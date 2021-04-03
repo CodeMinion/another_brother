@@ -2252,16 +2252,26 @@ class Printer {
 /* TODO
   List<Paper> getPaperList() {}
 
- */
+  Future<PrinterSpec> getPrinterSpec() async {
+      // TODO Make call to Other size
+    //return getSpec();
+    return PrinterSpec();
+  }
+  */
 
-  PrinterSpec getPrinterSpec() {
-    return getSpec();
+  Future<PrinterStatus> printFile(String filepath) async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "filePath" : filepath
+    };
+
+    final Map resultMap = await _channel.invokeMethod("printFile", params);
+    PrinterStatus status = PrinterStatus.fromMap(resultMap);
+
+    return status;
   }
 
-/* TODO
-  PrinterStatus printFile(String filepath) {}
-
- */
 
   /*
   Bitmap saveBitmap(Bitmap bmp, int halftone, int halfThreshold, int gamaAdjust) {
@@ -2329,9 +2339,22 @@ class Printer {
   }
 
 
-/* TODO
-  PrinterStatus printFileList(List<String> fileList) {}
 
+  Future<PrinterStatus> printFileList(List<String> fileList) async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "filePathList" : fileList
+    };
+
+    final Map resultMap = await _channel.invokeMethod("printFileList", params);
+    PrinterStatus status = PrinterStatus.fromMap(resultMap);
+
+    return status;
+
+  }
+
+  /*
   PrinterStatus printPdfFile(String filepath, int pagenum) {}
 
   PrinterStatus printPDF(String filepath, int pagenum) {}

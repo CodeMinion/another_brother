@@ -7,6 +7,8 @@ import android.util.Log
 import com.brother.ptouch.sdk.*
 import com.rouninlabs.another_brother.BrotherManager
 
+const val TAG = "A-Brother"
+
 fun printerInfofromMap(map:HashMap<String, Any>):PrinterInfo {
     val model: PrinterInfo.Model  = modelFromMap(map["printerModel"] as Map<String, Any>)
     val timeout: TimeoutSetting  = TimeoutSettingFromMap(map["timeout"] as Map<String, Any>)
@@ -207,6 +209,10 @@ fun setupConnectionManagers(context: Context, printInfo:PrinterInfo, printer:Pri
         val usbDevice = printer.getUsbDevice(usbManager)
         val currSpecs = printer.printerSpec
 
+        if (usbDevice == null) {
+            Log.e(TAG, "USB not Connected")
+            return
+        }
         // Check if the user has the permission to print to the device.
         val hasPermission = usbManager.hasPermission(usbDevice)
         if (!hasPermission) {

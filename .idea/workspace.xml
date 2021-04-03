@@ -6,18 +6,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afd4f045-3e4d-48d8-a470-2ac132de8d06" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/BrotherManager.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/EndCommunicationMethodCall.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/StartCommunicationMethodCall.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/receiver/UsbPermissionsReceiver.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/PrintFileListMethodCall.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/PrintFileMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/AnotherBrotherPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/AnotherBrotherPlugin.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/BrotherUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/BrotherUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/PrintImageMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/PrintImageMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/another_brother.iml" beforeDir="false" afterPath="$PROJECT_DIR$/another_brother.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/another_brother.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/another_brother.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/printer_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/printer_info.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,7 +26,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Android_Wear_Round_API_23" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="520006eab47a65db" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>

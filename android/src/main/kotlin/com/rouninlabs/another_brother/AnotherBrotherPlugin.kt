@@ -2,9 +2,7 @@ package com.rouninlabs.another_brother
 
 import android.content.Context
 import androidx.annotation.NonNull
-import com.rouninlabs.another_brother.method.EndCommunicationMethodCall
-import com.rouninlabs.another_brother.method.PrintImageMethodCall
-import com.rouninlabs.another_brother.method.StartCommunicationMethodCall
+import com.rouninlabs.another_brother.method.*
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
@@ -41,6 +39,12 @@ class AnotherBrotherPlugin: FlutterPlugin, MethodCallHandler {
     }
     else if (call.method == EndCommunicationMethodCall.METHOD_NAME) {
         EndCommunicationMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == PrintFileMethodCall.METHOD_NAME) {
+        PrintFileMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == PrintFileListMethodCall.METHOD_NAME) {
+        PrintFileListMethodCall(context = mContext, call = call, result = result).execute()
     }
     else {
       result.notImplemented()
