@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/another_brother.iml" filepath="$PROJECT_DIR$/another_brother.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/another_brother_android.iml" filepath="$PROJECT_DIR$/android/another_brother_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/android/another_brother_example_android.iml" filepath="$PROJECT_DIR$/example/android/another_brother_example_android.iml" />
+    </modules>
+  </component>
+</project>
