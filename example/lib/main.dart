@@ -52,22 +52,33 @@ class _MyAppState extends State<MyApp> {
     Canvas c = Canvas(recorder);
     Paint paint = new Paint();
     paint.color = Color.fromRGBO(255, 0, 0, 1);
-    Rect bounds = new Rect.fromLTWH(0, 0, 300, 300);
+    Rect bounds = new Rect.fromLTWH(0, 0, 300, 100);
     c.drawRect(bounds, paint);
-    var picture = await recorder.endRecording().toImage(300, 300);
+    var picture = await recorder.endRecording().toImage(300, 100);
 
     var printer = new Printer();
     var printInfo = PrinterInfo();
     printInfo.printerModel = Model.QL_1110NWB;
     printInfo.printMode = PrintMode.FIT_TO_PAGE;
     printInfo.isAutoCut = true;
-    printInfo.port = Port.BLUETOOTH;
-    printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer BLuetooth Mac
+    //printInfo.port = Port.BLUETOOTH;
+    //printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer BLuetooth Mac
+    //printInfo.port = Port.NET;
+    //printInfo.ipAddress = "192.168.1.80"; // Printer BLuetooth Mac
+    printInfo.port = Port.USB;
+    //printInfo.ipAddress = "192.168.1.80"; // Printer BLuetooth Mac
     //printInfo.workPath = "/";
     printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W103.getId());
-    printer.setPrinterInfo(printInfo);
+    await printer.setPrinterInfo(printInfo);
 
+    // Alternatively we can startCommunication/endCommunication if we
+    // want to do a batch operation.
+    //bool opened = await printer.startCommunication();
+
+    // Print
     PrinterStatus status = await printer.printImage(picture);
+
+    //bool closed = await printer.endCommunication();
 
     print ("Got Status: $status and Error: ${status.errorCode.getName()}");
     return status;

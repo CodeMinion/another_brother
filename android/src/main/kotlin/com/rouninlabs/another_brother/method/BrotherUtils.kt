@@ -1,9 +1,11 @@
 package com.rouninlabs.another_brother.method
 
-import com.brother.ptouch.sdk.JNIStatus
-import com.brother.ptouch.sdk.PrinterInfo
-import com.brother.ptouch.sdk.PrinterStatus
-import com.brother.ptouch.sdk.TimeoutSetting
+import android.bluetooth.BluetoothAdapter
+import android.content.Context
+import android.hardware.usb.UsbManager
+import android.util.Log
+import com.brother.ptouch.sdk.*
+import com.rouninlabs.another_brother.BrotherManager
 
 fun printerInfofromMap(map:HashMap<String, Any>):PrinterInfo {
     val model: PrinterInfo.Model  = modelFromMap(map["printerModel"] as Map<String, Any>)
@@ -191,6 +193,42 @@ fun PrinterStatus.toMap():Map<String, Any> {
     "batteryResidualQuantityLevel" to batteryResidualQuantityLevel,
     "maxOfBatteryResidualQuantityLevel" to maxOfBatteryResidualQuantityLevel
     )
+}
+
+fun setupConnectionManagers(context: Context, printInfo:PrinterInfo, printer:Printer) {
+    if (printInfo.port == PrinterInfo.Port.BLUETOOTH){
+        printer.setBluetooth(BluetoothAdapter.getDefaultAdapter())
+    }
+    else if ( printInfo.port == PrinterInfo.Port.BLE) {
+        printer.setBluetoothLowEnergy(context, BluetoothAdapter.getDefaultAdapter(), 3000)
+    }
+    else if (printInfo.port == PrinterInfo.Port.USB) {
+        val usbManager = context.getSystemService(Context.USB_SERVICE) as UsbManager
+        val usbDevice = printer.getUsbDevice(usbManager)
+        val currSpecs = printer.printerSpec
+
+        // Check if the user has the permission to print to the device.
+        val hasPermission = usbManager.hasPermission(usbDevice)
+        if (!hasPermission) {
+            val granted = BrotherManager.requestUsbPermission(context = context, usbManager = usbManager, usbDevice = usbDevice).take()
+            // TODO Block until granted/denied
+        }
+
+        Log.e("Frank" , "Specs: ${currSpecs.mModelId}, ${currSpecs.mSeriesId}")
+        // vendor ID - 1273 is for Brother.
+        /*
+        val printerSpec = PrinterSpec(
+                0,
+                0,
+                usbDevice.productId,
+
+        )*/
+    }
+
+    if (printInfo.workPath.isEmpty()) {
+        printInfo.workPath = context.filesDir.absolutePath + "/";
+    }
+
 }
 
 

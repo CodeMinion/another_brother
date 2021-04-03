@@ -2178,6 +2178,7 @@ class Printer {
   static PrinterStatus mResult = new PrinterStatus();
   static bool mCancel = false;
 
+  String mPrinterId = new DateTime.now().millisecondsSinceEpoch.toString();
   Paper mPaper = Paper();
   String charEncode = "";
 
@@ -2313,6 +2314,7 @@ class Printer {
       }
 
       var params = {
+        "printerId": mPrinterId,
         "printInfo": mPrinterInfo.toMap(),
         "imageBytes": outByteArray
       };
@@ -2368,14 +2370,17 @@ class Printer {
   */
 
   // TODO consider making this Future and sending it over to the printer.
-  bool setPrinterInfo(PrinterInfo printerInfo) {
+  Future<bool> setPrinterInfo(PrinterInfo printerInfo) async {
     mPrinterInfo = printerInfo;
     return true;
   }
 
-  /*
-  PrinterInfo getPrinterInfo() {}
 
+  Future<PrinterInfo> getPrinterInfo() async {
+    return mPrinterInfo;
+  }
+
+  /*
   ErrorCode convertToJpeg(String paths) {}
 
   PrinterStatus getPrinterStatus() {}
@@ -2424,11 +2429,40 @@ class Printer {
   bool openNoMacAddress() {}
 
   List<BLEPrinter> getBLEPrinters(int timeout) {}
+  */
 
-  bool startCommunication() {}
+  /// Starts a communication with the printer.
+  /// Note: This does not seem to impact whether a print will succeed or not
+  /// on the Android side. Printing without calling this will still print.
+  Future<bool> startCommunication() async {
 
-  bool endCommunication() {}
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
 
+    final bool result = await _channel.invokeMethod("startCommunication", params);
+
+    print("Print Result: ${result} ");
+    return result;
+  }
+
+  /// Ends a communication with the printer.
+  /// Note: This does not seem to impact printing.
+  Future<bool> endCommunication() async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
+
+    final bool result = await _channel.invokeMethod("endCommunication", params);
+
+    print("Print Result: ${result} ");
+    return result;
+  }
+
+  /*
   bool cancel() {}
 
   List<String> unzipFile(String filePath) {}

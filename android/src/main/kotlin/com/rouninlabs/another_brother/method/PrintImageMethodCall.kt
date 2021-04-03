@@ -1,17 +1,19 @@
 package com.rouninlabs.another_brother.method
 
-import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Log
-import com.brother.ptouch.sdk.LabelInfo
 import com.brother.ptouch.sdk.Printer
-import com.brother.ptouch.sdk.PrinterInfo
+import com.rouninlabs.another_brother.BrotherManager
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.*
 
-
+/**
+ * Command for printing an image to a Brother printer.
+ * This support both one-time as well as the standard openCommunication/print/closeCommunication
+ * approach.
+ */
 class PrintImageMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
     companion object {
         const val METHOD_NAME = "printImage"
@@ -24,6 +26,7 @@ class PrintImageMethodCall(val context: Context, val call: MethodCall, val resul
             // TODO Run on background thread.
             val dartPrintInfo: HashMap<String, Any> = call.argument<HashMap<String, Any>>("printInfo")!!
             val imageBytes: ByteArray = call.argument<ByteArray>("imageBytes")!!
+            val printerId: String = call.argument<String>("printerId")!!
 
             Log.e("Brother", "Image Bytes: $imageBytes - Size ${imageBytes.size}")
             // Bytes to bitmap
@@ -32,27 +35,37 @@ class PrintImageMethodCall(val context: Context, val call: MethodCall, val resul
             val printInfo = printerInfofromMap(dartPrintInfo)
             Log.e("Brother", "PrintInfo: $dartPrintInfo")
             Log.e("Brother", "Parsed Info: ${printInfo}")
+
+            // A print request is considered one-time if there was no printer tracked with this ID.
+            // this will open a new connection and close it when done.
+            // If it is not one-time it means someone must have already opened a connection using
+            // the startCommunication() API. When endCommunication() is called that printer will be removed.
             // Create Printer
-            val printer = Printer()
-            if (printInfo.workPath.isEmpty()) {
-                printInfo.workPath = context.filesDir.absolutePath + "/";
-            }
+            val trackedPrinter = BrotherManager.getPrinter(printerId = printerId)
+            val isOneTime:Boolean = trackedPrinter == null;
+            val printer = trackedPrinter?: Printer()
+
+            // Prepare local connection.
+            setupConnectionManagers(context = context, printer = printer, printInfo = printInfo)
+
             // Set Printer Info
             printer.printerInfo = printInfo
-
-            if (printInfo.port == PrinterInfo.Port.BLUETOOTH){
-                printer.setBluetooth(BluetoothAdapter.getDefaultAdapter())
-            }
-            else if ( printInfo.port == PrinterInfo.Port.BLE) {
-                printer.setBluetoothLowEnergy(context, BluetoothAdapter.getDefaultAdapter(), 3000)
-            }
+            val specs = printer.printerSpec
 
             // Start communication
-            printer.startCommunication()
+            if (isOneTime) {
+                // Note: Starting a communication does not seem to impact whether we can print or
+                // not. Calling print without calling this seems to still print fine.
+                val started: Boolean = printer.startCommunication()
+            }
+
             // Print Image
             val printResult = printer.printImage(bitmap)
+
             // End Communication
-            printer.endCommunication()
+            if (isOneTime) {
+                val connectionClosed: Boolean = printer.endCommunication()
+            }
             // Recycle bitmap
             if (!bitmap.isRecycled) {
                 bitmap.recycle()
