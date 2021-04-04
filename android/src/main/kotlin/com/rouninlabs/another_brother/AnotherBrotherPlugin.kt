@@ -118,6 +118,9 @@ class AnotherBrotherPlugin: FlutterPlugin, MethodCallHandler {
     else if (call.method == GetNetPrinterInfoMethodCall.METHOD_NAME) {
         GetNetPrinterInfoMethodCall(context = mContext, call = call, result = result).execute()
     }
+    else if (call.method == GetBlePrintersMethodCall.METHOD_NAME) {
+        GetBlePrintersMethodCall(context = mContext, call = call, result = result).execute()
+    }
     else {
       result.notImplemented()
     }

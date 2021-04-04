@@ -1,5 +1,6 @@
 package com.rouninlabs.another_brother.method
 
+import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import com.brother.ptouch.sdk.Printer
 import com.rouninlabs.another_brother.BrotherManager
@@ -8,13 +9,13 @@ import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.*
 
 /**
- * Command for getting the Brother printers that are connected to the network.
+ * Command for discovering the BLE Brother printers that are available.
  * This support both one-time as well as the standard openCommunication/print/closeCommunication
  * approach.
  */
-class GetNetPrintersMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
+class GetBlePrintersMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
     companion object {
-        const val METHOD_NAME = "getNetPrinters"
+        const val METHOD_NAME = "getBLEPrinters"
     }
 
     fun execute() {
@@ -23,7 +24,7 @@ class GetNetPrintersMethodCall(val context: Context, val call: MethodCall, val r
 
             val dartPrintInfo: HashMap<String, Any> = call.argument<HashMap<String, Any>>("printInfo")!!
             val printerId: String = call.argument<String>("printerId")!!
-            val models:List<String> = call.argument<List<String>>("models")!!
+            val timeout:Long = call.argument<Long>("timeout")!!
 
             // Decoded Printer Info
             val printInfo = printerInfofromMap(dartPrintInfo)
@@ -43,10 +44,10 @@ class GetNetPrintersMethodCall(val context: Context, val call: MethodCall, val r
             // Set Printer Info
             printer.printerInfo = printInfo
 
-            val netPrinters = printer.getNetPrinters(models.toTypedArray());
+            val blePrinters = printer.getBLEPrinters(BluetoothAdapter.getDefaultAdapter(), timeout);
 
             // Encode Printers
-            val dartPrinters = netPrinters.map { it-> it.toMap() }
+            val dartPrinters = blePrinters.map { it-> it.toMap() }
            withContext(Dispatchers.Main) {
                // Set result Printer status.
                result.success(dartPrinters)

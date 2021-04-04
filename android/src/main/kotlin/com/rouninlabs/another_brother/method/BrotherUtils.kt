@@ -188,6 +188,12 @@ fun NetPrinter.toMap():Map<String, Any> {
     )
 }
 
+fun BLEPrinter.toMap():Map<String, Any> {
+    return hashMapOf(
+            "localName" to localName
+    )
+}
+
 fun JNIStatus.BatteryTernary.toMap():Map<String, Any> {
     return hashMapOf(
             "id" to -1,

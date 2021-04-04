@@ -43,19 +43,7 @@ class GetNetPrinterInfoMethodCall(val context: Context, val call: MethodCall, va
             // Set Printer Info
             printer.printerInfo = printInfo
 
-            // Start communication
-            if (isOneTime) {
-                // Note: Starting a communication does not seem to impact whether we can print or
-                // not. Calling print without calling this seems to still print fine.
-                val started: Boolean = printer.startCommunication()
-            }
-
             val netPrinter = printer.getNetPrinterInfo(ipAddress);
-
-            // End Communication
-            if (isOneTime) {
-                val connectionClosed: Boolean = printer.endCommunication()
-            }
 
             // Encode Printers
             val dartPrinter = netPrinter.toMap()

@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
     //printInfo.port = Port.BLUETOOTH;
     //printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer BLuetooth Mac
     printInfo.port = Port.NET;
-    printInfo.ipAddress = "192.168.1.80"; // Printer BLuetooth Mac
+    printInfo.ipAddress = "192.168.1.80"; // Printer Bluetooth Mac
     //printInfo.port = Port.USB;
     printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W103.getId());
     await printer.setPrinterInfo(printInfo);
@@ -82,6 +82,10 @@ class _MyAppState extends State<MyApp> {
 
     var netPrinter = await printer.getNetPrinterInfo("192.168.1.80");
     print ("Net Printer: $netPrinter");
+
+    //var blePrinters = await printer.getBLEPrinters(3000);
+    //print ("Net Printer: $blePrinters");
+
     /*
     FilePickerResult result = await FilePicker.platform.pickFiles(allowMultiple: true);
 

@@ -2168,6 +2168,11 @@ class BLEPrinter {
     };
   }
 
+  @override
+  String toString() {
+    return "{localName: $localName}";
+  }
+
 }
 
 class Printer {
@@ -2727,9 +2732,21 @@ class Printer {
   LabelParam getLabelParam() {}
 
   LabelInfo getLabelInfo() {}
-
-  List<BLEPrinter> getBLEPrinters(int timeout) {}
   */
+
+  Future<List<BLEPrinter>> getBLEPrinters(int timeout) async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "timeout" : timeout,
+    };
+
+    final List<dynamic> resultList = await _channel.invokeMethod("getBLEPrinters", params);
+
+    final List<BLEPrinter> outList = resultList.map( (netPrinter) => BLEPrinter.fromMap(netPrinter)).toList();
+    return outList;
+  }
+
 
   /// Starts a communication with the printer.
   /// Note: This does not seem to impact whether a print will succeed or not
