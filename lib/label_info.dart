@@ -415,37 +415,38 @@ class QL700 {
 }
 
 class QL1115 {
-  final _id;
+  final int _id;
+  final String _name;
 
-  const QL1115._internal(this._id);
+  const QL1115._internal(this._id, this._name);
 
-  static const W17H54 = const QL1115._internal(1);
-  static const W17H87 = const QL1115._internal(2);
-  static const W23H23 = const QL1115._internal(3);
-  static const W29H42 = const QL1115._internal(4);
-  static const W29H90 = const QL1115._internal(5);
-  static const W38H90 = const QL1115._internal(6);
-  static const W39H48 = const QL1115._internal(7);
-  static const W52H29 = const QL1115._internal(8);
-  static const W62H29 = const QL1115._internal(9);
-  static const W62H100 = const QL1115._internal(10);
-  static const W12 = const QL1115._internal(11);
-  static const W29 = const QL1115._internal(12);
-  static const W38 = const QL1115._internal(13);
-  static const W50 = const QL1115._internal(14);
-  static const W54 = const QL1115._internal(15);
-  static const W62 = const QL1115._internal(16);
-  static const W60H86 = const QL1115._internal(17);
-  static const W102 = const QL1115._internal(40);
-  static const W102H51 = const QL1115._internal(41);
-  static const W102H152 = const QL1115._internal(48);
-  static const W103 = const QL1115._internal(49);
-  static const W103H164 = const QL1115._internal(50);
-  static const DT_W90 = const QL1115._internal(51);
-  static const DT_W102 = const QL1115._internal(52);
-  static const DT_W102H51 = const QL1115._internal(53);
-  static const DT_W102H152 = const QL1115._internal(54);
-  static const UNSUPPORT = const QL1115._internal(255);
+  static const W17H54 = const QL1115._internal(1, "W17H54");
+  static const W17H87 = const QL1115._internal(2, "W17H87");
+  static const W23H23 = const QL1115._internal(3, "W23H23");
+  static const W29H42 = const QL1115._internal(4, "W29H42");
+  static const W29H90 = const QL1115._internal(5, "W29H90");
+  static const W38H90 = const QL1115._internal(6, "W38H90");
+  static const W39H48 = const QL1115._internal(7, "W39H48");
+  static const W52H29 = const QL1115._internal(8, "W52H29");
+  static const W62H29 = const QL1115._internal(9, "W62H29");
+  static const W62H100 = const QL1115._internal(10, "W62H100");
+  static const W12 = const QL1115._internal(11, "W12");
+  static const W29 = const QL1115._internal(12, "W29");
+  static const W38 = const QL1115._internal(13, "W38");
+  static const W50 = const QL1115._internal(14, "W50");
+  static const W54 = const QL1115._internal(15, "W54");
+  static const W62 = const QL1115._internal(16, "W62");
+  static const W60H86 = const QL1115._internal(17, "W60H86");
+  static const W102 = const QL1115._internal(40, "W102");
+  static const W102H51 = const QL1115._internal(41, "W102H51");
+  static const W102H152 = const QL1115._internal(48, "W102H152");
+  static const W103 = const QL1115._internal(49, "W103");
+  static const W103H164 = const QL1115._internal(50, "W103H164");
+  static const DT_W90 = const QL1115._internal(51, "DT_W90");
+  static const DT_W102 = const QL1115._internal(52, "DT_W102");
+  static const DT_W102H51 = const QL1115._internal(53, "DT_W102H51");
+  static const DT_W102H152 = const QL1115._internal(54, "DT_W102H152");
+  static const UNSUPPORT = const QL1115._internal(255, "UNSUPPORT");
 
   static final _values = [
     W17H54,

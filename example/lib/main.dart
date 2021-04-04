@@ -77,11 +77,11 @@ class _MyAppState extends State<MyApp> {
     // Print
     //PrinterStatus status = await printer.printImage(picture);
 
-    //var netPrinters = await printer.getNetPrinters(["QL-1110NWB"]);
-    //print ("Found Printers: $netPrinters");
+    var netPrinters = await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
+    print ("Found Printers: $netPrinters");
 
-    var netPrinter = await printer.getNetPrinterInfo("192.168.1.80");
-    print ("Net Printer: $netPrinter");
+    //var netPrinter = await printer.getNetPrinterInfo("192.168.1.80");
+    //print ("Net Printer: $netPrinter");
 
     //var blePrinters = await printer.getBLEPrinters(3000);
     //print ("Net Printer: $blePrinters");

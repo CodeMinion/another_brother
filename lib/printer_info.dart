@@ -308,11 +308,15 @@ class Model {
 
   static Model fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
+    String name = map["name"];
     return Model.valueFromID(id);
   }
 
   Map<String, dynamic> toMap() {
-    return {"id": _id};
+    return {
+      "id": _id,
+    "name": _name
+    };
   }
 }
 
