@@ -121,6 +121,15 @@ class AnotherBrotherPlugin: FlutterPlugin, MethodCallHandler {
     else if (call.method == GetBlePrintersMethodCall.METHOD_NAME) {
         GetBlePrintersMethodCall(context = mContext, call = call, result = result).execute()
     }
+    else if (call.method == GetLabelParamMethodCall.METHOD_NAME) {
+        GetLabelParamMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetLabelInfoMethodCall.METHOD_NAME) {
+        GetLabelInfoMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetTemplateListMethodCall.METHOD_NAME) {
+        GetTemplateListMethodCall(context = mContext, call = call, result = result).execute()
+    }
     else {
       result.notImplemented()
     }

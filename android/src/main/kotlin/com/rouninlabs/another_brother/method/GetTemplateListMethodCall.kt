@@ -1,22 +1,25 @@
 package com.rouninlabs.another_brother.method
 
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.util.Log
 import com.brother.ptouch.sdk.Printer
 import com.brother.ptouch.sdk.PrinterInfo
 import com.brother.ptouch.sdk.PrinterStatus
+import com.brother.ptouch.sdk.TemplateInfo
 import com.rouninlabs.another_brother.BrotherManager
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.*
 
 /**
- * Command for getting the firmware version of a Brother printer.
+ * Command for getting the template list downloaded to a Brother printer.
  * This support both one-time as well as the standard openCommunication/print/closeCommunication
  * approach.
  */
-class GetFirmVersionMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
+class GetTemplateListMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
     companion object {
-        const val METHOD_NAME = "getFirmVersion"
+        const val METHOD_NAME = "getTemplateList"
     }
 
     fun execute() {
@@ -43,7 +46,12 @@ class GetFirmVersionMethodCall(val context: Context, val call: MethodCall, val r
             if (error != PrinterInfo.ErrorCode.ERROR_NONE) {
                 // There was an error notify
                 withContext(Dispatchers.Main) {
-                    result.success("")
+                    // Set result Printer status.
+                    result.success(
+                            hashMapOf<String, Any>(
+                                    "printerStatus" to PrinterStatus().apply { errorCode = error }.toMap(),
+                                    "templateList" to arrayListOf<Map<String, Any>>())
+                            )
                 }
                 return@launch
             }
@@ -58,7 +66,9 @@ class GetFirmVersionMethodCall(val context: Context, val call: MethodCall, val r
                 val started: Boolean = printer.startCommunication()
             }
 
-            val firmVersion = printer.firmVersion
+            val templateList:ArrayList<TemplateInfo> = arrayListOf()
+            // Get templates
+            val printResult = printer.getTemplateList(templateList)
 
             // End Communication
             if (isOneTime) {
@@ -66,9 +76,14 @@ class GetFirmVersionMethodCall(val context: Context, val call: MethodCall, val r
             }
 
             // Encode PrinterStatus
+            val dartPrintStatus = printResult.toMap()
+            val dartTemplateList = templateList.map { it.toMap() }.toList()
            withContext(Dispatchers.Main) {
                // Set result Printer status.
-               result.success(firmVersion)
+               result.success(hashMapOf<String, Any>(
+                     "printerStatus" to dartPrintStatus,
+                      "templateList" to dartTemplateList
+               ))
            }
         }
 

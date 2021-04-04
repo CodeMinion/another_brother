@@ -1,7 +1,10 @@
 package com.rouninlabs.another_brother.method
 
 import android.content.Context
+import android.util.Log
 import com.brother.ptouch.sdk.Printer
+import com.brother.ptouch.sdk.PrinterInfo
+import com.brother.ptouch.sdk.PrinterStatus
 import com.rouninlabs.another_brother.BrotherManager
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -38,15 +41,23 @@ class GetNetPrintersMethodCall(val context: Context, val call: MethodCall, val r
             val printer = trackedPrinter?: Printer()
 
             // Prepare local connection.
-            setupConnectionManagers(context = context, printer = printer, printInfo = printInfo)
+            val error = setupConnectionManagers(context = context, printer = printer, printInfo = printInfo)
+            if (error != PrinterInfo.ErrorCode.ERROR_NONE) {
+                // There was an error notify
+                withContext(Dispatchers.Main) {
+                    result.success(arrayListOf<Map<String, Any>>())
+                }
+                return@launch
+            }
 
             // Set Printer Info
             printer.printerInfo = printInfo
 
             val netPrinters = printer.getNetPrinters(models.toTypedArray());
 
+            Log.e(TAG, "Printers: $netPrinters")
             // Encode Printers
-            val dartPrinters = netPrinters.map { it-> it.toMap() }
+            val dartPrinters = netPrinters.map { it-> it.toMap() }.toList()
            withContext(Dispatchers.Main) {
                // Set result Printer status.
                result.success(dartPrinters)

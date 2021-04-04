@@ -6,7 +6,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afd4f045-3e4d-48d8-a470-2ac132de8d06" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetLabelInfoMethodCall.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetLabelParamMethodCall.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetTemplateListMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/AnotherBrotherPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/AnotherBrotherPlugin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/BrotherUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/BrotherUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/CancelMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/CancelMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetBatteryWeakMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetBatteryWeakMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetBlePrintersMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetBlePrintersMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetBootModeMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetBootModeMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetFirmFileVersionMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetFirmFileVersionMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetFirmVersionMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetFirmVersionMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetMediaFileVersionMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetMediaFileVersionMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetMediaVersionMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetMediaVersionMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetNetPrinterInfoMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetNetPrinterInfoMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetNetPrintersMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetNetPrintersMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetPdfFilePagesMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetPdfFilePagesMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetPdfPagesMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetPdfPagesMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetPrinterStatusMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetPrinterStatusMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetSerialNumberMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetSerialNumberMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetSystemReportMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetSystemReportMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/PrintFileListMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/PrintFileListMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/PrintFileMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/PrintFileMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/PrintImageMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/PrintImageMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/PrintPdfFileMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/PrintPdfFileMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/PrintPdfMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/PrintPdfMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/RemoveTemplateMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/RemoveTemplateMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/ReplaceTextIndexMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/ReplaceTextIndexMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/ReplaceTextMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/ReplaceTextMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/ReplaceTextNameMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/ReplaceTextNameMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/SendBinaryFileMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/SendBinaryFileMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/SendBinaryMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/SendBinaryMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/SendDatabaseMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/SendDatabaseMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/StartCommunicationMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/StartCommunicationMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/StartPttPrintMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/StartPttPrintMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/TransferMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/TransferMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/UpdateFirmMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/UpdateFirmMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/flushPttPrintMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/flushPttPrintMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/another_brother.iml" beforeDir="false" afterPath="$PROJECT_DIR$/another_brother.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/label_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/label_info.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/printer_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/printer_info.dart" afterDir="false" />
@@ -20,6 +59,13 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="520006eab47a65db" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\CodeMinion\AndroidstudioProjects\FlutterProjects\AnotherBrother\another_brother\.idea" />
+      </set>
+    </option>
   </component>
   <component name="ProjectId" id="1qVV2MprV0Xzu4IWI5iZXcSd4q0" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -56,5 +102,16 @@
       <updated>1617164535287</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

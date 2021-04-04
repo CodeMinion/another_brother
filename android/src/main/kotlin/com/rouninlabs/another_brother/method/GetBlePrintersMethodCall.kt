@@ -2,7 +2,10 @@ package com.rouninlabs.another_brother.method
 
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
+import com.brother.ptouch.sdk.BLEPrinter
 import com.brother.ptouch.sdk.Printer
+import com.brother.ptouch.sdk.PrinterInfo
+import com.brother.ptouch.sdk.PrinterStatus
 import com.rouninlabs.another_brother.BrotherManager
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -39,7 +42,14 @@ class GetBlePrintersMethodCall(val context: Context, val call: MethodCall, val r
             val printer = trackedPrinter?: Printer()
 
             // Prepare local connection.
-            setupConnectionManagers(context = context, printer = printer, printInfo = printInfo)
+            val error = setupConnectionManagers(context = context, printer = printer, printInfo = printInfo)
+            if (error != PrinterInfo.ErrorCode.ERROR_NONE) {
+                // There was an error notify
+                withContext(Dispatchers.Main) {
+                    result.success(arrayListOf<Map<String, Any>>())
+                }
+                return@launch
+            }
 
             // Set Printer Info
             printer.printerInfo = printInfo
@@ -47,7 +57,7 @@ class GetBlePrintersMethodCall(val context: Context, val call: MethodCall, val r
             val blePrinters = printer.getBLEPrinters(BluetoothAdapter.getDefaultAdapter(), timeout);
 
             // Encode Printers
-            val dartPrinters = blePrinters.map { it-> it.toMap() }
+            val dartPrinters = blePrinters.map { it-> it.toMap() }.toList()
            withContext(Dispatchers.Main) {
                // Set result Printer status.
                result.success(dartPrinters)

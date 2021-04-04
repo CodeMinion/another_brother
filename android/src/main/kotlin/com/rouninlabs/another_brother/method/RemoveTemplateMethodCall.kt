@@ -2,6 +2,8 @@ package com.rouninlabs.another_brother.method
 
 import android.content.Context
 import com.brother.ptouch.sdk.Printer
+import com.brother.ptouch.sdk.PrinterInfo
+import com.brother.ptouch.sdk.PrinterStatus
 import com.rouninlabs.another_brother.BrotherManager
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -38,7 +40,17 @@ class RemoveTemplateMethodCall(val context: Context, val call: MethodCall, val r
             val printer = trackedPrinter?: Printer()
 
             // Prepare local connection.
-            setupConnectionManagers(context = context, printer = printer, printInfo = printInfo)
+            val error = setupConnectionManagers(context = context, printer = printer, printInfo = printInfo)
+            if (error != PrinterInfo.ErrorCode.ERROR_NONE) {
+                // There was an error notify
+                withContext(Dispatchers.Main) {
+                    // Set result Printer status.
+                    result.success(PrinterStatus().apply {
+                        errorCode = error
+                    }.toMap())
+                }
+                return@launch
+            }
 
             // Set Printer Info
             printer.printerInfo = printInfo

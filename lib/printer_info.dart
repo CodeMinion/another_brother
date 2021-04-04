@@ -1853,6 +1853,14 @@ class TemplateInfo {
       "modifiedDateRaw": modifiedDateRaw
     };
   }
+
+  @override
+  String toString() {
+    return "key $key, fileSize $fileSize, "
+        "checksum  $checksum, "
+        "modifiedDate $modifiedDate, fileName $fileName, "
+        "modifiedDateRaw  $modifiedDateRaw";
+  }
 }
 
 class Paper {
@@ -2034,6 +2042,32 @@ class LabelParam {
       "labelType": labelType,
       "paperID": paperID
     };
+  }
+
+  @override
+  String toString() {
+    return "{headPinNum $headPinNum, "
+        "labelWidth $labelWidth, "
+        "labelLength $labelLength, "
+        "paperWidth $paperWidth, "
+        "paperLength $paperLength, "
+        "imageAreaWidth $imageAreaWidth, "
+        "imageAreaLength $imageAreaLength, "
+        "pinOffsetLeft $pinOffsetLeft, "
+        "pinOffsetRight $pinOffsetRight,"
+        "physicalOffsetX $physicalOffsetX, "
+        "physicalOffsetY $physicalOffsetY,"
+        "labelType $labelType,"
+        "isAutoCut $isAutoCut, "
+        "isEndCut  $isEndCut,"
+        "isHalfCut  $isHalfCut, "
+        "isSpecialTape $isSpecialTape,"
+        "isCutMark $isCutMark,"
+        "tubeHeadPinNum $tubeHeadPinNum, "
+        "paperName $paperName, "
+        "paperNameInch $paperNameInch, "
+        "paperID $paperID}";
+
   }
 }
 
@@ -2299,9 +2333,9 @@ class Printer {
     return version;
   }
 
-  Future<PrinterStatus> printImage(Image bmp) async {
+  Future<PrinterStatus> printImage(Image image) async {
 
-      var imageBytes = await bmp.toByteData(format: ImageByteFormat.png);
+      var imageBytes = await image.toByteData(format: ImageByteFormat.png);
       if (imageBytes == null) {
         return PrinterStatus(errorCode: ErrorCode.ERROR_UNSUPPORTED_MEDIA);
       }
@@ -2577,9 +2611,25 @@ class Printer {
     return status;
   }
 
-  /*
-  PrinterStatus getTemplateList(List<TemplateInfo> tmplList) {}
-  */
+
+  Future<PrinterStatus> getTemplateList(List<TemplateInfo> outTmplList) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
+
+    final Map resultMap = await _channel.invokeMethod("getTemplateList", params);
+    PrinterStatus status = PrinterStatus.fromMap(resultMap["printerStatus"]);
+
+    final List<dynamic> templates = resultMap["templateList"];
+    templates.forEach((element) {
+      outTmplList.add(TemplateInfo.fromMap(element));
+    });
+
+    return status;
+  }
+
 
   Future<bool> setPrinterInfo(PrinterInfo printerInfo) async {
     mPrinterInfo = printerInfo;
@@ -2605,10 +2655,10 @@ class Printer {
   }
 
   /*
-
+  TODO
   PrinterStatus updatePrinterSettings(
       Map<PrinterSettingItem, String> settings) {}
-
+  TODO
   PrinterStatus getPrinterSettings(
       List<PrinterSettingItem> keys, Map<PrinterSettingItem, String> values) {}
 
@@ -2626,12 +2676,15 @@ class Printer {
   }
 
   /*
+  TODO
   BatteryInfo getBatteryInfo() {}
-
+  TODO
   PrinterStatus getBluetoothPreference(BluetoothPreference btPre) {}
 
+ TODO
   PrinterStatus updateBluetoothPreference(BluetoothPreference btPre) {}
 
+  TODO
   bool setCustomPaper(Model printerModel, String filePath) {}
   */
 
@@ -2713,7 +2766,6 @@ class Printer {
 
     final List<dynamic> resultList = await _channel.invokeMethod("getNetPrinters", params);
 
-    //final List<Map<String, dynamic>> resultList = resultMap["foundPrinters"];
     final List<NetPrinter> outList = resultList.map( (netPrinter) => NetPrinter.fromMap(netPrinter)).toList();
     return outList;
   }
@@ -2732,11 +2784,32 @@ class Printer {
     return outPrinter;
   }
 
-  /*
-  LabelParam getLabelParam() {}
+  Future<LabelParam> getLabelParam() async {
 
-  LabelInfo getLabelInfo() {}
-  */
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
+
+    final Map resultMap = await _channel.invokeMethod("getLabelParam", params);
+
+    final LabelParam outLabel = LabelParam.fromMap(resultMap);
+    return outLabel;
+  }
+
+  Future<LabelInfo> getLabelInfo() async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
+
+    final Map resultMap = await _channel.invokeMethod("getLabelInfo", params);
+
+    final LabelInfo outLabel = LabelInfo.fromMap(resultMap);
+    return outLabel;
+  }
+
 
   Future<List<BLEPrinter>> getBLEPrinters(int timeout) async {
     var params = {

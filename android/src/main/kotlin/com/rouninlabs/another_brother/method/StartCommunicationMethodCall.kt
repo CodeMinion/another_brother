@@ -2,6 +2,8 @@ package com.rouninlabs.another_brother.method
 
 import android.content.Context
 import com.brother.ptouch.sdk.Printer
+import com.brother.ptouch.sdk.PrinterInfo
+import com.brother.ptouch.sdk.PrinterStatus
 import com.rouninlabs.another_brother.BrotherManager
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -38,7 +40,15 @@ class StartCommunicationMethodCall(val context: Context, val call: MethodCall, v
             val printer = Printer()
 
             // Prepare local connection.
-            setupConnectionManagers(context = context, printer = printer, printInfo = printInfo)
+            val error = setupConnectionManagers(context = context, printer = printer, printInfo = printInfo)
+            if (error != PrinterInfo.ErrorCode.ERROR_NONE) {
+                // There was an error notify
+                withContext(Dispatchers.Main) {
+                    // Set result Printer status.
+                    result.success(false)
+                }
+                return@launch
+            }
 
             // Set Printer Info
             printer.printerInfo = printInfo
@@ -52,7 +62,7 @@ class StartCommunicationMethodCall(val context: Context, val call: MethodCall, v
 
            withContext(Dispatchers.Main) {
                // Set result Printer status.
-               result.success(true)
+               result.success(success)
                //result.error("Error", "Method not implemented", "")
            }
         }

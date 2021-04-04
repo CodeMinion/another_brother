@@ -22,7 +22,7 @@ class LabelInfo {
       this.labelFontColor = LabelColor.UNSUPPORT,
       this.labelType = -1});
 
-  LabelInfo fromMap(Map<dynamic, dynamic> map) {
+  static LabelInfo fromMap(Map<dynamic, dynamic> map) {
     return LabelInfo(
       labelNameIndex: map["labelNameIndex"],
       isAutoCut: map["isAutoCut"],
@@ -36,6 +36,7 @@ class LabelInfo {
     );
   }
 
+
   Map<String, dynamic> toMap() {
     return {
       "labelNameIndex": labelNameIndex,
@@ -44,59 +45,74 @@ class LabelInfo {
       "isHalfCut" : isHalfCut,
       "isSpecialTape" : isSpecialTape,
       "isCutMark" : isCutMark,
-      "labelColor" : labelColor,
-      "labelFontColor": labelType
+      "labelColor" : labelColor.toMap(),
+      "labelFontColor": labelFontColor.toMap(),
+      "labelType": labelType
     };
+  }
+
+  @override
+  String toString() {
+    return "{labelNameIndex $labelNameIndex, "
+        "isAutoCut $isAutoCut, "
+        "isEndCut $isEndCut, "
+        "isHalfCut $isHalfCut, "
+        "isSpecialTape  $isSpecialTape, "
+        "isCutMark $isCutMark, "
+        "labelColor $labelColor, "
+        "labelFontColor $labelFontColor, "
+        "labelType $labelType}";
   }
 }
 
 class LabelColor {
   final int _id;
+  final String _name;
 
-  const LabelColor._internal(this._id);
+  const LabelColor._internal(this._id, this._name);
 
-  static const WHITE = const LabelColor._internal(1);
-  static const OTHERS = const LabelColor._internal(2);
-  static const CLEAR = const LabelColor._internal(3);
-  static const RED = const LabelColor._internal(4);
-  static const BLUE = const LabelColor._internal(5);
-  static const YELLOW = const LabelColor._internal(6);
-  static const GREEN = const LabelColor._internal(7);
-  static const BLACK = const LabelColor._internal(8);
-  static const CLEAR_WHITE = const LabelColor._internal(9);
-  static const GOLD = const LabelColor._internal(10);
-  static const GOLD_PREMIUM = const LabelColor._internal(11);
-  static const SILVER_PREMIUM = const LabelColor._internal(12);
-  static const OTHERS_PREMIUM = const LabelColor._internal(13);
-  static const OTHERS_MASKING = const LabelColor._internal(14);
-  static const LIGHTBLUE_SATIN = const LabelColor._internal(15);
-  static const MINT_SATIN = const LabelColor._internal(16);
-  static const SILVER_SATIN = const LabelColor._internal(17);
-  static const MATTE_WHITE = const LabelColor._internal(32);
-  static const MATTE_CLEAR = const LabelColor._internal(33);
-  static const MATTE_SILVER = const LabelColor._internal(34);
-  static const SATIN_GOLD = const LabelColor._internal(35);
-  static const SATIN_SILVER = const LabelColor._internal(36);
-  static const BLUE_WHITE = const LabelColor._internal(48);
-  static const RED_WHITE = const LabelColor._internal(49);
-  static const FLUORESCENT_ORANGE = const LabelColor._internal(64);
-  static const FLUORESCENT_YELLOW = const LabelColor._internal(65);
-  static const BERRY_PINK = const LabelColor._internal(80);
-  static const LIGHT_GRAY = const LabelColor._internal(81);
-  static const LIME_GREEN = const LabelColor._internal(82);
-  static const FABRIC_YELLOW = const LabelColor._internal(96);
-  static const FABRIC_PINK = const LabelColor._internal(97);
-  static const FABRIC_BLUE = const LabelColor._internal(98);
-  static const TUBE_WHITE = const LabelColor._internal(112);
-  static const SELF_WHITE = const LabelColor._internal(128);
-  static const FLEXIBLE_WHITE = const LabelColor._internal(144);
-  static const FLEXIBLE_YELLOW = const LabelColor._internal(145);
-  static const CLEANING = const LabelColor._internal(240);
-  static const STENCIL = const LabelColor._internal(241);
-  static const PASTEL_PURPLE = const LabelColor._internal(37);
-  static const NAVY_BLUE = const LabelColor._internal(83);
-  static const WINE_RED = const LabelColor._internal(84);
-  static const UNSUPPORT = const LabelColor._internal(255);
+  static const WHITE = const LabelColor._internal(1, "WHITE");
+  static const OTHERS = const LabelColor._internal(2, "OTHERS");
+  static const CLEAR = const LabelColor._internal(3, "CLEAR");
+  static const RED = const LabelColor._internal(4, "RED");
+  static const BLUE = const LabelColor._internal(5, "BLUE");
+  static const YELLOW = const LabelColor._internal(6, "YELLOW");
+  static const GREEN = const LabelColor._internal(7, "GREEN");
+  static const BLACK = const LabelColor._internal(8, "BLACK");
+  static const CLEAR_WHITE = const LabelColor._internal(9, "CLEAR_WHITE");
+  static const GOLD = const LabelColor._internal(10, "GOLD");
+  static const GOLD_PREMIUM = const LabelColor._internal(11, "GOLD_PREMIUM");
+  static const SILVER_PREMIUM = const LabelColor._internal(12, "SILVER_PREMIUM");
+  static const OTHERS_PREMIUM = const LabelColor._internal(13, "OTHERS_PREMIUM");
+  static const OTHERS_MASKING = const LabelColor._internal(14, "OTHERS_MASKING");
+  static const LIGHTBLUE_SATIN = const LabelColor._internal(15, "LIGHTBLUE_SATIN");
+  static const MINT_SATIN = const LabelColor._internal(16, "MINT_SATIN");
+  static const SILVER_SATIN = const LabelColor._internal(17, "SILVER_SATIN");
+  static const MATTE_WHITE = const LabelColor._internal(32, "MATTE_WHITE");
+  static const MATTE_CLEAR = const LabelColor._internal(33, "MATTE_CLEAR");
+  static const MATTE_SILVER = const LabelColor._internal(34, "MATTE_SILVER");
+  static const SATIN_GOLD = const LabelColor._internal(35, "SATIN_GOLD");
+  static const SATIN_SILVER = const LabelColor._internal(36, "SATIN_SILVER");
+  static const BLUE_WHITE = const LabelColor._internal(48, "BLUE_WHITE");
+  static const RED_WHITE = const LabelColor._internal(49, "RED_WHITE");
+  static const FLUORESCENT_ORANGE = const LabelColor._internal(64, "FLUORESCENT_ORANGE");
+  static const FLUORESCENT_YELLOW = const LabelColor._internal(65, "FLUORESCENT_YELLOW");
+  static const BERRY_PINK = const LabelColor._internal(80, "BERRY_PINK");
+  static const LIGHT_GRAY = const LabelColor._internal(81, "LIGHT_GRAY");
+  static const LIME_GREEN = const LabelColor._internal(82, "LIME_GREEN");
+  static const FABRIC_YELLOW = const LabelColor._internal(96, "FABRIC_YELLOW");
+  static const FABRIC_PINK = const LabelColor._internal(97, "FABRIC_PINK");
+  static const FABRIC_BLUE = const LabelColor._internal(98, "FABRIC_BLUE");
+  static const TUBE_WHITE = const LabelColor._internal(112, "TUBE_WHITE");
+  static const SELF_WHITE = const LabelColor._internal(128, "SELF_WHITE");
+  static const FLEXIBLE_WHITE = const LabelColor._internal(144, "FLEXIBLE_WHITE");
+  static const FLEXIBLE_YELLOW = const LabelColor._internal(145, "FLEXIBLE_YELLOW");
+  static const CLEANING = const LabelColor._internal(240, "CLEANING");
+  static const STENCIL = const LabelColor._internal(241, "STENCIL");
+  static const PASTEL_PURPLE = const LabelColor._internal(37, "PASTEL_PURPLE");
+  static const NAVY_BLUE = const LabelColor._internal(83, "NAVY_BLUE");
+  static const WINE_RED = const LabelColor._internal(84, "WINE_RED");
+  static const UNSUPPORT = const LabelColor._internal(255, "UNSUPPORT");
 
   static final _values = [
     WHITE,
@@ -147,6 +163,10 @@ class LabelColor {
     return _id;
   }
 
+  String getName() {
+    return _name;
+  }
+
   static int getItemId(index) {
     if (index < 0 || index > _values.length) {
       return UNSUPPORT.getId();
@@ -165,13 +185,32 @@ class LabelColor {
     return UNSUPPORT;
   }
 
+  static LabelColor valueFromName(String name) {
+    for (int i = 0; i < _values.length; ++i) {
+      LabelColor num = _values[i];
+      if (num.getName() == name) {
+        return num;
+      }
+    }
+    return UNSUPPORT;
+  }
+
   static LabelColor fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    return LabelColor.valueFromID(id);
+    String name = map["name"];
+    return LabelColor.valueFromName(name);
   }
 
   Map<String, dynamic> toMap() {
-    return {"id": _id};
+    return {
+      "id": _id,
+      "name": _name
+    };
+  }
+
+  @override
+  String toString() {
+    return _name;
   }
 }
 
