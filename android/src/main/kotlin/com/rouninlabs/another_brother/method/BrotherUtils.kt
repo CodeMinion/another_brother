@@ -177,6 +177,17 @@ fun PrinterInfo.ErrorCode.toMap():Map<String, Any> {
     )
 }
 
+fun NetPrinter.toMap():Map<String, Any> {
+    return hashMapOf(
+            "modelName" to modelName,
+            "serNo" to serNo,
+            "ipAddress" to ipAddress,
+            "macAddress" to  macAddress,
+            "nodeName" to nodeName,
+            "location" to location
+    )
+}
+
 fun JNIStatus.BatteryTernary.toMap():Map<String, Any> {
     return hashMapOf(
             "id" to -1,
@@ -219,16 +230,6 @@ fun setupConnectionManagers(context: Context, printInfo:PrinterInfo, printer:Pri
             val granted = BrotherManager.requestUsbPermission(context = context, usbManager = usbManager, usbDevice = usbDevice).take()
             // TODO Block until granted/denied
         }
-
-        Log.e("Frank" , "Specs: ${currSpecs.mModelId}, ${currSpecs.mSeriesId}")
-        // vendor ID - 1273 is for Brother.
-        /*
-        val printerSpec = PrinterSpec(
-                0,
-                0,
-                usbDevice.productId,
-
-        )*/
     }
 
     if (printInfo.workPath.isEmpty()) {

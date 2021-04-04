@@ -2145,6 +2145,11 @@ class NetPrinter {
     };
   }
 
+  @override
+  String toString() {
+    return "{modelName: $modelName, serNo: $serNo, ipAddress: $ipAddress, macAddress:$macAddress, nodeName: $nodeName, location: $location}";
+  }
+
 }
 
 class BLEPrinter {
@@ -2167,8 +2172,7 @@ class BLEPrinter {
 
 class Printer {
 
-  static const MethodChannel _channel =
-  const MethodChannel('another_brother');
+  static const MethodChannel _channel = const MethodChannel('another_brother');
 
   static final int QUALITY = 100;
   static String bytePath = "";
@@ -2183,34 +2187,8 @@ class Printer {
   String charEncode = "";
 
   Printer() {
-    if (getResult() == null) {
-      setResult(new PrinterStatus());
-    }
   }
 
-  static PrinterSpec getSpec() {
-    return mSpec;
-  }
-
-  static void setSpec(PrinterSpec mSpec) {
-    Printer.mSpec = mSpec;
-  }
-
-  static PrinterStatus getResult() {
-    return mResult;
-  }
-
-  static void setResult(PrinterStatus mResult) {
-    Printer.mResult = mResult;
-  }
-
-  static bool isCancel() {
-    return mCancel;
-  }
-
-  static void setCancel(bool mCancel) {
-    Printer.mCancel = mCancel;
-  }
 
   static PrinterInfo getUserPrinterInfo() {
     return mPrinterInfo;
@@ -2223,6 +2201,7 @@ class Printer {
   /* TODO
   static List<LabelParam> getLabelParamList(Model model) {}
 */
+
   static DateTime getDate(Uint8List bytes) {
     BigInt bi = _readBytes(bytes);
     int pwdLastSet = bi.toInt();
@@ -2354,45 +2333,245 @@ class Printer {
 
   }
 
+
+  Future<PrinterStatus> printPdfFile(String filepath, int pagenum) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "filePath" : filepath,
+      "pagenum" : pagenum
+    };
+
+    final Map resultMap = await _channel.invokeMethod("printPdfFile", params);
+    PrinterStatus status = PrinterStatus.fromMap(resultMap);
+
+    return status;
+
+  }
+
+
+  Future<PrinterStatus> printPDF(String filepath, int pagenum) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "filePath" : filepath,
+      "pagenum" : pagenum
+    };
+
+    final Map resultMap = await _channel.invokeMethod("printPDF", params);
+    PrinterStatus status = PrinterStatus.fromMap(resultMap);
+
+    return status;
+
+  }
+
+
+  Future<int> getPDFPages(String filepath) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "filePath" : filepath
+    };
+
+    final int pages = await _channel.invokeMethod("getPDFPages", params);
+
+    return pages;
+  }
+
+
+  Future<int> getPDFFilePages(String filepath) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "filePath" : filepath
+    };
+
+    final int pages = await _channel.invokeMethod("getPDFFilePages", params);
+
+    return pages;
+  }
+
+
+  Future<PrinterStatus> transfer(String filepath) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "filePath" : filepath,
+    };
+
+    final Map resultMap = await _channel.invokeMethod("transfer", params);
+    PrinterStatus status = PrinterStatus.fromMap(resultMap);
+
+    return status;
+  }
+
+
+  Future<PrinterStatus> updateFirm(String filepath) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "filePath" : filepath,
+    };
+
+    final Map resultMap = await _channel.invokeMethod("updateFirm", params);
+    PrinterStatus status = PrinterStatus.fromMap(resultMap);
+
+    return status;
+
+  }
+
+
+  Future<PrinterStatus> sendDatabase(String filepath) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "filePath" : filepath,
+    };
+
+    final Map resultMap = await _channel.invokeMethod("sendDatabase", params);
+    PrinterStatus status = PrinterStatus.fromMap(resultMap);
+
+    return status;
+
+  }
+
+  Future<PrinterStatus> sendBinaryFile(String filepath) async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "filePath" : filepath,
+    };
+
+    final Map resultMap = await _channel.invokeMethod("sendBinaryFile", params);
+    PrinterStatus status = PrinterStatus.fromMap(resultMap);
+
+    return status;
+
+  }
+
+
+  Future<PrinterStatus> sendBinary(Uint8List data) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "data" : data,
+    };
+
+    final Map resultMap = await _channel.invokeMethod("sendBinary", params);
+    PrinterStatus status = PrinterStatus.fromMap(resultMap);
+
+    return status;
+  }
+
+  Future<String> getFirmVersion() async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
+
+    final String firmVersion = await _channel.invokeMethod("getFirmVersion", params);
+
+    return firmVersion;
+  }
+
+
+  Future<String> getMediaVersion() async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
+
+    final String mediaVersion = await _channel.invokeMethod("getMediaVersion", params);
+
+    return mediaVersion;
+  }
+
+  Future<String> getSerialNumber() async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
+
+    final String serialNumber = await _channel.invokeMethod("getSerialNumber", params);
+
+    return serialNumber;
+  }
+
+
+  Future<int> getBatteryWeak() async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
+
+    final int batteryWeak = await _channel.invokeMethod("getBatteryWeak", params);
+
+    return batteryWeak;
+  }
+
+
+  Future<int> getBootMode() async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
+
+    final int bootMode = await _channel.invokeMethod("getBootMode", params);
+
+    return bootMode;
+  }
+
+
+  Future<String> getFirmFileVer(String filePath) async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "filePath" : filePath,
+    };
+
+    final String firmFileVersion = await _channel.invokeMethod("getFirmFileVer", params);
+
+    return firmFileVersion;
+  }
+
+  Future<String> getMediaFileVer(String filePath) async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "filePath" : filePath,
+    };
+
+    final String mediaFileVersion = await _channel.invokeMethod("getMediaFileVer", params);
+
+    return mediaFileVersion;
+  }
+
+  Future<PrinterStatus> removeTemplate(List<int> keyList) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "keyList" : keyList,
+    };
+
+    final Map resultMap = await _channel.invokeMethod("removeTemplate", params);
+    PrinterStatus status = PrinterStatus.fromMap(resultMap);
+
+    return status;
+  }
+
   /*
-  PrinterStatus printPdfFile(String filepath, int pagenum) {}
-
-  PrinterStatus printPDF(String filepath, int pagenum) {}
-
-  int getPDFPages(String filepath) {}
-
-  int getPDFFilePages(String filepath) {}
-
-  PrinterStatus transfer(String filepath) {}
-
-  PrinterStatus updateFirm(String filepath) {}
-
-  PrinterStatus sendDatabase(String filepath) {}
-
-  PrinterStatus sendBinaryFile(String filepath) {}
-
-  PrinterStatus sendBinary(Uint8List data) {}
-
-  String getFirmVersion() {}
-
-  String getMediaVersion() {}
-
-  String getSerialNumber() {}
-
-  int getBatteryWeak() {}
-
-  int getBootMode() {}
-
-  String getFirmFileVer(String filePath) {}
-
-  String getMediaFileVer(String filePath) {}
-
-  PrinterStatus removeTemplate(List<int> keyList) {}
-
   PrinterStatus getTemplateList(List<TemplateInfo> tmplList) {}
   */
 
-  // TODO consider making this Future and sending it over to the printer.
   Future<bool> setPrinterInfo(PrinterInfo printerInfo) async {
     mPrinterInfo = printerInfo;
     return true;
@@ -2403,10 +2582,20 @@ class Printer {
     return mPrinterInfo;
   }
 
-  /*
-  ErrorCode convertToJpeg(String paths) {}
+  Future<PrinterStatus> getPrinterStatus() async {
 
-  PrinterStatus getPrinterStatus() {}
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
+
+    final Map resultMap = await _channel.invokeMethod("getPrinterStatus", params);
+    PrinterStatus status = PrinterStatus.fromMap(resultMap);
+
+    return status;
+  }
+
+  /*
 
   PrinterStatus updatePrinterSettings(
       Map<PrinterSettingItem, String> settings) {}
@@ -2414,10 +2603,20 @@ class Printer {
   PrinterStatus getPrinterSettings(
       List<PrinterSettingItem> keys, Map<PrinterSettingItem, String> values) {}
 
-  String getSystemReport() {
-    return null;
+  */
+
+  Future<String> getSystemReport() async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
+
+    final String systemReport = await _channel.invokeMethod("getSystemReport", params);
+
+    return systemReport;
   }
 
+  /*
   BatteryInfo getBatteryInfo() {}
 
   PrinterStatus getBluetoothPreference(BluetoothPreference btPre) {}
@@ -2425,31 +2624,109 @@ class Printer {
   PrinterStatus updateBluetoothPreference(BluetoothPreference btPre) {}
 
   bool setCustomPaper(Model printerModel, String filePath) {}
+  */
 
-  bool startPTTPrint(int key, String encode) {}
+  Future<bool> startPTTPrint(int key, String encode) async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "key": key,
+      "encode":key
+    };
 
-  bool replaceText(String data) {}
+    final bool success = await _channel.invokeMethod("startPTTPrint", params);
 
-  bool replaceTextIndex(String data, int index) {}
+    return success;
+  }
 
-  bool replaceTextName(String data, String objectName) {}
+  Future<bool> replaceText(String data) async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "data": data
+    };
 
-  PrinterStatus flushPTTPrint() {}
+    final bool success = await _channel.invokeMethod("replaceText", params);
 
-  List<NetPrinter> getNetPrinters(List<String> modelName) {}
+    return success;
 
-  NetPrinter getNetPrinterInfo(String ipAddress) {}
+  }
 
-  /** @deprecated */
-  bool setLabelInfo(LabelInfo label) {}
 
+  Future<bool> replaceTextIndex(String data, int index) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "data": data,
+      "index": index
+    };
+
+    final bool success = await _channel.invokeMethod("replaceTextIndex", params);
+
+    return success;
+  }
+
+
+  Future<bool> replaceTextName(String data, String objectName) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "data": data,
+      "objectName": objectName
+    };
+
+    final bool success = await _channel.invokeMethod("replaceTextName", params);
+
+    return success;
+  }
+
+  Future<PrinterStatus> flushPTTPrint() async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
+
+    final Map resultMap = await _channel.invokeMethod("flushPTTPrint", params);
+    PrinterStatus status = PrinterStatus.fromMap(resultMap);
+
+    return status;
+  }
+
+  Future<List<NetPrinter>> getNetPrinters(List<String> modelName) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "models" : modelName,
+    };
+
+    final List<dynamic> resultList = await _channel.invokeMethod("getNetPrinters", params);
+
+    //final List<Map<String, dynamic>> resultList = resultMap["foundPrinters"];
+    final List<NetPrinter> outList = resultList.map( (netPrinter) => NetPrinter.fromMap(netPrinter)).toList();
+    return outList;
+  }
+
+
+  Future<NetPrinter> getNetPrinterInfo(String ipAddress) async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "ipAddress" : ipAddress,
+    };
+
+    final Map resultMap = await _channel.invokeMethod("getNetPrinterInfo", params);
+
+    final NetPrinter outPrinter = NetPrinter.fromMap(resultMap);
+    return outPrinter;
+  }
+
+  /*
   LabelParam getLabelParam() {}
 
   LabelInfo getLabelInfo() {}
-
-  int checkLabelInPrinter() {}
-
-  bool openNoMacAddress() {}
 
   List<BLEPrinter> getBLEPrinters(int timeout) {}
   */
@@ -2485,14 +2762,15 @@ class Printer {
     return result;
   }
 
-  /*
-  bool cancel() {}
 
-  List<String> unzipFile(String filePath) {}
+  Future<bool> cancel() async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
 
-  Paper getPaper() {}
+    final bool result = await _channel.invokeMethod("cancel", params);
+    return result;
+  }
 
-  void setPaper(Paper mPaper) {}
-
- */
 }

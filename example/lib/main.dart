@@ -62,10 +62,10 @@ class _MyAppState extends State<MyApp> {
     printInfo.printerModel = Model.QL_1110NWB;
     printInfo.printMode = PrintMode.FIT_TO_PAGE;
     printInfo.isAutoCut = true;
-    printInfo.port = Port.BLUETOOTH;
-    printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer BLuetooth Mac
-    //printInfo.port = Port.NET;
-    //printInfo.ipAddress = "192.168.1.80"; // Printer BLuetooth Mac
+    //printInfo.port = Port.BLUETOOTH;
+    //printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer BLuetooth Mac
+    printInfo.port = Port.NET;
+    printInfo.ipAddress = "192.168.1.80"; // Printer BLuetooth Mac
     //printInfo.port = Port.USB;
     printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W103.getId());
     await printer.setPrinterInfo(printInfo);
@@ -77,6 +77,12 @@ class _MyAppState extends State<MyApp> {
     // Print
     //PrinterStatus status = await printer.printImage(picture);
 
+    //var netPrinters = await printer.getNetPrinters(["QL-1110NWB"]);
+    //print ("Found Printers: $netPrinters");
+
+    var netPrinter = await printer.getNetPrinterInfo("192.168.1.80");
+    print ("Net Printer: $netPrinter");
+    /*
     FilePickerResult result = await FilePicker.platform.pickFiles(allowMultiple: true);
 
     PrinterStatus status = PrinterStatus();
@@ -86,11 +92,13 @@ class _MyAppState extends State<MyApp> {
 
     } else {
       // User canceled the picker
-    }
+    }*/
+    
     //bool closed = await printer.endCommunication();
 
-    print ("Got Status: $status and Error: ${status.errorCode.getName()}");
-    return status;
+    //print ("Got Status: $status and Error: ${status.errorCode.getName()}");
+    //return status;
+    return PrinterStatus();
   }
 
   @override

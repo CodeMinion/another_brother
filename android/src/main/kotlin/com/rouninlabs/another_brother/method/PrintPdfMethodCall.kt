@@ -10,13 +10,13 @@ import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.*
 
 /**
- * Command for printing a file to a Brother printer.
+ * Command for printing an PDF file to a Brother printer.
  * This support both one-time as well as the standard openCommunication/print/closeCommunication
  * approach.
  */
-class PrintFileMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
+class PrintPdfMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
     companion object {
-        const val METHOD_NAME = "printFile"
+        const val METHOD_NAME = "printPDF"
     }
 
     fun execute() {
@@ -26,6 +26,7 @@ class PrintFileMethodCall(val context: Context, val call: MethodCall, val result
             val dartPrintInfo: HashMap<String, Any> = call.argument<HashMap<String, Any>>("printInfo")!!
             val printerId: String = call.argument<String>("printerId")!!
             val filePath:String = call.argument("filePath")!!
+            val pageNum:Int = call.argument("pagenum")!!
 
             // Decoded Printer Info
             val printInfo = printerInfofromMap(dartPrintInfo)
@@ -53,7 +54,7 @@ class PrintFileMethodCall(val context: Context, val call: MethodCall, val result
             }
 
             // Print Image
-            val printResult = printer.printFile(filePath)
+            val printResult = printer.printPdfFile(filePath, pageNum)
 
             // End Communication
             if (isOneTime) {

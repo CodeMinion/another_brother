@@ -46,6 +46,78 @@ class AnotherBrotherPlugin: FlutterPlugin, MethodCallHandler {
     else if (call.method == PrintFileListMethodCall.METHOD_NAME) {
         PrintFileListMethodCall(context = mContext, call = call, result = result).execute()
     }
+    else if (call.method == PrintPdfFileMethodCall.METHOD_NAME) {
+        PrintPdfFileMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetPdfPagesMethodCall.METHOD_NAME) {
+        GetPdfPagesMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetPdfFilePagesMethodCall.METHOD_NAME) {
+        GetPdfFilePagesMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == TransferMethodCall.METHOD_NAME) {
+        TransferMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == SendDatabaseMethodCall.METHOD_NAME) {
+        SendDatabaseMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == SendBinaryFileMethodCall.METHOD_NAME) {
+        SendBinaryFileMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == SendBinaryMethodCall.METHOD_NAME) {
+        SendBinaryMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetFirmVersionMethodCall.METHOD_NAME) {
+        GetFirmVersionMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetMediaVersionMethodCall.METHOD_NAME) {
+        GetMediaVersionMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetSerialNumberMethodCall.METHOD_NAME) {
+        GetSerialNumberMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetBatteryWeakMethodCall.METHOD_NAME) {
+        GetBatteryWeakMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetBootModeMethodCall.METHOD_NAME) {
+        GetBootModeMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetFirmFileVersionMethodCall.METHOD_NAME) {
+        GetFirmFileVersionMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetMediaFileVersionMethodCall.METHOD_NAME) {
+        GetMediaFileVersionMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == RemoveTemplateMethodCall.METHOD_NAME) {
+        RemoveTemplateMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == CancelMethodCall.METHOD_NAME) {
+        CancelMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetPrinterStatusMethodCall.METHOD_NAME) {
+        GetPrinterStatusMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetSystemReportMethodCall.METHOD_NAME) {
+        GetSystemReportMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == StartPttPrintMethodCall.METHOD_NAME) {
+        StartPttPrintMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == ReplaceTextMethodCall.METHOD_NAME) {
+        ReplaceTextMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == ReplaceTextIndexMethodCall.METHOD_NAME) {
+        ReplaceTextIndexMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == ReplaceTextNameMethodCall.METHOD_NAME) {
+        ReplaceTextNameMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetNetPrintersMethodCall.METHOD_NAME) {
+        GetNetPrintersMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetNetPrinterInfoMethodCall.METHOD_NAME) {
+        GetNetPrinterInfoMethodCall(context = mContext, call = call, result = result).execute()
+    }
     else {
       result.notImplemented()
     }

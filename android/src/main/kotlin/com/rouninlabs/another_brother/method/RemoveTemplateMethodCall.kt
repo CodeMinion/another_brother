@@ -1,8 +1,6 @@
 package com.rouninlabs.another_brother.method
 
 import android.content.Context
-import android.graphics.BitmapFactory
-import android.util.Log
 import com.brother.ptouch.sdk.Printer
 import com.rouninlabs.another_brother.BrotherManager
 import io.flutter.plugin.common.MethodCall
@@ -10,13 +8,13 @@ import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.*
 
 /**
- * Command for printing a file to a Brother printer.
+ * Command for removing a template from  a Brother printer.
  * This support both one-time as well as the standard openCommunication/print/closeCommunication
  * approach.
  */
-class PrintFileMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
+class RemoveTemplateMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
     companion object {
-        const val METHOD_NAME = "printFile"
+        const val METHOD_NAME = "removeTemplate"
     }
 
     fun execute() {
@@ -25,7 +23,7 @@ class PrintFileMethodCall(val context: Context, val call: MethodCall, val result
 
             val dartPrintInfo: HashMap<String, Any> = call.argument<HashMap<String, Any>>("printInfo")!!
             val printerId: String = call.argument<String>("printerId")!!
-            val filePath:String = call.argument("filePath")!!
+            val keyList:List<Int> = call.argument("keyList")!!
 
             // Decoded Printer Info
             val printInfo = printerInfofromMap(dartPrintInfo)
@@ -53,7 +51,7 @@ class PrintFileMethodCall(val context: Context, val call: MethodCall, val result
             }
 
             // Print Image
-            val printResult = printer.printFile(filePath)
+            val templateResult = printer.removeTemplate(keyList)
 
             // End Communication
             if (isOneTime) {
@@ -61,7 +59,7 @@ class PrintFileMethodCall(val context: Context, val call: MethodCall, val result
             }
 
             // Encode PrinterStatus
-            val dartPrintStatus = printResult.toMap()
+            val dartPrintStatus = templateResult.toMap()
            withContext(Dispatchers.Main) {
                // Set result Printer status.
                result.success(dartPrintStatus)
