@@ -7,5 +7,5 @@ Another Bother SDK library for Flutter.
 - WiFi
 - USB
 
-## Android Support
+## iOS Support
 - Coming Soon
