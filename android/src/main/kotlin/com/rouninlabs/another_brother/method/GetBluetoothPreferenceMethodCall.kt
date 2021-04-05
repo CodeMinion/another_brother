@@ -1,23 +1,25 @@
 package com.rouninlabs.another_brother.method
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.util.Log
-import com.brother.ptouch.sdk.LabelInfo
+import com.brother.ptouch.sdk.BluetoothPreference
 import com.brother.ptouch.sdk.Printer
 import com.brother.ptouch.sdk.PrinterInfo
+import com.brother.ptouch.sdk.PrinterStatus
 import com.rouninlabs.another_brother.BrotherManager
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.*
 
 /**
- * Command for getting the label param of a Brother printer.
+ * Command for getting the bluetooth preference of a Brother printer.
  * This support both one-time as well as the standard openCommunication/print/closeCommunication
  * approach.
  */
-class GetLabelInfoMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
+class GetBluetoothPreferenceMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
     companion object {
-        const val METHOD_NAME = "getLabelInfo"
+        const val METHOD_NAME = "getBluetoothPreference"
     }
 
     fun execute() {
@@ -45,7 +47,12 @@ class GetLabelInfoMethodCall(val context: Context, val call: MethodCall, val res
                 // There was an error notify
                 withContext(Dispatchers.Main) {
                     // Set result Printer status.
-                    result.success(LabelInfo())
+                    result.success(hashMapOf(
+                            "printerStatus" to PrinterStatus().apply {
+                                errorCode = error
+                            }.toMap(),
+                            "btPre" to BluetoothPreference().toMap()
+                    ))
                 }
                 return@launch
             }
@@ -60,21 +67,23 @@ class GetLabelInfoMethodCall(val context: Context, val call: MethodCall, val res
                 val started: Boolean = printer.startCommunication()
             }
 
-            // Print Image
-            val labelInfo = printer.labelInfo
+            val outPrefs = BluetoothPreference()
+            // Get settings
+            val printResult = printer.getBluetoothPreference(outPrefs);
 
             // End Communication
             if (isOneTime) {
                 val connectionClosed: Boolean = printer.endCommunication()
             }
-
-            Log.e(TAG, "Label Info: ${labelInfo.labelNameIndex}")
-
             // Encode PrinterStatus
-            val dartLabelParam = labelInfo.toMap()
+            val dartPrintStatus = printResult.toMap()
+            val dartOutValues:Map<String, Any> = outPrefs.toMap();
            withContext(Dispatchers.Main) {
                // Set result Printer status.
-               result.success(dartLabelParam)
+               result.success(hashMapOf(
+                   "printerStatus" to dartPrintStatus,
+                   "values" to dartOutValues
+               ))
            }
         }
 

@@ -130,6 +130,21 @@ class AnotherBrotherPlugin: FlutterPlugin, MethodCallHandler {
     else if (call.method == GetTemplateListMethodCall.METHOD_NAME) {
         GetTemplateListMethodCall(context = mContext, call = call, result = result).execute()
     }
+    else if (call.method == GetBatteryInfoMethodCall.METHOD_NAME) {
+        GetBatteryInfoMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == UpdatePrinterSettingsMethodCall.METHOD_NAME) {
+        UpdatePrinterSettingsMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetPrinterSettingsMethodCall.METHOD_NAME) {
+        GetPrinterSettingsMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == GetBluetoothPreferenceMethodCall.METHOD_NAME) {
+        GetBluetoothPreferenceMethodCall(context = mContext, call = call, result = result).execute()
+    }
+    else if (call.method == UpdateBluetoothPreferenceMethodCall.METHOD_NAME) {
+        UpdateBluetoothPreferenceMethodCall(context = mContext, call = call, result = result).execute()
+    }
     else {
       result.notImplemented()
     }

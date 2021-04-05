@@ -1,23 +1,23 @@
 package com.rouninlabs.another_brother.method
 
 import android.content.Context
-import android.util.Log
-import com.brother.ptouch.sdk.LabelInfo
+import com.brother.ptouch.sdk.BatteryInfo
 import com.brother.ptouch.sdk.Printer
 import com.brother.ptouch.sdk.PrinterInfo
+import com.brother.ptouch.sdk.PrinterStatus
 import com.rouninlabs.another_brother.BrotherManager
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.*
 
 /**
- * Command for getting the label param of a Brother printer.
+ * Command for getting the battery info of a Brother printer.
  * This support both one-time as well as the standard openCommunication/print/closeCommunication
  * approach.
  */
-class GetLabelInfoMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
+class GetBatteryInfoMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
     companion object {
-        const val METHOD_NAME = "getLabelInfo"
+        const val METHOD_NAME = "getBatteryInfo"
     }
 
     fun execute() {
@@ -26,7 +26,7 @@ class GetLabelInfoMethodCall(val context: Context, val call: MethodCall, val res
 
             val dartPrintInfo: HashMap<String, Any> = call.argument<HashMap<String, Any>>("printInfo")!!
             val printerId: String = call.argument<String>("printerId")!!
-            
+
             // Decoded Printer Info
             val printInfo = printerInfofromMap(dartPrintInfo)
 
@@ -44,8 +44,7 @@ class GetLabelInfoMethodCall(val context: Context, val call: MethodCall, val res
             if (error != PrinterInfo.ErrorCode.ERROR_NONE) {
                 // There was an error notify
                 withContext(Dispatchers.Main) {
-                    // Set result Printer status.
-                    result.success(LabelInfo())
+                    result.success(BatteryInfo().toMap())
                 }
                 return@launch
             }
@@ -60,21 +59,17 @@ class GetLabelInfoMethodCall(val context: Context, val call: MethodCall, val res
                 val started: Boolean = printer.startCommunication()
             }
 
-            // Print Image
-            val labelInfo = printer.labelInfo
+            val batterInfo:BatteryInfo = printer.batteryInfo;
 
             // End Communication
             if (isOneTime) {
                 val connectionClosed: Boolean = printer.endCommunication()
             }
 
-            Log.e(TAG, "Label Info: ${labelInfo.labelNameIndex}")
-
             // Encode PrinterStatus
-            val dartLabelParam = labelInfo.toMap()
            withContext(Dispatchers.Main) {
                // Set result Printer status.
-               result.success(dartLabelParam)
+               result.success(batterInfo.toMap())
            }
         }
 

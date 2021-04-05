@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<PrinterStatus> printImageUsb() async {
-    /*
+
     PictureRecorder recorder = PictureRecorder();
     Canvas c = Canvas(recorder);
     Paint paint = new Paint();
@@ -60,7 +60,6 @@ class _MyAppState extends State<MyApp> {
     Rect bounds = new Rect.fromLTWH(0, 0, 300, 100);
     c.drawRect(bounds, paint);
     var picture = await recorder.endRecording().toImage(300, 100);
-    */
 
     var printer = new Printer();
     var printInfo = PrinterInfo();
@@ -68,12 +67,19 @@ class _MyAppState extends State<MyApp> {
     printInfo.printMode = PrintMode.FIT_TO_PAGE;
     printInfo.isAutoCut = true;
     //printInfo.port = Port.BLUETOOTH;
-    //printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer BLuetooth Mac
-    printInfo.port = Port.NET;
-    printInfo.ipAddress = "192.168.1.80"; // Printer Bluetooth Mac
-    //printInfo.port = Port.USB;
+    //printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer Bluetooth Mac
+    //printInfo.port = Port.NET;
+    //printInfo.ipAddress = "192.168.1.80"; // Printer Bluetooth Mac
+    printInfo.port = Port.USB;
+    // Note: This request stopped working, revisit.
     //printInfo.labelNameIndex = (await printer.getLabelInfo()).labelNameIndex; //QL1100.ordinalFromID(QL1100.W103.getId());
+    printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W103.getId());
+
     await printer.setPrinterInfo(printInfo);
+    await printer.printImage(picture);
+
+    LabelInfo info = await printer.getLabelInfo();
+    print ("Label Info $info");
 
     PrinterStatus status = PrinterStatus();
 
@@ -84,12 +90,26 @@ class _MyAppState extends State<MyApp> {
     // Print
     //PrinterStatus status = await printer.printImage(picture);
 
-    //var netPrinters = await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
-    //print ("Found Printers: $netPrinters");
+    var netPrinters = await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
+    print ("Found Printers: $netPrinters");
 
-    List<TemplateInfo> templates = [];
-    status = await printer.getTemplateList(templates);
-    print ("Found Templates: $templates");
+    //List<TemplateInfo> templates = [];
+    //status = await printer.getTemplateList(templates);
+    //print ("Found Templates: $templates");
+
+    //BatteryInfo battInfo = await printer.getBatteryInfo();
+    //print ("Found Battery Info: $battInfo");
+
+    //status = await printer.updatePrinterSettings({PrinterSettingItem.RESET: ""});
+    //print("Settings Status $status");
+
+    //status = await printer.updatePrinterSettings({PrinterSettingItem.BT_DEVICENAME: "QL-1110NWB7078"});
+    //print("Settings Status $status");
+
+    //Map<PrinterSettingItem, String> outValues = {};
+    //status = await printer.getPrinterSettings([PrinterSettingItem.BT_DEVICENAME], outValues);
+    //print ("Settings: ${outValues}");
+
     //var netPrinter = await printer.getNetPrinterInfo("192.168.1.80");
     //print ("Net Printer: $netPrinter");
 

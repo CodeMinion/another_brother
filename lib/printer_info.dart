@@ -1090,51 +1090,51 @@ class Msg {
 
 class PrinterSettingItem {
   final int _id;
+  final String _name;
+  const PrinterSettingItem._internal(this._id, this._name);
 
-  const PrinterSettingItem._internal(this._id);
-
-  static const NET_BOOTMODE = PrinterSettingItem._internal(1);
-  static const NET_INTERFACE = PrinterSettingItem._internal(2);
-  static const NET_IPV4_BOOTMETHOD = PrinterSettingItem._internal(5);
-  static const NET_STATIC_IPV4ADDRESS = PrinterSettingItem._internal(6);
-  static const NET_SUBNETMASK = PrinterSettingItem._internal(7);
-  static const NET_GATEWAY = PrinterSettingItem._internal(8);
-  static const NET_DNS_IPV4_BOOTMETHOD = PrinterSettingItem._internal(9);
-  static const NET_PRIMARY_DNS_IPV4ADDRESS = PrinterSettingItem._internal(10);
-  static const NET_SECOND_DNS_IPV4ADDRESS = PrinterSettingItem._internal(11);
-  static const NET_USED_IPV6 = PrinterSettingItem._internal(3);
-  static const NET_PRIORITY_IPV6 = PrinterSettingItem._internal(4);
-  static const NET_IPV6_BOOTMETHOD = PrinterSettingItem._internal(12);
-  static const NET_STATIC_IPV6ADDRESS = PrinterSettingItem._internal(13);
-  static const NET_PRIMARY_DNS_IPV6ADDRESS = PrinterSettingItem._internal(14);
-  static const NET_SECOND_DNS_IPV6ADDRESS = PrinterSettingItem._internal(15);
-  static const NET_IPV6ADDRESS_LIST = PrinterSettingItem._internal(16);
-  static const NET_COMMUNICATION_MODE = PrinterSettingItem._internal(17);
-  static const NET_SSID = PrinterSettingItem._internal(18);
-  static const NET_CHANNEL = PrinterSettingItem._internal(19);
-  static const NET_AUTHENTICATION_METHOD = PrinterSettingItem._internal(20);
-  static const NET_ENCRYPTIONMODE = PrinterSettingItem._internal(21);
-  static const NET_WEPKEY = PrinterSettingItem._internal(22);
-  static const NET_PASSPHRASE = PrinterSettingItem._internal(23);
-  static const NET_USER_ID = PrinterSettingItem._internal(24);
-  static const NET_PASSWORD = PrinterSettingItem._internal(25);
-  static const NET_NODENAME = PrinterSettingItem._internal(26);
+  static const NET_BOOTMODE = PrinterSettingItem._internal(1, "NET_BOOTMODE");
+  static const NET_INTERFACE = PrinterSettingItem._internal(2, "NET_INTERFACE");
+  static const NET_IPV4_BOOTMETHOD = PrinterSettingItem._internal(5, "NET_IPV4_BOOTMETHOD");
+  static const NET_STATIC_IPV4ADDRESS = PrinterSettingItem._internal(6, "NET_STATIC_IPV4ADDRESS");
+  static const NET_SUBNETMASK = PrinterSettingItem._internal(7, "NET_SUBNETMASK");
+  static const NET_GATEWAY = PrinterSettingItem._internal(8, "NET_GATEWAY");
+  static const NET_DNS_IPV4_BOOTMETHOD = PrinterSettingItem._internal(9, "NET_DNS_IPV4_BOOTMETHOD");
+  static const NET_PRIMARY_DNS_IPV4ADDRESS = PrinterSettingItem._internal(10, "NET_PRIMARY_DNS_IPV4ADDRESS");
+  static const NET_SECOND_DNS_IPV4ADDRESS = PrinterSettingItem._internal(11, "NET_SECOND_DNS_IPV4ADDRESS");
+  static const NET_USED_IPV6 = PrinterSettingItem._internal(3, "NET_USED_IPV6");
+  static const NET_PRIORITY_IPV6 = PrinterSettingItem._internal(4, "NET_PRIORITY_IPV6");
+  static const NET_IPV6_BOOTMETHOD = PrinterSettingItem._internal(12, "NET_IPV6_BOOTMETHOD");
+  static const NET_STATIC_IPV6ADDRESS = PrinterSettingItem._internal(13, "NET_STATIC_IPV6ADDRESS");
+  static const NET_PRIMARY_DNS_IPV6ADDRESS = PrinterSettingItem._internal(14, "NET_PRIMARY_DNS_IPV6ADDRESS");
+  static const NET_SECOND_DNS_IPV6ADDRESS = PrinterSettingItem._internal(15, "NET_SECOND_DNS_IPV6ADDRESS");
+  static const NET_IPV6ADDRESS_LIST = PrinterSettingItem._internal(16, "NET_IPV6ADDRESS_LIST");
+  static const NET_COMMUNICATION_MODE = PrinterSettingItem._internal(17, "NET_COMMUNICATION_MODE");
+  static const NET_SSID = PrinterSettingItem._internal(18, "NET_SSID");
+  static const NET_CHANNEL = PrinterSettingItem._internal(19, "NET_CHANNEL");
+  static const NET_AUTHENTICATION_METHOD = PrinterSettingItem._internal(20, "NET_AUTHENTICATION_METHOD");
+  static const NET_ENCRYPTIONMODE = PrinterSettingItem._internal(21, "NET_ENCRYPTIONMODE");
+  static const NET_WEPKEY = PrinterSettingItem._internal(22, "NET_WEPKEY");
+  static const NET_PASSPHRASE = PrinterSettingItem._internal(23, "NET_PASSPHRASE");
+  static const NET_USER_ID = PrinterSettingItem._internal(24, "NET_USER_ID");
+  static const NET_PASSWORD = PrinterSettingItem._internal(25, "NET_PASSWORD");
+  static const NET_NODENAME = PrinterSettingItem._internal(26, "NET_NODENAME");
   static const WIRELESSDIRECT_KEY_CREATE_MODE =
-      PrinterSettingItem._internal(27);
-  static const WIRELESSDIRECT_SSID = PrinterSettingItem._internal(28);
-  static const WIRELESSDIRECT_NETWORK_KEY = PrinterSettingItem._internal(29);
-  static const BT_ISDISCOVERABLE = PrinterSettingItem._internal(30);
-  static const BT_DEVICENAME = PrinterSettingItem._internal(31);
-  static const BT_BOOTMODE = PrinterSettingItem._internal(34);
-  static const PRINT_JPEG_HALFTONE = PrinterSettingItem._internal(37);
-  static const PRINT_JPEG_SCALE = PrinterSettingItem._internal(38);
-  static const PRINT_DENSITY = PrinterSettingItem._internal(39);
-  static const PRINT_SPEED = PrinterSettingItem._internal(40);
-  static const PRINTER_POWEROFFTIME = PrinterSettingItem._internal(35);
-  static const PRINTER_POWEROFFTIME_BATTERY = PrinterSettingItem._internal(36);
-  static const BT_AUTO_CONNECTION = PrinterSettingItem._internal(44);
-  static const RESET = PrinterSettingItem._internal(254);
-  static const UNSUPPORTED = PrinterSettingItem._internal(255);
+      PrinterSettingItem._internal(27, "WIRELESSDIRECT_KEY_CREATE_MODE");
+  static const WIRELESSDIRECT_SSID = PrinterSettingItem._internal(28, "WIRELESSDIRECT_SSID");
+  static const WIRELESSDIRECT_NETWORK_KEY = PrinterSettingItem._internal(29, "WIRELESSDIRECT_NETWORK_KEY");
+  static const BT_ISDISCOVERABLE = PrinterSettingItem._internal(30, "BT_ISDISCOVERABLE");
+  static const BT_DEVICENAME = PrinterSettingItem._internal(31, "BT_DEVICENAME");
+  static const BT_BOOTMODE = PrinterSettingItem._internal(34, "BT_BOOTMODE");
+  static const PRINT_JPEG_HALFTONE = PrinterSettingItem._internal(37, "PRINT_JPEG_HALFTONE");
+  static const PRINT_JPEG_SCALE = PrinterSettingItem._internal(38, "PRINT_JPEG_SCALE");
+  static const PRINT_DENSITY = PrinterSettingItem._internal(39, "PRINT_DENSITY");
+  static const PRINT_SPEED = PrinterSettingItem._internal(40, "PRINT_SPEED");
+  static const PRINTER_POWEROFFTIME = PrinterSettingItem._internal(35, "PRINTER_POWEROFFTIME");
+  static const PRINTER_POWEROFFTIME_BATTERY = PrinterSettingItem._internal(36, "PRINTER_POWEROFFTIME_BATTERY");
+  static const BT_AUTO_CONNECTION = PrinterSettingItem._internal(44, "BT_AUTO_CONNECTION");
+  static const RESET = PrinterSettingItem._internal(254, "RESET");
+  static const UNSUPPORTED = PrinterSettingItem._internal(255, "UNSUPPORTED");
 
   static final _values = [
     NET_BOOTMODE,
@@ -1184,6 +1184,10 @@ class PrinterSettingItem {
     return _id;
   }
 
+  String getName() {
+    return _name;
+  }
+
   static int getItemId(index) {
     if (index < 0 || index > _values.length) {
       return UNSUPPORTED.getId();
@@ -1202,6 +1206,16 @@ class PrinterSettingItem {
     return UNSUPPORTED;
   }
 
+  static PrinterSettingItem valueFromName(String name) {
+    for (int i = 0; i < _values.length; ++i) {
+      PrinterSettingItem num = _values[i];
+      if (num.getName() == name) {
+        return num;
+      }
+    }
+    return UNSUPPORTED;
+  }
+
   static int ordinalFromID(int id) {
     for (int i = 0; i < _values.length; ++i) {
       PrinterSettingItem num = _values[i];
@@ -1214,11 +1228,20 @@ class PrinterSettingItem {
 
   static PrinterSettingItem fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    return PrinterSettingItem.valueFromID(id);
+    String name = map["name"];
+    return PrinterSettingItem.valueFromName(name);
   }
 
   Map<String, dynamic> toMap() {
-    return {"id": _id};
+    return {
+      "id": _id,
+      "name": _name
+    };
+  }
+
+  @override
+  String toString() {
+    return _name;
   }
 }
 
@@ -1358,7 +1381,6 @@ class PrinterInfo {
   String customPaper;
 
   //CustomPaperInfo customPaperInfo;
-  // TODO Consider making this the label enum rather than the ordinal
   int labelNameIndex;
   bool pjCarbon;
   int pjDensity;
@@ -1576,7 +1598,6 @@ class PrinterInfo {
       "overwrite": overwrite,
       "isHalfCut": isHalfCut,
       "isSpecialTape": isSpecialTape,
-      // TODO Consider using the enum value instead.
       "labelNameIndex": labelNameIndex,
       "customPaper": customPaper,
       //this.customPaperInfo = null,
@@ -1728,6 +1749,11 @@ class PrinterStatus {
       "batteryResidualQuantityLevel": batteryResidualQuantityLevel,
       "maxOfBatteryResidualQuantityLevel": maxOfBatteryResidualQuantityLevel
     };
+  }
+
+  @override
+  String toString() {
+    return toMap().toString();
   }
 
 }
@@ -2073,13 +2099,14 @@ class LabelParam {
 
 class HealthStatus {
   final int _id;
-  const HealthStatus._internal(this._id);
+  final String _name;
+  const HealthStatus._internal(this._id, this._name);
 
-  static const Excellent = HealthStatus._internal(0);
-  static const Good = HealthStatus._internal(1);
-  static const ReplaceSoon  = HealthStatus._internal(2);
-  static const ReplaceBattery = HealthStatus._internal(3);
-  static const NotInstalled = HealthStatus._internal(4);
+  static const Excellent = HealthStatus._internal(0, "Excellent");
+  static const Good = HealthStatus._internal(1, "Good");
+  static const ReplaceSoon  = HealthStatus._internal(2, "ReplaceSoon");
+  static const ReplaceBattery = HealthStatus._internal(3, "ReplaceBattery");
+  static const NotInstalled = HealthStatus._internal(4, "NotInstalled");
 
   static final List<HealthStatus> _values = [
     Excellent,
@@ -2093,6 +2120,10 @@ class HealthStatus {
     return _id;
   }
 
+  String getName() {
+    return _name;
+  }
+
   static HealthStatus valueFromID(int id) {
     for (int i = 0; i < _values.length; ++i) {
       HealthStatus num = _values[i];
@@ -2103,13 +2134,32 @@ class HealthStatus {
     return NotInstalled;
   }
 
+  static HealthStatus valueFromName(String name) {
+    for (int i = 0; i < _values.length; ++i) {
+      HealthStatus num = _values[i];
+      if (num.getName() == name) {
+        return num;
+      }
+    }
+    return NotInstalled;
+  }
+
   static HealthStatus fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    return HealthStatus.valueFromID(id);
+    String name = map["name"];
+    return HealthStatus.valueFromName(name);
   }
 
   Map<String, dynamic> toMap() {
-    return {"id": this._id};
+    return {
+      "id": this._id,
+      "name": this._name
+    };
+  }
+
+  @override
+  String toString() {
+    return _name;
   }
 
 }
@@ -2143,9 +2193,13 @@ class BatteryInfo {
       "healthStatus": this.batteryHealthStatus.toMap()
     };
   }
+
+  @override
+  String toString() {
+    return "chargeLevel: $batteryChargeLevel, healthLevel: $batteryHealthLevel, healthStatus: $batteryHealthStatus";
+  }
 }
 
-// TODO Continue toMap/fromMap
 class NetPrinter {
   String modelName;
   String serNo;
@@ -2229,9 +2283,7 @@ class Printer {
   Paper mPaper = Paper();
   String charEncode = "";
 
-  Printer() {
-  }
-
+  Printer();
 
   static PrinterInfo getUserPrinterInfo() {
     return mPrinterInfo;
@@ -2240,10 +2292,6 @@ class Printer {
   static void setUserPrinterInfo(PrinterInfo mPrinterInfo) {
     Printer.mPrinterInfo = mPrinterInfo;
   }
-
-  /* TODO
-  static List<LabelParam> getLabelParamList(Model model) {}
-*/
 
   static DateTime getDate(Uint8List bytes) {
     BigInt bi = _readBytes(bytes);
@@ -2271,16 +2319,9 @@ class Printer {
     return read(0, bytes.length);
   }
 
-/* TODO
-  List<Paper> getPaperList() {}
-
-  Future<PrinterSpec> getPrinterSpec() async {
-      // TODO Make call to Other size
-    //return getSpec();
-    return PrinterSpec();
-  }
-  */
-
+  /// Print the image file or print data file (.prn) using print settings set by setPrinterInfo.
+  ///
+  /// [filepath] The image (.jpg/.jpeg, .bmp, .png) file path or print data (.prn) path to be printed.
   Future<PrinterStatus> printFile(String filepath) async {
     var params = {
       "printerId": mPrinterId,
@@ -2295,44 +2336,13 @@ class Printer {
   }
 
 
-  /*
-  Bitmap saveBitmap(Bitmap bmp, int halftone, int halfThreshold, int gamaAdjust) {
-    BitmapData bitmapData = new BitmapData();
-    bitmapData.bitmapHeight = bmp.getHeight();
-    bitmapData.bitmapWidth = bmp.getWidth();
-    bitmapData.bitmapFile = bytePath;
-    String dirPath = this.getWorkPath();
-    if (!this.createWorkPath(dirPath)) {
-      return null;
-    } else {
-      String saveFile = dirPath + "/print.data";
-      JNIWrapper.byteFileWriteRGB(bmp, bytePath);
-      JNIWrapper.saveBitmapJNI(bitmapData, saveFile, halftone, halfThreshold, gamaAdjust);
-      byte[] data = this.readBinaryDataFromFile(saveFile);
-      int bitmapHeight = bmp.getHeight();
-      int bitmapWidth = bmp.getWidth();
-
-      for(int y = 0; y < bitmapHeight; ++y) {
-        for(int x = 0; x < bitmapWidth; ++x) {
-          if (data[y * bitmapWidth + x] != 0) {
-            bmp.setPixel(x, y, 16777215);
-          } else {
-            bmp.setPixel(x, y, 0);
-          }
-        }
-      }
-
-      this.tempFileDelete();
-      return bmp;
-    }
-  }*/
-
-
   static Future<String> get platformVersion async {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
 
+
+  /// Print the image using print settings set by setPrinterInfo.
   Future<PrinterStatus> printImage(Image image) async {
 
       var imageBytes = await image.toByteData(format: ImageByteFormat.png);
@@ -2361,7 +2371,7 @@ class Printer {
   }
 
 
-
+  /// Print the image files using print settings set by setPrinterInfo.
   Future<PrinterStatus> printFileList(List<String> fileList) async {
     var params = {
       "printerId": mPrinterId,
@@ -2377,6 +2387,7 @@ class Printer {
   }
 
 
+  /// Print the pdf file using print settings set by setPrinterInfo. Available on Android 5.0 or later.
   Future<PrinterStatus> printPdfFile(String filepath, int pagenum) async {
 
     var params = {
@@ -2394,6 +2405,7 @@ class Printer {
   }
 
 
+  /// Same functionality as printPdfFile. Available on less than Android 6.0.
   Future<PrinterStatus> printPDF(String filepath, int pagenum) async {
 
     var params = {
@@ -2411,6 +2423,7 @@ class Printer {
   }
 
 
+  /// Same functionality as getPDFFilePages. Available on less than Android 6.0.
   Future<int> getPDFPages(String filepath) async {
 
     var params = {
@@ -2425,6 +2438,7 @@ class Printer {
   }
 
 
+  /// Get the page count of the specified pdf file. Available on Android 5.0 or later.
   Future<int> getPDFFilePages(String filepath) async {
 
     var params = {
@@ -2438,7 +2452,10 @@ class Printer {
     return pages;
   }
 
-
+  /// Transfers a P-touch Template file to the printer.
+  /// The template file (*.pdz, *.blf) is created by P-touch Transfer Manager,
+  /// a Windows application. For Bluetooth and USB transfers, use pdz files.
+  /// For all interface, use blf files.
   Future<PrinterStatus> transfer(String filepath) async {
 
     var params = {
@@ -2470,6 +2487,18 @@ class Printer {
   }
 
 
+  /// Send the database data described in .csv format. In addition,
+  /// Updates the database for printers that have templates and databases
+  /// created and linked by P-touch Editor.
+  //
+  //.csv data format restrictions :
+  //
+  //the delimiter is ,(connma) only
+  //Alphanumeric & symbol in ASCII only
+  //
+  // This method is supported by the following printers.
+  //
+  //PT-E550W
   Future<PrinterStatus> sendDatabase(String filepath) async {
 
     var params = {
@@ -2485,6 +2514,9 @@ class Printer {
 
   }
 
+  /// Send the binary file containing the command. Since the status check is
+  /// not performed, it is sent even if the printer specified by printerModel
+  /// is different from the actually connected printer.
   Future<PrinterStatus> sendBinaryFile(String filepath) async {
     var params = {
       "printerId": mPrinterId,
@@ -2499,7 +2531,9 @@ class Printer {
 
   }
 
-
+  /// Send the binary data containing the command. Since the status check
+  /// is not performed, it is sent even if the printer specified by
+  /// printerModel is different from the actually connected printer.
   Future<PrinterStatus> sendBinary(Uint8List data) async {
 
     var params = {
@@ -2597,6 +2631,7 @@ class Printer {
     return mediaFileVersion;
   }
 
+  /// Removes templates from the printer.
   Future<PrinterStatus> removeTemplate(List<int> keyList) async {
 
     var params = {
@@ -2612,6 +2647,7 @@ class Printer {
   }
 
 
+  /// Gets a list of the templates that have been downloaded to the printer.
   Future<PrinterStatus> getTemplateList(List<TemplateInfo> outTmplList) async {
 
     var params = {
@@ -2630,17 +2666,19 @@ class Printer {
     return status;
   }
 
-
+  /// Set PrinterInfo object to specify the printer and print settings.
   Future<bool> setPrinterInfo(PrinterInfo printerInfo) async {
     mPrinterInfo = printerInfo;
     return true;
   }
 
 
+  /// Get the printer information which is currently set.
   Future<PrinterInfo> getPrinterInfo() async {
     return mPrinterInfo;
   }
 
+  /// Retrieves the printer status.
   Future<PrinterStatus> getPrinterStatus() async {
 
     var params = {
@@ -2654,16 +2692,49 @@ class Printer {
     return status;
   }
 
-  /*
-  TODO
-  PrinterStatus updatePrinterSettings(
-      Map<PrinterSettingItem, String> settings) {}
-  TODO
-  PrinterStatus getPrinterSettings(
-      List<PrinterSettingItem> keys, Map<PrinterSettingItem, String> values) {}
+  /// Update printer settings. See Printer Configurations for available values.
+  /// Some settings are not applied until the printer is restarted. Restart
+  /// the printer, then confirm the values are properly applied via
+  /// getPrinterSettings after the restart.
+  Future<PrinterStatus> updatePrinterSettings(
+      Map<PrinterSettingItem, String> settings) async {
 
-  */
+    final Map<Map<String, dynamic>, String> dartSettings = settings.map((key, value) => new MapEntry(key.toMap(), value));
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "settings": dartSettings
+    };
 
+    final Map resultMap = await _channel.invokeMethod("updatePrinterSettings", params);
+    PrinterStatus status = PrinterStatus.fromMap(resultMap);
+
+    return status;
+  }
+
+  /// Get printer settings. See Printer Configurations for available values.
+  Future<PrinterStatus> getPrinterSettings(
+      List<PrinterSettingItem> keys, Map<PrinterSettingItem, String> outValues) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "keys": keys.map((printerSettingItem) => printerSettingItem.toMap()).toList()
+    };
+
+    final Map resultMap = await _channel.invokeMethod("getPrinterSettings", params);
+    PrinterStatus status = PrinterStatus.fromMap(resultMap["printerStatus"]);
+    Map<dynamic, dynamic> values = resultMap["values"];
+
+    values.forEach((key, value) {
+      outValues.putIfAbsent(PrinterSettingItem.fromMap(key), () => value);
+    });
+
+    return status;
+  }
+
+  /// Retrieves the system report of the printer like self-print contents.
+  /// Available if port is other than Port.NET.
   Future<String> getSystemReport() async {
     var params = {
       "printerId": mPrinterId,
@@ -2675,19 +2746,62 @@ class Printer {
     return systemReport;
   }
 
-  /*
-  TODO
-  BatteryInfo getBatteryInfo() {}
-  TODO
-  PrinterStatus getBluetoothPreference(BluetoothPreference btPre) {}
+  /// Retrieves the battery information of the printer.
+  Future<BatteryInfo> getBatteryInfo() async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
 
- TODO
-  PrinterStatus updateBluetoothPreference(BluetoothPreference btPre) {}
+    final Map resultMap = await _channel.invokeMethod("getBatteryInfo", params);
 
-  TODO
-  bool setCustomPaper(Model printerModel, String filePath) {}
-  */
+    BatteryInfo info = BatteryInfo.fromMap(resultMap);
+    return info;
 
+  }
+
+  /// Gets Bluetooth settings from the MW series. Refer to BluetoothPreference.
+  Future<PrinterStatus> getBluetoothPreference(BluetoothPreference btPre) async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+    };
+
+    final Map resultMap = await _channel.invokeMethod("getBluetoothPreference", params);
+
+    PrinterStatus status = PrinterStatus.fromMap(resultMap["printerStatus"]);
+
+    BluetoothPreference resultPrefs = BluetoothPreference.fromMap(resultMap["btPre"]);
+    btPre.authMode = resultPrefs.authMode;
+    btPre.enableSsp = resultPrefs.enableSsp;
+    btPre.powerMode = resultPrefs.powerMode;
+
+    return status;
+  }
+
+  /// Updates Bluetooth settings of the MW series. Refer to BluetoothPreference.
+  /// This method does not check if the request has been reflected on the
+  /// device. Please check using getBluetoothPreference if needed.
+  Future<PrinterStatus> updateBluetoothPreference(BluetoothPreference btPre) async {
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "btPre": btPre.toMap()
+    };
+
+    final Map resultMap = await _channel.invokeMethod("updateBluetoothPreference", params);
+
+    PrinterStatus status = PrinterStatus.fromMap(resultMap);
+    return status;
+  }
+
+
+  /// Start creating the command and print data string for a P-touch Template.
+  /// Specify a template and the character encoding.
+  /// This function assumes the default P-touch Template settings.
+  /// Your application may not be able to print if the printer's settings
+  /// differ from the defaults. If necessary, use the P-touch Template
+  /// Setting Tool to configure the printer.
   Future<bool> startPTTPrint(int key, String encode) async {
     var params = {
       "printerId": mPrinterId,
@@ -2701,6 +2815,8 @@ class Printer {
     return success;
   }
 
+  /// Replaces the next replaceable text in a P-touch Template.
+  /// Text strings are replaced in order of small object number.
   Future<bool> replaceText(String data) async {
     var params = {
       "printerId": mPrinterId,
@@ -2714,7 +2830,8 @@ class Printer {
 
   }
 
-
+  /// Replaces the text in an object of a P-touch Template, specified by
+  /// its object number.
   Future<bool> replaceTextIndex(String data, int index) async {
 
     var params = {
@@ -2730,6 +2847,8 @@ class Printer {
   }
 
 
+  /// Replaces the text in an object of a P-touch Template,
+  /// specified by the object's name.
   Future<bool> replaceTextName(String data, String objectName) async {
 
     var params = {
@@ -2744,6 +2863,7 @@ class Printer {
     return success;
   }
 
+  /// Transmits command and print data used to print a P-touch Template.
   Future<PrinterStatus> flushPTTPrint() async {
     var params = {
       "printerId": mPrinterId,
@@ -2756,6 +2876,8 @@ class Printer {
     return status;
   }
 
+  /// Discover printers of the given model that are connected to the
+  /// same network.
   Future<List<NetPrinter>> getNetPrinters(List<String> modelName) async {
 
     var params = {
@@ -2784,6 +2906,8 @@ class Printer {
     return outPrinter;
   }
 
+  /// Get the detail information of the media (for QL, PT, TD and RJ series)
+  /// specified by setPrinterInfo.
   Future<LabelParam> getLabelParam() async {
 
     var params = {
@@ -2797,6 +2921,9 @@ class Printer {
     return outLabel;
   }
 
+
+  /// Retrieves the label information from the printer.
+  /// Available for QL and PT series only.
   Future<LabelInfo> getLabelInfo() async {
 
     var params = {
@@ -2811,6 +2938,8 @@ class Printer {
   }
 
 
+  /// Discover printers which are connectable via BLE. Available
+  /// on Android 5.0 or later.
   Future<List<BLEPrinter>> getBLEPrinters(int timeout) async {
     var params = {
       "printerId": mPrinterId,
@@ -2857,6 +2986,7 @@ class Printer {
   }
 
 
+  /// Cancel printing. Invalid while sending data.
   Future<bool> cancel() async {
     var params = {
       "printerId": mPrinterId,

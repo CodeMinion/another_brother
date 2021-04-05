@@ -170,6 +170,30 @@ fun marginFromMap(map: Map<String, Any>): PrinterInfo.Margin {
     return PrinterInfo.Margin(left, top)
 }
 
+fun printerSettingItemFromMap(map:Map<String, Any>):PrinterInfo.PrinterSettingItem {
+    val id:Int = map["id"] as Int
+    val name:String = map["name"] as String
+    return PrinterInfo.PrinterSettingItem.valueFromID(id)
+}
+
+fun bluetoothPreferenceFromMap(map:Map<String, Any>):BluetoothPreference {
+    return BluetoothPreference().apply {
+        enableSsp = sspFromMap(map["enableSsp"] as Map<String, Any>)
+        powerMode to powerSaveModeFromMap(map["powerMode"] as Map<String, Any>)
+        // Note: Auth Mode is Protected in the SDK
+        //authMode to AuthMode.fromMap(map["authMode"])
+    }
+}
+
+fun sspFromMap(map:Map<String, Any>):BluetoothPreference.SSP {
+    return BluetoothPreference.SSP.getSsp(map["command"] as Int)
+}
+
+fun powerSaveModeFromMap(map:Map<String, Any>):BluetoothPreference.PowerSaveMode {
+    return BluetoothPreference.PowerSaveMode.getPowerSaveMode(map["command"] as Int)
+}
+
+
 fun PrinterInfo.ErrorCode.toMap(): Map<String, Any> {
     return hashMapOf(
             "id" to -1,
@@ -252,7 +276,7 @@ fun LabelInfo.LabelColor.toMap(): Map<String, Any> {
     )
 }
 
-fun TemplateInfo.toMap():Map<String, Any> {
+fun TemplateInfo.toMap(): Map<String, Any> {
     return hashMapOf(
             "key" to key,
             "fileSize" to fileSize,
@@ -263,11 +287,57 @@ fun TemplateInfo.toMap():Map<String, Any> {
     )
 }
 
+fun BatteryInfo.toMap(): Map<String, Any> {
+    return hashMapOf(
+            "chargeLevel" to batteryChargeLevel,
+            "healthLevel" to batteryHealthLevel,
+            "healthStatus" to batteryHealthStatus.toMap()
+    )
+}
+
+fun BatteryInfo.HealthStatus.toMap(): Map<String, Any> {
+    return hashMapOf(
+            "id" to -1,
+            "name" to name
+    )
+}
+
+fun PrinterInfo.PrinterSettingItem.toMap():Map<String, Any> {
+    return hashMapOf(
+            "id" to -1,
+            "name" to name
+    )
+}
+
+fun BluetoothPreference.toMap():Map<String, Any> {
+    return hashMapOf<String, Any>(
+            "enableSsp" to enableSsp.toMap(),
+    "powerMode" to powerMode.toMap(),
+    "authMode" to 255 //authMode.toMap()
+    )
+}
+
+fun BluetoothPreference.SSP.toMap():Map<String, Any> {
+    return hashMapOf(
+            "command" to this.command
+    )
+}
+
+fun BluetoothPreference.PowerSaveMode.toMap():Map<String, Any> {
+    return hashMapOf(
+            "command" to this.command
+    )
+}
+
+
+
 fun setupConnectionManagers(context: Context, printInfo: PrinterInfo, printer: Printer): PrinterInfo.ErrorCode {
     if (printInfo.port == PrinterInfo.Port.BLUETOOTH) {
         printer.setBluetooth(BluetoothAdapter.getDefaultAdapter())
+
     } else if (printInfo.port == PrinterInfo.Port.BLE) {
         printer.setBluetoothLowEnergy(context, BluetoothAdapter.getDefaultAdapter(), 3000)
+
     } else if (printInfo.port == PrinterInfo.Port.USB) {
         val usbManager = context.getSystemService(Context.USB_SERVICE) as UsbManager
         val usbDevice = printer.getUsbDevice(usbManager)
@@ -280,8 +350,9 @@ fun setupConnectionManagers(context: Context, printInfo: PrinterInfo, printer: P
         // Check if the user has the permission to print to the device.
         val hasPermission = usbManager.hasPermission(usbDevice)
         if (!hasPermission) {
-            val granted = BrotherManager.requestUsbPermission(context = context, usbManager = usbManager, usbDevice = usbDevice).take()
-            // TODO Block until granted/denied
+            // Block until granted/denied
+            val granted = BrotherManager.requestUsbPermission(context = context, usbManager = usbManager, usbDevice = usbDevice)//.take()
+            
         }
     }
 

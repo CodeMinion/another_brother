@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
+import androidx.annotation.WorkerThread
 import com.brother.ptouch.sdk.Printer
 import com.rouninlabs.another_brother.receiver.UsbPermissionsReceiver
 import java.util.concurrent.ArrayBlockingQueue
@@ -34,17 +35,18 @@ object BrotherManager {
     /**
      * Makes a permission request to get access to the usb device
      */
-    fun requestUsbPermission(context: Context, usbManager: UsbManager, usbDevice: UsbDevice) :BlockingQueue<Boolean> {
+    @WorkerThread
+    fun requestUsbPermission(context: Context, usbManager: UsbManager, usbDevice: UsbDevice) : Boolean {//:BlockingQueue<Boolean> {
         val requestId = usbDevice.deviceId
         if (mUsbPermissionRequests.containsKey(requestId)) {
-            return mUsbPermissionRequests[requestId]!!;
+            return mUsbPermissionRequests[requestId]!!.take()
         }
 
         val completableFuture = ArrayBlockingQueue<Boolean>(1)
         mUsbPermissionRequests.put(requestId, completableFuture)
         val intent = Intent(context, UsbPermissionsReceiver::class.java)
         usbManager.requestPermission(usbDevice, PendingIntent.getBroadcast(context, 1234, intent, 0))
-        return completableFuture
+        return completableFuture.take()
     }
 
     fun completePermissionRequest(usbDevice: UsbDevice, granted:Boolean) {
