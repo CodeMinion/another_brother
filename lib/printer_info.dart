@@ -2405,6 +2405,7 @@ class Printer {
   }
 
 
+  /*
   /// Same functionality as printPdfFile. Available on less than Android 6.0.
   Future<PrinterStatus> printPDF(String filepath, int pagenum) async {
 
@@ -2436,10 +2437,10 @@ class Printer {
 
     return pages;
   }
-
+  */
 
   /// Get the page count of the specified pdf file. Available on Android 5.0 or later.
-  Future<int> getPDFFilePages(String filepath) async {
+  Future<int> getPdfFilePages(String filepath) async {
 
     var params = {
       "printerId": mPrinterId,

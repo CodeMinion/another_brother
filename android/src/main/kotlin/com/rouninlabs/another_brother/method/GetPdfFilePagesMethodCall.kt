@@ -18,7 +18,7 @@ import kotlinx.coroutines.*
  */
 class GetPdfFilePagesMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
     companion object {
-        const val METHOD_NAME = "getPDFPages"
+        const val METHOD_NAME = "getPDFFilePages"
     }
 
     fun execute() {

@@ -7,8 +7,10 @@
   <component name="ChangeListManager">
     <list default="true" id="afd4f045-3e4d-48d8-a470-2ac132de8d06" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetNetPrintersMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetNetPrintersMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/AnotherBrotherPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/AnotherBrotherPlugin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetPdfFilePagesMethodCall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/rouninlabs/another_brother/method/GetPdfFilePagesMethodCall.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/printer_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/printer_info.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

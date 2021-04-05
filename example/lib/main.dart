@@ -66,17 +66,17 @@ class _MyAppState extends State<MyApp> {
     printInfo.printerModel = Model.QL_1110NWB;
     printInfo.printMode = PrintMode.FIT_TO_PAGE;
     printInfo.isAutoCut = true;
-    //printInfo.port = Port.BLUETOOTH;
-    //printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer Bluetooth Mac
+    printInfo.port = Port.BLUETOOTH;
+    printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer Bluetooth Mac
     //printInfo.port = Port.NET;
     //printInfo.ipAddress = "192.168.1.80"; // Printer Bluetooth Mac
-    printInfo.port = Port.USB;
+    //printInfo.port = Port.USB;
     // Note: This request stopped working, revisit.
     //printInfo.labelNameIndex = (await printer.getLabelInfo()).labelNameIndex; //QL1100.ordinalFromID(QL1100.W103.getId());
     printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W103.getId());
 
     await printer.setPrinterInfo(printInfo);
-    await printer.printImage(picture);
+    //await printer.printImage(picture);
 
     LabelInfo info = await printer.getLabelInfo();
     print ("Label Info $info");
@@ -90,8 +90,8 @@ class _MyAppState extends State<MyApp> {
     // Print
     //PrinterStatus status = await printer.printImage(picture);
 
-    var netPrinters = await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
-    print ("Found Printers: $netPrinters");
+    //var netPrinters = await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
+    //print ("Found Printers: $netPrinters");
 
     //List<TemplateInfo> templates = [];
     //status = await printer.getTemplateList(templates);
@@ -116,24 +116,25 @@ class _MyAppState extends State<MyApp> {
     //var blePrinters = await printer.getBLEPrinters(3000);
     //print ("Net Printer: $blePrinters");
 
-    /*
+
     FilePickerResult result = await FilePicker.platform.pickFiles(
         allowMultiple: true,
         type: FileType.custom,
-        allowedExtensions: ['jpg', 'pdf', 'png']);
+        allowedExtensions: [/*'jpg',*/ 'pdf' /*, 'png'*/]);
 
-    PrinterStatus status = PrinterStatus();
+    //PrinterStatus status = PrinterStatus();
     if(result != null) {
       setState(() {
-        _selectedImage = File(result.files.single.path);
+        //_selectedImage = File(result.files.single.path);
       });
       //PrinterStatus status = await printer.printFile(result.files.single.path);
-      status = await printer.printFileList(result.paths);
+      int pages = await printer.getPdfFilePages(result.files.single.path);
+      print ("Pages in PDF: $pages");
+      //status = await printer.printPdfFile(result.paths.single, 1);
 
     } else {
       // User canceled the picker
     }
-    */
     //bool closed = await printer.endCommunication();
 
     //print ("Got Status: $status and Error: ${status.errorCode.getName()}");

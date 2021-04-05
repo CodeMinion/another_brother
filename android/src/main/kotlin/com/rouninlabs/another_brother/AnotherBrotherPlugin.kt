@@ -1,6 +1,7 @@
 package com.rouninlabs.another_brother
 
 import android.content.Context
+import android.os.Build
 import androidx.annotation.NonNull
 import com.rouninlabs.another_brother.method.*
 
@@ -47,13 +48,25 @@ class AnotherBrotherPlugin: FlutterPlugin, MethodCallHandler {
         PrintFileListMethodCall(context = mContext, call = call, result = result).execute()
     }
     else if (call.method == PrintPdfFileMethodCall.METHOD_NAME) {
-        PrintPdfFileMethodCall(context = mContext, call = call, result = result).execute()
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            PrintPdfFileMethodCall(context = mContext, call = call, result = result).execute()
+        }
+        else {
+            PrintPdfMethodCall(context = mContext, call = call, result = result).execute()
+        }
     }
+    /* @Deprecated - Both methods have been merged to expose a single call in Flutter.
     else if (call.method == GetPdfPagesMethodCall.METHOD_NAME) {
         GetPdfPagesMethodCall(context = mContext, call = call, result = result).execute()
     }
+     */
     else if (call.method == GetPdfFilePagesMethodCall.METHOD_NAME) {
-        GetPdfFilePagesMethodCall(context = mContext, call = call, result = result).execute()
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            GetPdfFilePagesMethodCall(context = mContext, call = call, result = result).execute()
+        }
+        else {
+            GetPdfPagesMethodCall(context = mContext, call = call, result = result).execute()
+        }
     }
     else if (call.method == TransferMethodCall.METHOD_NAME) {
         TransferMethodCall(context = mContext, call = call, result = result).execute()
