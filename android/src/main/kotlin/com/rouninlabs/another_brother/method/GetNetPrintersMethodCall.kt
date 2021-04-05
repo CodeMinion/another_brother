@@ -57,8 +57,12 @@ class GetNetPrintersMethodCall(val context: Context, val call: MethodCall, val r
 
             Log.e(TAG, "Printers: $netPrinters")
             // Encode Printers
-            val dartPrinters = netPrinters.map { it-> it.toMap() }.toList()
-           withContext(Dispatchers.Main) {
+            val dartPrinters:List<Map<String, Any>> = netPrinters.map {
+                Log.e(TAG, "Printer Name: ${it.modelName}" )
+                it.toMap() }
+            Log.e(TAG, " Out Printers: $dartPrinters")
+
+            withContext(Dispatchers.Main) {
                // Set result Printer status.
                result.success(dartPrinters)
            }
