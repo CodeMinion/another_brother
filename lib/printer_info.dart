@@ -1380,7 +1380,7 @@ class PrinterInfo {
   PaperSize paperSize;
   String customPaper;
 
-  //CustomPaperInfo customPaperInfo;
+  CustomPaperInfo? customPaperInfo;
   int labelNameIndex;
   bool pjCarbon;
   int pjDensity;
@@ -1456,7 +1456,7 @@ class PrinterInfo {
       this.isSpecialTape = false,
       this.labelNameIndex = -1,
       this.customPaper = "",
-      //this.customPaperInfo = null,
+      this.customPaperInfo = null,
       this.isLabelEndCut = false,
       this.printQuality = PrintQuality.NORMAL,
       this.labelMargin = 0,
@@ -1538,7 +1538,7 @@ class PrinterInfo {
         isSpecialTape: map["isSpecialTape"],
         labelNameIndex: map["labelNameIndex"],
         customPaper: map["customPaper"],
-        //this.customPaperInfo = null,
+        customPaperInfo: CustomPaperInfo.fromMap(map["customPaperInfo"]),
         isLabelEndCut: map["isLabelEndCut"],
         printQuality: PrintQuality.fromMap(map["printQuality"]),
         labelMargin: map["labelMargin"],
@@ -1600,7 +1600,7 @@ class PrinterInfo {
       "isSpecialTape": isSpecialTape,
       "labelNameIndex": labelNameIndex,
       "customPaper": customPaper,
-      //this.customPaperInfo = null,
+      "customPaperInfo": this.customPaperInfo?.toMap(),
       "isLabelEndCut": isLabelEndCut,
       "printQuality": printQuality.toMap(),
       "labelMargin": labelMargin,
@@ -1617,6 +1617,13 @@ class PrinterInfo {
       "useCopyCommandInTemplatePrint": useCopyCommandInTemplatePrint
     };
   }
+
+  /*
+  CustomPaperInfo? getCustomPaperInfo() {
+    return this.customPaperInfo;
+  }*/
+
+
 }
 
 class BatteryTernary {
@@ -2243,6 +2250,174 @@ class NetPrinter {
   }
 
 }
+
+class PaperKind {
+  final String _name;
+
+  const PaperKind._internal(this._name);
+
+  static const ROLL = PaperKind._internal("ROLL");
+  static const DIE_CUT = PaperKind._internal("DIE_CUT");
+  static const MARKED_ROLL = PaperKind._internal("MARKED_ROLL");
+
+  static final _values = [
+    ROLL,
+    DIE_CUT,
+    MARKED_ROLL
+  ];
+
+  static PaperKind fromName(String name) {
+    int var2 = _values.length;
+
+    for (int var3 = 0; var3 < var2; ++var3) {
+      PaperKind d = _values[var3];
+      if (d._name == name) {
+        return d;
+      }
+    }
+
+    return ROLL;
+  }
+
+  static PaperKind fromMap(Map<dynamic, dynamic> map) {
+    String name = map["name"];
+    return PaperKind.fromName(name);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {"name": _name};
+  }
+
+  @override
+  String toString() {
+    return toMap().toString();
+  }
+
+}
+
+class Unit {
+  final String _name;
+  const Unit._internal(this._name);
+
+  static const Inch = Unit._internal("Inch");
+  static const Mm = Unit._internal("Mm");
+
+  static final _values = [
+    Inch,
+    Mm
+  ];
+
+  static Unit fromName(String name) {
+    int var2 = _values.length;
+
+    for (int var3 = 0; var3 < var2; ++var3) {
+      Unit d = _values[var3];
+      if (d._name == name) {
+        return d;
+      }
+    }
+
+    return Mm;
+  }
+
+  static Unit fromMap(Map<dynamic, dynamic> map) {
+    String name = map["name"];
+    return Unit.fromName(name);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {"name": _name};
+  }
+
+  @override
+  String toString() {
+    return toMap().toString();
+  }
+}
+
+class CustomPaperInfo {
+  final Model printerModel;
+  final PaperKind paperKind;
+  final Unit unit;
+  final double tapeWidth;
+  final double tapeLength;
+  final double rightMargin;
+  final double leftMargin;
+  final double topMargin;
+  final double bottomMargin;
+  final double labelPitch;
+  final double markPosition;
+  final double markHeight;
+
+  CustomPaperInfo._internal(
+      this.printerModel,
+      this.paperKind,
+      this.unit,
+      this.tapeWidth,
+      this.tapeLength,
+      this.rightMargin,
+      this.leftMargin,
+      this.topMargin,
+      this.bottomMargin,
+      this.labelPitch,
+      this.markPosition,
+      this.markHeight);
+
+  static CustomPaperInfo newCustomRollPaper(Model printerModel, Unit unit, double tapeWidth, double rightMargin, double leftMargin, double topMargin) {
+    return new CustomPaperInfo._internal(printerModel, PaperKind.ROLL, unit, tapeWidth, 0.0, rightMargin, leftMargin, topMargin, 0.0, 0.0, 0.0, 0.0);
+  }
+
+  static CustomPaperInfo newCustomDiaCutPaper(Model printerModel, Unit unit, double tapeWidth, double tapeLength, double rightMargin, double leftMargin, double topMargin, double bottomMargin, double labelPitch) {
+    return new CustomPaperInfo._internal(printerModel, PaperKind.DIE_CUT, unit, tapeWidth, tapeLength, rightMargin, leftMargin, topMargin, bottomMargin, labelPitch, 0.0, 0.0);
+  }
+
+  static CustomPaperInfo newCustomMarkRollPaper(Model printerModel, Unit unit, double tapeWidth, double tapeLength, double rightMargin, double leftMargin, double topMargin, double bottomMargin, double markPosition, double markHeight) {
+    return new CustomPaperInfo._internal(printerModel, PaperKind.MARKED_ROLL, unit, tapeWidth, tapeLength, rightMargin, leftMargin, topMargin, bottomMargin, 0.0, markPosition, markHeight);
+  }
+
+  static CustomPaperInfo? fromMap(Map<dynamic, dynamic>? map) {
+    if (map == null) {
+      return null;
+    }
+
+    return CustomPaperInfo._internal(
+        Model.fromMap(map["printerModel"]),
+        PaperKind.fromMap(map["paperKind"]),
+        Unit.fromMap(map["unit"]),
+        map["tapeWidth"],
+        map["tapeLength"],
+        map["rightMargin"],
+        map["leftMargin"],
+        map["topMargin"],
+        map["bottomMargin"],
+        map["labelPitch"],
+        map["markPosition"],
+        map["markHeight"]);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "printerModel" : this.printerModel.toMap(),
+      "paperKind": this.paperKind.toMap(),
+      "unit": this.unit.toMap(),
+      "tapeWidth": this.tapeWidth,
+      "tapeLength": this.tapeLength,
+      "rightMargin": this.rightMargin,
+      "leftMargin": this.leftMargin,
+      "topMargin": this.topMargin,
+      "bottomMargin": this.bottomMargin,
+      "labelPitch": this.labelPitch,
+      "markPosition": this.markPosition,
+      "markHeight": this.markHeight
+    };
+  }
+
+  @override
+  String toString() {
+    return toMap().toString();
+  }
+}
+
 
 class BLEPrinter {
   final String localName;
@@ -2934,6 +3109,8 @@ class Printer {
 
     final Map resultMap = await _channel.invokeMethod("getLabelInfo", params);
 
+    print ("Label Info: $resultMap");
+
     final LabelInfo outLabel = LabelInfo.fromMap(resultMap);
     return outLabel;
   }
@@ -2999,3 +3176,4 @@ class Printer {
   }
 
 }
+

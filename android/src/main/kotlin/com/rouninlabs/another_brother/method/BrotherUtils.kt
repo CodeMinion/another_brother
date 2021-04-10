@@ -5,6 +5,7 @@ import android.content.Context
 import android.hardware.usb.UsbManager
 import android.util.Log
 import com.brother.ptouch.sdk.*
+import com.brother.ptouch.sdk.Unit
 import com.rouninlabs.another_brother.BrotherManager
 
 const val TAG = "A-Brother"
@@ -12,6 +13,8 @@ const val TAG = "A-Brother"
 fun printerInfofromMap(map: HashMap<String, Any>): PrinterInfo {
     val model: PrinterInfo.Model = modelFromMap(map["printerModel"] as Map<String, Any>)
     val timeout: TimeoutSetting = TimeoutSettingFromMap(map["timeout"] as Map<String, Any>)
+    val customPaperInfo = customPaperInfoFromMap(map["customPaperInfo"] as Map<String, Any>?)
+
     val info: PrinterInfo = PrinterInfo().apply {
         printerModel = model
         port = portFromMap(map["port"] as Map<String, Any>)
@@ -69,12 +72,59 @@ fun printerInfofromMap(map: HashMap<String, Any>): PrinterInfo {
         useLegacyHalftoneEngine = map["useLegacyHalftoneEngine"] as Boolean
         banishMargin = map["banishMargin"] as Boolean
         useCopyCommandInTemplatePrint = map["useCopyCommandInTemplatePrint"] as Boolean
-        this.timeout = timeout;
+        this.timeout = timeout
+        setCustomPaperInfo(customPaperInfo)
     }
     return info;
 }
 
+fun customPaperInfoFromMap(map:Map<String, Any>?):CustomPaperInfo? {
+    return map?.let {
+        val paperKind:PaperKind = paperKindFromMap(map["paperKind"] as Map<String, Any>)
+        val unit:Unit = unitFromMap(map["unit"] as Map<String, Any>)
+        val printerModel:PrinterInfo.Model = modelFromMap(map["printerModel"] as Map<String, Any>)
+        val tapeWidth = (map["tapeWidth"] as Double).toFloat()
+        val tapeLength = (map["tapeLength"] as Double).toFloat()
+        val rightMargin = (map["rightMargin"] as Double).toFloat()
+        val leftMargin = (map["leftMargin"] as Double).toFloat()
+        val topMargin = (map["topMargin"] as Double).toFloat()
+        val bottomMargin = (map["bottomMargin"] as Double).toFloat()
+        val labelPitch = (map["labelPitch"] as Double).toFloat()
+        val markPosition = (map["markPosition"] as Double).toFloat()
+        val markHeight = (map["markHeight"] as Double).toFloat()
 
+        val customPaperInfo:CustomPaperInfo = when(paperKind) {
+            PaperKind.DIE_CUT -> {
+                CustomPaperInfo.newCustomDiaCutPaper(printerModel,
+                        unit, tapeWidth, tapeLength, rightMargin, leftMargin, topMargin, bottomMargin, labelPitch)
+            }
+            PaperKind.MARKED_ROLL -> {
+                CustomPaperInfo.newCustomMarkRollPaper(printerModel,
+                        unit, tapeWidth, tapeLength, rightMargin, leftMargin, topMargin, bottomMargin, markPosition, markHeight)
+            }
+            PaperKind.ROLL -> {
+                CustomPaperInfo.newCustomRollPaper(printerModel,
+                        unit, tapeWidth, tapeLength, rightMargin, leftMargin)
+
+            }
+        }
+
+        customPaperInfo
+    }
+}
+
+fun unitFromMap(map:Map<String, Any>):com.brother.ptouch.sdk.Unit {
+    val name = map["name"] as String
+    return when(name){
+        "Inch" -> com.brother.ptouch.sdk.Unit.Inch
+        else ->
+            com.brother.ptouch.sdk.Unit.Mm
+    }
+}
+fun paperKindFromMap(map:Map<String, Any>):PaperKind {
+    val name = map["name"] as String
+    return PaperKind.valueOf(name)
+}
 fun modelFromMap(map: Map<String, Any>): PrinterInfo.Model {
     val id: Int = map["id"] as Int;
     return PrinterInfo.Model.valueFromID(id);
@@ -332,6 +382,11 @@ fun BluetoothPreference.PowerSaveMode.toMap():Map<String, Any> {
 
 
 fun setupConnectionManagers(context: Context, printInfo: PrinterInfo, printer: Printer): PrinterInfo.ErrorCode {
+
+    if (printInfo.workPath.isEmpty()) {
+        printInfo.workPath = context.filesDir.absolutePath + "/";
+    }
+
     if (printInfo.port == PrinterInfo.Port.BLUETOOTH) {
         printer.setBluetooth(BluetoothAdapter.getDefaultAdapter())
 
@@ -354,10 +409,6 @@ fun setupConnectionManagers(context: Context, printInfo: PrinterInfo, printer: P
             val granted = BrotherManager.requestUsbPermission(context = context, usbManager = usbManager, usbDevice = usbDevice)//.take()
             
         }
-    }
-
-    if (printInfo.workPath.isEmpty()) {
-        printInfo.workPath = context.filesDir.absolutePath + "/";
     }
 
     return PrinterInfo.ErrorCode.ERROR_NONE

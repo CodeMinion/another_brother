@@ -63,25 +63,46 @@ class _MyAppState extends State<MyApp> {
 
     var printer = new Printer();
     var printInfo = PrinterInfo();
-    printInfo.printerModel = Model.QL_1110NWB;
+    printInfo.port = Port.BLUETOOTH;
+    //printInfo.printerModel = Model.QL_1110NWB;
+    //printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer Bluetooth Mac
+    printInfo.printerModel = Model.RJ_4250WB;
+    //printInfo.macAddress = "F8:5B:3B:70:BF:57"; // Printer Bluetooth Mac
+    printInfo.macAddress = "69:50:C6:D5:33:0E"; // Printer Bluetooth Mac
     printInfo.printMode = PrintMode.FIT_TO_PAGE;
     printInfo.isAutoCut = true;
-    printInfo.port = Port.BLUETOOTH;
-    printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer Bluetooth Mac
+
+    double width = 102.0;
+    double rightMargin = 0.0;
+    double leftMargin = 0.0;
+    double topMargin = 0.0;
+    CustomPaperInfo customPaperInfo = CustomPaperInfo.newCustomRollPaper(printInfo.printerModel,
+        Unit.Mm,
+        width,
+        rightMargin,
+        leftMargin,
+        topMargin);
+    printInfo.customPaperInfo = customPaperInfo;
     //printInfo.port = Port.NET;
     //printInfo.ipAddress = "192.168.1.80"; // Printer Bluetooth Mac
     //printInfo.port = Port.USB;
     // Note: This request stopped working, revisit.
-    //printInfo.labelNameIndex = (await printer.getLabelInfo()).labelNameIndex; //QL1100.ordinalFromID(QL1100.W103.getId());
-    printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W103.getId());
+    //LabelInfo info = await printer.getLabelInfo();
+    //print ("Label Info $info");
 
-    await printer.setPrinterInfo(printInfo);
-    //await printer.printImage(picture);
-
-    LabelInfo info = await printer.getLabelInfo();
-    print ("Label Info $info");
+    //printInfo.labelNameIndex = info.labelNameIndex; //QL1100.ordinalFromID(QL1100.W103.getId());
+    //printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W103.getId());
 
     PrinterStatus status = PrinterStatus();
+
+    //await printer.setPrinterInfo(printInfo);
+    //status  = await printer.printImage(picture);
+    print ("Got Status: $status and Error: ${status.errorCode.getName()}");
+
+
+    //LabelInfo info = await printer.getLabelInfo();
+    //print ("Label Info $info");
+
 
     // Alternatively we can startCommunication/endCommunication if we
     // want to do a batch operation.
@@ -113,28 +134,37 @@ class _MyAppState extends State<MyApp> {
     //var netPrinter = await printer.getNetPrinterInfo("192.168.1.80");
     //print ("Net Printer: $netPrinter");
 
-    //var blePrinters = await printer.getBLEPrinters(3000);
-    //print ("Net Printer: $blePrinters");
+    var blePrinters = await printer.getBLEPrinters(3000);
+    print ("BLE Printer: $blePrinters");
 
+    if (blePrinters.isNotEmpty) {
+      printInfo.port = Port.BLE;
+      printInfo.setLocalName(blePrinters.single.localName);
+      printer.setPrinterInfo(printInfo);
+      status  = await printer.printImage(picture);
+
+    }
 
     FilePickerResult result = await FilePicker.platform.pickFiles(
         allowMultiple: true,
         type: FileType.custom,
-        allowedExtensions: [/*'jpg',*/ 'pdf' /*, 'png'*/]);
+        allowedExtensions: ['jpg', /*'pdf' ,*/ 'png']);
 
     //PrinterStatus status = PrinterStatus();
     if(result != null) {
       setState(() {
         //_selectedImage = File(result.files.single.path);
       });
-      //PrinterStatus status = await printer.printFile(result.files.single.path);
-      int pages = await printer.getPdfFilePages(result.files.single.path);
-      print ("Pages in PDF: $pages");
+      status = await printer.printFile(result.files.single.path);
+      //int pages = await printer.getPdfFilePages(result.files.single.path);
+      //print ("Pages in PDF: $pages");
       //status = await printer.printPdfFile(result.paths.single, 1);
 
     } else {
       // User canceled the picker
     }
+
+
     //bool closed = await printer.endCommunication();
 
     //print ("Got Status: $status and Error: ${status.errorCode.getName()}");
