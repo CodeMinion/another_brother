@@ -1,5 +1,7 @@
 import Flutter
 import UIKit
+import BRPtouchPrinterKit
+
 
 public class SwiftAnotherBrotherPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
@@ -9,6 +11,14 @@ public class SwiftAnotherBrotherPlugin: NSObject, FlutterPlugin {
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    result("iOS " + UIDevice.current.systemVersion)
+    let printer = BRPtouchPrinter(printerName: "PT-P900W", interface: .WLAN)
+    
+    if call.method == "getPlatformVersion" {
+        result("iOS " + UIDevice.current.systemVersion)
+    }
+    else {
+        
+        result(FlutterMethodNotImplemented)
+    }
   }
 }
