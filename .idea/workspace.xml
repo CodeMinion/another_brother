@@ -23,18 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afd4f045-3e4d-48d8-a470-2ac132de8d06" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ios/BrotherPrint.modulemap" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Classes/BrotherManager.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Classes/BrotherManager.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/PtouchPrinterKit-Bridging-Header.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/PtouchPrinterKit-Bridging-Header.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/SwiftAnotherBrotherPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/SwiftAnotherBrotherPlugin.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/another_brother.podspec" beforeDir="false" afterPath="$PROJECT_DIR$/ios/another_brother.podspec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.m" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

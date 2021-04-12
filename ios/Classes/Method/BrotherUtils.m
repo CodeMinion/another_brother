@@ -236,5 +236,157 @@
     
 }
 
++ (BRLMPrintSettingsHalftone)halftoneFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSString * name = (NSString *)[map objectForKey:@"name"];
+    
+    if ([@"THRESHOLD" isEqualToString:name]) {
+        return BRLMPrintSettingsHalftoneThreshold;
+    }
+    else if ([@"PATTERNDITHER" isEqualToString:name]){
+        return BRLMPrintSettingsHalftonePatternDither;
+    }
+    else if ([@"ERRORDIFFUSION" isEqualToString:name]) {
+        return BRLMPrintSettingsHalftoneErrorDiffusion;
+    }
+    
+    return BRLMPrintSettingsHalftoneErrorDiffusion;
+    
+}
+
++ (BRLMPrintSettingsHorizontalAlignment)alignFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    NSString * name = (NSString * )[map objectForKey:@"name"];
+    
+    if([@"LEFT" isEqualToString:name]) {
+        return BRLMPrintSettingsHorizontalAlignmentLeft;
+    }
+    else if([@"CENTER" isEqualToString:name]) {
+        return BRLMPrintSettingsHorizontalAlignmentCenter;
+    }
+    else if([@"RIGHT" isEqualToString:name]) {
+        return BRLMPrintSettingsHorizontalAlignmentRight;
+    }
+    
+    return BRLMPrintSettingsHorizontalAlignmentLeft;
+}
+
++ (BRLMPrintSettingsVerticalAlignment)vAlignFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSString * name = (NSString *) [map objectForKey:@"name"];
+    
+    if([@"TOP" isEqualToString:name]) {
+        return BRLMPrintSettingsVerticalAlignmentTop;
+    }
+    else if([@"MIDDLE" isEqualToString:name]) {
+        return BRLMPrintSettingsVerticalAlignmentCenter;
+    }
+    else if([@"BOTTOM" isEqualToString:name]) {
+        return BRLMPrintSettingsVerticalAlignmentBottom;
+    }
+    
+    return BRLMPrintSettingsVerticalAlignmentTop;
+    
+}
+
++ (BRLMPrintSettingsOrientation)orientationFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSString * name = (NSString *) [map objectForKey:@"name"];
+    
+    if ([@"PORTRAIT" isEqualToString:name]) {
+        return BRLMPrintSettingsOrientationPortrait;
+    }
+    else if ([@"LANDSCAPE" isEqualToString:name]) {
+        return BRLMPrintSettingsOrientationLandscape;
+    }
+    
+    return BRLMPrintSettingsOrientationPortrait;
+}
+
+
++ (BRLMPrintSettingsResolution)printQualityFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSString * name = (NSString *)[map objectForKey:@"name"];
+    
+    if ([@"LOW_RESOLUTION" isEqualToString:name]) {
+        return BRLMPrintSettingsResolutionLow;
+    }
+    else if ([@"NORMAL" isEqualToString:name]) {
+        return BRLMPrintSettingsResolutionNormal;
+    }
+    else if ([@"DOUBLE_SPEED" isEqualToString:name]) {
+        return BRLMPrintSettingsResolutionLow;
+    }
+    else if ([@"HIGH_RESOLUTION" isEqualToString:name]) {
+        return BRLMPrintSettingsResolutionHigh;
+    }
+    
+    return BRLMPrintSettingsResolutionNormal;
+}
+
++ (BRLMPrintSettingsScaleMode)printModeFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSString * name = (NSString *)[map objectForKey:@"name"];
+    
+    if([@"ORIGINAL" isEqualToString:name]) {
+        return BRLMPrintSettingsScaleModeActualSize;
+    }
+    else if([@"FIT_TO_PAGE" isEqualToString:name]) {
+        return BRLMPrintSettingsScaleModeFitPageAspect;
+    }
+    else if([@"SCALE" isEqualToString:name]) {
+        return BRLMPrintSettingsScaleModeScaleValue;
+    }
+    else if([@"FIT_TO_PAPER" isEqualToString:name]) {
+        return BRLMPrintSettingsScaleModeFitPaperAspect;
+    }
+    
+    return BRLMPrintSettingsScaleModeActualSize;
+}
+
++ (BRLMCustomPaperSizePaperKind)paperKindFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSString * name = (NSString *) [map objectForKey:@"name"];
+    
+    if ([@"ROLL" isEqualToString:name]) {
+        return BRLMCustomPaperSizePaperKindRoll;
+    }
+    else if ([@"DIE_CUT" isEqualToString:name]) {
+        return BRLMCustomPaperSizePaperKindDieCut;
+    }
+    else if ([@"MARKED_ROLL" isEqualToString:name]) {
+        return BRLMCustomPaperSizePaperKindMarkRoll;
+    }
+    
+    return BRLMCustomPaperSizePaperKindRoll;
+}
+
++ (BRLMCustomPaperSizeLengthUnit)unitFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSString * name = (NSString*) [map objectForKey:@"name"];
+    
+    if ([@"Inch" isEqualToString: name]) {
+        return BRLMCustomPaperSizeLengthUnitInch;
+    }
+    else if ([@"Mm" isEqualToString: name]) {
+        return BRLMCustomPaperSizeLengthUnitMm;
+    }
+    
+    return BRLMCustomPaperSizeLengthUnitInch;
+}
+
++ (BRLMCustomPaperSizeMargins)customMarginFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    CGFloat topMargin = [(NSNumber *)[map objectForKey:@"topMargin"] doubleValue];
+    CGFloat bottomMargin = [(NSNumber *)[map objectForKey:@"bottomMargin"] doubleValue];
+    CGFloat leftMargin = [(NSNumber *)[map objectForKey:@"leftMargin"] doubleValue];
+    CGFloat rightMargin = [(NSNumber *)[map objectForKey:@"rightMargin"] doubleValue];
+    
+    return BRLMCustomPaperSizeMarginsMake(
+                                        topMargin,
+                                          leftMargin,
+                                          bottomMargin,
+                                          rightMargin);
+}
+
 @end
 
