@@ -1,0 +1,12 @@
+framework module BrotherPrint {
+    header "PtouchPrinterKit-Bridging-Header.h"
+
+    //umbrella header "GifSwift.h"
+
+    /*
+    explicit module CLibgif {
+        private header "gif_lib.h"
+    }*/
+
+    export *
+}

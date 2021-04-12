@@ -8,7 +8,7 @@
 #ifndef PtouchPrinterKit_Bridging_Header_h
 #define PtouchPrinterKit_Bridging_Header_h
 
-#import <BRLMPrinterKit/BRLMPrinterKit.h>
-#import <BRLMPrinterKit/BRPtouchPrinterKit.h>
+//#import <BRLMPrinterKit/BRLMPrinterKit.h>
+//#import <BRLMPrinterKit/BRPtouchPrinterKit.h>
 
 #endif /* PtouchPrinterKit_Bridging_Header_h */

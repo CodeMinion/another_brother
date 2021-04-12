@@ -1,6 +1,6 @@
 import Flutter
 import UIKit
-import BRPtouchPrinterKit
+//import BRLMPrinterKit
 
 
 public class SwiftAnotherBrotherPlugin: NSObject, FlutterPlugin {
@@ -11,7 +11,7 @@ public class SwiftAnotherBrotherPlugin: NSObject, FlutterPlugin {
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    let printer = BRPtouchPrinter(printerName: "PT-P900W", interface: .WLAN)
+    //let printer = BRPtouchPrinter(printerName: "PT-P900W", interface: .WLAN)
     
     if call.method == "getPlatformVersion" {
         result("iOS " + UIDevice.current.systemVersion)

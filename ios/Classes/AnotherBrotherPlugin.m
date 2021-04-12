@@ -8,8 +8,34 @@
 #import "another_brother-Swift.h"
 #endif
 
+#import <BRLMPrinterKit/BRLMPrinterKit.h>
+#import <BRLMPrinterKit/BRPtouchDeviceInfo.h>
+
+/*
 @implementation AnotherBrotherPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
   [SwiftAnotherBrotherPlugin registerWithRegistrar:registrar];
 }
+*/
+
+@implementation AnotherBrotherPlugin
++ (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
+  FlutterMethodChannel* channel = [FlutterMethodChannel methodChannelWithName:@"another_brother" binaryMessenger:[registrar messenger]];
+    AnotherBrotherPlugin* instance = [AnotherBrotherPlugin new];
+  [registrar addMethodCallDelegate:instance channel:channel];
+}
+
+- (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
+  if ([@"getPlatformVersion" isEqualToString:call.method]) {
+      result([NSString stringWithFormat:@"iOS %@", UIDevice.currentDevice.systemVersion]);
+  }
+  else {
+      result(FlutterMethodNotImplemented);
+  }
+    
+}
+
+
+
+
 @end

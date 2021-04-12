@@ -23,17 +23,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afd4f045-3e4d-48d8-a470-2ac132de8d06" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/BrotherPrint.modulemap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/BrotherManager.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/BrotherManager.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/another_brother.iml" beforeDir="false" afterPath="$PROJECT_DIR$/another_brother.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Flutter/Debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Flutter/Debug.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Flutter/Release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Flutter/Release.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/contents.xcworkspacedata" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Base.lproj/Main.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner/Base.lproj/Main.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/PtouchPrinterKit-Bridging-Header.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/PtouchPrinterKit-Bridging-Header.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/SwiftAnotherBrotherPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/SwiftAnotherBrotherPlugin.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/another_brother.podspec" beforeDir="false" afterPath="$PROJECT_DIR$/ios/another_brother.podspec" afterDir="false" />
     </list>
@@ -97,22 +96,30 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1218" height="184" key="GridCell.Tab.0.bottom" timestamp="1618152648023">
+    <state x="337" y="220" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1618171346674">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1218" height="184" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1618152648023" />
-    <state width="1218" height="184" key="GridCell.Tab.0.center" timestamp="1618152648023">
+    <state x="337" y="220" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1280.777@0.23.1280.777" timestamp="1618171346674" />
+    <state width="1218" height="184" key="GridCell.Tab.0.bottom" timestamp="1618181672630">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1218" height="184" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1618152648023" />
-    <state width="1218" height="184" key="GridCell.Tab.0.left" timestamp="1618152648022">
+    <state width="1218" height="184" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1618181672630" />
+    <state width="1218" height="184" key="GridCell.Tab.0.center" timestamp="1618181672629">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1218" height="184" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1618152648022" />
-    <state width="1218" height="184" key="GridCell.Tab.0.right" timestamp="1618152648023">
+    <state width="1218" height="184" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1618181672629" />
+    <state width="1218" height="184" key="GridCell.Tab.0.left" timestamp="1618181672629">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1218" height="184" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1618152648023" />
+    <state width="1218" height="184" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1618181672629" />
+    <state width="1218" height="184" key="GridCell.Tab.0.right" timestamp="1618181672629">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state width="1218" height="184" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1618181672629" />
+    <state x="332" y="44" width="638" height="735" key="find.popup" timestamp="1618177620826">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="332" y="44" width="638" height="735" key="find.popup/0.23.1280.777@0.23.1280.777" timestamp="1618177620826" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
