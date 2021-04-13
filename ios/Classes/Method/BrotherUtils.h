@@ -35,6 +35,21 @@
 
 + (BRLMCustomPaperSizeMargins) customMarginFromMapWithValue:(NSDictionary<NSString*, NSObject *> *) map;
 
++ (BRLMPrinterModel) printerModelFromPrinterInfoMapWithValue:(NSDictionary<NSString *, NSObject*> *) map;
+
++ (BRLMQLPrintSettings *) qlPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
+
++ (BRLMPJPrintSettings *) pjPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
+
++ (BRLMRJPrintSettings *) rjPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
+
++ (BRLMTDPrintSettings *) tdPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
+
++ (BRLMPTPrintSettings *) ptPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
+
++ (BRLMMWPrintSettings *) mwPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
+
+
 @end
 /*
 @interface  BRLMChannelType (BRLMChannelTypeEncoding)

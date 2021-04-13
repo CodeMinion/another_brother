@@ -388,5 +388,28 @@
                                           rightMargin);
 }
 
++ (BRLMPrinterModel) printerModelFromPrinterInfoMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSDictionary<NSString *,NSObject *> * dartPrinterModel = (NSDictionary<NSString *,NSObject *> *) [map objectForKey:@"printerModel"];
+    
+    return [BrotherUtils modelFromMapWithValue:dartPrinterModel];
+}
+
++ (BRLMQLPrintSettings *) qlPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map {
+    
+    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
+    
+    BRLMQLPrintSettings * printerSettings = [[BRLMQLPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
+    
+    // TODO Extract info from map.
+    
+    //labelSize
+    //autoCutForEachPageCount
+    //autoCut
+    //cutAtEnd
+    //resolution
+    
+    return printerSettings;
+}
 @end
 

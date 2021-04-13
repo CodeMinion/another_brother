@@ -91,7 +91,7 @@ class _MyAppState extends State<MyApp> {
     //print ("Label Info $info");
 
     //printInfo.labelNameIndex = info.labelNameIndex; //QL1100.ordinalFromID(QL1100.W103.getId());
-    //printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W103.getId());
+    printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W103.getId());
 
     PrinterStatus status = PrinterStatus();
 

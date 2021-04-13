@@ -214,16 +214,22 @@ class LabelColor {
   }
 }
 
-class PT3 {
+abstract class ALabelName {
+  Map<String, dynamic> toMap();
+
+}
+class PT3 implements ALabelName {
   final int _id;
+  final String _name;
+  static const String _model = "PT3";
 
-  const PT3._internal(this._id);
+  const PT3._internal(this._id, this._name);
 
-  static const W3_5 = PT3._internal(18);
-  static const W6 = PT3._internal(19);
-  static const W9 = PT3._internal(20);
-  static const W12 = PT3._internal(11);
-  static const UNSUPPORT = PT3._internal(255);
+  static const W3_5 = PT3._internal(18, "W3_5");
+  static const W6 = PT3._internal(19, "W6");
+  static const W9 = PT3._internal(20, "W9");
+  static const W12 = PT3._internal(11, "W12");
+  static const UNSUPPORT = PT3._internal(255, "UNSUPPORT");
 
   static final _values = [W3_5, W6, W9, W12, UNSUPPORT];
 
@@ -264,37 +270,49 @@ class PT3 {
     return PT3.valueFromID(id);
   }
 
+  static PT3 fromIndex (int index) {
+    if (index < 0 ||index >= _values.length ) {
+      return UNSUPPORT;
+    }
+    return _values[index];
+  }
+
   Map<String, dynamic> toMap() {
-    return {"id": _id};
+    return {"id": _id,
+      "name": _name,
+      "model": _model
+    };
   }
 }
 
-class PT {
+class PT implements ALabelName {
   final int _id;
+  final String _name;
+  static const String _model = "PT";
 
-  const PT._internal(this._id);
+  const PT._internal(this._id, this._name);
 
-  static const W3_5 = const PT._internal(18);
-  static const W6 = const PT._internal(19);
-  static const W9 = const PT._internal(20);
-  static const W12 = const PT._internal(11);
-  static const W18 = const PT._internal(21);
-  static const W24 = const PT._internal(22);
-  static const HS_W6 = const PT._internal(23);
-  static const HS_W9 = const PT._internal(24);
-  static const HS_W12 = const PT._internal(25);
-  static const HS_W18 = const PT._internal(26);
-  static const HS_W24 = const PT._internal(27);
-  static const W36 = const PT._internal(28);
-  static const R6_5 = const PT._internal(29);
-  static const R6_0 = const PT._internal(31);
-  static const R5_0 = const PT._internal(32);
-  static const R4_0 = const PT._internal(33);
-  static const R3_5 = const PT._internal(34);
-  static const R3_0 = const PT._internal(35);
-  static const R2_5 = const PT._internal(36);
-  static const FLE_W21H45 = const PT._internal(37);
-  static const UNSUPPORT = const PT._internal(255);
+  static const W3_5 = const PT._internal(18, "W3_5");
+  static const W6 = const PT._internal(19, "W6");
+  static const W9 = const PT._internal(20, "W9");
+  static const W12 = const PT._internal(11, "W12");
+  static const W18 = const PT._internal(21, "W18");
+  static const W24 = const PT._internal(22, "W24");
+  static const HS_W6 = const PT._internal(23, "HS_W6");
+  static const HS_W9 = const PT._internal(24, "HS_W9");
+  static const HS_W12 = const PT._internal(25, "HS_W12");
+  static const HS_W18 = const PT._internal(26, "HS_W18");
+  static const HS_W24 = const PT._internal(27, "HS_W24");
+  static const W36 = const PT._internal(28, "W36");
+  static const R6_5 = const PT._internal(29, "R6_5");
+  static const R6_0 = const PT._internal(31, "R6_0");
+  static const R5_0 = const PT._internal(32, "R5_0");
+  static const R4_0 = const PT._internal(33, "R4_0");
+  static const R3_5 = const PT._internal(34, "R3_5");
+  static const R3_0 = const PT._internal(35, "R3_0");
+  static const R2_5 = const PT._internal(36, "R2_5");
+  static const FLE_W21H45 = const PT._internal(37, "FLE_W21H45");
+  static const UNSUPPORT = const PT._internal(255, "UNSUPPORT");
 
   static final _values = [
     W3_5,
@@ -322,6 +340,10 @@ class PT {
 
   int getId() {
     return _id;
+  }
+
+  String getName() {
+    return _name;
   }
 
   static int getItemId(index) {
@@ -357,36 +379,48 @@ class PT {
     return PT.valueFromID(id);
   }
 
+  static PT fromIndex (int index) {
+    if (index < 0 ||index >= _values.length ) {
+      return UNSUPPORT;
+    }
+    return _values[index];
+  }
+
   Map<String, dynamic> toMap() {
-    return {"id": _id};
+    return {"id": _id,
+      "name": _name,
+      "model": _model
+    };
   }
 }
 
-class QL700 {
+class QL700 implements ALabelName {
   final int _id;
+  final String _name;
+  static const String _model = "QL700";
 
-  const QL700._internal(this._id);
+  const QL700._internal(this._id, this._name);
 
-  static const W17H54 = const QL700._internal(1);
-  static const W17H87 = const QL700._internal(2);
-  static const W23H23 = const QL700._internal(3);
-  static const W29H42 = const QL700._internal(4);
-  static const W29H90 = const QL700._internal(5);
-  static const W38H90 = const QL700._internal(6);
-  static const W39H48 = const QL700._internal(7);
-  static const W52H29 = const QL700._internal(8);
-  static const W62H29 = const QL700._internal(9);
-  static const W62H100 = const QL700._internal(10);
-  static const W12 = const QL700._internal(11);
-  static const W29 = const QL700._internal(12);
-  static const W38 = const QL700._internal(13);
-  static const W50 = const QL700._internal(14);
-  static const W54 = const QL700._internal(15);
-  static const W62 = const QL700._internal(16);
-  static const W60H86 = const QL700._internal(17);
-  static const W62RB = const QL700._internal(38);
-  static const W54H29 = const QL700._internal(39);
-  static const UNSUPPORT = const QL700._internal(255);
+  static const W17H54 = const QL700._internal(1, "W17H54");
+  static const W17H87 = const QL700._internal(2, "W17H87");
+  static const W23H23 = const QL700._internal(3, "W23H23");
+  static const W29H42 = const QL700._internal(4, "W29H42");
+  static const W29H90 = const QL700._internal(5, "W29H90");
+  static const W38H90 = const QL700._internal(6, "W38H90");
+  static const W39H48 = const QL700._internal(7, "W39H48");
+  static const W52H29 = const QL700._internal(8, "W52H29");
+  static const W62H29 = const QL700._internal(9, "W62H29");
+  static const W62H100 = const QL700._internal(10, "W62H100");
+  static const W12 = const QL700._internal(11, "W12");
+  static const W29 = const QL700._internal(12, "W29");
+  static const W38 = const QL700._internal(13, "W38");
+  static const W50 = const QL700._internal(14, "W50");
+  static const W54 = const QL700._internal(15, "W54");
+  static const W62 = const QL700._internal(16, "W62");
+  static const W60H86 = const QL700._internal(17, "W60H86");
+  static const W62RB = const QL700._internal(38, "W62RB");
+  static const W54H29 = const QL700._internal(39, "W54H29");
+  static const UNSUPPORT = const QL700._internal(255, "UNSUPPORT");
 
   static final _values = [
     W17H54,
@@ -413,6 +447,10 @@ class QL700 {
 
   int getId() {
     return _id;
+  }
+
+  String getName() {
+    return _name;
   }
 
   static int getItemId(index) {
@@ -448,14 +486,25 @@ class QL700 {
     return QL700.valueFromID(id);
   }
 
+  static QL700 fromIndex (int index) {
+    if (index < 0 ||index >= _values.length ) {
+      return UNSUPPORT;
+    }
+    return _values[index];
+  }
+
   Map<String, dynamic> toMap() {
-    return {"id": _id};
+    return {"id": _id,
+      "name": _name,
+      "model": _model
+    };
   }
 }
 
-class QL1115 {
+class QL1115 implements ALabelName {
   final int _id;
   final String _name;
+  static const String _model = "QL1115";
 
   const QL1115._internal(this._id, this._name);
 
@@ -555,38 +604,51 @@ class QL1115 {
   }
 
   Map<String, dynamic> toMap() {
-    return {"id": _id};
+    return {"id": _id,
+    "name": _name,
+      "model": _model
+    };
+  }
+
+  static QL1115 fromIndex (int index) {
+    if (index < 0 ||index >= _values.length ) {
+      return UNSUPPORT;
+    }
+
+    return _values[index];
   }
 }
 
-class QL1100 {
+class QL1100 implements ALabelName {
   final _id;
+  final String _name;
+  static const String _model = "QL1100";
 
-  const QL1100._internal(this._id);
+  const QL1100._internal(this._id, this._name);
 
-  static const W17H54 = const QL1100._internal(1);
-  static const W17H87 = const QL1100._internal(2);
-  static const W23H23 = const QL1100._internal(3);
-  static const W29H42 = const QL1100._internal(4);
-  static const W29H90 = const QL1100._internal(5);
-  static const W38H90 = const QL1100._internal(6);
-  static const W39H48 = const QL1100._internal(7);
-  static const W52H29 = const QL1100._internal(8);
-  static const W62H29 = const QL1100._internal(9);
-  static const W62H100 = const QL1100._internal(10);
-  static const W12 = const QL1100._internal(11);
-  static const W29 = const QL1100._internal(12);
-  static const W38 = const QL1100._internal(13);
-  static const W50 = const QL1100._internal(14);
-  static const W54 = const QL1100._internal(15);
-  static const W62 = const QL1100._internal(16);
-  static const W60H86 = const QL1100._internal(17);
-  static const W102 = const QL1100._internal(40);
-  static const W102H51 = const QL1100._internal(41);
-  static const W102H152 = const QL1100._internal(48);
-  static const W103 = const QL1100._internal(49);
-  static const W103H164 = const QL1100._internal(50);
-  static const UNSUPPORT = const QL1100._internal(255);
+  static const W17H54 = const QL1100._internal(1, "W17H54");
+  static const W17H87 = const QL1100._internal(2, "W17H87");
+  static const W23H23 = const QL1100._internal(3, "W23H23");
+  static const W29H42 = const QL1100._internal(4, "W29H42");
+  static const W29H90 = const QL1100._internal(5, "W29H90");
+  static const W38H90 = const QL1100._internal(6, "W38H90");
+  static const W39H48 = const QL1100._internal(7, "W39H48");
+  static const W52H29 = const QL1100._internal(8, "W52H29");
+  static const W62H29 = const QL1100._internal(9, "W62H29");
+  static const W62H100 = const QL1100._internal(10, "W62H100");
+  static const W12 = const QL1100._internal(11, "W12");
+  static const W29 = const QL1100._internal(12, "W29");
+  static const W38 = const QL1100._internal(13, "W38");
+  static const W50 = const QL1100._internal(14, "W50");
+  static const W54 = const QL1100._internal(15, "W54");
+  static const W62 = const QL1100._internal(16, "W62");
+  static const W60H86 = const QL1100._internal(17, "W60H86");
+  static const W102 = const QL1100._internal(40, "W60H86");
+  static const W102H51 = const QL1100._internal(41, "W102H51");
+  static const W102H152 = const QL1100._internal(48, "W102H152");
+  static const W103 = const QL1100._internal(49, "W103");
+  static const W103H164 = const QL1100._internal(50, "W103H164");
+  static const UNSUPPORT = const QL1100._internal(255, "UNSUPPORT");
 
   static final List<QL1100> _values = [
     W17H54,
@@ -616,6 +678,10 @@ class QL1100 {
 
   int getId() {
     return _id;
+  }
+
+  String getName() {
+    return _name;
   }
 
   static int getItemId(index) {
@@ -651,7 +717,18 @@ class QL1100 {
     return QL1100.valueFromID(id);
   }
 
+  static QL1100 fromIndex (int index) {
+    if (index < 0 ||index >= _values.length ) {
+      return UNSUPPORT;
+    }
+
+    return _values[index];
+  }
+
   Map<String, dynamic> toMap() {
-    return {"id": _id};
+    return {"id": _id,
+      "name": _name,
+      "model": _model
+    };
   }
 }

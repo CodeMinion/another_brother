@@ -302,6 +302,22 @@ class Model {
     }
   }
 
+  ALabelName getLabelName(int index) {
+    if (this._series == PrinterSeries.PT3_LABEL_PRINTER) {
+      return PT3.fromIndex(index);
+    } else if (this._series == PrinterSeries.PT_LABEL_PRINTER) {
+      return PT.fromIndex(index);
+    } else if (this._series == PrinterSeries.QL700_LABEL_PRINTER) {
+      return QL700.fromIndex(index);
+    } else if (this._series == PrinterSeries.QL1100_LABEL_PRINTER) {
+      return QL1100.fromIndex(index);
+    } else {
+      return this._series == PrinterSeries.QL1115_LABEL_PRINTER
+          ? QL1115.fromIndex(index)
+          : QL700.UNSUPPORT;
+    }
+  }
+
   String getName() {
     return this._name.replaceAll("_", "-");
   }
@@ -1382,6 +1398,7 @@ class PrinterInfo {
 
   CustomPaperInfo? customPaperInfo;
   int labelNameIndex;
+  ALabelName _labelName;
   bool pjCarbon;
   int pjDensity;
   PjFeedMode pjFeedMode;
@@ -1472,7 +1489,8 @@ class PrinterInfo {
       this.banishMargin = false,
       this.useCopyCommandInTemplatePrint = false}):
         this.printerModel = printerModel == null ?  Model.PJ_663 : printerModel,
-  this._lastConnectedAddress = "", this._localName = "";
+  this._lastConnectedAddress = "", this._localName = "",
+        _labelName = QL700.W62;
 
   String getLastConnectedAddress() {
     return this._lastConnectedAddress;
@@ -1614,7 +1632,8 @@ class PrinterInfo {
       "pjPaperKind": pjPaperKind.toMap(),
       "useLegacyHalftoneEngine": useLegacyHalftoneEngine,
       "banishMargin": banishMargin,
-      "useCopyCommandInTemplatePrint": useCopyCommandInTemplatePrint
+      "useCopyCommandInTemplatePrint": useCopyCommandInTemplatePrint,
+      "labelName": _labelName.toMap()
     };
   }
 
@@ -2466,6 +2485,8 @@ class Printer {
 
   static void setUserPrinterInfo(PrinterInfo mPrinterInfo) {
     Printer.mPrinterInfo = mPrinterInfo;
+    mPrinterInfo._labelName = Printer.mPrinterInfo.printerModel.getLabelName(mPrinterInfo.labelNameIndex);
+
   }
 
   static DateTime getDate(Uint8List bytes) {
@@ -2845,6 +2866,7 @@ class Printer {
   /// Set PrinterInfo object to specify the printer and print settings.
   Future<bool> setPrinterInfo(PrinterInfo printerInfo) async {
     mPrinterInfo = printerInfo;
+    mPrinterInfo._labelName = mPrinterInfo.printerModel.getLabelName(mPrinterInfo.labelNameIndex);
     return true;
   }
 
