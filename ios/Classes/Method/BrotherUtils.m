@@ -544,8 +544,179 @@
     
     return printerSettings;
 }
-@end
 
++ (id<BRLMPrintSettingsProtocol>) printSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map {
+    NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
+    
+    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:dartPrintModel];
+    
+    if (printerModel == BRLMPrinterModelQL_710W
+        || printerModel == BRLMPrinterModelQL_720NW
+        || printerModel == BRLMPrinterModelQL_810W
+        || printerModel == BRLMPrinterModelQL_1110NWB
+        || printerModel == BRLMPrinterModelQL_1115NWB
+        ) {
+        return [BrotherUtils qlPrintSettingsFromMapWithValue:map];
+    }
+    else if (printerModel == BRLMPrinterModelPJ_673
+             || printerModel == BRLMPrinterModelPJ_773
+             || printerModel == BRLMPrinterModelPJ_763MFi
+             ) {
+        return [BrotherUtils pjPrintSettingsFromMapWithValue:map];
+    }
+    else if (printerModel == BRLMPrinterModelRJ_2050
+             || printerModel == BRLMPrinterModelRJ_2140
+             || printerModel == BRLMPrinterModelRJ_2150
+             || printerModel == BRLMPrinterModelRJ_3050
+             || printerModel == BRLMPrinterModelRJ_3150
+             || printerModel == BRLMPrinterModelRJ_4040
+             || printerModel == BRLMPrinterModelRJ_4230B
+             || printerModel == BRLMPrinterModelRJ_4250WB
+             ) {
+        return [BrotherUtils rjPrintSettingsFromMapWithValue:map];
+    }
+    else if (printerModel == BRLMPrinterModelTD_2120N
+             || printerModel == BRLMPrinterModelTD_2130N
+             || printerModel == BRLMPrinterModelTD_4100N
+             || printerModel == BRLMPrinterModelTD_4420DN
+             || printerModel == BRLMPrinterModelTD_4520DN
+             || printerModel == BRLMPrinterModelTD_4550DNWB
+             ) {
+        return [BrotherUtils tdPrintSettingsFromMapWithValue:map];
+    }
+    else if (printerModel == BRLMPrinterModelPT_D800W
+             || printerModel == BRLMPrinterModelPT_E550W
+             || printerModel == BRLMPrinterModelPT_E800W
+             || printerModel == BRLMPrinterModelPT_P750W
+             || printerModel == BRLMPrinterModelPT_P900W
+             || printerModel == BRLMPrinterModelPT_P300BT
+             || printerModel == BRLMPrinterModelPT_P710BT
+             || printerModel == BRLMPrinterModelPT_P910BT
+             || printerModel == BRLMPrinterModelPT_P950NW
+             || printerModel == BRLMPrinterModelPT_E850TKW
+             || printerModel == BRLMPrinterModelPT_P715eBT
+             ) {
+        return [BrotherUtils ptPrintSettingsFromMapWithValue:map];
+    }
+    else if (printerModel == BRLMPrinterModelMW_170
+             || printerModel == BRLMPrinterModelMW_270
+             || printerModel == BRLMPrinterModelMW_145MFi
+             || printerModel == BRLMPrinterModelMW_260MFi
+             || printerModel == BRLMPrinterModelMW_145MFi
+             ) {
+        return [BrotherUtils mwPrintSettingsFromMapWithValue:map];
+    }
+    
+    return [BrotherUtils qlPrintSettingsFromMapWithValue:map];
+}
+
+
++ (NSDictionary<NSString *,NSObject *> *)errorCodeToMapWithValue:(BRLMPrintErrorCode)error {
+    
+    NSString * errorName = @"ERROR_NONE";
+    if (error == BRLMPrintErrorCodeNoError) {
+        errorName = @"ERROR_NONE";
+    }
+    else if (error == BRLMPrintErrorCodePrintSettingsError) {
+        errorName = @"ERROR_PRINTER_SETTING_NOT_SUPPORTED";
+    }
+    else if (error == BRLMPrintErrorCodeFilepathURLError) {
+        errorName = @"ERROR_FILE_NOT_FOUND";
+    }
+    else if (error == BRLMPrintErrorCodePDFPageError) {
+        errorName = @"ERROR_FILE_NOT_FOUND";
+    }
+    else if (error == BRLMPrintErrorCodePrintSettingsNotSupportError) {
+        errorName = @"ERROR_PRINTER_SETTING_NOT_SUPPORTED";
+    }
+    else if (error == BRLMPrintErrorCodeDataBufferError) {
+        errorName = @"ERROR_BUFFER_FULL";
+    }
+    else if (error == BRLMPrintErrorCodePrinterModelError) {
+        errorName = @"ERROR_NOT_SAME_MODEL";
+    }
+    else if (error == BRLMPrintErrorCodeCanceled) {
+        errorName = @"ERROR_CANCEL";
+    }
+    else if (error == BRLMPrintErrorCodeChannelTimeout) {
+        errorName = @"ERROR_EVALUATION_TIMEUP";
+    }
+    else if (error == BRLMPrintErrorCodeSetModelError) {
+        errorName = @"ERROR_NOT_SAME_MODEL";
+    }
+    else if (error == BRLMPrintErrorCodeUnsupportedFile) {
+        errorName = @"ERROR_UNSUPPORTED_MEDIA";
+    }
+    else if (error == BRLMPrintErrorCodeSetMarginError) {
+        errorName = @"ERROR_SET_OVER_MARGIN";
+    }
+    else if (error == BRLMPrintErrorCodeSetLabelSizeError) {
+        errorName = @"ERROR_WRONG_LABEL";
+    }
+    else if (error == BRLMPrintErrorCodeCustomPaperSizeError) {
+        errorName = @"ERROR_WRONG_CUSTOM_INFO";
+    }
+    else if (error == BRLMPrintErrorCodeSetLengthError) {
+        errorName = @"ERROR_MINIMUM_LENGTH_LIMIT";
+    }
+    else if (error == BRLMPrintErrorCodeTubeSettingError) {
+        errorName = @"ERROR_PRINTER_SETTING_NOT_SUPPORTED";
+    }
+    else if (error == BRLMPrintErrorCodeChannelErrorStreamStatusError) {
+        errorName = @"ERROR_GET_OUTPUT_STREAM_FAILED";
+    }
+    else if (error == BRLMPrintErrorCodeChannelErrorUnsupportedChannel) {
+        errorName = @"ERROR_PORT_NOT_SUPPORTED";
+    }
+    else if (error == BRLMPrintErrorCodePrinterStatusErrorPaperEmpty) {
+        errorName = @"ERROR_PAPER_EMPTY";
+    }
+    else if (error == BRLMPrintErrorCodePrinterStatusErrorCoverOpen) {
+        errorName = @"ERROR_COVER_OPEN";
+    }
+    else if (error == BRLMPrintErrorCodePrinterStatusErrorBusy) {
+        errorName = @"ERROR_BUSY";
+    }
+    else if (error == BRLMPrintErrorCodePrinterStatusErrorPrinterTurnedOff) {
+        errorName = @"ERROR_INTERNAL_ERROR";
+    }
+    else if (error == BRLMPrintErrorCodePrinterStatusErrorBatteryWeak) {
+        errorName = @"ERROR_BATTERY_TROUBLE";
+    }
+    else if (error == BRLMPrintErrorCodePrinterStatusErrorExpansionBufferFull) {
+        errorName = @"ERROR_BUFFER_FULL";
+    }
+    else if (error == BRLMPrintErrorCodePrinterStatusErrorCommunicationError) {
+        errorName = @"ERROR_COMMUNICATION_ERROR";
+    }
+    else if (error == BRLMPrintErrorCodePrinterStatusErrorPaperJam) {
+        errorName = @"ERROR_PAPER_JAM";
+    }
+    else if (error == BRLMPrintErrorCodePrinterStatusErrorMediaCannotBeFed) {
+        errorName = @"ERROR_FEED_OR_CASSETTE_EMPTY";
+    }
+    else if (error == BRLMPrintErrorCodePrinterStatusErrorOverHeat) {
+        errorName = @"ERROR_OVERHEAT";
+    }
+    else if (error == BRLMPrintErrorCodePrinterStatusErrorHighVoltageAdapter) {
+        errorName = @"ERROR_HIGH_VOLTAGE_ADAPTER";
+    }
+    else if (error == BRLMPrintErrorCodePrinterStatusErrorUnknownError) {
+        errorName = @"ERROR_INTERNAL_ERROR";
+    }
+    else if (error == BRLMPrintErrorCodeUnknownError) {
+        errorName = @"ERROR_INTERNAL_ERROR";
+    }
+    NSDictionary<NSString*, NSObject *> * dartErrorCode = @{
+        @"name":errorName,
+        @"id": [[NSNumber alloc] initWithInt:(-1)]
+    };
+
+    return dartErrorCode;
+
+    
+}
+@end
 
 
 

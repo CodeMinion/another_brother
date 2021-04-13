@@ -11,6 +11,8 @@
 #import <BRLMPrinterKit/BRLMPrinterKit.h>
 #import <BRLMPrinterKit/BRPtouchDeviceInfo.h>
 
+#import "Method/PrintFileMethodCall.h"
+
 /*
 @implementation AnotherBrotherPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
@@ -28,6 +30,9 @@
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
   if ([@"getPlatformVersion" isEqualToString:call.method]) {
       result([NSString stringWithFormat:@"iOS %@", UIDevice.currentDevice.systemVersion]);
+  }
+  else if ([[PrintFileMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[PrintFileMethodCall alloc] initWithCall:call result:result] execute];
   }
   else {
       result(FlutterMethodNotImplemented);
