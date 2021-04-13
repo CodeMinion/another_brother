@@ -395,21 +395,170 @@
     return [BrotherUtils modelFromMapWithValue:dartPrinterModel];
 }
 
++ (LabelName *)labelNameFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    NSString * name = (NSString *)[map objectForKey:@"name"];
+    NSString * model = (NSString *)[map objectForKey:@"model"];
+    return [[LabelName alloc] initWithName:name model:model];
+}
+
++ (BRLMChannel *)printChannelWithPrintSettingsMap:(NSDictionary<NSString *,NSObject *> *) map {
+    // TODO Get port dart info
+    NSDictionary<NSString *, NSObject*> * dartPort = (NSDictionary<NSString *, NSObject*> *)[map objectForKey:@"port"];
+    // TODO Get Channel type
+    BRLMChannelType channelType = [BrotherUtils portFromMapWithValue:dartPort];
+    // TODO From channel type create channel.
+    BRLMChannel * outChannel;
+    
+    NSString * ipAddress = (NSString *) [map objectForKey:@"ipAddress"];
+    NSString * macAddress = (NSString *) [map objectForKey:@"macAddress"];
+    NSString * localName = (NSString *) [map objectForKey:@"localName"];
+    
+    if (channelType == BRLMChannelTypeBluetoothMFi) {
+        outChannel = [[BRLMChannel alloc] initWithWifiIPAddress:ipAddress];
+    }
+    else if (channelType == BRLMChannelTypeBluetoothMFi) {
+        outChannel = [[BRLMChannel alloc] initWithBluetoothSerialNumber:macAddress];
+        
+    }
+    else if (channelType == BRLMChannelTypeBluetoothLowEnergy) {
+        outChannel = [[BRLMChannel alloc] initWithBLELocalName:localName];
+    }
+    else {
+        outChannel = [[BRLMChannel alloc] initWithWifiIPAddress:ipAddress];
+    }
+    
+    return outChannel;
+}
+
++ (BRLMQLPrintSettingsLabelSize)qlLabelSizeWithName:(LabelName *)labelName {
+
+    if ([@"W17H54" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDieCutW17H54;
+    }
+    else if ([@"W17H87" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDieCutW17H87;
+    }
+    else if ([@"W23H23" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDieCutW23H23;
+    }
+    else if ([@"W29H42" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDieCutW29H42;
+    }
+    else if ([@"W29H90" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDieCutW29H90;
+    }
+    else if ([@"W38H90" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDieCutW38H90;
+    }
+    else if ([@"W39H48" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDieCutW39H48;
+    }
+    else if ([@"W52H29" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDieCutW52H29;
+    }
+    else if ([@"W54H29" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDieCutW54H29;
+    }
+    else if ([@"W62H29" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDieCutW62H29;
+    }
+    else if ([@"W62H100" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDieCutW62H100;
+    }
+    else if ([@"W12" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeRollW12;
+    }
+    else if ([@"W29" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeRollW29;
+    }
+    else if ([@"W38" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeRollW38;
+    }
+    else if ([@"W50" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeRollW50;
+    }
+    else if ([@"W54" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeRollW54;
+    }
+    else if ([@"W62" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeRollW62;
+    }
+    else if ([@"W62RB" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeRollW62RB;
+    }
+    else if ([@"W60H86" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDieCutW60H86;
+    }
+    else if ([@"W102" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeRollW102;
+    }
+    else if ([@"W102H51" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDTRollW102H51;
+    }
+    else if ([@"W102H152" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDTRollW102H152;
+    }
+    else if ([@"W103" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeRollW103;
+    }
+    else if ([@"W103H164" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDieCutW103H164;
+    }
+    else if ([@"DT_W90" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDTRollW90;
+    }
+    else if ([@"DT_W102" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDTRollW102;
+    }
+    else if ([@"DT_W102H51" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDTRollW102H51;
+    }
+    else if ([@"DT_W102H152" isEqualToString:[labelName name]]) {
+        return BRLMQLPrintSettingsLabelSizeDTRollW102H152;
+    }
+
+    return BRLMQLPrintSettingsLabelSizeDieCutW103H164;
+}
+
 + (BRLMQLPrintSettings *) qlPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map {
     
     BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
     
+    NSDictionary<NSString*, NSObject*> * dartLabelName = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"labelName"];
+    LabelName * labelName = [BrotherUtils labelNameFromMapWithValue:dartLabelName];
+    
     BRLMQLPrintSettings * printerSettings = [[BRLMQLPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
     
-    // TODO Extract info from map.
+    NSDictionary<NSString*, NSObject*> * dartPrintQuality = (NSDictionary<NSString*, NSObject*> *) [map objectForKey:@"printQuality"];
     
-    //labelSize
+    printerSettings.labelSize = [BrotherUtils qlLabelSizeWithName:labelName];
+    printerSettings.autoCut = [map objectForKey:@"isAutoCut"];
+    printerSettings.cutAtEnd = [map objectForKey:@"isEndCut"];
+    printerSettings.resolution = [BrotherUtils printQualityFromMapWithValue:dartPrintQuality];
+    // TODO Extract info from map.
+    //[x]labelSize
     //autoCutForEachPageCount
-    //autoCut
-    //cutAtEnd
-    //resolution
+    //[x]autoCut
+    //[x]cutAtEnd
+    //[x]resolution
     
     return printerSettings;
 }
 @end
 
+
+
+
+@implementation LabelName
+- (instancetype)initWithName:(NSString *)name model:(NSString *)model {
+    self = [super init];
+        if (self) {
+            _name = name;
+            _model = model;
+            
+        }
+        return self;
+}
+
+
+@end

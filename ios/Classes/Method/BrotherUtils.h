@@ -11,6 +11,15 @@
 #import <BRLMPrinterKit/BRLMPrinterKit.h>
 #import <BRLMPrinterKit/BRLMPrinterDefine.h>
 
+
+@interface LabelName : NSObject
+
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *model;
+- (instancetype)initWithName:(NSString *)name
+                  model:(NSString *)model;
+@end
+
 @interface BrotherUtils :NSObject
 
 + (BRLMChannelType) portFromMapWithValue:(NSDictionary<NSString *, NSObject *>*) map;
@@ -37,6 +46,12 @@
 
 + (BRLMPrinterModel) printerModelFromPrinterInfoMapWithValue:(NSDictionary<NSString *, NSObject*> *) map;
 
++ (LabelName *) labelNameFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
+
++ (BRLMQLPrintSettingsLabelSize) qlLabelSizeWithName:(LabelName *) labelName;
+
++ (BRLMChannel *) printChanneFromPrintSettingsMap:(NSDictionary<NSString *, NSObject *> *) map;
+
 + (BRLMQLPrintSettings *) qlPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
 + (BRLMPJPrintSettings *) pjPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
@@ -51,6 +66,10 @@
 
 
 @end
+
+
+
+
 /*
 @interface  BRLMChannelType (BRLMChannelTypeEncoding)
 - (NSMutableDictionary<NSString *, NSObject *>)toMap;
