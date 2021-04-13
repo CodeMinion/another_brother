@@ -50,7 +50,7 @@
 
 + (BRLMQLPrintSettingsLabelSize) qlLabelSizeWithName:(LabelName *) labelName;
 
-+ (BRLMChannel *) printChanneFromPrintSettingsMap:(NSDictionary<NSString *, NSObject *> *) map;
++ (BRLMChannel *) printChannelWithPrintSettingsMap:(NSDictionary<NSString *, NSObject *> *) map;
 
 + (id<BRLMPrintSettingsProtocol>) printSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 

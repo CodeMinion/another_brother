@@ -12,6 +12,7 @@
 #import <BRLMPrinterKit/BRPtouchDeviceInfo.h>
 
 #import "Method/PrintFileMethodCall.h"
+#import "Method/PrintImageMethodCall.h"
 
 /*
 @implementation AnotherBrotherPlugin
@@ -33,6 +34,10 @@
   }
   else if ([[PrintFileMethodCall METHOD_NAME] isEqualToString:call.method]) {
       [[[PrintFileMethodCall alloc] initWithCall:call result:result] execute];
+  }
+  else if ([[PrintImageMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      //PrintImageMethodCall
+      [[[PrintImageMethodCall alloc] initWithCall:call result:result] execute];
   }
   else {
       result(FlutterMethodNotImplemented);

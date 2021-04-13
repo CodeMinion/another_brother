@@ -1,15 +1,15 @@
 //
-//  PrintFileMethodCall.m
+//  PrintImageMethodCall.m
 //  another_brother
 //
-//  Created by admin on 4/12/21.
+//  Created by admin on 4/13/21.
 //
 
 #import <Foundation/Foundation.h>
-#import "PrintFileMethodCall.h"
+#import "PrintImageMethodCall.h"
 
-@implementation PrintFileMethodCall
-static NSString * METHOD_NAME = @"printFile";
+@implementation PrintImageMethodCall
+static NSString * METHOD_NAME = @"printImage";
 
 - (instancetype)initWithCall:(FlutterMethodCall *)call
                       result:(FlutterResult) result {
@@ -28,9 +28,11 @@ static NSString * METHOD_NAME = @"printFile";
 - (void)execute {
     // Get printInfo dart params from call
     NSDictionary<NSString *, NSObject *> * dartPrintInfo = _call.arguments[@"printInfo"];
-    // Get file path from call
-    NSString * filePath = _call.arguments[@"filePath"];
+    // Get image bytes from call
+    FlutterStandardTypedData * imageData = _call.arguments[@"imageBytes"];
+    NSData * imageBytes = imageData.data;
     
+    //NSData * imageBytes = [FlutterStandardTypedData typedDataWithBytes:_call.arguments[@"imageBytes"]].data;
     
     // TODO Get channel from printInfo
     BRLMChannel *channel = [BrotherUtils printChannelWithPrintSettingsMap:dartPrintInfo];
@@ -52,12 +54,12 @@ static NSString * METHOD_NAME = @"printFile";
     // Get printer settings.
     id<BRLMPrintSettingsProtocol>  printerSettings = [BrotherUtils printSettingsFromMapWithValue:dartPrintInfo];
     
-    // If no error create URL from path
+    CGDataProviderRef imgDataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)(imageBytes));
+    CGImageRef imageRef = CGImageCreateWithPNGDataProvider
+(imgDataProvider, NULL, true, kCGRenderingIntentDefault);
     
-    NSURL *url = [[NSBundle mainBundle] URLForResource:filePath withExtension:nil];
-
     // Call print method
-    BRLMPrintError * printError = [printerDriver printImageWithURL:url settings:printerSettings];
+    BRLMPrintError * printError = [printerDriver printImageWithImage:imageRef settings:printerSettings];
 
     
     [printerDriver closeChannel];

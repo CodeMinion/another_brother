@@ -1,17 +1,17 @@
 //
-//  PrintFileMethodCall.h
+//  PrintImageMethodCall.h
 //  another_brother
 //
-//  Created by admin on 4/12/21.
+//  Created by admin on 4/13/21.
 //
 
-#ifndef PrintFileMethodCall_h
-#define PrintFileMethodCall_h
+#ifndef PrintImageMethodCall_h
+#define PrintImageMethodCall_h
 
 #import <Flutter/Flutter.h>
 #import "BrotherUtils.h"
 
-@interface PrintFileMethodCall : NSObject
+@interface PrintImageMethodCall : NSObject
 
 //val call: MethodCall, val result: MethodChannel.Resul
 
@@ -25,4 +25,4 @@
 - (void) execute;
 @end
 
-#endif /* PrintFileMethodCall_h */
+#endif /* PrintImageMethodCall_h */

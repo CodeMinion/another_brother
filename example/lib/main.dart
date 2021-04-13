@@ -197,17 +197,15 @@ class _MyAppState extends State<MyApp> {
     Rect bounds = new Rect.fromLTWH(0, 0, 300, 100);
     c.drawRect(bounds, paint);
     var picture = await recorder.endRecording().toImage(300, 100);
-    //PrinterStatus status = await printer.printImage(picture);
+    PrinterStatus status = await printer.printImage(picture);
 
-
+/*
     FilePickerResult result = await FilePicker.platform.pickFiles();
-    /*
     FilePickerResult result = await FilePicker.platform.pickFiles(allowMultiple: true,
         type: FileType.custom,
         allowedExtensions: ['jpg', 'pdf', 'png']);
 
 
-     */
     PrinterStatus status = PrinterStatus();
     if(result != null) {
       setState(() {
@@ -225,6 +223,8 @@ class _MyAppState extends State<MyApp> {
     } else {
       // User canceled the picker
     }
+
+ */
 
     print ("Got Status: $status and Error: ${status.errorCode.getName()}");
     return status;
