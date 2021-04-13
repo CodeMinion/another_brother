@@ -713,8 +713,24 @@
     };
 
     return dartErrorCode;
+}
 
++ (NSDictionary<NSString *,NSObject *> *)printerStatusToMapWithError:(BRLMPrintErrorCode)error status:(BRLMPrinterStatus *)status {
     
+    NSObject * dartError = [BrotherUtils errorCodeToMapWithValue: error];
+    
+    NSDictionary<NSString*, NSObject *> * dartPrintStatus = @{
+        @"errorCode":dartError,
+        @"labelId": [[NSNumber alloc] initWithInt:(-1)], // TODO
+        @"labelType": [[NSNumber alloc] initWithInt:(-1)], // TODO
+        @"isACConnected": @{@"id": [[NSNumber alloc] initWithInt:(-1)], @"name": @"Unknown" }, // TODO
+        @"isBatteryMounted": @{@"id": [[NSNumber alloc] initWithInt:(-1)]}, // TODO
+        @"batteryLevel": [[NSNumber alloc] initWithInt:(-1)], // TODO
+        @"batteryResidualQuantityLevel":[[NSNumber alloc] initWithInt:(-1)], // TODO
+        @"maxOfBatteryResidualQuantityLevel":[[NSNumber alloc] initWithInt:(-1)], // TODO
+    };
+    
+    return dartPrintStatus;
 }
 @end
 

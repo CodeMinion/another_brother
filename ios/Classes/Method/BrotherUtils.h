@@ -68,6 +68,8 @@
 
 + (NSDictionary<NSString *, NSObject *> *) errorCodeToMapWithValue:(BRLMPrintErrorCode)error;
 
++ (NSDictionary<NSString *, NSObject *> *) printerStatusToMapWithError:(BRLMPrintErrorCode)error status:(BRLMPrinterStatus *) status;
+
 @end
 
 

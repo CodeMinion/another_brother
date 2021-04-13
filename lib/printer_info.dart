@@ -2527,7 +2527,7 @@ class Printer {
 
     final Map resultMap = await _channel.invokeMethod("printFile", params);
     print ("Received Result: $resultMap");
-    
+
     PrinterStatus status = PrinterStatus.fromMap(resultMap);
 
     return status;

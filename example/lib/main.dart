@@ -180,10 +180,14 @@ class _MyAppState extends State<MyApp> {
     printInfo.printerModel = Model.QL_1110NWB;
     printInfo.printMode = PrintMode.FIT_TO_PAGE;
     printInfo.isAutoCut = true;
-    printInfo.port = Port.BLUETOOTH;
-    printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer BLuetooth Mac
+    //printInfo.port = Port.BLUETOOTH;
+    //printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer BLuetooth Mac
+    printInfo.port = Port.NET;
+    printInfo.ipAddress = "192.168.1.80"; // Printer Bluetooth Mac
+
     // Ask the printer what label it has on.
-    printInfo.labelNameIndex = (await printer.getLabelInfo()).labelNameIndex; //QL1100.ordinalFromID(QL1100.W103.getId());
+    //printInfo.labelNameIndex = (await printer.getLabelInfo()).labelNameIndex; //QL1100.ordinalFromID(QL1100.W103.getId());
+    printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W103.getId());
     await printer.setPrinterInfo(printInfo);
 
     PictureRecorder recorder = PictureRecorder();
@@ -193,31 +197,35 @@ class _MyAppState extends State<MyApp> {
     Rect bounds = new Rect.fromLTWH(0, 0, 300, 100);
     c.drawRect(bounds, paint);
     var picture = await recorder.endRecording().toImage(300, 100);
-    PrinterStatus status = await printer.printImage(picture);
+    //PrinterStatus status = await printer.printImage(picture);
 
+
+    FilePickerResult result = await FilePicker.platform.pickFiles();
     /*
     FilePickerResult result = await FilePicker.platform.pickFiles(allowMultiple: true,
         type: FileType.custom,
         allowedExtensions: ['jpg', 'pdf', 'png']);
 
+
+     */
     PrinterStatus status = PrinterStatus();
     if(result != null) {
       setState(() {
         _selectedImage = File(result.files.single.path);
       });
-      //PrinterStatus status = await printer.printFile(result.files.single.path);
+      status = await printer.printFile(result.files.single.path);
       // Get Information about currently loaded paper
-      LabelInfo labelInfo = await printer.getLabelInfo();
-      print ("Label Info: $labelInfo");
-      LabelParam labelParam = await printer.getLabelParam();
-      print ("Label Param $labelParam");
+      //LabelInfo labelInfo = await printer.getLabelInfo();
+      //print ("Label Info: $labelInfo");
+      //LabelParam labelParam = await printer.getLabelParam();
+      //print ("Label Param $labelParam");
 
       //status = await printer.printFileList(result.paths);
 
     } else {
       // User canceled the picker
     }
-    */
+
     print ("Got Status: $status and Error: ${status.errorCode.getName()}");
     return status;
   }
