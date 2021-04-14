@@ -554,6 +554,63 @@
     return BRLMQLPrintSettingsLabelSizeDieCutW103H164;
 }
 
++ (BRLMPTPrintSettingsLabelSize)ptLabelSizeWithName:(LabelName *)labelName {
+    
+    if ([@"W3_5" isEqualToString:[labelName name]]) {
+        return BRLMPTPrintSettingsLabelSizeWidth3_5mm;
+    }
+    else if ([@"W6" isEqualToString:[labelName name]]) {
+        return BRLMPTPrintSettingsLabelSizeWidth6mm;
+    }
+    else if ([@"W9" isEqualToString:[labelName name]]) {
+        return BRLMPTPrintSettingsLabelSizeWidth9mm;
+    }
+    else if ([@"W12" isEqualToString:[labelName name]]) {
+        return BRLMPTPrintSettingsLabelSizeWidth12mm;
+    }
+    else if ([@"W18" isEqualToString:[labelName name]]) {
+        return BRLMPTPrintSettingsLabelSizeWidth18mm;
+    }
+    else if ([@"W24" isEqualToString:[labelName name]]) {
+        return BRLMPTPrintSettingsLabelSizeWidth24mm;
+    }
+    else if ([@"W36" isEqualToString:[labelName name]]) {
+        return BRLMPTPrintSettingsLabelSizeWidth36mm;
+    }
+    else if ([@"HS_W6" isEqualToString:[labelName name]]) {
+        return BRLMPTPrintSettingsLabelSizeWidthHS_5_8mm;
+    }
+    else if ([@"HS_W9" isEqualToString:[labelName name]]) {
+        return BRLMPTPrintSettingsLabelSizeWidthHS_8_8mm;
+    }
+    else if ([@"HS_W12" isEqualToString:[labelName name]]) {
+        return BRLMPTPrintSettingsLabelSizeWidthHS_11_7mm;
+    }
+    else if ([@"HS_W18" isEqualToString:[labelName name]]) {
+        return BRLMPTPrintSettingsLabelSizeWidthHS_17_7mm;
+    }
+    else if ([@"HS_W24" isEqualToString:[labelName name]]) {
+        return BRLMPTPrintSettingsLabelSizeWidthHS_23_6mm;
+    }
+    else if ([@"FLE_W21H45" isEqualToString:[labelName name]]) {
+        return BRLMPTPrintSettingsLabelSizeWidthFL_21x45mm;
+    }
+    
+    /*
+      Note: These were not found in the iOS side.
+         R6_5,
+         R6_0,
+         R5_0,
+         R4_0,
+         R3_5,
+         R3_0,
+         R2_5,
+         UNSUPPORT
+     */
+    
+    return BRLMPTPrintSettingsLabelSizeWidth3_5mm;
+}
+
 + (BRLMQLPrintSettings *) qlPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map {
     
     BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
@@ -917,7 +974,76 @@
     
     return printerSettings;
 }
+
++ (BRLMPTPrintSettings *)ptPrintSettingsFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
+    
+    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:dartPrintModel];
+    
+    NSDictionary<NSString *, NSObject *> * dartLabelName = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"labelName"];
+    
+    LabelName * labelName = [BrotherUtils labelNameFromMapWithValue:dartLabelName];
+    
+    bool cutmarkPrint = [map objectForKey:@"isCutMark"];
+    bool autoCut = [map objectForKey:@"isAutoCut"];
+    bool halfCut = [map objectForKey:@"isHalfCut"];
+    bool specialTapePrint = [map objectForKey:@"isSpecialTape"];
+    
+    NSDictionary<NSString *, NSObject *> * dartResolution = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"printQuality"];
+    
+    bool forceVanishingMargin = [map objectForKey:@"banishMargin"];
+    
+    
+    BRLMPTPrintSettings * printerSettings = [[BRLMPTPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
+    
+    printerSettings.labelSize = [BrotherUtils ptLabelSizeWithName:labelName];
+    printerSettings.cutmarkPrint = cutmarkPrint;
+    printerSettings.autoCut = autoCut;
+    printerSettings.halfCut = halfCut;
+    printerSettings.specialTapePrint = specialTapePrint;
+    printerSettings.resolution = [BrotherUtils printQualityFromMapWithValue:dartResolution];
+    printerSettings.forceVanishingMargin = forceVanishingMargin;
+    
+    // chainPrint @"???"
+    // highResolutionPrint @"???"
+    // autoCutForEachPageCount @"???"
+    //
+    
+    return printerSettings;
+}
+
++ (BRLMMWPrintSettingsPaperSize)mwPaperSizeFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSString * name = (NSString *)[map objectForKey:@"name"];
+    
+    if  ([@"A7" isEqualToString:name]) {
+        return BRLMMWPrintSettingsPaperSizeA7;
+    }
+    else if  ([@"A6" isEqualToString:name]) {
+        return BRLMMWPrintSettingsPaperSizeA6;
+    }
+    
+    
+    else return BRLMMWPrintSettingsPaperSizeA6;
+}
  
++ (BRLMMWPrintSettings *)mwPrintSettingsFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
+    
+    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:dartPrintModel];
+    
+    NSDictionary<NSString*, NSObject*> * dartPaperSize = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"paperSize"];
+    
+    
+    BRLMMWPrintSettings * printerSettings = [[BRLMMWPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
+    
+    // TODO Ask Brother Why this is read only, seems odd.
+    //printerSettings.paperSize = [BrotherUtils mwPaperSizeFromMapWithValue:dartPaperSize];
+    
+    return printerSettings;
+}
 
 + (id<BRLMPrintSettingsProtocol>) printSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map {
     NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];

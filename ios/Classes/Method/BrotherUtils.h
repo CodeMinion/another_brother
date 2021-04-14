@@ -66,10 +66,10 @@
     // DONE
 + (BRLMTDPrintSettings *) tdPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
-    // TODO
+    // DONE
 + (BRLMPTPrintSettings *) ptPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
-    // TODO
+    // DONE
 + (BRLMMWPrintSettings *) mwPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
 + (NSDictionary<NSString *, NSObject *> *) errorCodeToMapWithValue:(BRLMPrintErrorCode)error;
@@ -98,6 +98,11 @@
 + (BRLMPJPrintSettingsDensity) pjPrintDensityWithValue:(NSNumber *) density;
 
 + (BRLMTDPrintSettingsDensity) tdPrintDensityWithValue:(NSNumber *) density;
+
+
++ (BRLMPTPrintSettingsLabelSize) ptLabelSizeWithName:(LabelName *) labelName;
+
++ (BRLMMWPrintSettingsPaperSize) mwPaperSizeFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
 
 @end
