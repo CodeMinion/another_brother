@@ -1418,7 +1418,6 @@ class PrinterInfo {
   bool mode9;
   PrintQuality printQuality;
   bool mirrorPrint;
-
   TimeoutSetting timeout = new TimeoutSetting();
   bool dashLine;
   bool isLabelEndCut;

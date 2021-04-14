@@ -54,21 +54,47 @@
 
 + (id<BRLMPrintSettingsProtocol>) printSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
+    // DONE
 + (BRLMQLPrintSettings *) qlPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
++ (BRLMPJPrintSettingsDensity) pjPrintDensityWithValue:(NSNumber *) density;
+
+    // TODO
 + (BRLMPJPrintSettings *) pjPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
++ (BRLMPJPrintSettingsPaperType) pjPaperKindFromMapWithValue:(NSDictionary<NSString*, NSObject *> *) map;
+
++ (BRLMPJPrintSettingsRollCase) pjRollCaseFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
+
++ (BRLMPJPrintSettingsFeedMode) pjFeedModeFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
+
++ (BRLMPJPrintSettingsPrintSpeed) pjPrintSpeedWithValue:(NSNumber *)pjSpeed;
+
+    // DONE
 + (BRLMRJPrintSettings *) rjPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
++ (BRLMRJPrintSettingsDensity) rjPrintDensityWithValue:(NSNumber *) density;
+
+// TODO
 + (BRLMTDPrintSettings *) tdPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
+    // TODO
 + (BRLMPTPrintSettings *) ptPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
+    // TODO
 + (BRLMMWPrintSettings *) mwPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
 + (NSDictionary<NSString *, NSObject *> *) errorCodeToMapWithValue:(BRLMPrintErrorCode)error;
 
 + (NSDictionary<NSString *, NSObject *> *) printerStatusToMapWithError:(BRLMPrintErrorCode)error status:(BRLMPrinterStatus *) status;
+
++ (BRLMCustomPaperSize *) customPaperInfoFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
+
++ (BRLMPJPrintSettingsPaperSizeStandard) pjPaperSizeStandardFromMapWithValue:(NSDictionary<NSString *, NSObject*> *) map;
+
++ (BRLMPJPrintSettingsPaperSize * ) pjPrinterPaperSizeFromMapWithValue:(NSDictionary<NSString *, NSObject*> *) map;
+
++ (BRLMPJPrintSettingsPaperInsertionPosition) pjPaperPositionFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
 @end
 

@@ -388,6 +388,40 @@
                                           rightMargin);
 }
 
++ (BRLMCustomPaperSize *)customPaperInfoFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSDictionary<NSString*, NSObject *> * dartPaperKind = (NSDictionary<NSString*, NSObject *> *)[map objectForKey:@"paperKind"];
+    
+    BRLMCustomPaperSizePaperKind paperKind = [BrotherUtils paperKindFromMapWithValue:dartPaperKind];
+    
+    NSDictionary<NSString*, NSObject *> * dartUnit = (NSDictionary<NSString*, NSObject *> *)[map objectForKey:@"unit"];
+    
+    BRLMCustomPaperSizeLengthUnit unit = [BrotherUtils unitFromMapWithValue: dartUnit];
+    
+    BRLMCustomPaperSizeMargins margins = [BrotherUtils customMarginFromMapWithValue:map];
+    
+    float tapeWidth = [(NSNumber *)[map objectForKey:@"tapeWidth"] floatValue];
+    float tapeLength = [(NSNumber *)[map objectForKey:@"tapeLength"] floatValue];
+    float markHeight = [(NSNumber *)[map objectForKey:@"markHeight"] floatValue];
+    float gapLength = [(NSNumber *)[map objectForKey:@"labelPitch"] floatValue];
+    float markPosition = [(NSNumber *)[map objectForKey:@"markPosition"] floatValue];
+    
+    if (paperKind == BRLMCustomPaperSizePaperKindDieCut) {
+        return [[BRLMCustomPaperSize alloc] initDieCutWithTapeWidth:tapeWidth tapeLength:tapeLength margins:margins gapLength:gapLength unitOfLength:unit];
+    }
+    else if (paperKind == BRLMCustomPaperSizePaperKindByFile) {
+        // TODO Add support for binary file.
+    }
+    else if (paperKind == BRLMCustomPaperSizePaperKindMarkRoll) {
+        return [[BRLMCustomPaperSize alloc] initMarkRollWithTapeWidth:tapeWidth tapeLength:tapeLength margins:margins markPosition:markPosition markHeight:markHeight unitOfLength:unit];
+    }
+    else if (paperKind == BRLMCustomPaperSizePaperKindRoll) {
+        return [[BRLMCustomPaperSize alloc] initRollWithTapeWidth:tapeWidth margins:margins unitOfLength:unit];
+    }
+    
+    return [[BRLMCustomPaperSize alloc] initRollWithTapeWidth:tapeWidth margins:margins unitOfLength:unit];
+}
+
 + (BRLMPrinterModel) printerModelFromPrinterInfoMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
     
     NSDictionary<NSString *,NSObject *> * dartPrinterModel = (NSDictionary<NSString *,NSObject *> *) [map objectForKey:@"printerModel"];
@@ -544,6 +578,285 @@
     
     return printerSettings;
 }
+
++ (BRLMRJPrintSettingsDensity)rjPrintDensityWithValue:(NSNumber *)density {
+    if ([density isEqualToNumber:@0]) {
+        return BRLMRJPrintSettingsDensityWeakLevel5;
+    }
+    else if ([density isEqualToNumber:@1]) {
+        return BRLMRJPrintSettingsDensityWeakLevel4;
+    }
+    else if ([density isEqualToNumber:@2]) {
+        return BRLMRJPrintSettingsDensityWeakLevel3;
+    }
+    else if ([density isEqualToNumber:@3]) {
+        return BRLMRJPrintSettingsDensityWeakLevel2;
+    }
+    else if ([density isEqualToNumber:@4]) {
+        return BRLMRJPrintSettingsDensityWeakLevel1;
+    }
+    else if ([density isEqualToNumber:@5]) {
+        return BRLMRJPrintSettingsDensityNeutral;
+    }
+    else if ([density isEqualToNumber:@6]) {
+        return BRLMRJPrintSettingsDensityStrongLevel1;
+    }
+    else if ([density isEqualToNumber:@7]) {
+        return BRLMRJPrintSettingsDensityStrongLevel2;
+    }
+    else if ([density isEqualToNumber:@8]) {
+        return BRLMRJPrintSettingsDensityStrongLevel3;
+    }
+    else if ([density isEqualToNumber:@9]) {
+        return BRLMRJPrintSettingsDensityStrongLevel4;
+    }
+    else if ([density isEqualToNumber:@10]) {
+        return BRLMRJPrintSettingsDensityStrongLevel5;
+    }
+    
+    return BRLMRJPrintSettingsDensityNeutral;
+}
+
++ (BRLMRJPrintSettings *)rjPrintSettingsFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
+    
+     
+    NSDictionary<NSString*, NSObject*> * dartCustomPaperInfo = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"customPaperInfo"];
+    
+    BRLMCustomPaperSize * customPaperSize = [BrotherUtils customPaperInfoFromMapWithValue:dartCustomPaperInfo];
+    
+    BRLMRJPrintSettings * printerSettings = [[BRLMRJPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
+    
+    NSNumber * density = (NSNumber *)[map objectForKey:@"rjDensity"];
+    
+    printerSettings.density = [BrotherUtils rjPrintDensityWithValue:density];
+    printerSettings.rotate180degrees = (bool) [map objectForKey:@"rotate180"];
+    printerSettings.peelLabel = (bool) [map objectForKey:@"peelMode"];
+    printerSettings.customPaperSize = customPaperSize;
+    
+    
+    //customPaperSize "customPaperInfo" TODO
+    
+    return printerSettings;
+}
+
++ (BRLMPJPrintSettingsDensity)pjPrintDensityWithValue:(NSNumber *)density {
+    if ([density isEqualToNumber:@0]) {
+        return BRLMPJPrintSettingsDensityWeakLevel5;
+    }
+    else if ([density isEqualToNumber:@1]) {
+        return BRLMPJPrintSettingsDensityWeakLevel4;
+    }
+    else if ([density isEqualToNumber:@2]) {
+        return BRLMPJPrintSettingsDensityWeakLevel3;
+    }
+    else if ([density isEqualToNumber:@3]) {
+        return BRLMPJPrintSettingsDensityWeakLevel2;
+    }
+    else if ([density isEqualToNumber:@4]) {
+        return BRLMPJPrintSettingsDensityWeakLevel1;
+    }
+    else if ([density isEqualToNumber:@5]) {
+        return BRLMPJPrintSettingsDensityNeutral;
+    }
+    else if ([density isEqualToNumber:@6]) {
+        return BRLMPJPrintSettingsDensityStrongLevel1;
+    }
+    else if ([density isEqualToNumber:@7]) {
+        return BRLMPJPrintSettingsDensityStrongLevel2;
+    }
+    else if ([density isEqualToNumber:@8]) {
+        return BRLMPJPrintSettingsDensityStrongLevel3;
+    }
+    else if ([density isEqualToNumber:@9]) {
+        return BRLMPJPrintSettingsDensityStrongLevel4;
+    }
+    else if ([density isEqualToNumber:@10]) {
+        return BRLMPJPrintSettingsDensityStrongLevel5;
+    }
+    
+    return BRLMPJPrintSettingsDensityNeutral;
+}
+
+
++ (BRLMPJPrintSettingsPaperSizeStandard) pjPaperSizeStandardFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSString * name = (NSString *)[map objectForKey:@"name"];
+    
+    if ([@"CUSTOM" isEqualToString:name]) {
+        return BRLMPJPrintSettingsPaperSizeStandardCustom;
+    }
+    else if  ([@"A7" isEqualToString:name]) {
+        return BRLMPJPrintSettingsPaperSizeStandardA5;
+    }
+    else if  ([@"A6" isEqualToString:name]) {
+        return BRLMPJPrintSettingsPaperSizeStandardA5;
+    }
+    else if  ([@"A5" isEqualToString:name]) {
+        return BRLMPJPrintSettingsPaperSizeStandardA5;
+    }
+    else if  ([@"A4" isEqualToString:name]) {
+        return BRLMPJPrintSettingsPaperSizeStandardA4;
+    }
+    else if  ([@"LEGAL" isEqualToString:name]) {
+        return BRLMPJPrintSettingsPaperSizeStandardLegal;
+    }
+    else if  ([@"LETTER" isEqualToString:name]) {
+        return BRLMPJPrintSettingsPaperSizeStandardLetter;
+    }
+    
+    else return BRLMPJPrintSettingsPaperSizeStandardA4;
+}
+
++ (BRLMPJPrintSettingsPaperSize *)pjPrinterPaperSizeFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSDictionary<NSString *, NSObject*> * dartStandardSize = (NSDictionary<NSString *, NSObject *>*) [map objectForKey:@"paperSize"];
+    
+    //paperSizeStandard
+    BRLMPJPrintSettingsPaperSizeStandard standardPaperSize = [BrotherUtils pjPaperSizeStandardFromMapWithValue:dartStandardSize];
+    
+    //customPaper
+    // TODO Support Custom size, need to send paper in.
+    
+    return [[BRLMPJPrintSettingsPaperSize alloc] initWithPaperSizeStandard:standardPaperSize];
+    
+}
+
++ (BRLMPJPrintSettingsPaperType)pjPaperKindFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSString * name = (NSString *)[map objectForKey:@"name"];
+    
+    if ([@"PJ_ROLL" isEqualToString:name]) {
+        return BRLMPJPrintSettingsPaperTypeRoll;
+    }
+    else if ([@"PJ_CUT_PAPER" isEqualToString:name]) {
+        return BRLMPJPrintSettingsPaperTypeCutSheet;
+    }
+    
+    return BRLMPJPrintSettingsPaperTypeRoll;
+
+}
+
++ (BRLMPJPrintSettingsRollCase)pjRollCaseFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSString * name = (NSString *)[map objectForKey:@"name"];
+    
+    if ([@"PJ_ROLLCASE_OFF" isEqualToString:name]) {
+        return BRLMPJPrintSettingsRollCaseNone;
+    }
+    else if ([@"PJ_ROLLCASE_ON" isEqualToString:name]) {
+        return BRLMPJPrintSettingsRollCasePARC001;
+    }
+    else if ([@"PJ_ROLLCASE_WITH_ANTICURL" isEqualToString:name]) {
+        return BRLMPJPrintSettingsRollCasePARC001_NoAntiCurl;
+    }
+    
+    return BRLMPJPrintSettingsRollCaseNone;
+    
+}
+
++ (BRLMPJPrintSettingsFeedMode)pjFeedModeFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSString * name = (NSString *)[map objectForKey:@"name"];
+    
+    if ([@"PJ_FEED_MODE_FREE" isEqualToString:name]) {
+        return BRLMPJPrintSettingsFeedModeNoFeed;
+    }
+    else if ([@"PJ_FEED_MODE_FIXEDPAGE" isEqualToString:name]) {
+        return BRLMPJPrintSettingsFeedModeFixedPage;
+    }
+    else if ([@"PJ_FEED_MODE_ENDOFPAGE" isEqualToString:name]) {
+        return BRLMPJPrintSettingsFeedModeEndOfPage;
+    }
+    else if ([@"PJ_FEED_MODE_ENDOFPAGERETRACT" isEqualToString:name]) {
+        return BRLMPJPrintSettingsFeedModeEndOfPageRetract;
+    }
+    
+    return BRLMPJPrintSettingsFeedModeNoFeed;
+}
+
++ (BRLMPJPrintSettingsPrintSpeed)pjPrintSpeedWithValue:(NSNumber *)pjSpeed {
+    
+    if ([pjSpeed isEqualToNumber: @0]) {
+        return BRLMPJPrintSettingsPrintSpeed2_5inchPerSec;
+    }
+    else if([pjSpeed isEqualToNumber:@1]) {
+        return BRLMPJPrintSettingsPrintSpeed1_9inchPerSec;
+    }
+    else if ([pjSpeed isEqualToNumber:@2]) {
+        return BRLMPJPrintSettingsPrintSpeed1_6inchPerSec;
+    }
+    else if ([pjSpeed isEqualToNumber:@3]) {
+        return BRLMPJPrintSettingsPrintSpeed1_1inchPerSec;
+    }
+    
+    return BRLMPJPrintSettingsPrintSpeed1_6inchPerSec;
+}
+
++ (BRLMPJPrintSettingsPaperInsertionPosition) pjPaperPositionFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSString * name = (NSString *)[map objectForKey:@"name"];
+    
+    if ([@"LEFT" isEqualToString:name]) {
+        return BRLMPJPrintSettingsPaperInsertionPositionLeft;
+    }
+    else if ([@"CENTER" isEqualToString:name]) {
+        return BRLMPJPrintSettingsPaperInsertionPositionCenter;
+    }
+    else if ([@"RIGHT" isEqualToString:name]) {
+        return BRLMPJPrintSettingsPaperInsertionPositionRight;
+    }
+    
+    return BRLMPJPrintSettingsPaperInsertionPositionLeft;
+}
+
++ (BRLMPJPrintSettings *)pjPrintSettingsFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
+    
+    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:dartPrintModel];
+    
+    BRLMPJPrintSettings * printerSettings = [[BRLMPJPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
+    
+    NSDictionary<NSString *, NSObject *> * dartPaperSize = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"paperSize"];
+    
+    NSDictionary<NSString *, NSObject *> * dartPaperKind = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"pjPaperKind"];
+    
+    NSDictionary<NSString *, NSObject *> * dartPjFeedMode = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"pjFeedMode"];
+    
+    NSNumber * dartPjDensity = (NSNumber *) [map objectForKey:@"pjDensity"];
+    
+    NSDictionary<NSString *, NSObject *> * dartPjRollCase = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"rollPrinterCase"];
+    
+    NSDictionary<NSString *, NSObject *> * dartPaperPosition = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"paperPosition"];
+    
+    NSNumber * dartPjSpeed = (NSNumber *) [map objectForKey:@"pjSpeed"];
+    
+    bool dashLine = [map objectForKey:@"dashLine"];
+    
+    printerSettings.paperSize = [BrotherUtils pjPrinterPaperSizeFromMapWithValue:dartPaperSize];
+    
+    printerSettings.paperType = [BrotherUtils pjPaperKindFromMapWithValue:dartPaperKind];
+    
+    printerSettings.paperInsertionPosition = [BrotherUtils pjPaperPositionFromMapWithValue:dartPaperPosition];
+    
+    printerSettings.feedMode = [BrotherUtils pjFeedModeFromMapWithValue:dartPjFeedMode];
+    
+    printerSettings.density = [BrotherUtils pjPrintDensityWithValue:dartPjDensity];
+    
+    printerSettings.rollCase = [BrotherUtils pjRollCaseFromMapWithValue:dartPjRollCase];
+    
+    printerSettings.printSpeed = [BrotherUtils pjPrintSpeedWithValue:dartPjSpeed];
+    
+    printerSettings.usingCarbonCopyPaper = [map objectForKey:@"pjCarbon"];
+    
+    printerSettings.printDashLine = [map objectForKey:@"dashLine"];
+    
+    return printerSettings;
+}
+
+ 
 
 + (id<BRLMPrintSettingsProtocol>) printSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map {
     NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
