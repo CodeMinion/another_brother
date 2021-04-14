@@ -57,25 +57,13 @@
     // DONE
 + (BRLMQLPrintSettings *) qlPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
-+ (BRLMPJPrintSettingsDensity) pjPrintDensityWithValue:(NSNumber *) density;
-
-    // TODO
+    // DONE
 + (BRLMPJPrintSettings *) pjPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
-
-+ (BRLMPJPrintSettingsPaperType) pjPaperKindFromMapWithValue:(NSDictionary<NSString*, NSObject *> *) map;
-
-+ (BRLMPJPrintSettingsRollCase) pjRollCaseFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
-
-+ (BRLMPJPrintSettingsFeedMode) pjFeedModeFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
-
-+ (BRLMPJPrintSettingsPrintSpeed) pjPrintSpeedWithValue:(NSNumber *)pjSpeed;
 
     // DONE
 + (BRLMRJPrintSettings *) rjPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
-+ (BRLMRJPrintSettingsDensity) rjPrintDensityWithValue:(NSNumber *) density;
-
-// TODO
+    // DONE
 + (BRLMTDPrintSettings *) tdPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
     // TODO
@@ -95,6 +83,22 @@
 + (BRLMPJPrintSettingsPaperSize * ) pjPrinterPaperSizeFromMapWithValue:(NSDictionary<NSString *, NSObject*> *) map;
 
 + (BRLMPJPrintSettingsPaperInsertionPosition) pjPaperPositionFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
+
+
++ (BRLMRJPrintSettingsDensity) rjPrintDensityWithValue:(NSNumber *) density;
+
++ (BRLMPJPrintSettingsPaperType) pjPaperKindFromMapWithValue:(NSDictionary<NSString*, NSObject *> *) map;
+
++ (BRLMPJPrintSettingsRollCase) pjRollCaseFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
+
++ (BRLMPJPrintSettingsFeedMode) pjFeedModeFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
+
++ (BRLMPJPrintSettingsPrintSpeed) pjPrintSpeedWithValue:(NSNumber *)pjSpeed;
+
++ (BRLMPJPrintSettingsDensity) pjPrintDensityWithValue:(NSNumber *) density;
+
++ (BRLMTDPrintSettingsDensity) tdPrintDensityWithValue:(NSNumber *) density;
+
 
 @end
 

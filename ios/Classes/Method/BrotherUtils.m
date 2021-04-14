@@ -856,6 +856,67 @@
     return printerSettings;
 }
 
+
++ (BRLMTDPrintSettingsDensity)tdPrintDensityWithValue:(NSNumber *)density {
+    
+    if ([density isEqualToNumber:@0]) {
+        return BRLMTDPrintSettingsDensityWeakLevel5;
+    }
+    else if ([density isEqualToNumber:@1]) {
+        return BRLMTDPrintSettingsDensityWeakLevel4;
+    }
+    else if ([density isEqualToNumber:@2]) {
+        return BRLMTDPrintSettingsDensityWeakLevel3;
+    }
+    else if ([density isEqualToNumber:@3]) {
+        return BRLMTDPrintSettingsDensityWeakLevel2;
+    }
+    else if ([density isEqualToNumber:@4]) {
+        return BRLMTDPrintSettingsDensityWeakLevel1;
+    }
+    else if ([density isEqualToNumber:@5]) {
+        return BRLMTDPrintSettingsDensityNeutral;
+    }
+    else if ([density isEqualToNumber:@6]) {
+        return BRLMTDPrintSettingsDensityStrongLevel1;
+    }
+    else if ([density isEqualToNumber:@7]) {
+        return BRLMTDPrintSettingsDensityStrongLevel2;
+    }
+    else if ([density isEqualToNumber:@8]) {
+        return BRLMTDPrintSettingsDensityStrongLevel3;
+    }
+    else if ([density isEqualToNumber:@9]) {
+        return BRLMTDPrintSettingsDensityStrongLevel4;
+    }
+    else if ([density isEqualToNumber:@10]) {
+        return BRLMTDPrintSettingsDensityStrongLevel5;
+    }
+    
+    return BRLMTDPrintSettingsDensityNeutral;
+}
+
++ (BRLMTDPrintSettings *)tdPrintSettingsFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    
+    NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
+    
+    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:dartPrintModel];
+    
+    NSDictionary<NSString *, NSObject *> * dartCustomPaperInfo = (NSDictionary<NSString *, NSObject *> *) [map objectForKey:@"customPaperInfo"];
+    
+    NSNumber * dartRjDensity = (NSNumber *) [map objectForKey:@"rjDensity"];
+    
+    bool peelLabel = [map objectForKey:@"peelMode"];
+    
+    BRLMTDPrintSettings * printerSettings = [[BRLMTDPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
+    
+    printerSettings.customPaperSize = [BrotherUtils customPaperInfoFromMapWithValue:dartCustomPaperInfo];
+    
+    printerSettings.density = [BrotherUtils tdPrintDensityWithValue:dartRjDensity];
+    printerSettings.peelLabel = peelLabel;
+    
+    return printerSettings;
+}
  
 
 + (id<BRLMPrintSettingsProtocol>) printSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map {
@@ -1045,6 +1106,9 @@
     
     return dartPrintStatus;
 }
+
+
+
 @end
 
 
