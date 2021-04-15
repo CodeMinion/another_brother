@@ -447,7 +447,7 @@
     NSString * macAddress = (NSString *) [map objectForKey:@"macAddress"];
     NSString * localName = (NSString *) [map objectForKey:@"localName"];
     
-    if (channelType == BRLMChannelTypeBluetoothMFi) {
+    if (channelType == BRLMChannelTypeWiFi) {
         outChannel = [[BRLMChannel alloc] initWithWifiIPAddress:ipAddress];
     }
     else if (channelType == BRLMChannelTypeBluetoothMFi) {

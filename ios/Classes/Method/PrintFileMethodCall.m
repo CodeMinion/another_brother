@@ -54,8 +54,8 @@ static NSString * METHOD_NAME = @"printFile";
     
     // If no error create URL from path
     
-    NSURL *url = [[NSBundle mainBundle] URLForResource:filePath withExtension:nil];
-
+    NSURL * url = [NSURL fileURLWithPath:filePath];
+    
     // Call print method
     BRLMPrintError * printError = [printerDriver printImageWithURL:url settings:printerSettings];
 
