@@ -1046,9 +1046,8 @@
 }
 
 + (id<BRLMPrintSettingsProtocol>) printSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map {
-    NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
     
-    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:dartPrintModel];
+    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
     
     if (printerModel == BRLMPrinterModelQL_710W
         || printerModel == BRLMPrinterModelQL_720NW

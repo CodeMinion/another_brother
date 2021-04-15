@@ -10,6 +10,9 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:another_brother/another_brother.dart';
+import 'package:flutter_blue/flutter_blue.dart';
+
+//import 'package:flutter_scan_bluetooth/flutter_scan_bluetooth.dart';
 // To add platforms, run `flutter create -t plugin --platforms <platforms> .` under another_brother.
 void main() {
   runApp(MyApp());
@@ -173,17 +176,72 @@ class _MyAppState extends State<MyApp> {
     //return PrinterStatus();
   }
 
+  Future<PrinterStatus> printBle() async {
+
+      var printer = new Printer();
+      var printInfo = PrinterInfo();
+      printInfo.printerModel = Model.RJ_4250WB;
+      printInfo.printMode = PrintMode.FIT_TO_PAGE;
+      printInfo.isAutoCut = true;
+      printInfo.port = Port.BLE;
+      printInfo.setLocalName("RJ-4250WB_5113");
+
+      // Set the label type.
+      double width = 102.0;
+      double rightMargin = 0.0;
+      double leftMargin = 0.0;
+      double topMargin = 0.0;
+      CustomPaperInfo customPaperInfo = CustomPaperInfo.newCustomRollPaper(printInfo.printerModel,
+          Unit.Mm,
+          width,
+          rightMargin,
+          leftMargin,
+          topMargin);
+      printInfo.customPaperInfo = customPaperInfo;
+
+      // Set the printer info so we can use the SDK to get the printers.
+      await printer.setPrinterInfo(printInfo);
+
+      PictureRecorder recorder = PictureRecorder();
+      Canvas c = Canvas(recorder);
+      Paint paint = new Paint();
+      paint.color = Color.fromRGBO(255, 0, 0, 1);
+      Rect bounds = new Rect.fromLTWH(0, 0, 300, 100);
+      c.drawRect(bounds, paint);
+      var picture = await recorder.endRecording().toImage(300, 100);
+      PrinterStatus status = await printer.printImage(picture);
+
+
+  }
   Future<PrinterStatus> printImageBluetooth() async {
+
+
+    //BLE Scanning
+    FlutterBlue flutterBlue = FlutterBlue.instance;
+
+    // Start scanning
+    flutterBlue.startScan(timeout: Duration(seconds: 4));
+
+    // Listen to scan results
+    var subscription = flutterBlue.scanResults.listen((results) {
+      // do something with scan results
+      for (ScanResult r in results) {
+        print('${r.device.name} found! rssi: ${r.device.id.id}');
+      }
+    });
+
+    // Stop scanning
+    flutterBlue.stopScan();
 
     var printer = new Printer();
     var printInfo = PrinterInfo();
     printInfo.printerModel = Model.QL_1110NWB;
     printInfo.printMode = PrintMode.FIT_TO_PAGE;
     printInfo.isAutoCut = true;
-    //printInfo.port = Port.BLUETOOTH;
-    //printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer BLuetooth Mac
-    printInfo.port = Port.NET;
-    printInfo.ipAddress = "192.168.1.80"; // Printer Bluetooth Mac
+    printInfo.port = Port.BLUETOOTH;
+    printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer BLuetooth Mac
+    //printInfo.port = Port.NET;
+    //printInfo.ipAddress = "192.168.1.80"; // Printer Bluetooth Mac
 
     // Ask the printer what label it has on.
     //printInfo.labelNameIndex = (await printer.getLabelInfo()).labelNameIndex; //QL1100.ordinalFromID(QL1100.W103.getId());
@@ -257,7 +315,8 @@ class _MyAppState extends State<MyApp> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(onPressed: (){
-                    printImageBluetooth();
+                    printBle();
+                    //printImageBluetooth();
                   }, child: Text("Print Bluetooth")),
                 ),
               ],
