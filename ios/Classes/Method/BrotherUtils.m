@@ -623,8 +623,8 @@
     NSDictionary<NSString*, NSObject*> * dartPrintQuality = (NSDictionary<NSString*, NSObject*> *) [map objectForKey:@"printQuality"];
     
     printerSettings.labelSize = [BrotherUtils qlLabelSizeWithName:labelName];
-    printerSettings.autoCut = [map objectForKey:@"isAutoCut"];
-    printerSettings.cutAtEnd = [map objectForKey:@"isEndCut"];
+    printerSettings.autoCut = [[map objectForKey:@"isAutoCut"] isEqual:@(YES)];
+    printerSettings.cutAtEnd = [[map objectForKey:@"isEndCut"] isEqual:@(YES)];
     printerSettings.resolution = [BrotherUtils printQualityFromMapWithValue:dartPrintQuality];
     // TODO Extract info from map.
     //[x]labelSize
@@ -688,8 +688,8 @@
     NSNumber * density = (NSNumber *)[map objectForKey:@"rjDensity"];
     
     printerSettings.density = [BrotherUtils rjPrintDensityWithValue:density];
-    printerSettings.rotate180degrees = (bool) [map objectForKey:@"rotate180"];
-    printerSettings.peelLabel = (bool) [map objectForKey:@"peelMode"];
+    printerSettings.rotate180degrees = [[map objectForKey:@"rotate180"] isEqual:@(YES)];
+    printerSettings.peelLabel = [[map objectForKey:@"peelMode"]isEqual:@(YES)];
     printerSettings.customPaperSize = customPaperSize;
     
     
@@ -890,7 +890,7 @@
     
     NSNumber * dartPjSpeed = (NSNumber *) [map objectForKey:@"pjSpeed"];
     
-    bool dashLine = [map objectForKey:@"dashLine"];
+    bool dashLine = [[map objectForKey:@"dashLine"] isEqual:@(YES)];
     
     printerSettings.paperSize = [BrotherUtils pjPrinterPaperSizeFromMapWithValue:dartPaperSize];
     
@@ -906,9 +906,9 @@
     
     printerSettings.printSpeed = [BrotherUtils pjPrintSpeedWithValue:dartPjSpeed];
     
-    printerSettings.usingCarbonCopyPaper = [map objectForKey:@"pjCarbon"];
+    printerSettings.usingCarbonCopyPaper = [[map objectForKey:@"pjCarbon"] isEqual:@(YES)];
     
-    printerSettings.printDashLine = [map objectForKey:@"dashLine"];
+    printerSettings.printDashLine = dashLine;
     
     return printerSettings;
 }
@@ -963,7 +963,7 @@
     
     NSNumber * dartRjDensity = (NSNumber *) [map objectForKey:@"rjDensity"];
     
-    bool peelLabel = [map objectForKey:@"peelMode"];
+    bool peelLabel = [[map objectForKey:@"peelMode"]isEqual:@(YES)];
     
     BRLMTDPrintSettings * printerSettings = [[BRLMTDPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
     
@@ -985,14 +985,14 @@
     
     LabelName * labelName = [BrotherUtils labelNameFromMapWithValue:dartLabelName];
     
-    bool cutmarkPrint = [map objectForKey:@"isCutMark"];
-    bool autoCut = [map objectForKey:@"isAutoCut"];
-    bool halfCut = [map objectForKey:@"isHalfCut"];
-    bool specialTapePrint = [map objectForKey:@"isSpecialTape"];
+    bool cutmarkPrint = [[map objectForKey:@"isCutMark"] isEqual:@(YES)];
+    bool autoCut = [[map objectForKey:@"isAutoCut"] isEqual:@(YES)];
+    bool halfCut = [[map objectForKey:@"isHalfCut"] isEqual:@(YES)];
+    bool specialTapePrint = [[map objectForKey:@"isSpecialTape"] isEqual:@(YES)];
     
     NSDictionary<NSString *, NSObject *> * dartResolution = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"printQuality"];
     
-    bool forceVanishingMargin = [map objectForKey:@"banishMargin"];
+    bool forceVanishingMargin = [[map objectForKey:@"banishMargin"] isEqual:@(YES)];
     
     
     BRLMPTPrintSettings * printerSettings = [[BRLMPTPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];

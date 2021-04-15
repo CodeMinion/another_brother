@@ -183,8 +183,12 @@ class _MyAppState extends State<MyApp> {
       printInfo.printerModel = Model.RJ_4250WB;
       printInfo.printMode = PrintMode.FIT_TO_PAGE;
       printInfo.isAutoCut = true;
+      printInfo.rotate180 = false;
       printInfo.port = Port.BLE;
       printInfo.setLocalName("RJ-4250WB_5113");
+      //printInfo.port = Port.BLUETOOTH;
+      //printInfo.macAddress = "795B8714-AC40-6FFE-C8D0-4FFF6D67D056";
+      //printInfo.setLocalName("RJ-4250WB_5113");
 
       // Set the label type.
       double width = 102.0;
@@ -209,7 +213,32 @@ class _MyAppState extends State<MyApp> {
       Rect bounds = new Rect.fromLTWH(0, 0, 300, 100);
       c.drawRect(bounds, paint);
       var picture = await recorder.endRecording().toImage(300, 100);
-      PrinterStatus status = await printer.printImage(picture);
+      //PrinterStatus status = await printer.printImage(picture);
+
+      //FilePickerResult result = await FilePicker.platform.pickFiles();
+
+      FilePickerResult result = await FilePicker.platform.pickFiles(allowMultiple: true,
+          type: FileType.custom,
+          allowedExtensions: ['jpg', 'pdf', 'png']);
+
+
+      PrinterStatus status = PrinterStatus();
+      if(result != null) {
+        setState(() {
+          _selectedImage = File(result.files.first.path);
+        });
+        //status = await printer.printFile(result.files.single.path);
+        // Get Information about currently loaded paper
+        //LabelInfo labelInfo = await printer.getLabelInfo();
+        //print ("Label Info: $labelInfo");
+        //LabelParam labelParam = await printer.getLabelParam();
+        //print ("Label Param $labelParam");
+
+        status = await printer.printFileList(result.paths);
+
+      } else {
+        // User canceled the picker
+      }
 
 
   }

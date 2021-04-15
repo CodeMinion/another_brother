@@ -13,6 +13,7 @@
 
 #import "Method/PrintFileMethodCall.h"
 #import "Method/PrintImageMethodCall.h"
+#import "Method/PrintFileListMethodCall.h"
 
 /*
 @implementation AnotherBrotherPlugin
@@ -41,6 +42,9 @@
   else if ([[PrintImageMethodCall METHOD_NAME] isEqualToString:call.method]) {
       //PrintImageMethodCall
       [[[PrintImageMethodCall alloc] initWithCall:call result:result] execute];
+  }
+  else if ([[PrintFileListMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[PrintFileListMethodCall alloc] initWithCall:call result:result] execute];
   }
   else {
       result(FlutterMethodNotImplemented);
