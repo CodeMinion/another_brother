@@ -286,6 +286,7 @@ class _MyAppState extends State<MyApp> {
     */
     var printer = new Printer();
       var printInfo = PrinterInfo();
+      //printInfo.printerModel = Model.RJ_4250WB;
       printInfo.printerModel = Model.RJ_4250WB;
       printInfo.printMode = PrintMode.FIT_TO_PAGE;
       printInfo.isAutoCut = true;
@@ -384,6 +385,13 @@ class _MyAppState extends State<MyApp> {
     // Ask the printer what label it has on.
     //printInfo.labelNameIndex = (await printer.getLabelInfo()).labelNameIndex; //QL1100.ordinalFromID(QL1100.W103.getId());
     printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W103.getId());
+
+    List<BluetoothPrinter> netPrinters = await printer.getBluetoothPrinters([Model.QL_1110NWB.getName()]);
+    print ("Bt Printers Found: $netPrinters");
+    printInfo.macAddress = netPrinters.single.macAddress;
+
+
+
     await printer.setPrinterInfo(printInfo);
 
     PictureRecorder recorder = PictureRecorder();
@@ -408,7 +416,7 @@ class _MyAppState extends State<MyApp> {
       setState(() {
         _selectedImage = File(result.files.single.path);
       });
-      //status = await printer.printFile(result.files.single.path);
+      status = await printer.printFile(result.files.single.path);
       // Get Information about currently loaded paper
       //LabelInfo labelInfo = await printer.getLabelInfo();
       //print ("Label Info: $labelInfo");
@@ -453,8 +461,8 @@ class _MyAppState extends State<MyApp> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(onPressed: (){
-                    printBle();
-                    //printImageBluetooth();
+                    //printBle();
+                    printImageBluetooth();
                   }, child: Text("Print Bluetooth")),
                 ),
               ],

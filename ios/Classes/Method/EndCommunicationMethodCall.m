@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "EndCommunicationMethodCall.h"
 
-@implementation StartCommunicationMethodCall
+@implementation EndCommunicationMethodCall
 static NSString * METHOD_NAME = @"endCommunication";
 
 - (instancetype)initWithCall:(FlutterMethodCall *)call
