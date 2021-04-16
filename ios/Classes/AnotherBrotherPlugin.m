@@ -15,6 +15,8 @@
 #import "Method/PrintImageMethodCall.h"
 #import "Method/PrintFileListMethodCall.h"
 #import "Method/PrintPdfFileMethodCall.h"
+#import "Method/CancelMethodCall.h"
+#import "Method/GetPrinterStatusMethodCall.h"
 
 /*
 @implementation AnotherBrotherPlugin
@@ -41,7 +43,6 @@
       [[[PrintFileMethodCall alloc] initWithCall:call result:result] execute];
   }
   else if ([[PrintImageMethodCall METHOD_NAME] isEqualToString:call.method]) {
-      //PrintImageMethodCall
       [[[PrintImageMethodCall alloc] initWithCall:call result:result] execute];
   }
   else if ([[PrintFileListMethodCall METHOD_NAME] isEqualToString:call.method]) {
@@ -49,6 +50,12 @@
   }
   else if ([[PrintPdfFileMethodCall METHOD_NAME] isEqualToString:call.method]) {
       [[[PrintPdfFileMethodCall alloc] initWithCall:call result:result] execute];
+  }
+  else if ([[CancelMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[CancelMethodCall alloc] initWithCall:call result:result] execute];
+  }
+  else if ([[GetPrinterStatusMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[GetPrinterStatusMethodCall alloc] initWithCall:call result:result] execute];
   }
   else {
       result(FlutterMethodNotImplemented);

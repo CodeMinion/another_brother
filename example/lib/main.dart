@@ -225,9 +225,11 @@ class _MyAppState extends State<MyApp> {
       PrinterStatus status = PrinterStatus();
       if(result != null) {
         setState(() {
-          //_selectedImage = File(result.files.first.path);
+          _selectedImage = File(result.files.first.path);
         });
-        status = await printer.printFile(result.files.single.path);
+        //status = await printer.printFile(result.files.single.path);
+        status = await printer.getPrinterStatus();
+        print ("Got Status $status");
         // Get Information about currently loaded paper
         //LabelInfo labelInfo = await printer.getLabelInfo();
         //print ("Label Info: $labelInfo");

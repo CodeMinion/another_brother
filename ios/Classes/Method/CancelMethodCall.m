@@ -1,15 +1,15 @@
 //
-//  PrintFileListMethodCall.m
+//  CancelMethodCall.m
 //  another_brother
 //
 //  Created by admin on 4/15/21.
 //
 
 #import <Foundation/Foundation.h>
-#import "PrintFileListMethodCall.h"
+#import "CancelMethodCall.h"
 
-@implementation PrintFileListMethodCall
-static NSString * METHOD_NAME = @"printFileList";
+@implementation CancelMethodCall
+static NSString * METHOD_NAME = @"cancel";
 
 - (instancetype)initWithCall:(FlutterMethodCall *)call
                       result:(FlutterResult) result {
@@ -28,17 +28,6 @@ static NSString * METHOD_NAME = @"printFileList";
 - (void)execute {
     // Get printInfo dart params from call
     NSDictionary<NSString *, NSObject *> * dartPrintInfo = _call.arguments[@"printInfo"];
-    // Get list of file paths from call
-    NSArray * dartFilePathList = _call.arguments[@"filePathList"];
-    
-    
-    // Map the paths into a list of NSURLs
-    NSMutableArray *urlList = [NSMutableArray arrayWithCapacity:[dartFilePathList count]];
-    [dartFilePathList enumerateObjectsUsingBlock:^(id filePath, NSUInteger idx, BOOL *stop) {
-        id mapObj = [NSURL fileURLWithPath:filePath];
-        [urlList addObject:mapObj];
-    }];
-    
     
     // TODO Get channel from printInfo
     BRLMChannel *channel = [BrotherUtils printChannelWithPrintSettingsMap:dartPrintInfo];
@@ -57,23 +46,13 @@ static NSString * METHOD_NAME = @"printFileList";
     
     BRLMPrinterDriver *printerDriver = driverGenerateResult.driver;
     
-    // Get printer settings.
-    id<BRLMPrintSettingsProtocol>  printerSettings = [BrotherUtils printSettingsFromMapWithValue:dartPrintInfo];
-    
-    // If no error create URL from path
-    
-    //NSURL * url = [NSURL fileURLWithPath:filePath];
-    
     // Call print method
-    BRLMPrintError * printError = [printerDriver printImageWithURLs:urlList settings:printerSettings];
+    [printerDriver cancelPrinting];
 
     
     [printerDriver closeChannel];
     
-    // Notify status to Flutter.
-    NSDictionary<NSString *, NSObject *> * printStatus = [BrotherUtils printerStatusToMapWithError:printError.code  status:nil];
-    
-    _result(printStatus);
+    _result(@YES);
     
    
 }

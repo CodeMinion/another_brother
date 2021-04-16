@@ -66,7 +66,7 @@ static NSString * METHOD_NAME = @"printImage";
     
     // Notify status to Flutter.
     NSDictionary<NSString *, NSObject *> * printStatus = [BrotherUtils printerStatusToMapWithError:printError.code  status:nil];
-    _result(printStatus);
+    
     _result(printStatus);
     
    

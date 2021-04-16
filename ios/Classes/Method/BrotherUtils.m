@@ -1218,6 +1218,7 @@
     
     NSObject * dartError = [BrotherUtils errorCodeToMapWithValue: error];
     
+    // TODO Translate status if not nill
     NSDictionary<NSString*, NSObject *> * dartPrintStatus = @{
         @"errorCode":dartError,
         @"labelId": [[NSNumber alloc] initWithInt:(-1)], // TODO
@@ -1231,7 +1232,6 @@
     
     return dartPrintStatus;
 }
-
 
 
 @end

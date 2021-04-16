@@ -23,9 +23,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afd4f045-3e4d-48d8-a470-2ac132de8d06" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/CancelMethodCall.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/CancelMethodCall.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/GetPrinterStatusMethodCall.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/GetPrinterStatusMethodCall.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/Method/CancelMethodCall.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/Method/CancelMethodCall.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/Method/GetPrinterStatusMethodCall.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/Method/GetPrinterStatusMethodCall.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/AnotherBrotherPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/AnotherBrotherPlugin.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/BrotherUtils.m" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/BrotherUtils.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/PrintFileListMethodCall.m" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/PrintFileListMethodCall.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/PrintFileMethodCall.m" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/PrintFileMethodCall.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/PrintImageMethodCall.m" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/PrintImageMethodCall.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/PrintPdfFileMethodCall.m" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/PrintPdfFileMethodCall.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/Method/PrintFileListMethodCall.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/Method/PrintFileListMethodCall.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/Method/PrintFileMethodCall.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/Method/PrintFileMethodCall.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/Method/PrintImageMethodCall.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/Method/PrintImageMethodCall.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/Method/PrintPdfFileMethodCall.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/Method/PrintPdfFileMethodCall.m" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,22 +111,22 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="337" y="220" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1280.777@0.23.1280.777" timestamp="1618171346674" />
-    <state width="1238" height="269" key="GridCell.Tab.0.bottom" timestamp="1618530323482">
+    <state width="1238" height="269" key="GridCell.Tab.0.bottom" timestamp="1618537177007">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="269" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1618530323482" />
-    <state width="1238" height="269" key="GridCell.Tab.0.center" timestamp="1618530323481">
+    <state width="1238" height="269" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1618537177007" />
+    <state width="1238" height="269" key="GridCell.Tab.0.center" timestamp="1618537177007">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="269" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1618530323481" />
-    <state width="1238" height="269" key="GridCell.Tab.0.left" timestamp="1618530323481">
+    <state width="1238" height="269" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1618537177007" />
+    <state width="1238" height="269" key="GridCell.Tab.0.left" timestamp="1618537177006">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="269" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1618530323481" />
-    <state width="1238" height="269" key="GridCell.Tab.0.right" timestamp="1618530323481">
+    <state width="1238" height="269" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1618537177006" />
+    <state width="1238" height="269" key="GridCell.Tab.0.right" timestamp="1618537177007">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="269" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1618530323481" />
+    <state width="1238" height="269" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1618537177007" />
     <state x="332" y="44" width="638" height="735" key="find.popup" timestamp="1618177620826">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
@@ -132,7 +152,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/example/lib/main.dart</url>
-          <line>236</line>
+          <line>238</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
