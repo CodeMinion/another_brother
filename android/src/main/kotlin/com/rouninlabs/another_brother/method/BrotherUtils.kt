@@ -1,6 +1,7 @@
 package com.rouninlabs.another_brother.method
 
 import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.hardware.usb.UsbManager
 import android.util.Log
@@ -412,6 +413,13 @@ fun setupConnectionManagers(context: Context, printInfo: PrinterInfo, printer: P
     }
 
     return PrinterInfo.ErrorCode.ERROR_NONE
+}
+
+fun BluetoothDevice.toBluetoothPrinter():Map<String, Any> {
+    return hashMapOf(
+            "modelName" to name,
+            "macAddress" to address
+    )
 }
 
 

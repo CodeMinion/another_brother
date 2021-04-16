@@ -378,7 +378,7 @@ class _MyAppState extends State<MyApp> {
     printInfo.printMode = PrintMode.FIT_TO_PAGE;
     printInfo.isAutoCut = true;
     printInfo.port = Port.BLUETOOTH;
-    printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer BLuetooth Mac
+    //printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer BLuetooth Mac
     //printInfo.port = Port.NET;
     //printInfo.ipAddress = "192.168.1.80"; // Printer Bluetooth Mac
 
