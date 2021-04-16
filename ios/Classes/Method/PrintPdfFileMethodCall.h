@@ -14,8 +14,6 @@
 
 @interface PrintPdfFileMethodCall : NSObject
 
-//val call: MethodCall, val result: MethodChannel.Resul
-
 @property (strong, nonatomic) FlutterMethodCall* call;
 @property (strong, nonatomic) FlutterResult result;
 @property (class, nonatomic, assign, readonly) NSString * METHOD_NAME;

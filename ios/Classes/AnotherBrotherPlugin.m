@@ -19,6 +19,8 @@
 #import "Method/GetPrinterStatusMethodCall.h"
 #import "Method/GetNetPrintersMethodCall.h"
 #import "Method/GetBluetoothPrintersMethodCall.h"
+#import "Method/StartCommunicationMethodCall.h"
+#import "Method/EndCommunicationMethodCall.h"
 
 /*
 @implementation AnotherBrotherPlugin
@@ -67,6 +69,12 @@
   }
   else if ([[GetBluetoothPrintersMethodCall METHOD_NAME] isEqualToString:call.method]) {
       [[[GetBluetoothPrintersMethodCall alloc] initWithCall:call result:result] execute];
+  }
+  else if ([[StartCommunicationMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[StartCommunicationMethodCall alloc] initWithCall:call result:result] execute];
+  }
+  else if ([[EndCommunicationMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[EndCommunicationMethodCall alloc] initWithCall:call result:result] execute];
   }
   else {
       result(FlutterMethodNotImplemented);

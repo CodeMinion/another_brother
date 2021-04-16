@@ -1,17 +1,17 @@
 //
-//  CancelMethodCall.h
+//  EndCommunicationMethodCall.h
 //  another_brother
 //
-//  Created by admin on 4/15/21.
+//  Created by admin on 4/16/21.
 //
 
-#ifndef CancelMethodCall_h
-#define CancelMethodCall_h
+#ifndef EndCommunicationMethodCall_h
+#define EndCommunicationMethodCall_h
 
 #import <Flutter/Flutter.h>
 #import "BrotherUtils.h"
 
-@interface CancelMethodCall : NSObject
+@interface EndCommunicationMethodCall : NSObject
 
 @property (strong, nonatomic) FlutterMethodCall* call;
 @property (strong, nonatomic) FlutterResult result;
@@ -23,4 +23,5 @@
 - (void) execute;
 @end
 
-#endif /* CancelMethodCall_h */
+
+#endif /* EndCommunicationMethodCall_h */
