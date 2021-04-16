@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:another_brother/label_info.dart';
 import 'package:another_brother/printer_info.dart';
-import 'package:bonsoir/bonsoir.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +11,6 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:another_brother/another_brother.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:flutter_nsd/flutter_nsd.dart';
-import 'package:mdns_plugin/mdns_plugin.dart';
-import 'package:multicast_dns/multicast_dns.dart';
-
-import 'package:ping_discover_network/ping_discover_network.dart';
-import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 
 //import 'package:flutter_scan_bluetooth/flutter_scan_bluetooth.dart';
 // To add platforms, run `flutter create -t plugin --platforms <platforms> .` under another_brother.
@@ -299,7 +292,7 @@ class _MyAppState extends State<MyApp> {
       printInfo.rotate180 = false;
       printInfo.port = Port.BLE;
       //printInfo.setLocalName("RJ-4250WB_5113");
-      //printInfo.port = Port.BLUETOOTH;
+      printInfo.port = Port.BLUETOOTH;
       //printInfo.macAddress = "795B8714-AC40-6FFE-C8D0-4FFF6D67D056";
       //printInfo.setLocalName("RJ-4250WB_5113");
 
@@ -321,12 +314,16 @@ class _MyAppState extends State<MyApp> {
 
       // Get a list of printers with my model available in the network.
       //List<BLEPrinter> printers = await printer.getBLEPrinters(3000);
-
-      List<NetPrinter> netPrinters = await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
-      print ("Net Printers Found: $netPrinters");
-
       // Get the BT name from the first printer found.
       //printInfo.setLocalName(printers.single.localName);
+
+      //List<NetPrinter> netPrinters = await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
+      //print ("Net Printers Found: $netPrinters");
+
+      List<BluetoothPrinter> netPrinters = await printer.getBluetoothPrinters([Model.RJ_4250WB.getName()]);
+      print ("Bt Printers Found: $netPrinters");
+      printInfo.macAddress = netPrinters.single.macAddress;
+
 
       printer.setPrinterInfo(printInfo);
 
@@ -337,7 +334,7 @@ class _MyAppState extends State<MyApp> {
       Rect bounds = new Rect.fromLTWH(0, 0, 300, 100);
       c.drawRect(bounds, paint);
       var picture = await recorder.endRecording().toImage(300, 100);
-      //PrinterStatus status = await printer.printImage(picture);
+      PrinterStatus status = await printer.printImage(picture);
 
       //FilePickerResult result = await FilePicker.platform.pickFiles();
 
@@ -468,7 +465,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
+/*
 class Delegate implements MDNSPluginDelegate {
   void onDiscoveryStarted() {
     print("Discovery started");
@@ -491,3 +488,5 @@ class Delegate implements MDNSPluginDelegate {
     print("Removed: $service");
   }
 }
+
+ */

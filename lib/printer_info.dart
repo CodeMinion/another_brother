@@ -3135,6 +3135,22 @@ class Printer {
   }
 
 
+  /// Returns the paried printers matching the model name specified.
+  Future<List<BluetoothPrinter>> getBluetoothPrinters(List<String> modelName) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "models" : modelName,
+    };
+
+    final List<dynamic> resultList = await _channel.invokeMethod("getBluetoothPrinters", params);
+
+    final List<BluetoothPrinter> outList = resultList.map( (bluetoothPrinter) => BluetoothPrinter.fromMap(bluetoothPrinter)).toList();
+    return outList;
+  }
+
+
   Future<NetPrinter> getNetPrinterInfo(String ipAddress) async {
     var params = {
       "printerId": mPrinterId,

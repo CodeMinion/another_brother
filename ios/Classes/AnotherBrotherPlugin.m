@@ -18,6 +18,7 @@
 #import "Method/CancelMethodCall.h"
 #import "Method/GetPrinterStatusMethodCall.h"
 #import "Method/GetNetPrintersMethodCall.h"
+#import "Method/GetBluetoothPrintersMethodCall.h"
 
 /*
 @implementation AnotherBrotherPlugin
@@ -63,6 +64,9 @@
       //[[[GetNetPrintersMethodCall alloc] initWithCall:call result:result] execute];
       _lastNetPrinterCall = [[GetNetPrintersMethodCall alloc] initWithCall:call result:result];
       [(GetNetPrintersMethodCall*)_lastNetPrinterCall execute];
+  }
+  else if ([[GetBluetoothPrintersMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[GetBluetoothPrintersMethodCall alloc] initWithCall:call result:result] execute];
   }
   else {
       result(FlutterMethodNotImplemented);

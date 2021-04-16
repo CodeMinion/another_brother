@@ -1247,6 +1247,17 @@
     return dartNetPrinter;
 }
 
++ (NSDictionary<NSString *,NSObject *> *)bRPtouchDeviceInfoToBluetoothPrinterMap:(BRPtouchDeviceInfo *)deviceInfo {
+    
+    NSDictionary<NSString *, NSObject *> * dartPrinter = @{
+        @"modelName": [deviceInfo strModelName],
+              @"macAddress": [deviceInfo strSerialNumber],
+              
+    };
+    
+    return dartPrinter;
+}
+
 + (NSDictionary<NSString *,NSObject *> *)bRPtouchDeviceInfoToBlePrinterMap:(BRPtouchDeviceInfo *)deviceInfo {
     
     NSDictionary<NSString *, NSObject *> * dartBlePrinter = @{

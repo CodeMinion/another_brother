@@ -81,6 +81,8 @@
 
 + (NSDictionary<NSString *, NSObject *> *) bRPtouchDeviceInfoToBlePrinterMap:(BRPtouchDeviceInfo *) deviceInfo;
 
++ (NSDictionary<NSString *, NSObject *> *) bRPtouchDeviceInfoToBluetoothPrinterMap:(BRPtouchDeviceInfo *) deviceInfo;
+
 + (BRLMCustomPaperSize *) customPaperInfoFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
 + (BRLMPJPrintSettingsPaperSizeStandard) pjPaperSizeStandardFromMapWithValue:(NSDictionary<NSString *, NSObject*> *) map;
