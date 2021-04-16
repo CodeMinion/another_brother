@@ -23,14 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afd4f045-3e4d-48d8-a470-2ac132de8d06" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/PrintPdfFileMethodCall.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/PrintPdfFileMethodCall.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Classes/Method/PrintPdfFileMethodCall.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Classes/Method/PrintPdfFileMethodCall.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/Method/PrintFileMethodCall.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/Method/PrintFileMethodCall.m" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -56,9 +56,21 @@ static NSString * METHOD_NAME = @"printFile";
     
     NSURL * url = [NSURL fileURLWithPath:filePath];
     
-    // Call print method
-    BRLMPrintError * printError = [printerDriver printImageWithURL:url settings:printerSettings];
-
+    NSString * extension = [url pathExtension];
+    BRLMPrintError * printError;
+    
+    if ([extension isEqualToString:@"prn"] ) {
+        // TODO Print PRN
+        // Call print method
+        printError = [printerDriver sendPRNFileWithURL:url];
+    }
+    else {
+        // Print normal file
+        // Call print method
+        printError = [printerDriver printImageWithURL:url settings:printerSettings];
+    }
+    
+    
     
     [printerDriver closeChannel];
     

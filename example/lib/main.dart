@@ -227,7 +227,7 @@ class _MyAppState extends State<MyApp> {
         setState(() {
           //_selectedImage = File(result.files.first.path);
         });
-        //status = await printer.printFile(result.files.single.path);
+        status = await printer.printFile(result.files.single.path);
         // Get Information about currently loaded paper
         //LabelInfo labelInfo = await printer.getLabelInfo();
         //print ("Label Info: $labelInfo");
@@ -235,7 +235,7 @@ class _MyAppState extends State<MyApp> {
         //print ("Label Param $labelParam");
 
         //status = await printer.printFileList(result.paths);
-        status = await printer.printPdfFile(result.paths.first, 2);
+        //status = await printer.printPdfFile(result.paths.first, 2);
 
       } else {
         // User canceled the picker
