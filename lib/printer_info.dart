@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 
 import "label_info.dart";
 import 'bluetooth_preference.dart';
@@ -2458,6 +2459,12 @@ class BLEPrinter {
     return "{localName: $localName}";
   }
 
+  @override
+  int get hashCode => localName.hashCode;
+
+  @override
+  bool operator ==(Object other) => other is BLEPrinter && localName == other.localName;
+
 }
 
 class Printer {
@@ -3079,6 +3086,8 @@ class Printer {
   /// same network.
   Future<List<NetPrinter>> getNetPrinters(List<String> modelName) async {
 
+    // TODO If on iOS don't call the platform, do it at the flutter layer.
+
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
@@ -3142,6 +3151,30 @@ class Printer {
   /// Discover printers which are connectable via BLE. Available
   /// on Android 5.0 or later.
   Future<List<BLEPrinter>> getBLEPrinters(int timeout) async {
+
+    String platform = await platformVersion;
+
+    if (platform.startsWith("iOS")) {
+      //BLE Scanning
+      FlutterBlue flutterBlue = FlutterBlue.instance;
+
+      // Start scanning
+      flutterBlue.startScan(withServices: [Guid("A76EB9E0-F3AC-4990-84CF-3A94D2426B2B")], timeout: Duration(microseconds: timeout));
+
+      Set<BLEPrinter> foundDevices = {};
+      // Listen to scan results
+      var subscription = flutterBlue.scanResults.listen((results) {
+        for (ScanResult r in results) {
+          BLEPrinter found = BLEPrinter(localName: r.device.name);
+          if (!foundDevices.contains(found)) {
+            foundDevices.add(found);
+          }
+        }
+      });
+
+      return await Future.delayed(Duration(microseconds: timeout), () => foundDevices.toList());
+    }
+
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),

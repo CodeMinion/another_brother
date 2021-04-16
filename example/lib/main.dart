@@ -185,7 +185,7 @@ class _MyAppState extends State<MyApp> {
       printInfo.isAutoCut = true;
       printInfo.rotate180 = false;
       printInfo.port = Port.BLE;
-      printInfo.setLocalName("RJ-4250WB_5113");
+      //printInfo.setLocalName("RJ-4250WB_5113");
       //printInfo.port = Port.BLUETOOTH;
       //printInfo.macAddress = "795B8714-AC40-6FFE-C8D0-4FFF6D67D056";
       //printInfo.setLocalName("RJ-4250WB_5113");
@@ -206,6 +206,14 @@ class _MyAppState extends State<MyApp> {
       // Set the printer info so we can use the SDK to get the printers.
       await printer.setPrinterInfo(printInfo);
 
+      // Get a list of printers with my model available in the network.
+      List<BLEPrinter> printers = await printer.getBLEPrinters(3000);
+
+      // Get the BT name from the first printer found.
+      printInfo.setLocalName(printers.single.localName);
+
+      printer.setPrinterInfo(printInfo);
+
       PictureRecorder recorder = PictureRecorder();
       Canvas c = Canvas(recorder);
       Paint paint = new Paint();
@@ -213,10 +221,11 @@ class _MyAppState extends State<MyApp> {
       Rect bounds = new Rect.fromLTWH(0, 0, 300, 100);
       c.drawRect(bounds, paint);
       var picture = await recorder.endRecording().toImage(300, 100);
-      //PrinterStatus status = await printer.printImage(picture);
+      PrinterStatus status = await printer.printImage(picture);
 
       //FilePickerResult result = await FilePicker.platform.pickFiles();
 
+      /*
       FilePickerResult result = await FilePicker.platform.pickFiles(allowMultiple: true,
           type: FileType.custom,
           allowedExtensions: ['jpg', 'pdf', 'png']);
@@ -243,6 +252,8 @@ class _MyAppState extends State<MyApp> {
         // User canceled the picker
       }
 
+       */
+
 
   }
   Future<PrinterStatus> printImageBluetooth() async {
@@ -252,16 +263,24 @@ class _MyAppState extends State<MyApp> {
     FlutterBlue flutterBlue = FlutterBlue.instance;
 
     // Start scanning
-    flutterBlue.startScan(timeout: Duration(seconds: 4));
+    flutterBlue.startScan(withServices: [Guid("A76EB9E0-F3AC-4990-84CF-3A94D2426B2B")], timeout: Duration(seconds: 4));
 
+    Set<BLEPrinter> foundDevices = {};
     // Listen to scan results
     var subscription = flutterBlue.scanResults.listen((results) {
       // do something with scan results
       for (ScanResult r in results) {
         print('${r.device.name} found! rssi: ${r.device.id.id}');
+
+        BLEPrinter found = BLEPrinter(localName: r.device.name);
+        if (!foundDevices.contains(found)) {
+          foundDevices.add(found);
+        }
       }
     });
 
+    List<BLEPrinter> foundPrinters = await Future.delayed(Duration(seconds: 4), () => foundDevices.toList());
+    print("Scan Finished - Printers: $foundPrinters");
     // Stop scanning
     flutterBlue.stopScan();
 
@@ -302,7 +321,7 @@ class _MyAppState extends State<MyApp> {
       setState(() {
         _selectedImage = File(result.files.single.path);
       });
-      status = await printer.printFile(result.files.single.path);
+      //status = await printer.printFile(result.files.single.path);
       // Get Information about currently loaded paper
       //LabelInfo labelInfo = await printer.getLabelInfo();
       //print ("Label Info: $labelInfo");
