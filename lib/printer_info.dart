@@ -1,9 +1,10 @@
-import 'dart:ffi';
+import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 
 import "label_info.dart";
 import 'bluetooth_preference.dart';
@@ -299,6 +300,22 @@ class Model {
       return this._series == PrinterSeries.QL1115_LABEL_PRINTER
           ? QL1115.ordinalFromID(index)
           : 255;
+    }
+  }
+
+  ALabelName getLabelName(int index) {
+    if (this._series == PrinterSeries.PT3_LABEL_PRINTER) {
+      return PT3.fromIndex(index);
+    } else if (this._series == PrinterSeries.PT_LABEL_PRINTER) {
+      return PT.fromIndex(index);
+    } else if (this._series == PrinterSeries.QL700_LABEL_PRINTER) {
+      return QL700.fromIndex(index);
+    } else if (this._series == PrinterSeries.QL1100_LABEL_PRINTER) {
+      return QL1100.fromIndex(index);
+    } else {
+      return this._series == PrinterSeries.QL1115_LABEL_PRINTER
+          ? QL1115.fromIndex(index)
+          : QL700.UNSUPPORT;
     }
   }
 
@@ -1382,6 +1399,7 @@ class PrinterInfo {
 
   CustomPaperInfo? customPaperInfo;
   int labelNameIndex;
+  ALabelName _labelName;
   bool pjCarbon;
   int pjDensity;
   PjFeedMode pjFeedMode;
@@ -1401,7 +1419,6 @@ class PrinterInfo {
   bool mode9;
   PrintQuality printQuality;
   bool mirrorPrint;
-
   TimeoutSetting timeout = new TimeoutSetting();
   bool dashLine;
   bool isLabelEndCut;
@@ -1472,7 +1489,8 @@ class PrinterInfo {
       this.banishMargin = false,
       this.useCopyCommandInTemplatePrint = false}):
         this.printerModel = printerModel == null ?  Model.PJ_663 : printerModel,
-  this._lastConnectedAddress = "", this._localName = "";
+  this._lastConnectedAddress = "", this._localName = "",
+        _labelName = QL700.W62;
 
   String getLastConnectedAddress() {
     return this._lastConnectedAddress;
@@ -1614,7 +1632,8 @@ class PrinterInfo {
       "pjPaperKind": pjPaperKind.toMap(),
       "useLegacyHalftoneEngine": useLegacyHalftoneEngine,
       "banishMargin": banishMargin,
-      "useCopyCommandInTemplatePrint": useCopyCommandInTemplatePrint
+      "useCopyCommandInTemplatePrint": useCopyCommandInTemplatePrint,
+      "labelName": _labelName.toMap()
     };
   }
 
@@ -2440,6 +2459,46 @@ class BLEPrinter {
     return "{localName: $localName}";
   }
 
+  @override
+  int get hashCode => localName.hashCode;
+
+  @override
+  bool operator ==(Object other) => other is BLEPrinter && localName == other.localName;
+
+}
+
+// TODO Integrate with new API getBluetoothPrinters(List<String> modelNames)
+class BluetoothPrinter {
+  final String modelName;
+  final String macAddress;
+
+  BluetoothPrinter({this.modelName = "", this.macAddress = ""});
+
+  static BluetoothPrinter fromMap(Map<dynamic, dynamic> map) {
+    return BluetoothPrinter(
+        modelName: map["modelName"],
+      macAddress: map["macAddress"]
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "modelName": modelName,
+      "macAddress": macAddress
+    };
+  }
+
+  @override
+  String toString() {
+    return toMap().toString();
+  }
+
+  @override
+  int get hashCode => macAddress.hashCode;
+
+  @override
+  bool operator ==(Object other) => other is BluetoothPrinter && macAddress == other.macAddress;
+
 }
 
 class Printer {
@@ -2466,6 +2525,8 @@ class Printer {
 
   static void setUserPrinterInfo(PrinterInfo mPrinterInfo) {
     Printer.mPrinterInfo = mPrinterInfo;
+    mPrinterInfo._labelName = Printer.mPrinterInfo.printerModel.getLabelName(mPrinterInfo.labelNameIndex);
+
   }
 
   static DateTime getDate(Uint8List bytes) {
@@ -2505,6 +2566,8 @@ class Printer {
     };
 
     final Map resultMap = await _channel.invokeMethod("printFile", params);
+    print ("Received Result: $resultMap");
+
     PrinterStatus status = PrinterStatus.fromMap(resultMap);
 
     return status;
@@ -2845,6 +2908,7 @@ class Printer {
   /// Set PrinterInfo object to specify the printer and print settings.
   Future<bool> setPrinterInfo(PrinterInfo printerInfo) async {
     mPrinterInfo = printerInfo;
+    mPrinterInfo._labelName = mPrinterInfo.printerModel.getLabelName(mPrinterInfo.labelNameIndex);
     return true;
   }
 
@@ -3056,6 +3120,8 @@ class Printer {
   /// same network.
   Future<List<NetPrinter>> getNetPrinters(List<String> modelName) async {
 
+    // TODO If on iOS don't call the platform, do it at the flutter layer.
+
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
@@ -3065,6 +3131,22 @@ class Printer {
     final List<dynamic> resultList = await _channel.invokeMethod("getNetPrinters", params);
 
     final List<NetPrinter> outList = resultList.map( (netPrinter) => NetPrinter.fromMap(netPrinter)).toList();
+    return outList;
+  }
+
+
+  /// Returns the paried printers matching the model name specified.
+  Future<List<BluetoothPrinter>> getBluetoothPrinters(List<String> modelName) async {
+
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "models" : modelName,
+    };
+
+    final List<dynamic> resultList = await _channel.invokeMethod("getBluetoothPrinters", params);
+
+    final List<BluetoothPrinter> outList = resultList.map( (bluetoothPrinter) => BluetoothPrinter.fromMap(bluetoothPrinter)).toList();
     return outList;
   }
 
@@ -3119,6 +3201,29 @@ class Printer {
   /// Discover printers which are connectable via BLE. Available
   /// on Android 5.0 or later.
   Future<List<BLEPrinter>> getBLEPrinters(int timeout) async {
+
+    // TODO Consider moving this to iOS side.
+    if (Platform.isIOS) {
+      //BLE Scanning
+      FlutterBlue flutterBlue = FlutterBlue.instance;
+
+      // Start scanning
+      flutterBlue.startScan(withServices: [Guid("A76EB9E0-F3AC-4990-84CF-3A94D2426B2B")], timeout: Duration(seconds: timeout~/1000));
+
+      Set<BLEPrinter> foundDevices = {};
+      // Listen to scan results
+      var subscription = flutterBlue.scanResults.listen((results) {
+        for (ScanResult r in results) {
+          BLEPrinter found = BLEPrinter(localName: r.device.name);
+          if (!foundDevices.contains(found)) {
+            foundDevices.add(found);
+          }
+        }
+      });
+
+      return await Future.delayed(Duration(seconds: timeout~/1000), () => foundDevices.toList());
+    }
+
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
@@ -3127,7 +3232,7 @@ class Printer {
 
     final List<dynamic> resultList = await _channel.invokeMethod("getBLEPrinters", params);
 
-    final List<BLEPrinter> outList = resultList.map( (netPrinter) => BLEPrinter.fromMap(netPrinter)).toList();
+    final List<BLEPrinter> outList = resultList.map( (blePrinter) => BLEPrinter.fromMap(blePrinter)).toList();
     return outList;
   }
 
