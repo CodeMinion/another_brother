@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Looking for local tcp Bonjour service</string>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_ipp._tcp</string>
@@ -63,8 +65,8 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Need Location permission</string>
 	<key>UISupportedExternalAccessoryProtocols</key>
-    	<array>
-    		<string>com.brother.ptcbp</string>
-    	</array>
+	<array>
+		<string>com.brother.ptcbp</string>
+	</array>
 </dict>
 </plist>

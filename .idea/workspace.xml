@@ -23,22 +23,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afd4f045-3e4d-48d8-a470-2ac132de8d06" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/GetNetPrintersMethodCall.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/GetNetPrintersMethodCall.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/Method/GetNetPrintersMethodCall.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/Method/GetNetPrintersMethodCall.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/another_brother.iml" beforeDir="false" afterPath="$PROJECT_DIR$/another_brother.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/another_brother.iml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/another_brother.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/example/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/example/ios/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/example/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/example/ios/Runner/Info.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/example/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/example/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/example/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/AnotherBrotherPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/AnotherBrotherPlugin.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/BrotherUtils.h" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/BrotherUtils.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/BrotherUtils.m" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/ios/Classes/Method/BrotherUtils.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/lib/printer_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/lib/printer_info.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner/Info.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AnotherBrotherPlugin.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/printer_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/printer_info.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,22 +113,22 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="337" y="220" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1280.777@0.23.1280.777" timestamp="1618171346674" />
-    <state width="1238" height="269" key="GridCell.Tab.0.bottom" timestamp="1618538935230">
+    <state width="1238" height="237" key="GridCell.Tab.0.bottom" timestamp="1618593109781">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="269" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1618538935230" />
-    <state width="1238" height="269" key="GridCell.Tab.0.center" timestamp="1618538935230">
+    <state width="1238" height="237" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1618593109781" />
+    <state width="1238" height="237" key="GridCell.Tab.0.center" timestamp="1618593109780">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="269" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1618538935230" />
-    <state width="1238" height="269" key="GridCell.Tab.0.left" timestamp="1618538935229">
+    <state width="1238" height="237" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1618593109780" />
+    <state width="1238" height="237" key="GridCell.Tab.0.left" timestamp="1618593109779">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="269" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1618538935229" />
-    <state width="1238" height="269" key="GridCell.Tab.0.right" timestamp="1618538935230">
+    <state width="1238" height="237" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1618593109779" />
+    <state width="1238" height="237" key="GridCell.Tab.0.right" timestamp="1618593109780">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="269" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1618538935230" />
+    <state width="1238" height="237" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1618593109780" />
     <state x="332" y="44" width="638" height="735" key="find.popup" timestamp="1618177620826">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
@@ -130,22 +139,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/example/lib/main.dart</url>
-          <line>100</line>
+          <line>107</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/example/lib/main.dart</url>
-          <line>101</line>
+          <line>108</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/example/lib/main.dart</url>
-          <line>105</line>
+          <line>112</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/example/lib/main.dart</url>
-          <line>247</line>
+          <line>363</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

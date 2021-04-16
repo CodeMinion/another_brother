@@ -10,6 +10,7 @@
 
 #import <BRLMPrinterKit/BRLMPrinterKit.h>
 #import <BRLMPrinterKit/BRLMPrinterDefine.h>
+#import <BRLMPrinterKit/BRPtouchPrinterKit.h>
 
 
 @interface LabelName : NSObject
@@ -75,6 +76,10 @@
 + (NSDictionary<NSString *, NSObject *> *) errorCodeToMapWithValue:(BRLMPrintErrorCode)error;
 
 + (NSDictionary<NSString *, NSObject *> *) printerStatusToMapWithError:(BRLMPrintErrorCode)error status:(BRLMPrinterStatus *) status;
+
++ (NSDictionary<NSString *, NSObject *> *) bRPtouchDeviceInfoToNetPrinterMap:(BRPtouchDeviceInfo *) deviceInfo;
+
++ (NSDictionary<NSString *, NSObject *> *) bRPtouchDeviceInfoToBlePrinterMap:(BRPtouchDeviceInfo *) deviceInfo;
 
 + (BRLMCustomPaperSize *) customPaperInfoFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 

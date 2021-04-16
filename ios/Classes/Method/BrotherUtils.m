@@ -1233,6 +1233,29 @@
     return dartPrintStatus;
 }
 
++ (NSDictionary<NSString *,NSObject *> *)bRPtouchDeviceInfoToNetPrinterMap:(BRPtouchDeviceInfo *)deviceInfo {
+    
+    NSDictionary<NSString *, NSObject *> * dartNetPrinter = @{
+        @"modelName": [deviceInfo strModelName],
+              @"serNo": [deviceInfo strSerialNumber],
+              @"ipAddress": [deviceInfo strIPAddress],
+              @"macAddress": [deviceInfo strMACAddress],
+              @"nodeName": [deviceInfo strNodeName],
+              @"location": [deviceInfo strLocation]
+    };
+    
+    return dartNetPrinter;
+}
+
++ (NSDictionary<NSString *,NSObject *> *)bRPtouchDeviceInfoToBlePrinterMap:(BRPtouchDeviceInfo *)deviceInfo {
+    
+    NSDictionary<NSString *, NSObject *> * dartBlePrinter = @{
+        @"localName": [deviceInfo strBLEAdvertiseLocalName]
+    };
+    
+    return dartBlePrinter;
+}
+
 
 @end
 

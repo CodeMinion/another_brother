@@ -1,4 +1,4 @@
-import 'dart:ffi';
+import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 import 'dart:async';
@@ -2467,6 +2467,40 @@ class BLEPrinter {
 
 }
 
+// TODO Integrate with new API getBluetoothPrinters(List<String> modelNames)
+class BluetoothPrinter {
+  final String modelName;
+  final String macAddress;
+
+  BluetoothPrinter({this.modelName = "", this.macAddress = ""});
+
+  static BluetoothPrinter fromMap(Map<dynamic, dynamic> map) {
+    return BluetoothPrinter(
+        modelName: map["modelName"],
+      macAddress: map["macAddress"]
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "modelName": modelName,
+      "macAddress": macAddress
+    };
+  }
+
+  @override
+  String toString() {
+    return toMap().toString();
+  }
+
+  @override
+  int get hashCode => macAddress.hashCode;
+
+  @override
+  bool operator ==(Object other) => other is BluetoothPrinter && macAddress == other.macAddress;
+
+}
+
 class Printer {
 
   static const MethodChannel _channel = const MethodChannel('another_brother');
@@ -3152,14 +3186,13 @@ class Printer {
   /// on Android 5.0 or later.
   Future<List<BLEPrinter>> getBLEPrinters(int timeout) async {
 
-    String platform = await platformVersion;
-
-    if (platform.startsWith("iOS")) {
+    // TODO Consider moving this to iOS side.
+    if (Platform.isIOS) {
       //BLE Scanning
       FlutterBlue flutterBlue = FlutterBlue.instance;
 
       // Start scanning
-      flutterBlue.startScan(withServices: [Guid("A76EB9E0-F3AC-4990-84CF-3A94D2426B2B")], timeout: Duration(microseconds: timeout));
+      flutterBlue.startScan(withServices: [Guid("A76EB9E0-F3AC-4990-84CF-3A94D2426B2B")], timeout: Duration(seconds: timeout~/1000));
 
       Set<BLEPrinter> foundDevices = {};
       // Listen to scan results
@@ -3172,7 +3205,7 @@ class Printer {
         }
       });
 
-      return await Future.delayed(Duration(microseconds: timeout), () => foundDevices.toList());
+      return await Future.delayed(Duration(seconds: timeout~/1000), () => foundDevices.toList());
     }
 
     var params = {
@@ -3183,7 +3216,7 @@ class Printer {
 
     final List<dynamic> resultList = await _channel.invokeMethod("getBLEPrinters", params);
 
-    final List<BLEPrinter> outList = resultList.map( (netPrinter) => BLEPrinter.fromMap(netPrinter)).toList();
+    final List<BLEPrinter> outList = resultList.map( (blePrinter) => BLEPrinter.fromMap(blePrinter)).toList();
     return outList;
   }
 

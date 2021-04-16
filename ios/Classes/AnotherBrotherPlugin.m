@@ -17,6 +17,7 @@
 #import "Method/PrintPdfFileMethodCall.h"
 #import "Method/CancelMethodCall.h"
 #import "Method/GetPrinterStatusMethodCall.h"
+#import "Method/GetNetPrintersMethodCall.h"
 
 /*
 @implementation AnotherBrotherPlugin
@@ -29,6 +30,7 @@
 
 
 @implementation AnotherBrotherPlugin
+
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
   FlutterMethodChannel* channel = [FlutterMethodChannel methodChannelWithName:@"another_brother" binaryMessenger:[registrar messenger]];
     AnotherBrotherPlugin* instance = [AnotherBrotherPlugin new];
@@ -56,6 +58,11 @@
   }
   else if ([[GetPrinterStatusMethodCall METHOD_NAME] isEqualToString:call.method]) {
       [[[GetPrinterStatusMethodCall alloc] initWithCall:call result:result] execute];
+  }
+  else if ([[GetNetPrintersMethodCall METHOD_NAME] isEqualToString:call.method]){
+      //[[[GetNetPrintersMethodCall alloc] initWithCall:call result:result] execute];
+      _lastNetPrinterCall = [[GetNetPrintersMethodCall alloc] initWithCall:call result:result];
+      [(GetNetPrintersMethodCall*)_lastNetPrinterCall execute];
   }
   else {
       result(FlutterMethodNotImplemented);

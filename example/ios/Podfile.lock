@@ -2,6 +2,8 @@ PODS:
   - another_brother (0.0.1):
     - BRLMPrinterKit
     - Flutter
+  - bonsoir (0.1.3):
+    - Flutter
   - BRLMPrinterKit (4.0.2.1)
   - DKImagePickerController/Core (4.3.2):
     - DKImagePickerController/ImageDataManager
@@ -44,17 +46,27 @@ PODS:
   - flutter_blue/Protos (0.0.1):
     - Flutter
     - Protobuf (~> 3.11.4)
+  - flutter_nsd (0.0.1):
+    - Flutter
+  - mdns_plugin (0.0.1):
+    - Flutter
   - Protobuf (3.11.4)
   - SDWebImage (5.11.0):
     - SDWebImage/Core (= 5.11.0)
   - SDWebImage/Core (5.11.0)
   - SwiftyGif (5.4.0)
+  - wifi_info_flutter (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - another_brother (from `.symlinks/plugins/another_brother/ios`)
+  - bonsoir (from `.symlinks/plugins/bonsoir/ios`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - Flutter (from `Flutter`)
   - flutter_blue (from `.symlinks/plugins/flutter_blue/ios`)
+  - flutter_nsd (from `.symlinks/plugins/flutter_nsd/ios`)
+  - mdns_plugin (from `.symlinks/plugins/mdns_plugin/ios`)
+  - wifi_info_flutter (from `.symlinks/plugins/wifi_info_flutter/ios`)
 
 SPEC REPOS:
   trunk:
@@ -68,24 +80,36 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   another_brother:
     :path: ".symlinks/plugins/another_brother/ios"
+  bonsoir:
+    :path: ".symlinks/plugins/bonsoir/ios"
   file_picker:
     :path: ".symlinks/plugins/file_picker/ios"
   Flutter:
     :path: Flutter
   flutter_blue:
     :path: ".symlinks/plugins/flutter_blue/ios"
+  flutter_nsd:
+    :path: ".symlinks/plugins/flutter_nsd/ios"
+  mdns_plugin:
+    :path: ".symlinks/plugins/mdns_plugin/ios"
+  wifi_info_flutter:
+    :path: ".symlinks/plugins/wifi_info_flutter/ios"
 
 SPEC CHECKSUMS:
   another_brother: d81929220683ec2e9c1d66f9c4c190300e26c599
+  bonsoir: 212526c08dfb6e5c2ca6f708ea0680aa00e4a237
   BRLMPrinterKit: 79ca593275bdae5309c8ee93674df2e5177a1b52
   DKImagePickerController: b5eb7f7a388e4643264105d648d01f727110fc3d
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   file_picker: 3e6c3790de664ccf9b882732d9db5eaf6b8d4eb1
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   flutter_blue: eeb381dc4727a0954dede73515f683865494b370
+  flutter_nsd: e945908005778ba9e7466b7d4dc9ea1c758022d4
+  mdns_plugin: f678ac538ece5a95490ede585dfa6b46aaaac977
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   SDWebImage: 7acbb57630ac7db4a495547fb73916ff3e432f6b
   SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
+  wifi_info_flutter: 55d4c2469034f5b5c38063ccefa62f708a503a2b
 
 PODFILE CHECKSUM: a75497545d4391e2d394c3668e20cfb1c2bbd4aa
 

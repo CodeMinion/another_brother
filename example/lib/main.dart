@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:another_brother/label_info.dart';
 import 'package:another_brother/printer_info.dart';
+import 'package:bonsoir/bonsoir.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,12 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:another_brother/another_brother.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter_nsd/flutter_nsd.dart';
+import 'package:mdns_plugin/mdns_plugin.dart';
+import 'package:multicast_dns/multicast_dns.dart';
+
+import 'package:ping_discover_network/ping_discover_network.dart';
+import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 
 //import 'package:flutter_scan_bluetooth/flutter_scan_bluetooth.dart';
 // To add platforms, run `flutter create -t plugin --platforms <platforms> .` under another_brother.
@@ -176,9 +183,115 @@ class _MyAppState extends State<MyApp> {
     //return PrinterStatus();
   }
 
+  Future sleep() {
+    return new Future.delayed(const Duration(seconds: 50), () => "5");
+  }
+
   Future<PrinterStatus> printBle() async {
 
-      var printer = new Printer();
+    /*
+    final String ip =  await WifiInfo().getWifiIP();
+    final String subnet = ip.substring(0, ip.lastIndexOf('.'));
+    final int port = 80;
+
+    final stream = NetworkAnalyzer.discover2(subnet, port);
+    stream.listen((NetworkAddress addr) {
+      if (addr.exists) {
+        print('Found device: ${addr.ip}');
+      }
+    });
+
+     */
+
+
+    /*
+    var reusePort = false;
+    if (Platform.isIOS) {
+      reusePort = true;
+    }
+    const String name = '_ipp._tcp';
+    // https://github.com/flutter/flutter/issues/27346#issuecomment-594021847
+    var factory = (dynamic host, int port,
+        {bool reuseAddress, bool reusePort, int ttl}) {
+      return RawDatagramSocket.bind(host, port, reuseAddress: true, reusePort: reusePort, ttl: 255);
+    };
+
+    var client = MDnsClient(rawDatagramSocketFactory: factory);
+    //final MDnsClient client = MDnsClient();
+    await client.start();
+
+    // Get the PTR recod for the service.
+    await for (PtrResourceRecord ptr in client
+        .lookup<PtrResourceRecord>(ResourceRecordQuery.serverPointer(name))) {
+      await for (SrvResourceRecord srv in client.lookup<SrvResourceRecord>(
+          ResourceRecordQuery.service(ptr.domainName))) {
+        String model =
+        ptr.domainName.substring(0, ptr.domainName.indexOf('._printer'));
+        print('Dart observatory instance found at '
+            '${srv.target}:${srv.port} for "$model".');
+        await for (IPAddressResourceRecord ipr in client.lookup(
+            ResourceRecordQuery.addressIPv4(srv.target))) {
+          debugPrint('Printer found at '
+              '${ipr.address} with "$model".');
+          model = "(mDNS)"+model;
+        }
+      }
+    }
+    client.stop();
+    print('Done.');
+    */
+
+    /*
+    final flutterNsd = FlutterNsd();
+
+    await flutterNsd.discoverServices('_printer._tcp');
+
+    flutterNsd.stream.listen((nsdServiceInfo) {
+      print('Discovered service name: ${nsdServiceInfo.name}');
+      print('Discovered service hostname/IP: ${nsdServiceInfo.hostname}');
+      print('Discovered service port: ${nsdServiceInfo.port}');
+
+    }, onError: (e) async {
+      print("Error: ${e.errorCode}");
+    });
+
+    await Future.delayed(Duration(seconds: 4), () {flutterNsd.stopDiscovery();});
+
+     */
+
+
+    /*
+    // This is the type of service we're looking for :
+    String type = '_printer._tcp';//'_printer._tcp';
+// Once defined, we can start the discovery :
+    BonsoirDiscovery discovery = BonsoirDiscovery(type: type);
+    await discovery.ready;
+    await discovery.start();
+
+// If you want to listen to the discovery :
+    discovery.eventStream.listen((event) {
+      print("Event $event");
+      if (event.type == BonsoirDiscoveryEventType.DISCOVERY_SERVICE_FOUND) {
+        print('Service found : ${event.service.toJson()}');
+      } else if (event.type == BonsoirDiscoveryEventType.DISCOVERY_SERVICE_LOST) {
+        print('Service lost : ${event.service.toJson()}');
+      }
+    });
+
+// Then if you want to stop the discovery :
+    await Future.delayed(Duration(seconds: 40), () async {
+      await discovery.stop();
+    });
+
+    */
+    /*
+    MDNSPlugin mdns = new MDNSPlugin(Delegate());
+    await mdns.startDiscovery("_pdl-datastream._tcp",enableUpdating: true);
+    await sleep();
+    await mdns.stopDiscovery();
+    await sleep();
+    */
+    var printer = new Printer();
       var printInfo = PrinterInfo();
       printInfo.printerModel = Model.RJ_4250WB;
       printInfo.printMode = PrintMode.FIT_TO_PAGE;
@@ -207,10 +320,13 @@ class _MyAppState extends State<MyApp> {
       await printer.setPrinterInfo(printInfo);
 
       // Get a list of printers with my model available in the network.
-      List<BLEPrinter> printers = await printer.getBLEPrinters(3000);
+      //List<BLEPrinter> printers = await printer.getBLEPrinters(3000);
+
+      List<NetPrinter> netPrinters = await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
+      print ("Net Printers Found: $netPrinters");
 
       // Get the BT name from the first printer found.
-      printInfo.setLocalName(printers.single.localName);
+      //printInfo.setLocalName(printers.single.localName);
 
       printer.setPrinterInfo(printInfo);
 
@@ -221,7 +337,7 @@ class _MyAppState extends State<MyApp> {
       Rect bounds = new Rect.fromLTWH(0, 0, 300, 100);
       c.drawRect(bounds, paint);
       var picture = await recorder.endRecording().toImage(300, 100);
-      PrinterStatus status = await printer.printImage(picture);
+      //PrinterStatus status = await printer.printImage(picture);
 
       //FilePickerResult result = await FilePicker.platform.pickFiles();
 
@@ -257,32 +373,6 @@ class _MyAppState extends State<MyApp> {
 
   }
   Future<PrinterStatus> printImageBluetooth() async {
-
-
-    //BLE Scanning
-    FlutterBlue flutterBlue = FlutterBlue.instance;
-
-    // Start scanning
-    flutterBlue.startScan(withServices: [Guid("A76EB9E0-F3AC-4990-84CF-3A94D2426B2B")], timeout: Duration(seconds: 4));
-
-    Set<BLEPrinter> foundDevices = {};
-    // Listen to scan results
-    var subscription = flutterBlue.scanResults.listen((results) {
-      // do something with scan results
-      for (ScanResult r in results) {
-        print('${r.device.name} found! rssi: ${r.device.id.id}');
-
-        BLEPrinter found = BLEPrinter(localName: r.device.name);
-        if (!foundDevices.contains(found)) {
-          foundDevices.add(found);
-        }
-      }
-    });
-
-    List<BLEPrinter> foundPrinters = await Future.delayed(Duration(seconds: 4), () => foundDevices.toList());
-    print("Scan Finished - Printers: $foundPrinters");
-    // Stop scanning
-    flutterBlue.stopScan();
 
     var printer = new Printer();
     var printInfo = PrinterInfo();
@@ -376,5 +466,28 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+}
+
+class Delegate implements MDNSPluginDelegate {
+  void onDiscoveryStarted() {
+    print("Discovery started");
+  }
+  void onDiscoveryStopped() {
+    print("Discovery stopped");
+  }
+  bool onServiceFound(MDNSService service) {
+    print("Found: $service");
+    // Always returns true which begins service resolution
+    return true;
+  }
+  void onServiceResolved(MDNSService service) {
+    print("Resolved: $service");
+  }
+  void onServiceUpdated(MDNSService service) {
+    print("Updated: $service");
+  }
+  void onServiceRemoved(MDNSService service) {
+    print("Removed: $service");
   }
 }
