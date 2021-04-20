@@ -303,7 +303,7 @@
 }
 
 
-+ (BRLMPrintSettingsResolution)printQualityFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
++ (BRLMPrintSettingsResolution)printResolutionFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
     
     NSString * name = (NSString *)[map objectForKey:@"name"];
     
@@ -321,6 +321,26 @@
     }
     
     return BRLMPrintSettingsResolutionNormal;
+}
+
++ (BRLMPrintSettingsPrintQuality)printQualityFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
+    NSString * name = (NSString *)[map objectForKey:@"name"];
+    
+    if ([@"LOW_RESOLUTION" isEqualToString:name]) {
+        return BRLMPrintSettingsPrintQualityFast;
+    }
+    else if ([@"NORMAL" isEqualToString:name]) {
+        return BRLMPrintSettingsPrintQualityBest;
+    }
+    else if ([@"DOUBLE_SPEED" isEqualToString:name]) {
+        return BRLMPrintSettingsPrintQualityFast;
+    }
+    else if ([@"HIGH_RESOLUTION" isEqualToString:name]) {
+        return BRLMPrintSettingsPrintQualityBest;
+    }
+    
+    return BRLMPrintSettingsPrintQualityBest;
+    
 }
 
 + (BRLMPrintSettingsScaleMode)printModeFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
@@ -625,13 +645,68 @@
     printerSettings.labelSize = [BrotherUtils qlLabelSizeWithName:labelName];
     printerSettings.autoCut = [[map objectForKey:@"isAutoCut"] isEqual:@(YES)];
     printerSettings.cutAtEnd = [[map objectForKey:@"isEndCut"] isEqual:@(YES)];
-    printerSettings.resolution = [BrotherUtils printQualityFromMapWithValue:dartPrintQuality];
+    printerSettings.resolution = [BrotherUtils printResolutionFromMapWithValue:dartPrintQuality];
     // TODO Extract info from map.
     //[x]labelSize
     //autoCutForEachPageCount
     //[x]autoCut
     //[x]cutAtEnd
     //[x]resolution
+    
+    
+    NSDictionary<NSString*, NSObject*> * dartPrintMode = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printMode"];
+    
+    printerSettings.scaleMode = [BrotherUtils printModeFromMapWithValue:dartPrintMode];
+    
+    printerSettings.scaleValue = [(NSNumber *)[map objectForKey:@"scaleValue"] doubleValue];
+    
+    NSDictionary<NSString*, NSObject*> * dartOrientation = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"orientation"];
+    
+    printerSettings.printOrientation = [BrotherUtils orientationFromMapWithValue:dartOrientation];
+    
+    NSDictionary<NSString*, NSObject*> * dartHalftone = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"halftone"];
+    
+    printerSettings.halftone = [BrotherUtils halftoneFromMapWithValue:dartHalftone];
+
+    NSDictionary<NSString*, NSObject*> * dartAlign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"align"];
+
+    printerSettings.hAlignment = [BrotherUtils alignFromMapWithValue:dartAlign];
+    
+    NSDictionary<NSString*, NSObject*> * dartValign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"valign"];
+    
+    printerSettings.vAlignment = [BrotherUtils vAlignFromMapWithValue:dartValign];
+
+    
+    if ([[map objectForKey:@"mode9"] isEqual:@(YES)]) {
+        printerSettings.compress = BRLMPrintSettingsCompressModeMode9;
+    }
+    else {
+        printerSettings.compress = BRLMPrintSettingsCompressModeNone;
+    }
+    
+    printerSettings.halftoneThreshold = [(NSNumber *)[map objectForKey:@"thresholdingValue"] intValue];
+    
+    
+    printerSettings.numCopies = (NSUInteger)[(NSNumber *)[map objectForKey:@"numberOfCopies"] integerValue];
+    
+    printerSettings.skipStatusCheck = [[map objectForKey:@"skipStatusCheck"] isEqual:@(YES)];
+    
+    NSDictionary<NSString*, NSObject*> * dartPrintQuality2 = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printQuality"];
+    
+    printerSettings.printQuality = [BrotherUtils printQualityFromMapWithValue:dartPrintQuality2];
+    
+    // TODO Add extra configuration
+    //[x]scaleMode @"printMode"(map)
+    //[x]scaleValue @"scaleValue" (double)
+    //[x]printOrientation @"orientation" (map)
+    //[x]halftone @"halftone" (map)
+    //[x]hAlignment @"align" (map)
+    //[x]vAlignment @"valign" (map)
+    //[x]compress ???
+    //[x]halftoneThreshold @"thresholdingValue" (int)
+    //[x]numCopies @"numberOfCopies" (int)
+    //[x]skipStatusCheck @"skipStatusCheck" (@YES/@NO type)
+    //printQuality @"printQuality" (map)
     
     return printerSettings;
 }
@@ -694,6 +769,63 @@
     
     
     //customPaperSize "customPaperInfo" TODO
+    
+    NSDictionary<NSString*, NSObject*> * dartPrintMode = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printMode"];
+    
+    printerSettings.scaleMode = [BrotherUtils printModeFromMapWithValue:dartPrintMode];
+    
+    printerSettings.scaleValue = [(NSNumber *)[map objectForKey:@"scaleValue"] doubleValue];
+    
+    NSDictionary<NSString*, NSObject*> * dartOrientation = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"orientation"];
+    
+    printerSettings.printOrientation = [BrotherUtils orientationFromMapWithValue:dartOrientation];
+    
+    NSDictionary<NSString*, NSObject*> * dartHalftone = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"halftone"];
+    
+    printerSettings.halftone = [BrotherUtils halftoneFromMapWithValue:dartHalftone];
+
+    NSDictionary<NSString*, NSObject*> * dartAlign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"align"];
+
+    printerSettings.hAlignment = [BrotherUtils alignFromMapWithValue:dartAlign];
+    
+    NSDictionary<NSString*, NSObject*> * dartValign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"valign"];
+    
+    printerSettings.vAlignment = [BrotherUtils vAlignFromMapWithValue:dartValign];
+
+    
+    if ([[map objectForKey:@"mode9"] isEqual:@(YES)]) {
+        printerSettings.compress = BRLMPrintSettingsCompressModeMode9;
+    }
+    else {
+        printerSettings.compress = BRLMPrintSettingsCompressModeNone;
+    }
+    
+    printerSettings.halftoneThreshold = [(NSNumber *)[map objectForKey:@"thresholdingValue"] intValue];
+    
+    
+    NSUInteger numberOfCopies =
+    printerSettings.numCopies = (NSUInteger)[(NSNumber *)[map objectForKey:@"numberOfCopies"] integerValue];
+    
+    printerSettings.numCopies = (NSUInteger)[(NSNumber *)[map objectForKey:@"numberOfCopies"] integerValue];
+    
+    printerSettings.skipStatusCheck = [[map objectForKey:@"skipStatusCheck"] isEqual:@(YES)];
+    
+    NSDictionary<NSString*, NSObject*> * dartPrintQuality2 = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printQuality"];
+    
+    printerSettings.printQuality = [BrotherUtils printQualityFromMapWithValue:dartPrintQuality2];
+    
+    // TODO Add extra configuration
+    //[x]scaleMode @"printMode"(map)
+    //[x]scaleValue @"scaleValue" (double)
+    //[x]printOrientation @"orientation" (map)
+    //[x]halftone @"halftone" (map)
+    //[x]hAlignment @"align" (map)
+    //[x]vAlignment @"valign" (map)
+    //[x]compress ???
+    //[x]halftoneThreshold @"thresholdingValue" (int)
+    //[x]numCopies @"numberOfCopies" (int)
+    //[x]skipStatusCheck @"skipStatusCheck" (@YES/@NO type)
+    //printQuality @"printQuality" (map)
     
     return printerSettings;
 }
@@ -905,9 +1037,63 @@
     
     printerSettings.printSpeed = [BrotherUtils pjPrintSpeedWithValue:dartPjSpeed];
     
+    
     printerSettings.usingCarbonCopyPaper = [[map objectForKey:@"pjCarbon"] isEqual:@(YES)];
     
     printerSettings.printDashLine = dashLine;
+    
+    NSDictionary<NSString*, NSObject*> * dartPrintMode = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printMode"];
+    
+    printerSettings.scaleMode = [BrotherUtils printModeFromMapWithValue:dartPrintMode];
+    
+    printerSettings.scaleValue = [(NSNumber *)[map objectForKey:@"scaleValue"] doubleValue];
+    
+    NSDictionary<NSString*, NSObject*> * dartOrientation = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"orientation"];
+    
+    printerSettings.printOrientation = [BrotherUtils orientationFromMapWithValue:dartOrientation];
+    
+    NSDictionary<NSString*, NSObject*> * dartHalftone = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"halftone"];
+    
+    printerSettings.halftone = [BrotherUtils halftoneFromMapWithValue:dartHalftone];
+
+    NSDictionary<NSString*, NSObject*> * dartAlign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"align"];
+
+    printerSettings.hAlignment = [BrotherUtils alignFromMapWithValue:dartAlign];
+    
+    NSDictionary<NSString*, NSObject*> * dartValign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"valign"];
+    
+    printerSettings.vAlignment = [BrotherUtils vAlignFromMapWithValue:dartValign];
+
+    
+    if ([[map objectForKey:@"mode9"] isEqual:@(YES)]) {
+        printerSettings.compress = BRLMPrintSettingsCompressModeMode9;
+    }
+    else {
+        printerSettings.compress = BRLMPrintSettingsCompressModeNone;
+    }
+    
+    printerSettings.halftoneThreshold = [(NSNumber *)[map objectForKey:@"thresholdingValue"] intValue];
+    
+    printerSettings.numCopies = (NSUInteger)[(NSNumber *)[map objectForKey:@"numberOfCopies"] integerValue];
+    
+    printerSettings.skipStatusCheck = [[map objectForKey:@"skipStatusCheck"] isEqual:@(YES)];
+    
+    NSDictionary<NSString*, NSObject*> * dartPrintQuality2 = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printQuality"];
+    
+    printerSettings.printQuality = [BrotherUtils printQualityFromMapWithValue:dartPrintQuality2];
+    
+    // TODO Add extra configuration
+    //[x]scaleMode @"printMode"(map)
+    //[x]scaleValue @"scaleValue" (double)
+    //[x]printOrientation @"orientation" (map)
+    //[x]halftone @"halftone" (map)
+    //[x]hAlignment @"align" (map)
+    //[x]vAlignment @"valign" (map)
+    //[x]compress ???
+    //[x]halftoneThreshold @"thresholdingValue" (int)
+    //[x]numCopies @"numberOfCopies" (int)
+    //[x]skipStatusCheck @"skipStatusCheck" (@YES/@NO type)
+    //printQuality @"printQuality" (map)
     
     return printerSettings;
 }
@@ -971,6 +1157,59 @@
     printerSettings.density = [BrotherUtils tdPrintDensityWithValue:dartRjDensity];
     printerSettings.peelLabel = peelLabel;
     
+    NSDictionary<NSString*, NSObject*> * dartPrintMode = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printMode"];
+    
+    printerSettings.scaleMode = [BrotherUtils printModeFromMapWithValue:dartPrintMode];
+    
+    printerSettings.scaleValue = [(NSNumber *)[map objectForKey:@"scaleValue"] doubleValue];
+    
+    NSDictionary<NSString*, NSObject*> * dartOrientation = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"orientation"];
+    
+    printerSettings.printOrientation = [BrotherUtils orientationFromMapWithValue:dartOrientation];
+    
+    NSDictionary<NSString*, NSObject*> * dartHalftone = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"halftone"];
+    
+    printerSettings.halftone = [BrotherUtils halftoneFromMapWithValue:dartHalftone];
+
+    NSDictionary<NSString*, NSObject*> * dartAlign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"align"];
+
+    printerSettings.hAlignment = [BrotherUtils alignFromMapWithValue:dartAlign];
+    
+    NSDictionary<NSString*, NSObject*> * dartValign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"valign"];
+    
+    printerSettings.vAlignment = [BrotherUtils vAlignFromMapWithValue:dartValign];
+
+    
+    if ([[map objectForKey:@"mode9"] isEqual:@(YES)]) {
+        printerSettings.compress = BRLMPrintSettingsCompressModeMode9;
+    }
+    else {
+        printerSettings.compress = BRLMPrintSettingsCompressModeNone;
+    }
+    
+    printerSettings.halftoneThreshold = [(NSNumber *)[map objectForKey:@"thresholdingValue"] intValue];
+    
+    printerSettings.numCopies = (NSUInteger)[(NSNumber *)[map objectForKey:@"numberOfCopies"] integerValue];
+    
+    printerSettings.skipStatusCheck = [[map objectForKey:@"skipStatusCheck"] isEqual:@(YES)];
+    
+    NSDictionary<NSString*, NSObject*> * dartPrintQuality2 = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printQuality"];
+    
+    printerSettings.printQuality = [BrotherUtils printQualityFromMapWithValue:dartPrintQuality2];
+    
+    // TODO Add extra configuration
+    //[x]scaleMode @"printMode"(map)
+    //[x]scaleValue @"scaleValue" (double)
+    //[x]printOrientation @"orientation" (map)
+    //[x]halftone @"halftone" (map)
+    //[x]hAlignment @"align" (map)
+    //[x]vAlignment @"valign" (map)
+    //[x]compress ???
+    //[x]halftoneThreshold @"thresholdingValue" (int)
+    //[x]numCopies @"numberOfCopies" (int)
+    //[x]skipStatusCheck @"skipStatusCheck" (@YES/@NO type)
+    //printQuality @"printQuality" (map)
+    
     return printerSettings;
 }
 
@@ -1001,7 +1240,7 @@
     printerSettings.autoCut = autoCut;
     printerSettings.halfCut = halfCut;
     printerSettings.specialTapePrint = specialTapePrint;
-    printerSettings.resolution = [BrotherUtils printQualityFromMapWithValue:dartResolution];
+    printerSettings.resolution = [BrotherUtils printResolutionFromMapWithValue:dartResolution];
     printerSettings.forceVanishingMargin = forceVanishingMargin;
     
     // chainPrint @"???"
