@@ -791,7 +791,7 @@
         return BRLMPJPrintSettingsPaperTypeCutSheet;
     }
     
-    return BRLMPJPrintSettingsPaperTypeRoll;
+    return BRLMPJPrintSettingsPaperTypeCutSheet;
 
 }
 
@@ -830,7 +830,7 @@
         return BRLMPJPrintSettingsFeedModeEndOfPageRetract;
     }
     
-    return BRLMPJPrintSettingsFeedModeNoFeed;
+    return BRLMPJPrintSettingsFeedModeFixedPage;
 }
 
 + (BRLMPJPrintSettingsPrintSpeed)pjPrintSpeedWithValue:(NSNumber *)pjSpeed {
@@ -870,13 +870,11 @@
 
 + (BRLMPJPrintSettings *)pjPrintSettingsFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
     
-    NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
     
-    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:dartPrintModel];
+    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
     
     BRLMPJPrintSettings * printerSettings = [[BRLMPJPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
     
-    NSDictionary<NSString *, NSObject *> * dartPaperSize = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"paperSize"];
     
     NSDictionary<NSString *, NSObject *> * dartPaperKind = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"pjPaperKind"];
     
@@ -892,7 +890,8 @@
     
     bool dashLine = [[map objectForKey:@"dashLine"] isEqual:@(YES)];
     
-    printerSettings.paperSize = [BrotherUtils pjPrinterPaperSizeFromMapWithValue:dartPaperSize];
+    printerSettings.paperSize = [BrotherUtils pjPrinterPaperSizeFromMapWithValue:map];
+    
     
     printerSettings.paperType = [BrotherUtils pjPaperKindFromMapWithValue:dartPaperKind];
     
@@ -955,9 +954,9 @@
 
 + (BRLMTDPrintSettings *)tdPrintSettingsFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
     
-    NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
+    //NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
     
-    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:dartPrintModel];
+    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
     
     NSDictionary<NSString *, NSObject *> * dartCustomPaperInfo = (NSDictionary<NSString *, NSObject *> *) [map objectForKey:@"customPaperInfo"];
     
@@ -977,9 +976,9 @@
 
 + (BRLMPTPrintSettings *)ptPrintSettingsFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
     
-    NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
+    //NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
     
-    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:dartPrintModel];
+    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
     
     NSDictionary<NSString *, NSObject *> * dartLabelName = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"labelName"];
     
@@ -1030,9 +1029,9 @@
  
 + (BRLMMWPrintSettings *)mwPrintSettingsFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
     
-    NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
+    //NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
     
-    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:dartPrintModel];
+    BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
     
     NSDictionary<NSString*, NSObject*> * dartPaperSize = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"paperSize"];
     
