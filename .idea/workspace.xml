@@ -22,6 +22,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="afd4f045-3e4d-48d8-a470-2ac132de8d06" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+=======
     <list default="true" id="afd4f045-3e4d-48d8-a470-2ac132de8d06" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/another_brother/.idea/workspace.xml" afterDir="false" />
@@ -30,11 +34,16 @@
       <change beforePath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/Method/BrotherUtils.m" afterDir="false" />
     </list>
+>>>>>>> f06b0bb206c33bb1f8f227db0dbabc7631a00d79
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Android_Wear_Round_API_23" />
+=======
+>>>>>>> f06b0bb206c33bb1f8f227db0dbabc7631a00d79
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>

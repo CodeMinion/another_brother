@@ -373,7 +373,6 @@ class _MyAppState extends State<MyApp> {
   }
   Future<PrinterStatus> printImageBluetooth() async {
 
-
     var printer = new Printer();
     var printInfo = PrinterInfo();
     printInfo.printerModel = Model.QL_1110NWB;
@@ -392,14 +391,6 @@ class _MyAppState extends State<MyApp> {
     List<BluetoothPrinter> netPrinters = await printer.getBluetoothPrinters([Model.QL_1110NWB.getName()]);
     print ("Bt Printers Found: $netPrinters");
     printInfo.macAddress = netPrinters.single.macAddress;
-
-    //List<NetPrinter> netPrinters = await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
-    //print ("Net Printers Found: $netPrinters");
-    //printInfo.ipAddress = netPrinters.single.ipAddress;
-
-    printer.setPrinterInfo(printInfo);
-
-
     /*
     var printer = new Printer();
     var printInfo = PrinterInfo();
@@ -417,7 +408,7 @@ class _MyAppState extends State<MyApp> {
     List<NetPrinter> printers = await printer.getNetPrinters([Model.PJ_773.getName()]);
     // Get the IP Address from the first printer found.
     printInfo.ipAddress = printers.single.ipAddress;
-
+*/
     printer.setPrinterInfo(printInfo);
 
     await printer.setPrinterInfo(printInfo);
