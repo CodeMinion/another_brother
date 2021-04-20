@@ -372,6 +372,7 @@ class _MyAppState extends State<MyApp> {
   }
   Future<PrinterStatus> printImageBluetooth() async {
 
+    /*
     var printer = new Printer();
     var printInfo = PrinterInfo();
     printInfo.printerModel = Model.QL_1110NWB;
@@ -389,8 +390,26 @@ class _MyAppState extends State<MyApp> {
     List<BluetoothPrinter> netPrinters = await printer.getBluetoothPrinters([Model.QL_1110NWB.getName()]);
     print ("Bt Printers Found: $netPrinters");
     printInfo.macAddress = netPrinters.single.macAddress;
+    */
 
+    var printer = new Printer();
+    var printInfo = PrinterInfo();
+    printInfo.printerModel = Model.PJ_773;
+    printInfo.printMode = PrintMode.FIT_TO_PAGE;
+    printInfo.isAutoCut = true;
+    printInfo.port = Port.NET;
+    // Set the label type.
+    printInfo.paperSize = PaperSize.A4;
 
+    // Set the printer info so we can use the SDK to get the printers.
+    await printer.setPrinterInfo(printInfo);
+
+    // Get a list of printers with my model available in the network.
+    List<NetPrinter> printers = await printer.getNetPrinters([Model.PJ_773.getName()]);
+    // Get the IP Address from the first printer found.
+    printInfo.ipAddress = printers.single.ipAddress;
+
+    printer.setPrinterInfo(printInfo);
 
     await printer.setPrinterInfo(printInfo);
 
@@ -401,16 +420,17 @@ class _MyAppState extends State<MyApp> {
     Rect bounds = new Rect.fromLTWH(0, 0, 300, 100);
     c.drawRect(bounds, paint);
     var picture = await recorder.endRecording().toImage(300, 100);
-    //PrinterStatus status = await printer.printImage(picture);
+    PrinterStatus status = await printer.printImage(picture);
 
 
-    FilePickerResult result = await FilePicker.platform.pickFiles();
+    //FilePickerResult result = await FilePicker.platform.pickFiles();
 
     //FilePickerResult result = await FilePicker.platform.pickFiles(allowMultiple: true,
     //    type: FileType.custom,
     //    allowedExtensions: ['jpg', 'pdf', 'png']);
 
 
+    /*
     PrinterStatus status = PrinterStatus();
     if(result != null) {
       setState(() {
@@ -428,7 +448,7 @@ class _MyAppState extends State<MyApp> {
     } else {
       // User canceled the picker
     }
-
+    */
 
 
     print ("Got Status: $status and Error: ${status.errorCode.getName()}");
