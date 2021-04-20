@@ -378,7 +378,7 @@ class _MyAppState extends State<MyApp> {
     printInfo.printerModel = Model.QL_1110NWB;
     printInfo.printMode = PrintMode.FIT_TO_PAGE;
     printInfo.isAutoCut = true;
-    //printInfo.port = Port.BLUETOOTH;
+    printInfo.port = Port.BLUETOOTH;
     printInfo.numberOfCopies = 2;
     //printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer BLuetooth Mac
     //printInfo.port = Port.NET;
@@ -391,6 +391,7 @@ class _MyAppState extends State<MyApp> {
     List<BluetoothPrinter> netPrinters = await printer.getBluetoothPrinters([Model.QL_1110NWB.getName()]);
     print ("Bt Printers Found: $netPrinters");
     printInfo.macAddress = netPrinters.single.macAddress;
+
     /*
     var printer = new Printer();
     var printInfo = PrinterInfo();
@@ -412,7 +413,6 @@ class _MyAppState extends State<MyApp> {
     printer.setPrinterInfo(printInfo);
 
     await printer.setPrinterInfo(printInfo);
-    */
 
     PictureRecorder recorder = PictureRecorder();
     Canvas c = Canvas(recorder);
@@ -482,8 +482,8 @@ class _MyAppState extends State<MyApp> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(onPressed: (){
-                    printBle();
-                    //printImageBluetooth();
+                    //printBle();
+                    printImageBluetooth();
                   }, child: Text("Print Bluetooth")),
                 ),
               ],
