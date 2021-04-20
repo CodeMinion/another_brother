@@ -291,6 +291,7 @@ class _MyAppState extends State<MyApp> {
       printInfo.printMode = PrintMode.FIT_TO_PAGE;
       printInfo.isAutoCut = true;
       printInfo.rotate180 = false;
+      printInfo.numberOfCopies = 2;
       printInfo.port = Port.BLE;
       //printInfo.setLocalName("RJ-4250WB_5113");
       printInfo.port = Port.BLUETOOTH;
@@ -372,13 +373,14 @@ class _MyAppState extends State<MyApp> {
   }
   Future<PrinterStatus> printImageBluetooth() async {
 
-    /*
+
     var printer = new Printer();
     var printInfo = PrinterInfo();
     printInfo.printerModel = Model.QL_1110NWB;
     printInfo.printMode = PrintMode.FIT_TO_PAGE;
     printInfo.isAutoCut = true;
-    printInfo.port = Port.BLUETOOTH;
+    //printInfo.port = Port.BLUETOOTH;
+    printInfo.numberOfCopies = 2;
     //printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer BLuetooth Mac
     //printInfo.port = Port.NET;
     //printInfo.ipAddress = "192.168.1.80"; // Printer Bluetooth Mac
@@ -390,8 +392,15 @@ class _MyAppState extends State<MyApp> {
     List<BluetoothPrinter> netPrinters = await printer.getBluetoothPrinters([Model.QL_1110NWB.getName()]);
     print ("Bt Printers Found: $netPrinters");
     printInfo.macAddress = netPrinters.single.macAddress;
-    */
 
+    //List<NetPrinter> netPrinters = await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
+    //print ("Net Printers Found: $netPrinters");
+    //printInfo.ipAddress = netPrinters.single.ipAddress;
+
+    printer.setPrinterInfo(printInfo);
+
+
+    /*
     var printer = new Printer();
     var printInfo = PrinterInfo();
     printInfo.printerModel = Model.PJ_773;
@@ -412,6 +421,7 @@ class _MyAppState extends State<MyApp> {
     printer.setPrinterInfo(printInfo);
 
     await printer.setPrinterInfo(printInfo);
+    */
 
     PictureRecorder recorder = PictureRecorder();
     Canvas c = Canvas(recorder);
@@ -481,8 +491,8 @@ class _MyAppState extends State<MyApp> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(onPressed: (){
-                    //printBle();
-                    printImageBluetooth();
+                    printBle();
+                    //printImageBluetooth();
                   }, child: Text("Print Bluetooth")),
                 ),
               ],

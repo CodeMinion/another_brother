@@ -12,7 +12,6 @@
 #import <BRLMPrinterKit/BRLMPrinterDefine.h>
 #import <BRLMPrinterKit/BRPtouchPrinterKit.h>
 
-
 @interface LabelName : NSObject
 
 @property (strong, nonatomic) NSString *name;
@@ -35,7 +34,10 @@
 
 + (BRLMPrintSettingsOrientation) orientationFromMapWithValue:(NSDictionary<NSString *, NSObject*> *) map;
 
-+ (BRLMPrintSettingsResolution) printQualityFromMapWithValue:(NSDictionary<NSString*, NSObject *> *) map;
++ (BRLMPrintSettingsResolution) printResolutionFromMapWithValue:(NSDictionary<NSString*, NSObject *> *) map;
+
++ (BRLMPrintSettingsPrintQuality) printQualityFromMapWithValue:(NSDictionary<NSString*, NSObject *> *) map;
+
 
 + (BRLMPrintSettingsScaleMode) printModeFromMapWithValue:(NSDictionary<NSString*, NSObject*> *) map;
 
