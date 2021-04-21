@@ -36,7 +36,21 @@ flutter:
         pluginClass: AnotherBrotherPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
-  # assets:
+  assets:
+    - CustomPaper/
+    - CustomPaper/CustomRJ2050Paper/
+    - CustomPaper/CustomRJ2150Paper/
+    - CustomPaper/CustomRJ3050AiPaper/
+    - CustomPaper/CustomRJ3050Paper/
+    - CustomPaper/CustomRJ3150AiPaper/
+    - CustomPaper/CustomRJ3150Paper/
+    - CustomPaper/CustomRJ4030AiPaper/
+    - CustomPaper/CustomRJ4040Paper/
+    - CustomPaper/CustomRJ4230Paper/
+    - CustomPaper/CustomRJ4250Paper/
+    - CustomPaper/CustomTD2120NPaper/
+    - CustomPaper/CustomTD2130NPaper/
+    - CustomPaper/CustomTD4550Paper/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   #
