@@ -8,6 +8,7 @@ import com.brother.ptouch.sdk.Printer
 import com.brother.ptouch.sdk.PrinterInfo
 import com.brother.ptouch.sdk.PrinterStatus
 import com.rouninlabs.another_brother.BrotherManager
+import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.*
@@ -17,7 +18,7 @@ import kotlinx.coroutines.*
  * This support both one-time as well as the standard openCommunication/print/closeCommunication
  * approach.
  */
-class UpdateBluetoothPreferenceMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
+class UpdateBluetoothPreferenceMethodCall(val flutterAssets: FlutterPlugin.FlutterAssets, val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
     companion object {
         const val METHOD_NAME = "updateBluetoothPreference"
     }
@@ -31,7 +32,7 @@ class UpdateBluetoothPreferenceMethodCall(val context: Context, val call: Method
             val dartBtPre:Map<String, Any> = call.argument<Map<String, Any>>("btPre")!!
 
             // Decoded Printer Info
-            val printInfo = printerInfofromMap(dartPrintInfo)
+            val printInfo = printerInfofromMap(context = context, flutterAssets = flutterAssets, map = dartPrintInfo)
 
             // A print request is considered one-time if there was no printer tracked with this ID.
             // this will open a new connection and close it when done.

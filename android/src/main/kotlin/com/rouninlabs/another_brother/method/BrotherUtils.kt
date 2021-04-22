@@ -8,13 +8,16 @@ import android.util.Log
 import com.brother.ptouch.sdk.*
 import com.brother.ptouch.sdk.Unit
 import com.rouninlabs.another_brother.BrotherManager
+import io.flutter.embedding.engine.plugins.FlutterPlugin
+import java.io.File
 
 const val TAG = "A-Brother"
 
-fun printerInfofromMap(map: HashMap<String, Any>): PrinterInfo {
+fun printerInfofromMap(context:Context, flutterAssets: FlutterPlugin.FlutterAssets, map: HashMap<String, Any>): PrinterInfo {
     val model: PrinterInfo.Model = modelFromMap(map["printerModel"] as Map<String, Any>)
     val timeout: TimeoutSetting = TimeoutSettingFromMap(map["timeout"] as Map<String, Any>)
     val customPaperInfo = customPaperInfoFromMap(map["customPaperInfo"] as Map<String, Any>?)
+    val binFilePath = binFilePathFromMap(context = context, flutterAssets = flutterAssets, map = map["binCustomPaper"] as Map<String, Any>?)
 
     val info: PrinterInfo = PrinterInfo().apply {
         printerModel = model
@@ -57,7 +60,7 @@ fun printerInfofromMap(map: HashMap<String, Any>): PrinterInfo {
         isHalfCut = map["isHalfCut"] as Boolean
         isSpecialTape = map["isSpecialTape"] as Boolean
         labelNameIndex = map["labelNameIndex"] as Int
-        customPaper = map["customPaper"] as String
+        customPaper = binFilePath//map["customPaper"] as String
         //this.customPaperInfo = null,
         isLabelEndCut = map["isLabelEndCut"] as Boolean
         printQuality = printQualityFromMap(map["printQuality"] as Map<String, Any>)
@@ -234,6 +237,26 @@ fun bluetoothPreferenceFromMap(map:Map<String, Any>):BluetoothPreference {
         // Note: Auth Mode is Protected in the SDK
         //authMode to AuthMode.fromMap(map["authMode"])
     }
+}
+
+fun binFilePathFromMap(context:Context, flutterAssets: FlutterPlugin.FlutterAssets, map:Map<String, Any>?):String {
+    if (map == null) {
+        return ""
+    }
+    val name: String = map["name"] as String
+    val assetPath:String = map["assetPath"] as String
+    val androidAssetPath = flutterAssets.getAssetFilePathByName(assetPath)
+    val assetManager = context.assets
+    // Copy the file so we can get the path
+    val cachePrintFile = File(context.cacheDir, "printBinTemp.bin");
+    //cachePrintFile.mkdirs()
+    assetManager.open(androidAssetPath).use {binInputStream->
+        cachePrintFile.outputStream().use { cache->
+            binInputStream.copyTo(cache)
+        }
+    }
+    val binFilePath = cachePrintFile.absolutePath
+    return binFilePath
 }
 
 fun sspFromMap(map:Map<String, Any>):BluetoothPreference.SSP {

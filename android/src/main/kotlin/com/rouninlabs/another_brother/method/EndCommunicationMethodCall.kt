@@ -3,6 +3,7 @@ package com.rouninlabs.another_brother.method
 import android.content.Context
 import com.brother.ptouch.sdk.Printer
 import com.rouninlabs.another_brother.BrotherManager
+import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.*
@@ -11,7 +12,7 @@ import kotlinx.coroutines.*
  * Command for ending a communication to a printer.
  * It will track the printer so it is available to print commands as well as close communication commands.
  */
-class EndCommunicationMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
+class EndCommunicationMethodCall(val flutterAssets: FlutterPlugin.FlutterAssets, val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
     companion object {
         const val METHOD_NAME = "endCommunication"
     }

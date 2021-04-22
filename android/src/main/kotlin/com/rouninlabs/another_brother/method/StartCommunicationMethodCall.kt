@@ -5,6 +5,7 @@ import com.brother.ptouch.sdk.Printer
 import com.brother.ptouch.sdk.PrinterInfo
 import com.brother.ptouch.sdk.PrinterStatus
 import com.rouninlabs.another_brother.BrotherManager
+import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.*
@@ -13,7 +14,7 @@ import kotlinx.coroutines.*
  * Command for starting a communication to a printer.
  * It will track the printer so it is available to print commands as well as close communication commands.
  */
-class StartCommunicationMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
+class StartCommunicationMethodCall(val flutterAssets: FlutterPlugin.FlutterAssets, val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
     companion object {
         const val METHOD_NAME = "startCommunication"
     }
@@ -26,7 +27,7 @@ class StartCommunicationMethodCall(val context: Context, val call: MethodCall, v
             val printerId: String = call.argument<String>("printerId")!!
 
             // Decoded Printer Info
-            val printInfo = printerInfofromMap(dartPrintInfo)
+            val printInfo = printerInfofromMap(context = context, flutterAssets = flutterAssets, map = dartPrintInfo)
 
             // Check if the ID is already tracked, if so we return.
             val trackedPrinter = BrotherManager.getPrinter(printerId = printerId)

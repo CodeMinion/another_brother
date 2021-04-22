@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:another_brother/custom_paper.dart';
 import 'package:another_brother/label_info.dart';
 import 'package:another_brother/printer_info.dart';
 import 'package:file_picker/file_picker.dart';
@@ -75,6 +76,10 @@ class _MyAppState extends State<MyApp> {
     printInfo.printMode = PrintMode.FIT_TO_PAGE;
     printInfo.isAutoCut = true;
 
+    printInfo.paperSize = PaperSize.CUSTOM;
+    printInfo.binCustomPaper = Paper_RJ4250WB.RD_W4in;
+
+    /*
     double width = 102.0;
     double rightMargin = 0.0;
     double leftMargin = 0.0;
@@ -86,6 +91,7 @@ class _MyAppState extends State<MyApp> {
         leftMargin,
         topMargin);
     printInfo.customPaperInfo = customPaperInfo;
+     */
     //printInfo.port = Port.NET;
     //printInfo.ipAddress = "192.168.1.80"; // Printer Bluetooth Mac
     //printInfo.port = Port.USB;
@@ -94,13 +100,13 @@ class _MyAppState extends State<MyApp> {
     //print ("Label Info $info");
 
     //printInfo.labelNameIndex = info.labelNameIndex; //QL1100.ordinalFromID(QL1100.W103.getId());
-    printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W103.getId());
+    //printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W103.getId());
 
     PrinterStatus status = PrinterStatus();
 
     //await printer.setPrinterInfo(printInfo);
     //status  = await printer.printImage(picture);
-    print ("Got Status: $status and Error: ${status.errorCode.getName()}");
+    //print ("Got Status: $status and Error: ${status.errorCode.getName()}");
 
 
     //LabelInfo info = await printer.getLabelInfo();
@@ -148,6 +154,7 @@ class _MyAppState extends State<MyApp> {
 
     }
 
+    /*
     FilePickerResult result = await FilePicker.platform.pickFiles(
         allowMultiple: true,
         type: FileType.custom,
@@ -166,7 +173,7 @@ class _MyAppState extends State<MyApp> {
     } else {
       // User canceled the picker
     }
-
+*/
 
     //bool closed = await printer.endCommunication();
 

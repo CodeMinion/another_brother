@@ -7,6 +7,7 @@ import com.brother.ptouch.sdk.Printer
 import com.brother.ptouch.sdk.PrinterInfo
 import com.brother.ptouch.sdk.PrinterStatus
 import com.rouninlabs.another_brother.BrotherManager
+import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.*
@@ -16,7 +17,7 @@ import kotlinx.coroutines.*
  * This support both one-time as well as the standard openCommunication/print/closeCommunication
  * approach.
  */
-class UpdatePrinterSettingsMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
+class UpdatePrinterSettingsMethodCall(val flutterAssets: FlutterPlugin.FlutterAssets, val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
     companion object {
         const val METHOD_NAME = "updatePrinterSettings"
     }
@@ -30,7 +31,7 @@ class UpdatePrinterSettingsMethodCall(val context: Context, val call: MethodCall
             val dartSettings:Map<Map<String, Any>, String> = call.argument("settings")!!
 
             // Decoded Printer Info
-            val printInfo = printerInfofromMap(dartPrintInfo)
+            val printInfo = printerInfofromMap(context = context, flutterAssets = flutterAssets, map = dartPrintInfo)
 
             // A print request is considered one-time if there was no printer tracked with this ID.
             // this will open a new connection and close it when done.

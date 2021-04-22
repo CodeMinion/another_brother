@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
+import 'custom_paper.dart';
 import "label_info.dart";
 import 'bluetooth_preference.dart';
 
@@ -1396,6 +1397,7 @@ class PrinterInfo {
   bool rawMode;
   PaperSize paperSize;
   String customPaper;
+  ACustomPaper? binCustomPaper;
 
   CustomPaperInfo? customPaperInfo;
   int labelNameIndex;
@@ -1473,6 +1475,7 @@ class PrinterInfo {
       this.isSpecialTape = false,
       this.labelNameIndex = -1,
       this.customPaper = "",
+      this.binCustomPaper = null,
       this.customPaperInfo = null,
       this.isLabelEndCut = false,
       this.printQuality = PrintQuality.NORMAL,
@@ -1556,6 +1559,7 @@ class PrinterInfo {
         isSpecialTape: map["isSpecialTape"],
         labelNameIndex: map["labelNameIndex"],
         customPaper: map["customPaper"],
+        //binCustomPaper: map["binCustomPaper"],
         customPaperInfo: CustomPaperInfo.fromMap(map["customPaperInfo"]),
         isLabelEndCut: map["isLabelEndCut"],
         printQuality: PrintQuality.fromMap(map["printQuality"]),
@@ -1618,6 +1622,7 @@ class PrinterInfo {
       "isSpecialTape": isSpecialTape,
       "labelNameIndex": labelNameIndex,
       "customPaper": customPaper,
+      "binCustomPaper": binCustomPaper != null ? binCustomPaper?.toMap() : null,
       "customPaperInfo": this.customPaperInfo?.toMap(),
       "isLabelEndCut": isLabelEndCut,
       "printQuality": printQuality.toMap(),

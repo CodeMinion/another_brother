@@ -37,20 +37,20 @@ flutter:
 
   # To add assets to your plugin package, add an assets section, like this:
   assets:
-    - CustomPaper/
-    - CustomPaper/CustomRJ2050Paper/
-    - CustomPaper/CustomRJ2150Paper/
-    - CustomPaper/CustomRJ3050AiPaper/
-    - CustomPaper/CustomRJ3050Paper/
-    - CustomPaper/CustomRJ3150AiPaper/
-    - CustomPaper/CustomRJ3150Paper/
-    - CustomPaper/CustomRJ4030AiPaper/
-    - CustomPaper/CustomRJ4040Paper/
-    - CustomPaper/CustomRJ4230Paper/
-    - CustomPaper/CustomRJ4250Paper/
-    - CustomPaper/CustomTD2120NPaper/
-    - CustomPaper/CustomTD2130NPaper/
-    - CustomPaper/CustomTD4550Paper/
+    - custom_paper/test.bin
+    - custom_paper/CustomRJ2050Paper/
+    - custom_paper/CustomRJ2150Paper/
+    - custom_paper/CustomRJ3050AiPaper/
+    - custom_paper/CustomRJ3050Paper/
+    - custom_paper/CustomRJ3150AiPaper/
+    - custom_paper/CustomRJ3150Paper/
+    - custom_paper/CustomRJ4030AiPaper/
+    - custom_paper/CustomRJ4040Paper/
+    - custom_paper/CustomRJ4230Paper/
+    - custom_paper/CustomRJ4250Paper/
+    - custom_paper/CustomTD2120NPaper/
+    - custom_paper/CustomTD2130NPaper/
+    - custom_paper/CustomTD4550Paper/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   #

@@ -8,6 +8,7 @@ import com.brother.ptouch.sdk.PrinterInfo
 import com.brother.ptouch.sdk.PrinterStatus
 import com.brother.ptouch.sdk.TemplateInfo
 import com.rouninlabs.another_brother.BrotherManager
+import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.*
@@ -17,7 +18,7 @@ import kotlinx.coroutines.*
  * This support both one-time as well as the standard openCommunication/print/closeCommunication
  * approach.
  */
-class GetTemplateListMethodCall(val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
+class GetTemplateListMethodCall(val flutterAssets: FlutterPlugin.FlutterAssets, val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
     companion object {
         const val METHOD_NAME = "getTemplateList"
     }
@@ -30,7 +31,7 @@ class GetTemplateListMethodCall(val context: Context, val call: MethodCall, val 
             val printerId: String = call.argument<String>("printerId")!!
 
             // Decoded Printer Info
-            val printInfo = printerInfofromMap(dartPrintInfo)
+            val printInfo = printerInfofromMap(context = context, flutterAssets = flutterAssets, map = dartPrintInfo)
 
             // A print request is considered one-time if there was no printer tracked with this ID.
             // this will open a new connection and close it when done.
