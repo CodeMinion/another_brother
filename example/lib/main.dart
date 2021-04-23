@@ -77,7 +77,7 @@ class _MyAppState extends State<MyApp> {
     printInfo.isAutoCut = true;
 
     printInfo.paperSize = PaperSize.CUSTOM;
-    printInfo.binCustomPaper = BinPaper_RJ4250WB.RD_W4in;
+    printInfo.binCustomPaper = BinPaper_RJ4250.RD_W4in;
 
     /*
     double width = 102.0;
