@@ -301,7 +301,7 @@ class _MyAppState extends State<MyApp> {
       printInfo.numberOfCopies = 2;
       printInfo.port = Port.BLE;
       //printInfo.setLocalName("RJ-4250WB_5113");
-      printInfo.port = Port.BLUETOOTH;
+      //printInfo.port = Port.BLUETOOTH;
       //printInfo.macAddress = "795B8714-AC40-6FFE-C8D0-4FFF6D67D056";
       //printInfo.setLocalName("RJ-4250WB_5113");
 
@@ -322,16 +322,16 @@ class _MyAppState extends State<MyApp> {
       await printer.setPrinterInfo(printInfo);
 
       // Get a list of printers with my model available in the network.
-      //List<BLEPrinter> printers = await printer.getBLEPrinters(3000);
+      List<BLEPrinter> printers = await printer.getBLEPrinters(3000);
       // Get the BT name from the first printer found.
-      //printInfo.setLocalName(printers.single.localName);
+      printInfo.setLocalName(printers.single.localName);
 
       //List<NetPrinter> netPrinters = await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
       //print ("Net Printers Found: $netPrinters");
 
-      List<BluetoothPrinter> netPrinters = await printer.getBluetoothPrinters([Model.RJ_4250WB.getName()]);
-      print ("Bt Printers Found: $netPrinters");
-      printInfo.macAddress = netPrinters.single.macAddress;
+      //List<BluetoothPrinter> netPrinters = await printer.getBluetoothPrinters([Model.RJ_4250WB.getName()]);
+      //print ("Bt Printers Found: $netPrinters");
+      //printInfo.macAddress = netPrinters.single.macAddress;
 
 
       printer.setPrinterInfo(printInfo);

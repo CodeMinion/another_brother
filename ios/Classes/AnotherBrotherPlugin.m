@@ -30,14 +30,19 @@
 */
 
 #import "AnotherBrotherPlugin.h"
-
+#import "Method/BrotherUtils.h"
 
 @implementation AnotherBrotherPlugin
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
+    
+    // Track the registrar to get Asstes from.
+    [BrotherUtils setRegistrarFlutter:registrar];
+    
   FlutterMethodChannel* channel = [FlutterMethodChannel methodChannelWithName:@"another_brother" binaryMessenger:[registrar messenger]];
     AnotherBrotherPlugin* instance = [AnotherBrotherPlugin new];
   [registrar addMethodCallDelegate:instance channel:channel];
+    
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {

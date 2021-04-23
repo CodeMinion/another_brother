@@ -11,6 +11,18 @@
 
 @implementation BrotherUtils
 
+static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
+
++ (NSObject<FlutterPluginRegistrar>*) registrarFlutter {
+  return _registrarFlutter;
+}
+
++ (void)setRegistrarFlutter:(NSObject<FlutterPluginRegistrar>*)newRegistrar {
+  if (newRegistrar != _registrarFlutter) {
+      _registrarFlutter = newRegistrar;//[newRegistrar copy];
+  }
+}
+
 + (BRLMChannelType) portFromMapWithValue:(NSMutableDictionary<NSString *, NSObject *>*) map {
     NSString * name = (NSString *) [map objectForKey:@"name"];
     if ([@"BLUETOOTH" isEqualToString:name]) {
@@ -408,7 +420,25 @@
                                           rightMargin);
 }
 
-+ (BRLMCustomPaperSize *)customPaperInfoFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
++ (BRLMCustomPaperSize *)customPaperInfoFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map binCustomPaperMap:(NSDictionary<NSString *, NSObject *> *)binCustomPaperMap{
+    
+    if (![binCustomPaperMap isEqual:[NSNull null]]) {
+        // TODO Get Asset key
+        NSString * assetFile = (NSString *)[binCustomPaperMap objectForKey:@"assetPath"];
+        NSString* key = [[BrotherUtils registrarFlutter] lookupKeyForAsset:assetFile];
+        NSString* path = [[NSBundle mainBundle] pathForResource:key ofType:nil];
+        
+        NSURL * customPaperFileUrl = [NSURL fileURLWithPath:path];
+        
+        BRLMCustomPaperSize *customPaperSize = [[BRLMCustomPaperSize alloc] initWithFile:customPaperFileUrl];
+        return customPaperSize;
+            
+    }
+    
+    if ([map isEqual:[NSNull null]] ) {
+        // No bin file or custom paper was passed.
+        return NULL;
+    }
     
     NSDictionary<NSString*, NSObject *> * dartPaperKind = (NSDictionary<NSString*, NSObject *> *)[map objectForKey:@"paperKind"];
     
@@ -426,11 +456,14 @@
     float gapLength = [(NSNumber *)[map objectForKey:@"labelPitch"] floatValue];
     float markPosition = [(NSNumber *)[map objectForKey:@"markPosition"] floatValue];
     
+    
     if (paperKind == BRLMCustomPaperSizePaperKindDieCut) {
         return [[BRLMCustomPaperSize alloc] initDieCutWithTapeWidth:tapeWidth tapeLength:tapeLength margins:margins gapLength:gapLength unitOfLength:unit];
     }
     else if (paperKind == BRLMCustomPaperSizePaperKindByFile) {
-        // TODO Add support for binary file.
+        // Note: This is handled with the asset files as the start of the method.
+        //[[BRLMCustomPaperSize alloc] initWithFile:<#(nonnull NSURL *)#>]
+        
     }
     else if (paperKind == BRLMCustomPaperSizePaperKindMarkRoll) {
         return [[BRLMCustomPaperSize alloc] initMarkRollWithTapeWidth:tapeWidth tapeLength:tapeLength margins:margins markPosition:markPosition markHeight:markHeight unitOfLength:unit];
@@ -754,9 +787,11 @@
     BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
     
      
+    NSDictionary<NSString*, NSObject*> * dartBinCustomPaperMap = (NSDictionary<NSString*, NSObject*> *) [map objectForKey:@"binCustomPaper"];
+    
     NSDictionary<NSString*, NSObject*> * dartCustomPaperInfo = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"customPaperInfo"];
     
-    BRLMCustomPaperSize * customPaperSize = [BrotherUtils customPaperInfoFromMapWithValue:dartCustomPaperInfo];
+    BRLMCustomPaperSize * customPaperSize = [BrotherUtils customPaperInfoFromMapWithValue:dartCustomPaperInfo binCustomPaperMap:dartBinCustomPaperMap];
     
     BRLMRJPrintSettings * printerSettings = [[BRLMRJPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
     
@@ -1152,7 +1187,9 @@
     
     BRLMTDPrintSettings * printerSettings = [[BRLMTDPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
     
-    printerSettings.customPaperSize = [BrotherUtils customPaperInfoFromMapWithValue:dartCustomPaperInfo];
+    NSDictionary<NSString*, NSObject*> * dartBinCustomPaperMap = (NSDictionary<NSString*, NSObject*> *) [map objectForKey:@"binCustomPaper"];
+    
+    printerSettings.customPaperSize = [BrotherUtils customPaperInfoFromMapWithValue:dartCustomPaperInfo binCustomPaperMap:dartBinCustomPaperMap];
     
     printerSettings.density = [BrotherUtils tdPrintDensityWithValue:dartRjDensity];
     printerSettings.peelLabel = peelLabel;

@@ -8,6 +8,7 @@
 #ifndef BrotherUtils_h
 #define BrotherUtils_h
 
+#import <Flutter/Flutter.h>
 #import <BRLMPrinterKit/BRLMPrinterKit.h>
 #import <BRLMPrinterKit/BRLMPrinterDefine.h>
 #import <BRLMPrinterKit/BRPtouchPrinterKit.h>
@@ -21,6 +22,8 @@
 @end
 
 @interface BrotherUtils :NSObject
+
+@property (class, nonatomic, copy) NSObject<FlutterPluginRegistrar>* registrarFlutter;
 
 + (BRLMChannelType) portFromMapWithValue:(NSDictionary<NSString *, NSObject *>*) map;
 
@@ -85,7 +88,7 @@
 
 + (NSDictionary<NSString *, NSObject *> *) bRPtouchDeviceInfoToBluetoothPrinterMap:(BRPtouchDeviceInfo *) deviceInfo;
 
-+ (BRLMCustomPaperSize *) customPaperInfoFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
++ (BRLMCustomPaperSize *) customPaperInfoFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map binCustomPaperMap:(NSDictionary<NSString *, NSObject *> *)binCustomPaperMap;
 
 + (BRLMPJPrintSettingsPaperSizeStandard) pjPaperSizeStandardFromMapWithValue:(NSDictionary<NSString *, NSObject*> *) map;
 
