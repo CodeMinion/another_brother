@@ -352,3 +352,75 @@ class BinPaper_TD2120N implements ACustomPaper {
     };
   }
 }
+
+class BinPaper_TD2130N implements ACustomPaper {
+  final String _name;
+  final String _assetPath;
+
+  static const String _rootDir = "packages/another_brother/custom_paper/CustomTD2130NPaper";
+  const BinPaper_TD2130N._internal(this._name, this._assetPath);
+
+  static const RD_W1_1H1_1in = const BinPaper_TD2130N._internal("TD2130N-RD1.1x1.1", "$_rootDir/TD2130N-RD1.1x1.1.bin");
+  static const RD_W1_5H1_5in = const BinPaper_TD2130N._internal("TD2130N-RD1.5x1.5", "$_rootDir/TD2130N-RD1.5x1.5.bin");
+  static const RD_W1_5H1_9in = const BinPaper_TD2130N._internal("TD2130N-RD1.5x1.9", "$_rootDir/TD2130N-RD1.5x1.9.bin");
+  static const RD_W1_5H2_3in = const BinPaper_TD2130N._internal("TD2130N-RD1.5x2.3", "$_rootDir/TD2130N-RD1.5x2.3.bin");
+  static const RD_W1_9H1_1in = const BinPaper_TD2130N._internal("TD2130N-RD1.9x1.1", "$_rootDir/TD2130N-RD1.9x1.1.bin");
+  static const RD_W2H1in = const BinPaper_TD2130N._internal("TD2130N-RD2.0x1.0", "$_rootDir/TD2130N-RD2.0x1.0.bin");
+  static const RD_W2_2H2_3in = const BinPaper_TD2130N._internal("TD2130N-RD2.3x2.3", "$_rootDir/TD2130N-RD2.3x2.3.bin");
+  static const RD_W2_5in = const BinPaper_TD2130N._internal("TD2130N-RD2.25inch", "$_rootDir/TD2130N-RD2.25inch.bin");
+  static const RD_W2_28in = const BinPaper_TD2130N._internal("TD2130N-RD2.28inch", "$_rootDir/TD2130N-RD2.28inch.bin");
+  static const RD_W40H50mm = const BinPaper_TD2130N._internal("TD2130N-RD40_50mm", "$_rootDir/TD2130N-RD40_50mm.bin");
+  static const RD_W40H60mm = const BinPaper_TD2130N._internal("TD2130N-RD40_60mm", "$_rootDir/TD2130N-RD40_60mm.bin");
+  static const RD_W50H30mm = const BinPaper_TD2130N._internal("TD2130N-RD50_30mm", "$_rootDir/TD2130N-RD50_30mm.bin");
+  static const RD_W51H26mm = const BinPaper_TD2130N._internal("TD2130N-RD51_26mm", "$_rootDir/TD2130N-RD51_26mm.bin");
+
+  @override
+  String getName() {
+    return _name;
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    return {
+      "name": _name,
+      "assetPath": _assetPath
+    };
+  }
+}
+
+class BinPaper_TD4550 implements ACustomPaper {
+  final String _name;
+  final String _assetPath;
+
+  static const String _rootDir = "packages/another_brother/custom_paper/CustomTD4550Paper";
+  const BinPaper_TD4550._internal(this._name, this._assetPath);
+
+  static const RD_W2_2in = const BinPaper_TD4550._internal("TD4550DNWB-RD2.2inch", "$_rootDir/TD4550DNWB-RD2.2inch.bin");
+  static const RD_W2_9in = const BinPaper_TD4550._internal("TD4550DNWB-RD2.9inch", "$_rootDir/TD4550DNWB-RD2.9inch.bin");
+  static const RD_W2H1in = const BinPaper_TD4550._internal("TD4550DNWB-RD2x1", "$_rootDir/TD4550DNWB-RD2x1.bin");
+  static const RD_W3_5in = const BinPaper_TD4550._internal("TD4550DNWB-RD3.5inch", "$_rootDir/TD4550DNWB-RD3.5inch.bin");
+  static const RD_W3H1in = const BinPaper_TD4550._internal("TD4550DNWB-RD3x1", "$_rootDir/TD4550DNWB-RD3x1.bin");
+  static const RD_W4in = const BinPaper_TD4550._internal("TD4550DNWB-RD4inch", "$_rootDir/TD4550DNWB-RD4inch.bin");
+  static const RD_W4H1in = const BinPaper_TD4550._internal("TD4550DNWB-RD4x1", "$_rootDir/TD4550DNWB-RD4x1.bin");
+  static const RD_W4H2in = const BinPaper_TD4550._internal("TD4550DNWB-RD4x2", "$_rootDir/TD4550DNWB-RD4x2.bin");
+  static const RD_W4H3in = const BinPaper_TD4550._internal("TD4550DNWB-RD4x3", "$_rootDir/TD4550DNWB-RD4x3.bin");
+  static const RD_W4H4in = const BinPaper_TD4550._internal("TD4550DNWB-RD4x4", "$_rootDir/TD4550DNWB-RD4x4.bin");
+  static const RD_W4H6in = const BinPaper_TD4550._internal("TD4550DNWB-RD4x6", "$_rootDir/TD4550DNWB-RD4x6.bin");
+  static const RD_W51H26mm = const BinPaper_TD4550._internal("TD4550DNWB-RD51_26mm", "$_rootDir/TD4550DNWB-RD51_26mm.bin");
+  static const RD_W76H26mm = const BinPaper_TD4550._internal("TD4550DNWB-RD76_26mm", "$_rootDir/TD4550DNWB-RD76_26mm.bin");
+  static const RD_W76mm = const BinPaper_TD4550._internal("TD4550DNWB-RD76mm", "$_rootDir/TD4550DNWB-RD76mm.bin");
+  static const RD_W90mm = const BinPaper_TD4550._internal("TD4550DNWB-RD90mm", "$_rootDir/TD4550DNWB-RD90mm.bin");
+
+  @override
+  String getName() {
+    return _name;
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    return {
+      "name": _name,
+      "assetPath": _assetPath
+    };
+  }
+}
