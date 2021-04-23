@@ -8,4 +8,5 @@ Another Bother SDK library for Flutter.
 - USB
 
 ## iOS Support
-- Coming Soon
+- Bluetooth/BLE
+- WiFi

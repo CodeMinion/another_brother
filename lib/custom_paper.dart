@@ -15,6 +15,13 @@ class BinPaper_RJ2050 implements ACustomPaper {
   static const RD_W50mm = const BinPaper_RJ2050._internal("RJ2050-RD50mm", "$_rootDir/RJ2050-RD50mm.bin");
   static const RD_W58mm = const BinPaper_RJ2050._internal("RJ2050-RD58mm", "$_rootDir/RJ2050-RD58mm.bin");
 
+  static final _values = [
+    RD_W50mm,
+    RD_W58mm
+  ];
+
+  static List<BinPaper_RJ2050> getValues() => _values;
+
   @override
   String getName() {
     return _name;
@@ -45,6 +52,17 @@ class BinPaper_RJ2150 implements ACustomPaper {
   static const RD_W2H1in = const BinPaper_RJ2150._internal("RJ2150_20ix10i", "$_rootDir/RJ2150_20ix10i.bin");
   static const RD_W2_1H1_5in = const BinPaper_RJ2150._internal("RJ2150_21ix15i", "$_rootDir/RJ2150_21ix15i.bin");
 
+  static final _values = [
+    RD_W2H4in,
+    RD_W1_9H3_3in,
+    RD_W50mm,
+    RD_W50H85mm,
+    RD_W58mm,
+    RD_W2H1in,
+    RD_W2_1H1_5in
+  ];
+
+  static List<BinPaper_RJ2150> getValues() => _values;
   @override
   String getName() {
     return _name;
@@ -73,6 +91,15 @@ class BinPaper_RJ3050Ai implements ACustomPaper {
   static const RD_W58mm = const BinPaper_RJ3050Ai._internal("RJ-3050Ai_RD58mmContinuous", "$_rootDir/RJ-3050Ai_RD58mmContinuous.bin");
   static const RD_W80mm = const BinPaper_RJ3050Ai._internal("RJ-3050Ai_RD80mmContinuous", "$_rootDir/RJ-3050Ai_RD80mmContinuous.bin");
 
+  static final _values = [
+    RD_W76mm,
+    RD_W2_2in,
+    RD_W50mm,
+    RD_W58mm,
+    RD_W80mm
+  ];
+
+  static List<BinPaper_RJ3050Ai> getValues() => _values;
   @override
   String getName() {
     return _name;
@@ -100,6 +127,14 @@ class BinPaper_RJ3050 implements ACustomPaper {
   static const RD_W3in = const BinPaper_RJ3050._internal("RJ3050-RD3.00inch", "$_rootDir/RJ3050-RD3.00inch.bin");
   static const RD_W3_15in = const BinPaper_RJ3050._internal("RJ3050-RD3.15inch", "$_rootDir/RJ3050-RD3.15inch.bin");
 
+  static final _values = [
+    RD_W1_9in,
+    RD_W2in,
+    RD_W3in,
+    RD_W3_15in
+  ];
+
+  List<BinPaper_RJ3050> getValues() => _values;
   @override
   String getName() {
     return _name;
@@ -129,6 +164,16 @@ class BinPaper_RJ3150Ai implements ACustomPaper {
   static const RD_W58mm = const BinPaper_RJ3150Ai._internal("RJ-3150Ai_RD58mmContinuous", "$_rootDir/RJ-3150Ai_RD58mmContinuous.bin");
   static const RD_W80mm = const BinPaper_RJ3150Ai._internal("RJ-3150Ai_RD80mmContinuous", "$_rootDir/RJ-3150Ai_RD80mmContinuous.bin");
 
+  static final _values = [
+    RD_W76mm,
+    RD_W76H44mm,
+    RD_W2_2in,
+    RD_W50mm,
+    RD_W58mm,
+    RD_W80mm
+  ];
+
+  static List<BinPaper_RJ3150Ai> getValues() => _values;
   @override
   String getName() {
     return _name;
@@ -165,6 +210,22 @@ class BinPaper_RJ3150 implements ACustomPaper {
   static const RD_W60H92mm = const BinPaper_RJ3150._internal("RJ3150-RD60_92mm", "$_rootDir/RJ3150-RD60_92mm.bin");
   static const RD_W76H44mm = const BinPaper_RJ3150._internal("RJ3150-RD76_44mm", "$_rootDir/RJ3150-RD76_44mm.bin");
 
+  static final _values = [RD_W1H1in,
+    RD_W1_9in,
+    RD_W1_9H3_3in,
+    RD_W2in,
+    RD_W2H1in,
+    RD_W2_3H3_6in,
+    RD_W3in,
+    RD_W3H1in,
+    RD_W3H1_75mm,
+    RD_W3_15in,
+    RD_W50H85mm,
+    RD_W60H92mm,
+    RD_W76H44mm
+  ];
+
+  static List<BinPaper_RJ3150> getValues() => _values;
   @override
   String getName() {
     return _name;
@@ -197,6 +258,19 @@ class BinPaper_RJ4030Ai implements ACustomPaper {
   static const RD_W4H4in = const BinPaper_RJ4030Ai._internal("RJ-4030Ai-RD4x4", "$_rootDir/RJ-4030Ai-RD4x4.bin");
   static const RD_W4H6in = const BinPaper_RJ4030Ai._internal("RJ-4030Ai-RD4x6", "$_rootDir/RJ-4030Ai-RD4x6.bin");
 
+  static final _values = [
+    RD_W80H115mm,
+    RD_W2in,
+    RD_W3in,
+    RD_W4in,
+    RD_W4H1in,
+    RD_W4H2in,
+    RD_W4H3in,
+    RD_W4H4in,
+    RD_W4H6in
+  ];
+
+  static List<BinPaper_RJ4030Ai> getValues() => _values;
   @override
   String getName() {
     return _name;
@@ -232,6 +306,23 @@ class BinPaper_RJ4040 implements ACustomPaper {
   static const RD_W80H115mm = const BinPaper_RJ4040._internal("RJ4040-RD80_115mm", "$_rootDir/RJ4040-RD80_115mm.bin");
   static const RD_W115H80mm = const BinPaper_RJ4040._internal("RJ4040-RD115_80mm", "$_rootDir/RJ4040-RD115_80mm.bin");
 
+  static final _values = [
+    RD_W3in,
+    RD_W4in,
+    RD_W4H1in,
+    RD_W4H2in,
+    RD_W4H3in,
+    RD_W4H4in,
+    RD_W4H6in,
+    RD_W50H85mm,
+    RD_W58mm,
+    RD_W60H92mm,
+    RD_W80H115mm,
+    RD_W115H80mm
+  ];
+
+  static List<BinPaper_RJ4040> getValues() => _values;
+
   @override
   String getName() {
     return _name;
@@ -266,6 +357,21 @@ class BinPaper_RJ4230 implements ACustomPaper {
   static const RD_W4H6in = const BinPaper_RJ4230._internal("RJ4230B-RD4x6", "$_rootDir/RJ4230B-RD4x6.bin");
   static const RD_W80mm = const BinPaper_RJ4230._internal("RJ4230B-RD80mm", "$_rootDir/RJ4230B-RD80mm.bin");
 
+  static final _values = [
+    RD_W1_9H3_3in,
+    RD_W2_2in,
+    RD_W2_3H3_6in,
+    RD_W3_1H4_5in,
+    RD_W4in,
+    RD_W4H1in,
+    RD_W4H2in,
+    RD_W4H3in,
+    RD_W4H4in,
+    RD_W4H6in,
+    RD_W80mm
+  ];
+
+  static List<BinPaper_RJ4230> getValues() => _values;
   @override
   String getName() {
     return _name;
@@ -304,6 +410,25 @@ class BinPaper_RJ4250 implements ACustomPaper {
   static const RD_W80H115mm = const BinPaper_RJ4250._internal("RJ4250WB-RD80_115mm", "$_rootDir/RJ4250WB-RD80_115mm.bin");
   static const RD_W80mm = const BinPaper_RJ4250._internal("RJ4250WB-RD80mm", "$_rootDir/RJ4250WB-RD80mm.bin");
 
+  static final _values = [
+    RD_W1_9H3_3in,
+    RD_W2_2in,
+    RD_W2_3H3_6in,
+    RD_W3_1H4_5in,
+    RD_W4in,
+    RD_W4H1in,
+    RD_W4H2in,
+    RD_W4H3in,
+    RD_W4H4in,
+    RD_W4H6in,
+    RD_W50H85mm,
+    RD_W60H92mm,
+    RD_W80H115mm,
+    RD_W80mm
+  ];
+
+  static List<BinPaper_RJ4250> getValues() => _values;
+
   @override
   String getName() {
     return _name;
@@ -339,6 +464,24 @@ class BinPaper_TD2120N implements ACustomPaper {
   static const RD_W50H30mm = const BinPaper_TD2120N._internal("TD2120N-RD50_30mm", "$_rootDir/TD2120N-RD50_30mm.bin");
   static const RD_W51H26mm = const BinPaper_TD2120N._internal("TD2120N-RD51_26mm", "$_rootDir/TD2120N-RD51_26mm.bin");
 
+  static final _values = [
+    RD_W1_1H1_1in,
+    RD_W1_5H1_5in,
+    RD_W1_5H1_9in,
+    RD_W1_5H2_3in,
+    RD_W1_9H1_1in,
+    RD_W2H1in,
+    RD_W2_3H2_3in,
+    RD_W2_25in,
+    RD_W2_28in,
+    RD_W40H50mm,
+    RD_W40H60mm,
+    RD_W50H30mm,
+    RD_W51H26mm
+  ];
+
+  static List<BinPaper_TD2120N> getValues() => _values;
+
   @override
   String getName() {
     return _name;
@@ -373,6 +516,24 @@ class BinPaper_TD2130N implements ACustomPaper {
   static const RD_W40H60mm = const BinPaper_TD2130N._internal("TD2130N-RD40_60mm", "$_rootDir/TD2130N-RD40_60mm.bin");
   static const RD_W50H30mm = const BinPaper_TD2130N._internal("TD2130N-RD50_30mm", "$_rootDir/TD2130N-RD50_30mm.bin");
   static const RD_W51H26mm = const BinPaper_TD2130N._internal("TD2130N-RD51_26mm", "$_rootDir/TD2130N-RD51_26mm.bin");
+
+  static final _values = [
+    RD_W1_1H1_1in,
+    RD_W1_5H1_5in,
+    RD_W1_5H1_9in,
+    RD_W1_5H2_3in,
+    RD_W1_9H1_1in,
+    RD_W2H1in,
+    RD_W2_2H2_3in,
+    RD_W2_5in,
+    RD_W2_28in,
+    RD_W40H50mm,
+    RD_W40H60mm,
+    RD_W50H30mm,
+    RD_W51H26mm
+  ];
+
+  static List<BinPaper_TD2130N> getValues() => _values;
 
   @override
   String getName() {
