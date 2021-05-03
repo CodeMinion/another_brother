@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:another_brother/custom_paper.dart';
@@ -7,6 +8,7 @@ import 'package:another_brother/printer_info.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import "dart:ui" as ui;
 import 'dart:async';
 
 import 'package:flutter/services.dart';
@@ -27,6 +29,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   File _selectedImage = null;
+
+  ui.Image _imageToShow = null;
+  Uint8List _imageBytes = null;
 
   @override
   void initState() {
@@ -62,8 +67,20 @@ class _MyAppState extends State<MyApp> {
     Paint paint = new Paint();
     paint.color = Color.fromRGBO(255, 0, 0, 1);
     Rect bounds = new Rect.fromLTWH(0, 0, 300, 100);
+    c.save();
+    c.translate(150, 150);
+    c.rotate(1.57);
+    c.translate(-150, -150);
     c.drawRect(bounds, paint);
-    var picture = await recorder.endRecording().toImage(300, 100);
+
+    c.restore();
+
+    var picture = await recorder.endRecording().toImage(300, 300);
+
+    _imageBytes = (await picture.toByteData(format: ImageByteFormat.png)).buffer.asUint8List();
+    setState(() {
+      //_imageToShow = picture;
+    });
 
     var printer = new Printer();
     var printInfo = PrinterInfo();
@@ -477,6 +494,7 @@ class _MyAppState extends State<MyApp> {
               child: Text('Running on: $_platformVersion\n'),
             ),
             _selectedImage != null ? Image.file(_selectedImage): Text("No Image Selected"),
+      _imageBytes != null ? Image.memory(_imageBytes) : Text("No Image From Canvas"),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
