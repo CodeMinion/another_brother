@@ -13,6 +13,8 @@ dependencies:
     sdk: flutter
 
   flutter_blue: ^0.8.0
+  path_provider: ^2.0.1
+
 
 dev_dependencies:
   flutter_test:

@@ -5,6 +5,8 @@ import 'dart:ui';
 import 'package:another_brother/custom_paper.dart';
 import 'package:another_brother/label_info.dart';
 import 'package:another_brother/printer_info.dart';
+import 'package:another_brother/type_b_commands.dart';
+import 'package:another_brother/type_b_printer.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,7 @@ import 'package:flutter_blue/flutter_blue.dart';
 // To add platforms, run `flutter create -t plugin --platforms <platforms> .` under another_brother.
 void main() {
   runApp(MyApp());
+  //runApp(TbPrinterSetup());
 }
 
 class MyApp extends StatefulWidget {
@@ -60,8 +63,112 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  Future<PrinterStatus> printImageUsb() async {
+  Future<PrinterStatus> printLabelTypeB() async {
 
+    TbPrinterInfo printerInfo = TbPrinterInfo(
+        port: Port.BLUETOOTH,
+        btAddress: "00:80:A3:8B:51:FD");
+
+
+    //TbPrinterInfo printerInfo =
+    //    TbPrinterInfo(port: Port.NET, ipAddress: "10.0.0.35");
+
+    /*
+    TbPrinterInfo printerInfo = TbPrinterInfo(
+        port: Port.USB);
+    */
+    TbPrinter printer = TbPrinter();
+
+    await printer.setPrinterInfo(printerInfo);
+
+    var printerFound = await printer.getBluetoothPrinters([TbModel.RJ_2055WB.getName()]);
+    print("Found Printers: $printerFound");
+
+    bool success = await printer.startCommunication();
+    print("TypeB: Connection Success? $success");
+
+    //bool bleEnabled = await printer.toggleBle(true);
+    //print("BLE Enabled: $bleEnabled");
+
+    //success = await printer.formFeed();
+    //print ("TypeB: Form Feed Success? $success");
+
+    //success = await printer.downloadPcxAsset("assets/UL.PCX");
+    //print ("TypeB: Download PCX Success? $success");
+
+    //success = await printer.downloadBmpAsset("assets/LOGO.BMP");
+    //print ("TypeB: Download BMP Success? $success");
+
+    //success = await printer.setup();
+    //print ("TypeB: Print Setup Success? $success");
+
+    //success = await printer.clearBuffer();
+    //print ("TypeB: Clear Buffer Success? $success");
+
+    //success = await printer.barcode("1234567");
+    //print ("TypeB: Barcode Success? $success");
+
+    //success = await printer.printerFont("printerFont", x: 10, y: 150);
+    //print ("TypeB: Printer Font Success? $success");
+
+    //success = await printer.sendCommand("PUTPCX 145,15,\"UL.PCX\"\r\n");
+    //success = await printer.sendTbCommand(TbCommandPutPcx(145, 15, "assets/UL.PCX"));
+    //print ("TypeB: Send Command Success? $success");
+
+    //success = await printer.sendCommand("PUTBMP 10,190,\"LOGO.BMP\"\r\n");
+    //success = await printer.sendTbCommand(TbCommandPutBmp(10, 190, "assets/LOGO.BMP"));
+    //success = await printer.sendTbCommand(TbCommandPutBmp(10, 190, "assets/logos.bmp"));
+    //print ("TypeB: Send Command Success? $success");
+
+    var assetImage = await loadImage("assets/brother_hack.png");
+    var grayImage = await printer.downloadImage(assetImage, scale: 0.25);
+    //_imageBytes = (await grayImage.toByteData(format: ImageByteFormat.png)).buffer.asUint8List();
+    //setState(() {
+    //_imageToShow = picture;
+    //});
+
+    //print ("TypeB: Image Download Success? $success");
+
+    //success = await printer.printLabel();
+    //print ("TypeB: Print Success? $success");
+
+    //TbPrinterStatus printerStatus = await printer.printerStatus();
+    //print ("TypeB: Printer Status? ${printerStatus.getStatusValue()}");
+
+    //success = await printer.sendTbCommand(TbCommandSetWlanSsid(""));
+    //success = await printer.sendTbCommand(TbCommandSetWlanSsid(null));
+    //print("TypeB: WLAN Set Command Success? $success");
+
+    //success = await printer.sendTbCommand(TbCommandSetWlanWpa(passKey: ""));
+    //print("TypeB: WPA Set Command Success? $success");
+
+    //success = await printer.sendTbCommand(TbCommandSetWlanIp(ipAddress: "10.0.0.35", gatewayAddress: "10.0.0.1"));
+    //print("TypeB: WPA Set Command Success? $success");
+
+    //success = await printer.sendTbCommand(TbCommandSetWlanDhcp());
+    //print ("TypeB: DHCP Set Command Success? $success");
+
+    //success = await printer.sendTbCommand(TbCommandSelfTest(page: TbSelfTestPage.SYSTEM));
+    //print("TypeB: WLAN Test Command Success? $success");
+
+    //success = await printer.printLabel();
+    //print ("TypeB: Print Success? $success");
+
+    success = await printer.endCommunication(timeoutMillis: 5000);
+    print("TypeB: Connection Closed? $success");
+
+  }
+
+  Future<ui.Image> loadImage(String assetPath) async {
+    final ByteData img = await rootBundle.load(assetPath);
+    final Completer<ui.Image> completer = new Completer();
+    ui.decodeImageFromList(new Uint8List.view(img.buffer), (ui.Image img) {
+      return completer.complete(img);
+    });
+    return completer.future;
+  }
+
+  Future<PrinterStatus> printImageUsb() async {
     PictureRecorder recorder = PictureRecorder();
     Canvas c = Canvas(recorder);
     Paint paint = new Paint();
@@ -77,7 +184,9 @@ class _MyAppState extends State<MyApp> {
 
     var picture = await recorder.endRecording().toImage(300, 300);
 
-    _imageBytes = (await picture.toByteData(format: ImageByteFormat.png)).buffer.asUint8List();
+    _imageBytes = (await picture.toByteData(format: ImageByteFormat.png))
+        .buffer
+        .asUint8List();
     setState(() {
       //_imageToShow = picture;
     });
@@ -125,10 +234,8 @@ class _MyAppState extends State<MyApp> {
     //status  = await printer.printImage(picture);
     //print ("Got Status: $status and Error: ${status.errorCode.getName()}");
 
-
     //LabelInfo info = await printer.getLabelInfo();
     //print ("Label Info $info");
-
 
     // Alternatively we can startCommunication/endCommunication if we
     // want to do a batch operation.
@@ -161,14 +268,13 @@ class _MyAppState extends State<MyApp> {
     //print ("Net Printer: $netPrinter");
 
     var blePrinters = await printer.getBLEPrinters(3000);
-    print ("BLE Printer: $blePrinters");
+    print("BLE Printer: $blePrinters");
 
     if (blePrinters.isNotEmpty) {
       printInfo.port = Port.BLE;
       printInfo.setLocalName(blePrinters.single.localName);
       printer.setPrinterInfo(printInfo);
-      status  = await printer.printImage(picture);
-
+      status = await printer.printImage(picture);
     }
 
     /*
@@ -195,7 +301,7 @@ class _MyAppState extends State<MyApp> {
     //bool closed = await printer.endCommunication();
 
     //print ("Got Status: $status and Error: ${status.errorCode.getName()}");
-    print ("Got Status: $status and Error: ${status.errorCode.getName()}");
+    print("Got Status: $status and Error: ${status.errorCode.getName()}");
     return status;
     //return PrinterStatus();
   }
@@ -205,7 +311,6 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<PrinterStatus> printBle() async {
-
     /*
     final String ip =  await WifiInfo().getWifiIP();
     final String subnet = ip.substring(0, ip.lastIndexOf('.'));
@@ -219,7 +324,6 @@ class _MyAppState extends State<MyApp> {
     });
 
      */
-
 
     /*
     var reusePort = false;
@@ -276,7 +380,6 @@ class _MyAppState extends State<MyApp> {
 
      */
 
-
     /*
     // This is the type of service we're looking for :
     String type = '_printer._tcp';//'_printer._tcp';
@@ -309,62 +412,62 @@ class _MyAppState extends State<MyApp> {
     await sleep();
     */
     var printer = new Printer();
-      var printInfo = PrinterInfo();
-      //printInfo.printerModel = Model.RJ_4250WB;
-      printInfo.printerModel = Model.RJ_4250WB;
-      printInfo.printMode = PrintMode.FIT_TO_PAGE;
-      printInfo.isAutoCut = true;
-      printInfo.rotate180 = false;
-      printInfo.numberOfCopies = 2;
-      printInfo.port = Port.BLE;
-      //printInfo.setLocalName("RJ-4250WB_5113");
-      //printInfo.port = Port.BLUETOOTH;
-      //printInfo.macAddress = "795B8714-AC40-6FFE-C8D0-4FFF6D67D056";
-      //printInfo.setLocalName("RJ-4250WB_5113");
+    var printInfo = PrinterInfo();
+    //printInfo.printerModel = Model.RJ_4250WB;
+    printInfo.printerModel = Model.RJ_4250WB;
+    printInfo.printMode = PrintMode.FIT_TO_PAGE;
+    printInfo.isAutoCut = true;
+    printInfo.rotate180 = false;
+    printInfo.numberOfCopies = 2;
+    printInfo.port = Port.BLE;
+    //printInfo.setLocalName("RJ-4250WB_5113");
+    //printInfo.port = Port.BLUETOOTH;
+    //printInfo.macAddress = "795B8714-AC40-6FFE-C8D0-4FFF6D67D056";
+    //printInfo.setLocalName("RJ-4250WB_5113");
 
-      // Set the label type.
-      double width = 102.0;
-      double rightMargin = 0.0;
-      double leftMargin = 0.0;
-      double topMargin = 0.0;
-      CustomPaperInfo customPaperInfo = CustomPaperInfo.newCustomRollPaper(printInfo.printerModel,
-          Unit.Mm,
-          width,
-          rightMargin,
-          leftMargin,
-          topMargin);
-      printInfo.customPaperInfo = customPaperInfo;
+    // Set the label type.
+    double width = 102.0;
+    double rightMargin = 0.0;
+    double leftMargin = 0.0;
+    double topMargin = 0.0;
+    CustomPaperInfo customPaperInfo = CustomPaperInfo.newCustomRollPaper(
+        printInfo.printerModel,
+        Unit.Mm,
+        width,
+        rightMargin,
+        leftMargin,
+        topMargin);
+    printInfo.customPaperInfo = customPaperInfo;
 
-      // Set the printer info so we can use the SDK to get the printers.
-      await printer.setPrinterInfo(printInfo);
+    // Set the printer info so we can use the SDK to get the printers.
+    await printer.setPrinterInfo(printInfo);
 
-      // Get a list of printers with my model available in the network.
-      List<BLEPrinter> printers = await printer.getBLEPrinters(3000);
-      // Get the BT name from the first printer found.
-      printInfo.setLocalName(printers.single.localName);
+    // Get a list of printers with my model available in the network.
+    List<BLEPrinter> printers = await printer.getBLEPrinters(3000);
+    // Get the BT name from the first printer found.
+    printInfo.setLocalName(printers.single.localName);
 
-      //List<NetPrinter> netPrinters = await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
-      //print ("Net Printers Found: $netPrinters");
+    //List<NetPrinter> netPrinters = await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
+    //print ("Net Printers Found: $netPrinters");
 
-      //List<BluetoothPrinter> netPrinters = await printer.getBluetoothPrinters([Model.RJ_4250WB.getName()]);
-      //print ("Bt Printers Found: $netPrinters");
-      //printInfo.macAddress = netPrinters.single.macAddress;
+    //List<BluetoothPrinter> netPrinters = await printer.getBluetoothPrinters([Model.RJ_4250WB.getName()]);
+    //print ("Bt Printers Found: $netPrinters");
+    //printInfo.macAddress = netPrinters.single.macAddress;
 
+    printer.setPrinterInfo(printInfo);
 
-      printer.setPrinterInfo(printInfo);
+    PictureRecorder recorder = PictureRecorder();
+    Canvas c = Canvas(recorder);
+    Paint paint = new Paint();
+    paint.color = Color.fromRGBO(255, 0, 0, 1);
+    Rect bounds = new Rect.fromLTWH(0, 0, 300, 100);
+    c.drawRect(bounds, paint);
+    var picture = await recorder.endRecording().toImage(300, 100);
+    PrinterStatus status = await printer.printImage(picture);
 
-      PictureRecorder recorder = PictureRecorder();
-      Canvas c = Canvas(recorder);
-      Paint paint = new Paint();
-      paint.color = Color.fromRGBO(255, 0, 0, 1);
-      Rect bounds = new Rect.fromLTWH(0, 0, 300, 100);
-      c.drawRect(bounds, paint);
-      var picture = await recorder.endRecording().toImage(300, 100);
-      PrinterStatus status = await printer.printImage(picture);
+    //FilePickerResult result = await FilePicker.platform.pickFiles();
 
-      //FilePickerResult result = await FilePicker.platform.pickFiles();
-
-      /*
+    /*
       FilePickerResult result = await FilePicker.platform.pickFiles(allowMultiple: true,
           type: FileType.custom,
           allowedExtensions: ['jpg', 'pdf', 'png']);
@@ -392,11 +495,9 @@ class _MyAppState extends State<MyApp> {
       }
 
        */
-
-
   }
-  Future<PrinterStatus> printImageBluetooth() async {
 
+  Future<PrinterStatus> printImageBluetooth() async {
     var printer = new Printer();
     var printInfo = PrinterInfo();
     printInfo.printerModel = Model.QL_1110NWB;
@@ -412,8 +513,9 @@ class _MyAppState extends State<MyApp> {
     //printInfo.labelNameIndex = (await printer.getLabelInfo()).labelNameIndex; //QL1100.ordinalFromID(QL1100.W103.getId());
     printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W103.getId());
 
-    List<BluetoothPrinter> netPrinters = await printer.getBluetoothPrinters([Model.QL_1110NWB.getName()]);
-    print ("Bt Printers Found: $netPrinters");
+    List<BluetoothPrinter> netPrinters =
+        await printer.getBluetoothPrinters([Model.QL_1110NWB.getName()]);
+    print("Bt Printers Found: $netPrinters");
     printInfo.macAddress = netPrinters.single.macAddress;
 
     /*
@@ -447,13 +549,11 @@ class _MyAppState extends State<MyApp> {
     var picture = await recorder.endRecording().toImage(300, 100);
     PrinterStatus status = await printer.printImage(picture);
 
-
     //FilePickerResult result = await FilePicker.platform.pickFiles();
 
     //FilePickerResult result = await FilePicker.platform.pickFiles(allowMultiple: true,
     //    type: FileType.custom,
     //    allowedExtensions: ['jpg', 'pdf', 'png']);
-
 
     /*
     PrinterStatus status = PrinterStatus();
@@ -475,8 +575,7 @@ class _MyAppState extends State<MyApp> {
     }
     */
 
-
-    print ("Got Status: $status and Error: ${status.errorCode.getName()}");
+    print("Got Status: $status and Error: ${status.errorCode.getName()}");
     return status;
   }
 
@@ -493,23 +592,32 @@ class _MyAppState extends State<MyApp> {
             Center(
               child: Text('Running on: $_platformVersion\n'),
             ),
-            _selectedImage != null ? Image.file(_selectedImage): Text("No Image Selected"),
-      _imageBytes != null ? Image.memory(_imageBytes) : Text("No Image From Canvas"),
+            _selectedImage != null
+                ? Image.file(_selectedImage)
+                : Text("No Image Selected"),
+            _imageBytes != null
+                ? Image.memory(_imageBytes)
+                : Text("No Image From Canvas"),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(onPressed: (){
-                    printImageUsb();
-                  }, child: Text("Print USB")),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        printImageUsb();
+                      },
+                      child: Text("Print USB")),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(onPressed: (){
-                    //printBle();
-                    printImageBluetooth();
-                  }, child: Text("Print Bluetooth")),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        //printBle();
+                        //printImageBluetooth();
+                        printLabelTypeB();
+                      },
+                      child: Text("Print Bluetooth")),
                 ),
               ],
             )
@@ -544,3 +652,155 @@ class Delegate implements MDNSPluginDelegate {
 }
 
  */
+
+class TbPrinterSetup extends StatefulWidget {
+  @override
+  _TbPrinterSetupState createState() => _TbPrinterSetupState();
+}
+
+class _TbPrinterSetupState extends State<TbPrinterSetup> {
+
+  final _ssidEditController = TextEditingController();
+  final _ssidWPAKeyController = TextEditingController();
+
+  TbPrinterInfo printerInfo = TbPrinterInfo(port: Port.USB);
+  TbPrinter printer = TbPrinter();
+/*
+    TbPrinterInfo printerInfo = TbPrinterInfo(
+        port: Port.BLUETOOTH,
+        btAddress: "00:80:A3:8B:51:FD");
+*/
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose(){
+    // TODO: implement dispose
+    super.dispose();
+
+    _ssidEditController.dispose();
+    _ssidWPAKeyController.dispose();
+
+  }
+
+  Future<bool> configureSSid(String ssid, String passkey) async {
+
+
+    await printer.setPrinterInfo(printerInfo);
+    bool success = await printer.startCommunication();
+      print("Connected to printer? $success");
+
+    success = await printer.clearBuffer();
+
+    success = await printer.sendTbCommand(TbCommandSetWlanSsid(ssid));
+    print("TypeB: WLAN Set Command Success? $success");
+
+    success =  success && await printer
+        .sendTbCommand(TbCommandSetWlanWpa(passKey: passkey));
+    print("TypeB: WPA Set Command Success? $success");
+
+    success = await printer.sendTbCommand(TbCommandSetWlanDhcp());
+    print("TypeB: DHCP Set Command Success? $success");
+
+    success = await printer.barcode(ssid);
+    await printer.printLabel();
+    success = await printer.endCommunication();
+
+    return success;
+  }
+
+  Future<bool> printBtInfo () async {
+
+    await printer.setPrinterInfo(printerInfo);
+    bool success = await printer.startCommunication();
+    print("Connected to printer? $success");
+
+    success = await printer.clearBuffer();
+
+    success = await printer.sendTbCommand(TbCommandSelfTest(page: TbSelfTestPage.BT));
+    print("TypeB: BT Test Set Command Success? $success");
+
+    success = await printer.endCommunication();
+
+    return success;
+
+  }
+
+  Future<bool> printAllSettings() async {
+    await printer.setPrinterInfo(printerInfo);
+    bool success = await printer.startCommunication();
+    print("Connected to printer? $success");
+
+    success = await printer.clearBuffer();
+
+    success = await printer.sendTbCommand(TbCommandSelfTest());
+    print("TypeB: All Test Set Command Success? $success");
+
+    success = await printer.endCommunication();
+
+    return success;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Type B WiFi Configuration'),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: _ssidEditController,
+                decoration: InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Enter Network SSID',
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: _ssidWPAKeyController,
+                decoration: InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Enter Network PASSKEY',
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 18.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                      child: Text("Print BT Settings"),
+                      onPressed: () {
+                    // Print BT Info
+                        printBtInfo();
+                  }),
+                  ElevatedButton(onPressed: () {
+                    printAllSettings();
+                    //printer.sendTbCommand(TbCommandSelfTest());
+                  }, child: Text("Print All Settings"))
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top:28.0),
+              child: ElevatedButton(onPressed: (){
+                configureSSid(_ssidEditController.value.text, _ssidWPAKeyController.value.text);
+              }, child: Text("Configure WiFI")),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

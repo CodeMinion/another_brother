@@ -35,8 +35,8 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.rouninlabs.another_brother_example"
-        minSdkVersion 19
-        targetSdkVersion 30
+        minSdkVersion 21 // Bummped to 21 as a result of Type B Sdk print Pdf
+        targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
