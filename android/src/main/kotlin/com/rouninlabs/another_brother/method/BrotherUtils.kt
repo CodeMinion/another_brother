@@ -8,6 +8,7 @@ import android.util.Log
 import com.brother.ptouch.sdk.*
 import com.brother.ptouch.sdk.Unit
 import com.rouninlabs.another_brother.BrotherManager
+import com.rouninlabs.another_brother.method.typeb.TbPrinterInfo
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import java.io.File
 
@@ -444,5 +445,8 @@ fun BluetoothDevice.toBluetoothPrinter():Map<String, Any> {
             "macAddress" to address
     )
 }
+
+////////////////////// TYPE B Section //////////////////////////
+
 
 

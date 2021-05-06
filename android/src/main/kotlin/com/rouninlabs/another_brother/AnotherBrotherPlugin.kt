@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Build
 import androidx.annotation.NonNull
 import com.rouninlabs.another_brother.method.*
+import com.rouninlabs.another_brother.method.typeb.*
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
@@ -160,6 +161,51 @@ class AnotherBrotherPlugin : FlutterPlugin, MethodCallHandler {
         }
         else if (call.method == GetBluetoothPrintersMethodCall.METHOD_NAME) {
             GetBluetoothPrintersMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
+        else if (call.method == TbStartCommunicationMethodCall.METHOD_NAME) {
+            TbStartCommunicationMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
+        else if (call.method == TbEndCommunicationMethodCall.METHOD_NAME) {
+            TbEndCommunicationMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
+        else if (call.method == TbSetupMethodCall.METHOD_NAME) {
+            TbSetupMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
+        else if (call.method == TbBarcodeMethodCall.METHOD_NAME) {
+            TbBarcodeMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
+        else if (call.method == TbPrintLabelMethodCall.METHOD_NAME) {
+            TbPrintLabelMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
+        else if (call.method == TbClearBufferMethodCall.METHOD_NAME) {
+            TbClearBufferMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
+        else if (call.method == TbNoBackFeedMethodCall.METHOD_NAME) {
+            TbNoBackFeedMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
+        else if (call.method == TbPrinterFontMethodCall.METHOD_NAME) {
+            TbPrinterFontMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
+        else if (call.method == TbSendCommandMethodCall.METHOD_NAME) {
+            TbSendCommandMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
+        else if (call.method == TbDownloadPcxMethodCall.METHOD_NAME) {
+            TbDownloadPcxMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
+        else if (call.method == TbDownloadBmpMethodCall.METHOD_NAME) {
+            TbDownloadBmpMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
+        else if (call.method == TbGetPrinterStatusMethodCall.METHOD_NAME) {
+            TbGetPrinterStatusMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
+        else if (call.method == TbFormFeedMethodCall.METHOD_NAME) {
+            TbFormFeedMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
+        else if (call.method == TbSendCommandBinMethodCall.METHOD_NAME) {
+            TbSendCommandBinMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
+        else if (call.method == TbGetBluetoothPrintersMethodCall.METHOD_NAME) {
+            TbGetBluetoothPrintersMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
         }
         else {
             result.notImplemented()

@@ -8,6 +8,7 @@ import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
 import androidx.annotation.WorkerThread
 import com.brother.ptouch.sdk.Printer
+import com.rouninlabs.another_brother.method.typeb.ITbPrinterAdapter
 import com.rouninlabs.another_brother.receiver.UsbPermissionsReceiver
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
@@ -18,6 +19,8 @@ import java.util.concurrent.BlockingQueue
 object BrotherManager {
 
     val mActivePrinters:MutableMap<String, Printer> = hashMapOf()
+    val mActiveTypeBPrinters:MutableMap<String, ITbPrinterAdapter> = hashMapOf()
+
     val mUsbPermissionRequests: MutableMap<Int, BlockingQueue<Boolean>> = hashMapOf()
 
     fun getPrinter(printerId:String):Printer? {
@@ -30,6 +33,18 @@ object BrotherManager {
 
     fun untrackPrinter(printerId: String) {
         mActivePrinters.remove(printerId)
+    }
+
+    fun trackTypeBPrinter(printerId:String, printer:ITbPrinterAdapter) {
+        mActiveTypeBPrinters.put(printerId, printer)
+    }
+
+    fun untrackTypeBPrinter(printerId: String) {
+        mActiveTypeBPrinters.remove(printerId)
+    }
+
+    fun getTypeBPrinter(printerId:String):ITbPrinterAdapter? {
+        return mActiveTypeBPrinters[printerId]
     }
 
     /**
