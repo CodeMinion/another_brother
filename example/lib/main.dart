@@ -66,8 +66,8 @@ class _MyAppState extends State<MyApp> {
   Future<PrinterStatus> printLabelTypeB() async {
 
     TbPrinterInfo printerInfo = TbPrinterInfo(
-        port: Port.BLUETOOTH,
-        btAddress: "00:80:A3:8B:51:FD");
+      printerModel: TbModel.RJ_2055WB,
+        port: Port.BLUETOOTH);
 
 
     //TbPrinterInfo printerInfo =
@@ -84,6 +84,9 @@ class _MyAppState extends State<MyApp> {
     var printerFound = await printer.getBluetoothPrinters([TbModel.RJ_2055WB.getName()]);
     print("Found Printers: $printerFound");
 
+    printerInfo.btAddress = printerFound.single.macAddress;
+    await printer.setPrinterInfo(printerInfo);
+
     bool success = await printer.startCommunication();
     print("TypeB: Connection Success? $success");
 
@@ -99,11 +102,11 @@ class _MyAppState extends State<MyApp> {
     //success = await printer.downloadBmpAsset("assets/LOGO.BMP");
     //print ("TypeB: Download BMP Success? $success");
 
-    //success = await printer.setup();
-    //print ("TypeB: Print Setup Success? $success");
+    success = await printer.setup();
+    print ("TypeB: Print Setup Success? $success");
 
-    //success = await printer.clearBuffer();
-    //print ("TypeB: Clear Buffer Success? $success");
+    success = await printer.clearBuffer();
+    print ("TypeB: Clear Buffer Success? $success");
 
     //success = await printer.barcode("1234567");
     //print ("TypeB: Barcode Success? $success");
@@ -121,7 +124,9 @@ class _MyAppState extends State<MyApp> {
     //print ("TypeB: Send Command Success? $success");
 
     var assetImage = await loadImage("assets/brother_hack.png");
-    var grayImage = await printer.downloadImage(assetImage, scale: 0.25);
+    success = await printer.downloadImage(assetImage, scale: 0.6);
+    print ("TypeB: Image Download Success? $success");
+    //var grayImage = await printer.downloadImage(assetImage, scale: 0.25);
     //_imageBytes = (await grayImage.toByteData(format: ImageByteFormat.png)).buffer.asUint8List();
     //setState(() {
     //_imageToShow = picture;
@@ -131,9 +136,6 @@ class _MyAppState extends State<MyApp> {
 
     //success = await printer.printLabel();
     //print ("TypeB: Print Success? $success");
-
-    //TbPrinterStatus printerStatus = await printer.printerStatus();
-    //print ("TypeB: Printer Status? ${printerStatus.getStatusValue()}");
 
     //success = await printer.sendTbCommand(TbCommandSetWlanSsid(""));
     //success = await printer.sendTbCommand(TbCommandSetWlanSsid(null));
@@ -151,8 +153,11 @@ class _MyAppState extends State<MyApp> {
     //success = await printer.sendTbCommand(TbCommandSelfTest(page: TbSelfTestPage.SYSTEM));
     //print("TypeB: WLAN Test Command Success? $success");
 
-    //success = await printer.printLabel();
-    //print ("TypeB: Print Success? $success");
+    success = await printer.printLabel();
+    print ("TypeB: Print Success? $success");
+
+    TbPrinterStatus printerStatus = await printer.printerStatus();
+    print ("TypeB: Printer Status? ${printerStatus.getStatusValue()}");
 
     success = await printer.endCommunication(timeoutMillis: 5000);
     print("TypeB: Connection Closed? $success");
