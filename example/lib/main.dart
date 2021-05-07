@@ -123,8 +123,10 @@ class _MyAppState extends State<MyApp> {
     //success = await printer.sendTbCommand(TbCommandPutBmp(10, 190, "assets/logos.bmp"));
     //print ("TypeB: Send Command Success? $success");
 
-    var assetImage = await loadImage("assets/brother_hack.png");
-    success = await printer.downloadImage(assetImage, scale: 0.6);
+    //var assetImage = await loadImage("assets/brother_hack.png");
+    //success = await printer.downloadImage(assetImage, scale: 0.6);
+    success = await printer.downloadImageAsset("assets/brother_hack.png", scale: 0.6);
+
     print ("TypeB: Image Download Success? $success");
     //var grayImage = await printer.downloadImage(assetImage, scale: 0.25);
     //_imageBytes = (await grayImage.toByteData(format: ImageByteFormat.png)).buffer.asUint8List();

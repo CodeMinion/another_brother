@@ -385,6 +385,7 @@ class TbPrinter {
       }
     }
 
+    /*
     String binLine = "";
     for (int i = 0; i < outImageBytes.length; i++) {
       if (i % pictureWidthBytes == 0) {
@@ -394,7 +395,7 @@ class TbPrinter {
 
       binLine =
           binLine + " " + (outImageBytes[i].toRadixString(2).padLeft(8, '0'));
-    }
+    }*/
 
     TbCommandSendBitmap sendBitmapCmd = TbCommandSendBitmap(
         x, y, pictureWidthBytes, pictureHeight,
@@ -785,21 +786,21 @@ class TbModel {
   final String _displayName;
   final String _name;
 
-  const TbModel(this._displayName, this._name);
+  const TbModel._internal(this._displayName, this._name);
 
-  static const TD_4650TNWB = const TbModel("TD-4650TNWB", "PS-");
-  static const TD_4750TNWB = const TbModel("TD_4750TNWB", "PS-");
-  static const TD_4650TNWBR = const TbModel("TD-4650TNWBR", "PS-");
-  static const TD_4750TNWBR = const TbModel("TD-4750TNWBR", "PS-");
-  static const RJ_2055WB = const TbModel("RJ-2055WB", "PS-");
-  static const RJ_3055WB = const TbModel("RJ-3055WB", "PS-");
-  static const TJ_4420TN = const TbModel("TJ-4420TN", "PS-");
-  static const TJ_4520TN = const TbModel("TJ-4520TN", "PS-");
-  static const TJ_4620TN = const TbModel("TJ-4620TN", "PS-");
-  static const TJ_4422TN = const TbModel("TJ-4422TN", "PS-");
-  static const TJ_4522TN = const TbModel("TJ-4522TN", "PS-");
-  static const RJ_2035B = const TbModel("RJ-2035B", "PS-");
-  static const RJ_3035B = const TbModel("RJ-3035B", "PS-");
+  static const TD_4650TNWB = const TbModel._internal("TD-4650TNWB", "PS-");
+  static const TD_4750TNWB = const TbModel._internal("TD_4750TNWB", "PS-");
+  static const TD_4650TNWBR = const TbModel._internal("TD-4650TNWBR", "PS-");
+  static const TD_4750TNWBR = const TbModel._internal("TD-4750TNWBR", "PS-");
+  static const RJ_2055WB = const TbModel._internal("RJ-2055WB", "PS-");
+  static const RJ_3055WB = const TbModel._internal("RJ-3055WB", "PS-");
+  static const TJ_4420TN = const TbModel._internal("TJ-4420TN", "PS-");
+  static const TJ_4520TN = const TbModel._internal("TJ-4520TN", "PS-");
+  static const TJ_4620TN = const TbModel._internal("TJ-4620TN", "PS-");
+  static const TJ_4422TN = const TbModel._internal("TJ-4422TN", "PS-");
+  static const TJ_4522TN = const TbModel._internal("TJ-4522TN", "PS-");
+  static const RJ_2035B = const TbModel._internal("RJ-2035B", "PS-");
+  static const RJ_3035B = const TbModel._internal("RJ-3035B", "PS-");
 
   static final _values = [
     TD_4650TNWB,
