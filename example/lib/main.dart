@@ -66,8 +66,11 @@ class _MyAppState extends State<MyApp> {
   Future<PrinterStatus> printLabelTypeB() async {
 
     TbPrinterInfo printerInfo = TbPrinterInfo(
-      printerModel: TbModel.RJ_2055WB,
-        port: Port.BLUETOOTH);
+      printerModel: TbModel.RJ_3035B,
+        port: Port.BLUETOOTH,
+        //port: Port.USB,
+      //btAddress: "34:81:F4:9A:5A:EC"
+    );
 
 
     //TbPrinterInfo printerInfo =
@@ -81,6 +84,8 @@ class _MyAppState extends State<MyApp> {
 
     await printer.setPrinterInfo(printerInfo);
 
+    //var printersFound = await printer.getBLEPrinters();
+    //print ("Found LE Printers: $printersFound");
     var printerFound = await printer.getBluetoothPrinters([TbModel.RJ_2055WB.getName()]);
     print("Found Printers: $printerFound");
 
@@ -125,9 +130,9 @@ class _MyAppState extends State<MyApp> {
 
     //var assetImage = await loadImage("assets/brother_hack.png");
     //success = await printer.downloadImage(assetImage, scale: 0.6);
-    success = await printer.downloadImageAsset("assets/brother_hack.png", scale: 0.6);
+    //success = await printer.downloadImageAsset("assets/brother_hack.png", scale: 0.6);
 
-    print ("TypeB: Image Download Success? $success");
+    //print ("TypeB: Image Download Success? $success");
     //var grayImage = await printer.downloadImage(assetImage, scale: 0.25);
     //_imageBytes = (await grayImage.toByteData(format: ImageByteFormat.png)).buffer.asUint8List();
     //setState(() {
@@ -155,14 +160,17 @@ class _MyAppState extends State<MyApp> {
     //success = await printer.sendTbCommand(TbCommandSelfTest(page: TbSelfTestPage.SYSTEM));
     //print("TypeB: WLAN Test Command Success? $success");
 
-    success = await printer.printLabel();
-    print ("TypeB: Print Success? $success");
+    //success = await printer.printLabel();
+    //print ("TypeB: Print Success? $success");
 
-    TbPrinterStatus printerStatus = await printer.printerStatus();
-    print ("TypeB: Printer Status? ${printerStatus.getStatusValue()}");
+    //TbPrinterStatus printerStatus = await printer.printerStatus();
+    //print ("TypeB: Printer Status? ${printerStatus.getStatusValue()}");
 
-    success = await printer.endCommunication(timeoutMillis: 5000);
-    print("TypeB: Connection Closed? $success");
+    //bool fileSent = await printer.updateFirmAsset("assets/RJ-3035B_EZC_B1.00.Q38.NEW");
+    //print("File Sent: $fileSent");
+
+    //success = await printer.endCommunication(timeoutMillis: 35000);
+    //print("TypeB: Connection Closed? $success");
 
   }
 

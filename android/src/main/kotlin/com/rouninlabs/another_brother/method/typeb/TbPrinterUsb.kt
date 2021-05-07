@@ -63,6 +63,15 @@ class TbPrinterUsb(val context: Context):ITbPrinterAdapter {
         return result == RESULT_SUCCESS
     }
 
+    override fun sendFile(filePath: String, brotherFileName: String): Boolean {
+        val inputFile = File(filePath)
+        val downloadFolder = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+        val downloadFile = File(downloadFolder, brotherFileName)
+        inputFile.copyTo(downloadFile, overwrite = true)
+        val result = mPrintConnector.downloadfile(downloadFile, downloadFile.name)
+        return result == RESULT_SUCCESS
+    }
+
     override fun setup(width: Int, height: Int, speed: Int, density: Int, sensor: Int, sensor_distance: Int, sensor_offset: Int): Boolean {
         val result = mPrintConnector.setup(width, height, speed, density, sensor, sensor_distance, sensor_offset)
         return result == RESULT_SUCCESS
@@ -99,7 +108,8 @@ class TbPrinterUsb(val context: Context):ITbPrinterAdapter {
     }
 
     override fun sendCommand(message: ByteArray): Boolean {
-        TODO("Not yet implemented")
+        val result = mPrintConnector.sendcommand(message)
+        return result == RESULT_SUCCESS
     }
 
     override fun printLabel(quantity: Int, copy: Int): Boolean {

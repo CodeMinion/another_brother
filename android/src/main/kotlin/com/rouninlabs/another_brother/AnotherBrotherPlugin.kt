@@ -207,6 +207,9 @@ class AnotherBrotherPlugin : FlutterPlugin, MethodCallHandler {
         else if (call.method == TbGetBluetoothPrintersMethodCall.METHOD_NAME) {
             TbGetBluetoothPrintersMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
         }
+        else if (call.method == TbSendFileMethodCall.METHOD_NAME) {
+            TbSendFileMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
+        }
         else {
             result.notImplemented()
         }

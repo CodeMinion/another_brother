@@ -9,6 +9,7 @@ import 'package:another_brother/printer_info.dart';
 import 'package:another_brother/type_b_commands.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'label_info.dart';
@@ -28,8 +29,8 @@ class TbPrinterInfo {
       {String ipAddress = "",
       String portNumber = "9100",
       String btAddress = "",
-        String localName = "",
-        TbModel printerModel = TbModel.RJ_2055WB,
+      String localName = "",
+      TbModel printerModel = TbModel.RJ_2055WB,
       this.port = Port.NET})
       : this.ipAddress = ipAddress,
         this.portNumber = portNumber,
@@ -70,14 +71,6 @@ class TbPrinter {
     return resolution / dots * _MM_IN_INCHE;
   }
 
-  static Future<Image> loadImage(String assetPath) async {
-    final ByteData img = await rootBundle.load(assetPath);
-    final Completer<Image> completer = new Completer();
-    decodeImageFromList(new Uint8List.view(img.buffer), (Image img) {
-      return completer.complete(img);
-    });
-    return completer.future;
-  }
 
   TbPrinter({TbPrinterInfo? printerInfo}) {
     if (printerInfo != null) {
@@ -305,18 +298,18 @@ class TbPrinter {
     return sendCommand(command.getCommand());
   }
 
-
   /// Downloads the image from the Flutter assets into the printer
   /// under the specified file name,
-  Future<bool> downloadImageAsset(String assetKey, {int x = 0, int y = 0, double scale = 1, int printerDpi = 203}) async {
-    Image image = await TbPrinter.loadImage(assetKey);
-    return downloadImage(image, x:x, y:y, scale: scale, printerDpi: printerDpi);
+  Future<bool> downloadImageAsset(String assetKey,
+      {int x = 0, int y = 0, double scale = 1, int printerDpi = 203}) async {
+    Image image = await BrotherUtils.loadImage(assetKey);
+    return downloadImage(image,
+        x: x, y: y, scale: scale, printerDpi: printerDpi);
   }
 
   /// Converts an image to gray scanle and sends it to the printer?
   Future<bool> downloadImage(Image image,
       {int x = 0, int y = 0, double scale = 1, int printerDpi = 203}) async {
-
     double ratio = image.width / image.height;
     double desiredImageWidth =
         image.width * scale; //image.height * printerDpi / 72 * scale;
@@ -325,7 +318,7 @@ class TbPrinter {
 
     // Ensure the that the sizes are a multiple of 8 because we track the widths in bytes.
     if (desiredImageWidth % 8 != 0) {
-      desiredImageWidth = (desiredImageWidth~/8 + 1) * 8;
+      desiredImageWidth = (desiredImageWidth ~/ 8 + 1) * 8;
       desiredImageHeight = desiredImageWidth * ratio;
     }
 
@@ -398,7 +391,10 @@ class TbPrinter {
     }*/
 
     TbCommandSendBitmap sendBitmapCmd = TbCommandSendBitmap(
-        x, y, pictureWidthBytes, pictureHeight,
+        x,
+        y,
+        pictureWidthBytes,
+        pictureHeight,
         Uint8List(outImageBytes.buffer.asUint8List().length));
     bool result = await sendTbCommand(sendBitmapCmd);
     result = result &&
@@ -418,26 +414,23 @@ class TbPrinter {
     } else
       return 1;
   }
-  
+
   /// Call to enable disable BLE
   Future<bool> toggleBle(bool enable) async {
     bool success = true;
-    if (_printerInfo.printerModel == TbModel.RJ_2035B 
-    || _printerInfo.printerModel == TbModel.RJ_3035B) {
+    if (_printerInfo.printerModel == TbModel.RJ_2035B ||
+        _printerInfo.printerModel == TbModel.RJ_3035B) {
       if (enable) {
         success = success && await sendCommand("BT MODE \"BT4.0\"\r\n");
         success = success && await sendCommand("SET BTLINKBACK OFF\r\n");
-      }
-      else {
+      } else {
         success = success && await sendCommand("BT MODE \"BT2.1\"\r\n");
         success = success && await sendCommand("SET BTLINKBACK ON\r\n");
       }
-    }
-    else {
+    } else {
       if (enable) {
         success = success && await sendCommand("BT MODE \"BT4.0\"\r\n");
-      }
-      else {
+      } else {
         success = success && await sendCommand("BT MODE \"BT2.1\"\r\n");
       }
       success = success && await sendCommand("WLAN MODULE SAVECFG\r\n");
@@ -445,6 +438,7 @@ class TbPrinter {
     }
     return success;
   }
+
   /// Prints the configure label.
   Future<bool> printLabel({int quantity = 1, int copy = 1}) async {
     var params = {
@@ -460,21 +454,34 @@ class TbPrinter {
   }
 
   /*
-   // TODO
+  /// Updates the firmware of the printer with the specified firmware file.
+  /// @param Path to firmware file.
+  Future<bool> updateFirmAsset(String assetKey) async {
+    String filePath = await BrotherUtils.assetFileToPath(assetKey);
+    return updateFirm(filePath);
+  }
+
+  /// Updates the firmware of the printer with the specified firmware file.
+  /// @param Path to firmware file.
+  Future<bool> updateFirm(String filePath) async {
+    bool success = await _sendFile(filePath);
+    success = success && await sendTbCommand(TbCommandRunFile(filePath));
+    return success;
+  }
+  */
   /// Sends a file to the printer.
-  Future<bool> sendFile(String filePath) async {
+  Future<bool> _sendFile(String filePath) async {
     var params = {
       "printerId": _printerId,
       "printInfo": _printerInfo.toMap(),
-      "filePath": filePath
+      "filePath": filePath,
+      "brotherFileName": ITbCommand.pathToBrotherFileName(filePath)
     };
 
     final bool success = await _channel.invokeMethod("typeB-sendFile", params);
 
     return success;
   }
-
-   */
 
   /// Returns the status of the printer.
   Future<TbPrinterStatus> printerStatus({int delayMillis = 1000}) async {
@@ -494,7 +501,7 @@ class TbPrinter {
   /// Downloads the BMP file from the Flutter assets into the printer
   /// under the specified file name,
   Future<bool> downloadPcxAsset(String assetKey) async {
-    String filePath = await _assetFileToPath(assetKey);
+    String filePath = await BrotherUtils.assetFileToPath(assetKey);
     return downloadPcx(filePath);
   }
 
@@ -516,7 +523,7 @@ class TbPrinter {
   /// Downloads the BMP file from the Flutter assets into the printer
   /// under the specified file name,
   Future<bool> downloadBmpAsset(String assetKey) async {
-    String filePath = await _assetFileToPath(assetKey);
+    String filePath = await BrotherUtils.assetFileToPath(assetKey);
     return downloadBmp(filePath);
   }
 
@@ -536,33 +543,54 @@ class TbPrinter {
     return success;
   }
 
-  Future<String> _assetFileToPath(String assetKey) async {
-    String fileName = assetKey.split("/").last;
-    // Load byte date from file.
-    ByteData fileData = await PlatformAssetBundle().load(assetKey);
-    // Save to a file.
-    Directory directory = await getTemporaryDirectory();
-    String dirPath = directory.path;
-    File destFile = File('$dirPath/$fileName');
-    destFile.writeAsBytesSync(fileData.buffer.asUint8List());
-    return destFile.path;
-  }
-
   /// Returns the paried printers matching the model name specified.
-  Future<List<BluetoothPrinter>> getBluetoothPrinters(List<String> modelName) async {
-
+  Future<List<BluetoothPrinter>> getBluetoothPrinters(
+      List<String> modelName) async {
     var params = {
       "printerId": _printerId,
       "printInfo": _printerInfo.toMap(),
-      "models" : modelName,
+      "models": modelName,
     };
 
-    final List<dynamic> resultList = await _channel.invokeMethod("typeB-getBluetoothPrinters", params);
+    final List<dynamic> resultList =
+        await _channel.invokeMethod("typeB-getBluetoothPrinters", params);
 
-    final List<BluetoothPrinter> outList = resultList.map( (bluetoothPrinter) => BluetoothPrinter.fromMap(bluetoothPrinter)).toList();
+    final List<BluetoothPrinter> outList = resultList
+        .map((bluetoothPrinter) => BluetoothPrinter.fromMap(bluetoothPrinter))
+        .toList();
     return outList;
   }
 
+  /// Discover printers which are connectable via BLE. Available
+  /// on Android 5.0 or later.
+  Future<List<BLEPrinter>> getBLEPrinters({int timeout = 5000}) async {
+    //BLE Scanning
+    FlutterBlue flutterBlue = FlutterBlue.instance;
+
+    // Start scanning
+    flutterBlue.startScan(
+      // Note: For some reason it does not find the printer even though this is the service
+      //withServices: [Guid("49535343-FE7D-4AE5-8FA9-9FAFD205E455")],
+        timeout: Duration(seconds: timeout ~/ 1000));
+
+    Set<BLEPrinter> foundDevices = {};
+    // Listen to scan results
+    var subscription = flutterBlue.scanResults.listen((results) {
+      for (ScanResult r in results) {
+        print("Scan Result: ${r.device}");
+
+        BLEPrinter found = BLEPrinter(localName: r.device.name);
+
+        // For now just filter by device name until we get service working.
+        if (found.localName.startsWith(_printerInfo.printerModel.getName()) && !foundDevices.contains(found)) {
+          foundDevices.add(found);
+        }
+      }
+    });
+
+    return await Future.delayed(
+        Duration(seconds: timeout ~/ 1000), () => foundDevices.toList());
+  }
 }
 
 class BarcodeType {
@@ -824,6 +852,42 @@ class TbModel {
 
   /// Used for searching during things like bt.
   String getName() => _name;
+}
+
+class BrotherUtils {
+
+  /// Utility function for turning a byte array into a UI Image.
+  /// @param imageBytes Byte array of the image.
+  static Future<Image> bytesToImage(Uint8List imageBytes) async {
+    final Completer<Image> completer = new Completer();
+    decodeImageFromList(imageBytes, (Image img) {
+      return completer.complete(img);
+    });
+    return completer.future;
+  }
+
+  /// Utility method for getting an UI Image from a resource in the assts.
+  /// @param assetPath path to retrieve the asset.
+  static Future<Image> loadImage(String assetPath) async {
+    final ByteData img = await rootBundle.load(assetPath);
+    final Completer<Image> completer = new Completer();
+    decodeImageFromList(new Uint8List.view(img.buffer), (Image img) {
+      return completer.complete(img);
+    });
+    return completer.future;
+  }
+
+  static Future<String> assetFileToPath(String assetKey) async {
+    String fileName = assetKey.split("/").last;
+    // Load byte date from file.
+    ByteData fileData = await PlatformAssetBundle().load(assetKey);
+    // Save to a file.
+    Directory directory = await getTemporaryDirectory();
+    String dirPath = directory.path;
+    File destFile = File('$dirPath/$fileName');
+    destFile.writeAsBytesSync(fileData.buffer.asUint8List());
+    return destFile.path;
+  }
 
 }
 /*

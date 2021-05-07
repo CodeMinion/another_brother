@@ -36,6 +36,7 @@ android {
     }
     defaultConfig {
         minSdkVersion 19 // Bumped up because of Type B SDK
+        consumerProguardFiles 'consumer-rules.pro'
     }
 }
 

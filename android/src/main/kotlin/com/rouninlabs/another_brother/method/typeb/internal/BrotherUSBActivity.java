@@ -1319,7 +1319,7 @@ public class BrotherUSBActivity extends Activity implements Runnable {
         }
     }
 
-    private String sendcommand(final byte[] command) {
+    public String sendcommand(final byte[] command) {
         if (mUsbConnection == null) {
             return "-1";
         } else {
@@ -1429,7 +1429,7 @@ public class BrotherUSBActivity extends Activity implements Runnable {
         }
     }
 
-    private String sendfile(String path, String filename) {
+    private String sendfile(Context context, String path, String filename) {
         if (mUsbConnection == null) {
             return "-1";
         } else {
@@ -1463,7 +1463,7 @@ public class BrotherUSBActivity extends Activity implements Runnable {
         }
     }
 
-    private String downloadfile(String path, String filename) {
+    public String downloadfile(String path, String filename) {
         if (mUsbConnection == null) {
             return "-1";
         } else {
@@ -1492,7 +1492,7 @@ public class BrotherUSBActivity extends Activity implements Runnable {
         }
     }
 
-    private String downloadfile(File file, String filename) {
+    public String downloadfile(File file, String filename) {
         if (mUsbConnection == null) {
             return "-1";
         } else {

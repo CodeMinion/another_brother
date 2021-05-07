@@ -33,12 +33,17 @@ class TbPrinterBluetooth(val context: Context, val btAddress:String):ITbPrinterA
         val downloadFile = File(downloadFolder, brotherFileName)
 
         // Note: This is a work around because of the location it is being saved to 
-        Log.d("Frank", "Input File Exists: ${inputFile.exists()}")
-        Log.d("Frank", "Input BMP File:${inputFile.path}!!")
-        Log.d("Frank", "Downloaded BMP File:${downloadFile.path}!!")
-        Log.d("Frank", "Downloaded BMP FileName:${downloadFile.name}!!")
         inputFile.copyTo(downloadFile, overwrite = true)
         val result = mPrintConnector.downloadbmp(context, downloadFile.name)
+        return result == RESULT_SUCCESS
+    }
+
+    override fun sendFile(filePath: String, brotherFileName: String): Boolean {
+        val inputFile = File(filePath)
+        val downloadFolder = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+        val downloadFile = File(downloadFolder, brotherFileName)
+        inputFile.copyTo(downloadFile, overwrite = true)
+        val result = mPrintConnector.downloadfile(downloadFile, downloadFile.name)
         return result == RESULT_SUCCESS
     }
 

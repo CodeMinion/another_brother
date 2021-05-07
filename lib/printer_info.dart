@@ -2442,8 +2442,11 @@ class CustomPaperInfo {
   }
 }
 
+abstract class ABrotherPrinter {
+  String getName();
+}
 
-class BLEPrinter {
+class BLEPrinter implements ABrotherPrinter {
   final String localName;
 
   BLEPrinter({this.localName = ""});
@@ -2470,10 +2473,13 @@ class BLEPrinter {
   @override
   bool operator ==(Object other) => other is BLEPrinter && localName == other.localName;
 
+  @override
+  String getName() => localName;
+
 }
 
 // TODO Integrate with new API getBluetoothPrinters(List<String> modelNames)
-class BluetoothPrinter {
+class BluetoothPrinter extends ABrotherPrinter {
   final String modelName;
   final String macAddress;
 
@@ -2503,6 +2509,9 @@ class BluetoothPrinter {
 
   @override
   bool operator ==(Object other) => other is BluetoothPrinter && macAddress == other.macAddress;
+
+  @override
+  String getName() => modelName;
 
 }
 

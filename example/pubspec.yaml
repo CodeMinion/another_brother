@@ -49,6 +49,8 @@ flutter:
      - assets/UL.PCX
      - assets/brother_hack.png
      - assets/logos.bmp
+     - assets/RJ-2035B_EZC_B1.00.Q38.NEW
+     - assets/RJ-3035B_EZC_B1.00.Q38.NEW
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

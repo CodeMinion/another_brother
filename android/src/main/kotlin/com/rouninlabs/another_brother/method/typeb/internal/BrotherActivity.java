@@ -2460,7 +2460,7 @@ public class BrotherActivity extends Activity {
         }
     }
 
-    private String downloadfile(File file, String filename) {
+    public String downloadfile(File file, String filename) {
         if (this.OutStream != null && this.InStream != null) {
             try {
                 FileInputStream fis = new FileInputStream(file);

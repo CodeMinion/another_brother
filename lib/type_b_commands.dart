@@ -184,3 +184,46 @@ class TbSelfTestPage {
   String getValue() => _value;
 
 }
+
+/// Command to delete a file
+/// Passing null will delete all files.
+class TbCommandDeleteFile implements ITbCommand {
+
+  String outCommand = "";
+
+
+  TbCommandDeleteFile(String? filePath) {
+    if (filePath == null) {
+      outCommand = "KILL \"* \"\r\n";
+
+    }
+    else {
+      outCommand = "KILL \"${ITbCommand.pathToBrotherFileName(filePath)}\"\r\n";
+    }
+
+  }
+  @override
+  String getCommand() {
+    return outCommand;
+  }
+
+}
+
+/// Command to run a file
+class TbCommandRunFile implements ITbCommand {
+
+  String outCommand = "";
+
+
+  TbCommandRunFile(String filePath) {
+    outCommand = "RUN \"${ITbCommand.pathToBrotherFileName(filePath)}\"\r\n";
+
+
+  }
+  @override
+  String getCommand() {
+    return outCommand;
+  }
+
+}
+

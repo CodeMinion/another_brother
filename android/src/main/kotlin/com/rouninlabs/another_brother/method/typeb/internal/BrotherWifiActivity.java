@@ -952,7 +952,7 @@ public class BrotherWifiActivity
         }
     }
 
-    private String sendcommand(byte[] message) {
+    public String sendcommand(byte[] message) {
         if (this.port_connected == 0) {
             return "-1";
         } else {
@@ -2401,7 +2401,7 @@ public class BrotherWifiActivity
         }
     }
 
-    private String downloadfile(File file, String filename) {
+    public String downloadfile(File file, String filename) {
         if (this.port_connected == 0) {
             return "-1";
         } else {

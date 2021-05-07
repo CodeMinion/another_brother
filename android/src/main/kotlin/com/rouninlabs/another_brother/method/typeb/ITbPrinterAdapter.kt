@@ -8,6 +8,8 @@ interface ITbPrinterAdapter {
 
     fun downloadBmp(filePath:String, brotherFileName: String):Boolean
 
+    fun sendFile(filePath:String, brotherFileName:String):Boolean
+
     fun setup(width:Int, height:Int, speed:Int, density:Int, sensor:Int, sensor_distance:Int, sensor_offset:Int):Boolean
 
     fun clearBuffer():Boolean
