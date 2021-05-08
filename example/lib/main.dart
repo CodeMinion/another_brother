@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> {
   Future<PrinterStatus> printLabelTypeB() async {
 
     TbPrinterInfo printerInfo = TbPrinterInfo(
-      printerModel: TbModel.RJ_3035B,
+      printerModel: TbModel.RJ_2055WB,
         port: Port.BLUETOOTH,
         //port: Port.USB,
       //btAddress: "34:81:F4:9A:5A:EC"
@@ -128,9 +128,9 @@ class _MyAppState extends State<MyApp> {
     //success = await printer.sendTbCommand(TbCommandPutBmp(10, 190, "assets/logos.bmp"));
     //print ("TypeB: Send Command Success? $success");
 
-    //var assetImage = await loadImage("assets/brother_hack.png");
+    var assetImage = await loadImage("assets/brother_hack.png");
     //success = await printer.downloadImage(assetImage, scale: 0.6);
-    //success = await printer.downloadImageAsset("assets/brother_hack.png", scale: 0.6);
+    success = await printer.downloadImageAsset("assets/brother_hack.png", scale: 0.2);
 
     //print ("TypeB: Image Download Success? $success");
     //var grayImage = await printer.downloadImage(assetImage, scale: 0.25);
@@ -160,8 +160,8 @@ class _MyAppState extends State<MyApp> {
     //success = await printer.sendTbCommand(TbCommandSelfTest(page: TbSelfTestPage.SYSTEM));
     //print("TypeB: WLAN Test Command Success? $success");
 
-    //success = await printer.printLabel();
-    //print ("TypeB: Print Success? $success");
+    success = await printer.printLabel();
+    print ("TypeB: Print Success? $success");
 
     //TbPrinterStatus printerStatus = await printer.printerStatus();
     //print ("TypeB: Printer Status? ${printerStatus.getStatusValue()}");

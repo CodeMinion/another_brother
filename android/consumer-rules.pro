@@ -1,1 +1,2 @@
 -keep class com.pauldemarco.flutter_blue.** { *; }
+-keep class com.brother.ptouch.sdk.** { *; }

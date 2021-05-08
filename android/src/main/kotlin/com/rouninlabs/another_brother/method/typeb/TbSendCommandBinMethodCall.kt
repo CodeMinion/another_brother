@@ -36,8 +36,10 @@ class TbSendCommandBinMethodCall(val flutterAssets: FlutterPlugin.FlutterAssets,
                 return@launch
             }
 
-            val success = tbPrinter.sendCommand(message = commandBytes)
-            
+            val success = tbPrinter.sendCommand(message =commandBytes)
+            //val success = tbPrinter.sendCommand(message = String(commandBytes, charset("UTF-8")))
+
+
             if (!success) {
                 withContext(Dispatchers.Main) {
                     // Set result Printer status.

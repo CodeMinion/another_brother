@@ -378,8 +378,23 @@ class TbPrinter {
       }
     }
 
+
     /*
     String binLine = "";
+    for (int i = 0; i < outImageBytes.length; i++) {
+      if (i % pictureWidthBytes == 0) {
+        print(binLine + " -- $i");
+        binLine = "";
+      }
+
+      binLine =
+          binLine + " " + (outImageBytes[i].toRadixString(2).padLeft(8, '0'));
+    }
+
+    print("String version: --- ");
+
+    binLine = "";
+    var stringBytes = Uint8List.fromList(String.fromCharCodes(outImageBytes).codeUnits);
     for (int i = 0; i < outImageBytes.length; i++) {
       if (i % pictureWidthBytes == 0) {
         print(binLine + " -- $i");
