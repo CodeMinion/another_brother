@@ -70,10 +70,23 @@ static NSString * METHOD_NAME = @"typeB-printerStatus";
                     dispatch_sync(dispatch_get_main_queue(), ^{
                             // Update UI
                             // Call the desired channel message here.
+                        const unsigned char *dataBuffer = (const unsigned char *)[status bytes];
+                        
+                        NSString * statusCode = [NSString stringWithFormat:@"%02lx",  (unsigned long)dataBuffer[0]];
+                        
+                        self->_result(@{
+                            @"value" : statusCode
+                                      });
+                
+                
+                        /*
                             self->_result(@{
                                 @"value" : [[NSString alloc] initWithData:status encoding:NSUTF8StringEncoding]
                                           });
+                         */
                         });
+                         
+                
                  
             });
     
