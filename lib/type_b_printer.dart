@@ -869,7 +869,15 @@ class TbModel {
   String getDisplayName() => _displayName;
 
   /// Used for searching during things like bt.
-  String getName() => _name;
+  String getName() {
+    if (Platform.isIOS) {
+      return _displayName;
+    }
+    else {
+      return _name;
+    }
+
+  }
 }
 
 class BrotherUtils {

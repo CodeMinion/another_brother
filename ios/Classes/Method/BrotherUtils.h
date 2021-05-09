@@ -13,6 +13,8 @@
 #import <BRLMPrinterKit/BRLMPrinterDefine.h>
 #import <BRLMPrinterKit/BRPtouchPrinterKit.h>
 #import <CoreBluetooth/CBCentralManager.h>
+#import <ExternalAccessory/ExternalAccessory.h>
+
 
 @interface LabelName : NSObject
 
@@ -119,6 +121,8 @@
 
 
 + (NSDictionary<NSString *, NSObject *> *) cpPeripheralToBluetoothPrinterMap:(CBPeripheral *) peripheral;
+
++ (NSDictionary<NSString *, NSObject *> *) eaAccessoryToBluetoothPrinterMap:(EAAccessory *) accessory;
 
 @end
 

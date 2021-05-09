@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <TbSendCommandBinMethodCall.h>
+#import "TbSendCommandBinMethodCall.h"
 
 @implementation TbSendCommandBinMethodCall
 

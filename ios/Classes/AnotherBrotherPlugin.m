@@ -35,6 +35,7 @@
 #import "Method/TypeB/TbNoBackFeedMethodCall.h"
 #import "Method/TypeB/TbPrintLabelMethodCall.h"
 #import "Method/TypeB/TbPrinterFontMethodCall.h"
+#import "Method/TypeB/TbGetPrinterStatusMethodCall.h"
 
 /*
 @implementation AnotherBrotherPlugin
@@ -137,6 +138,9 @@
   }
   else if ([[TbPrinterFontMethodCall METHOD_NAME] isEqualToString:call.method]) {
       [[[TbPrinterFontMethodCall alloc] initWithCall:call result:result plugin:self] execute];
+  }
+  else if ([[TbGetPrinterStatusMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[TbGetPrinterStatusMethodCall alloc] initWithCall:call result:result plugin:self] execute];
   }
   else {
       result(FlutterMethodNotImplemented);

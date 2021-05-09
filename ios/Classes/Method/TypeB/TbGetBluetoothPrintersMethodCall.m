@@ -41,11 +41,14 @@ static NSString * METHOD_NAME = @"typeB-getBluetoothPrinters";
                 // Get list of file paths from call
                 NSArray * printerModels = _call.arguments[@"models"];
                 
+                NSArray<EAAccessory *> * pairedDevices = [[EAAccessoryManager sharedAccessoryManager] connectedAccessories];
                 
+                /*
                 NSArray<CBUUID *> * services = @[
                     [CBUUID UUIDWithString:@"00001101-0000-1000-8000-00805F9B34FB" ] ];
                 
                 NSArray * pairedDevices = [[CBCentralManager alloc] retrieveConnectedPeripheralsWithServices:services];
+                */
                 
                 // TODO Filter out based on the name specified
                 // Map the paths into a list of NSURLs
@@ -55,22 +58,22 @@ static NSString * METHOD_NAME = @"typeB-getBluetoothPrinters";
                 [pairedDevices enumerateObjectsUsingBlock:^(id printerInfo, NSUInteger idx, BOOL *stop) {
                     
                     // TODO Convert to CBPeripheral to Bluetooth Printer
-                    id mapObj = [BrotherUtils cpPeripheralToBluetoothPrinterMap:(CBPeripheral*) printerInfo];
+                    //id mapObj = [BrotherUtils cpPeripheralToBluetoothPrinterMap:(CBPeripheral*) printerInfo];
                     
-                    [dartBluetoothPrinters addObject:mapObj];
+                    //[dartBluetoothPrinters addObject:mapObj];
                     
                     // TODO For not just send all the printers.
                     
-                    /*
-                    if ([printerModels containsObject:[(CBPeripheral*) printerInfo name]] ) {
+                    
+                    if ([printerModels containsObject:[(EAAccessory*) printerInfo name]] ) {
                     
                         // TODO Convert peripheral info into Bluetooth printer.
-                        id mapObj = [BrotherUtils bRPtouchDeviceInfoToBluetoothPrinterMap:printerInfo];
+                        id mapObj = [BrotherUtils eaAccessoryToBluetoothPrinterMap:printerInfo];
                         
                         
-                    [dartBluetoothPrinters addObject:mapObj];
+                        [dartBluetoothPrinters addObject:mapObj];
                     }
-                     */
+                     
                     
                 }];
                 

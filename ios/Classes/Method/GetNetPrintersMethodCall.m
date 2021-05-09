@@ -29,7 +29,7 @@ static NSString * METHOD_NAME = @"getNetPrinters";
 }
 - (void)execute {
     // Get printInfo dart params from call
-    NSDictionary<NSString *, NSObject *> * dartPrintInfo = _call.arguments[@"printInfo"];
+    //NSDictionary<NSString *, NSObject *> * dartPrintInfo = _call.arguments[@"printInfo"];
     // Get list of file paths from call
     NSArray * printerModels = _call.arguments[@"models"];
     

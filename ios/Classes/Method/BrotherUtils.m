@@ -1554,6 +1554,18 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     return dartPrinter;
 }
 
++ (NSDictionary<NSString *,NSObject *> *)eaAccessoryToBluetoothPrinterMap:(EAAccessory *)accessory {
+    
+    
+    NSDictionary<NSString *, NSObject *> * dartPrinter = @{
+        @"modelName": [accessory name],
+              @"macAddress": [accessory serialNumber]//[NSString stringWithFormat:@"%@",  @([accessory connectionID])]
+              
+    };
+    
+    return dartPrinter;
+}
+
 @end
 
 

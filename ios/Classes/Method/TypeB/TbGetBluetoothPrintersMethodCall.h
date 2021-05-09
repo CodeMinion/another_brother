@@ -11,6 +11,7 @@
 #import <Flutter/Flutter.h>
 #import "AnotherBrotherPlugin.h"
 #import <CoreBluetooth/CBCentralManager.h>
+#import <ExternalAccessory/ExternalAccessory.h>
 
 #import "TbPrinterInfo.h"
 
