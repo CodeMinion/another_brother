@@ -67,8 +67,8 @@ class _MyAppState extends State<MyApp> {
 
     TbPrinterInfo printerInfo = TbPrinterInfo(
       printerModel: TbModel.RJ_3035B,
-        port: Port.BLUETOOTH,
-        //port: Port.USB,
+        //port: Port.BLUETOOTH,
+        port: Port.USB,
       //btAddress: "34:81:F4:9A:5A:EC"
     );
 
@@ -113,8 +113,8 @@ class _MyAppState extends State<MyApp> {
     //success = await printer.clearBuffer();
     //print ("TypeB: Clear Buffer Success? $success");
 
-    //success = await printer.barcode("1234567");
-    //print ("TypeB: Barcode Success? $success");
+    success = await printer.barcode("1234567");
+    print ("TypeB: Barcode Success? $success");
 
     //success = await printer.printerFont("printerFont", x: 10, y: 150);
     //print ("TypeB: Printer Font Success? $success");
@@ -169,7 +169,7 @@ class _MyAppState extends State<MyApp> {
     //bool fileSent = await printer.updateFirmAsset("assets/RJ-3035B_EZC_B1.00.Q38.NEW");
     //print("File Sent: $fileSent");
 
-    success = await printer.endCommunication(timeoutMillis: 5000);
+    success = await printer.endCommunication(timeoutMillis: 35000);
     print("TypeB: Connection Closed? $success");
 
   }
