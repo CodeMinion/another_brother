@@ -1543,6 +1543,17 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
 }
 
 
++ (NSDictionary<NSString *,NSObject *> *)cpPeripheralToBluetoothPrinterMap:(CBPeripheral *)peripheral {
+    
+    NSDictionary<NSString *, NSObject *> * dartPrinter = @{
+        @"modelName": [peripheral name],
+              @"macAddress": [peripheral identifier],
+              
+    };
+    
+    return dartPrinter;
+}
+
 @end
 
 
@@ -1557,6 +1568,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
         }
         return self;
 }
+
 
 
 @end

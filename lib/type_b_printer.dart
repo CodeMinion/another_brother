@@ -449,6 +449,7 @@ class TbPrinter {
         success = success && await sendCommand("BT MODE \"BT2.1\"\r\n");
       }
       success = success && await sendCommand("WLAN MODULE SAVECFG\r\n");
+      success = success && await sendCommand("DELAY 20000\r\n");
       success = success && await sendCommand("INITIALPRINTER\r\n");
     }
     return success;
@@ -585,7 +586,9 @@ class TbPrinter {
     // Start scanning
     flutterBlue.startScan(
       // Note: For some reason it does not find the printer even though this is the service
-      //withServices: [Guid("49535343-FE7D-4AE5-8FA9-9FAFD205E455")],
+      //withServices: [Guid("49535343-FE7D-4AE5-8FA9-9FAFD205E455"),
+      // Guid("F0DD799C-C883-4976-96A5-8BB4907F41D6")
+      //],
         timeout: Duration(seconds: timeout ~/ 1000));
 
     Set<BLEPrinter> foundDevices = {};

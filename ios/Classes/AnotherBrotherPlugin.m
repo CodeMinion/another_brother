@@ -21,6 +21,20 @@
 #import "Method/GetBluetoothPrintersMethodCall.h"
 #import "Method/StartCommunicationMethodCall.h"
 #import "Method/EndCommunicationMethodCall.h"
+#import "Method/TypeB/TbStartCommunicationMethodCall.h"
+#import "Method/TypeB/TbEndCommunicationMethodCall.h"
+#import "Method/TypeB/TbSendCommandMethodCall.h"
+#import "Method/TypeB/TbSendCommandBinMethodCall.h"
+#import "Method/TypeB/TbGetBluetoothPrintersMethodCall.h"
+#import "Method/TypeB/TbSetupMethodCall.h"
+#import "Method/TypeB/TbBarcodeMethodCall.h"
+#import "Method/TypeB/TbClearBufferMethodCall.h"
+#import "Method/TypeB/TbDownloadBmpMethodCall.h"
+#import "Method/TypeB/TbDownloadPcxMethodCall.h"
+#import "Method/TypeB/TbFormFeedMethodCall.h"
+#import "Method/TypeB/TbNoBackFeedMethodCall.h"
+#import "Method/TypeB/TbPrintLabelMethodCall.h"
+#import "Method/TypeB/TbPrinterFontMethodCall.h"
 
 /*
 @implementation AnotherBrotherPlugin
@@ -81,13 +95,70 @@
   else if ([[EndCommunicationMethodCall METHOD_NAME] isEqualToString:call.method]) {
       [[[EndCommunicationMethodCall alloc] initWithCall:call result:result] execute];
   }
+  // TYPE B
+  else if ([[TbStartCommunicationMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[TbStartCommunicationMethodCall alloc] initWithCall:call result:result plugin:self] execute];
+  }
+  else if ([[TbEndCommunicationMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[TbEndCommunicationMethodCall alloc] initWithCall:call result:result plugin:self] execute];
+  }
+  else if ([[TbSendCommandMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[TbSendCommandMethodCall alloc] initWithCall:call result:result plugin:self] execute];
+  }
+  else if ([[TbSendCommandBinMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[TbSendCommandBinMethodCall alloc] initWithCall:call result:result plugin:self] execute];
+  }
+  else if ([[TbGetBluetoothPrintersMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[TbGetBluetoothPrintersMethodCall alloc] initWithCall:call result:result plugin:self ] execute];
+  }
+  else if ([[TbSetupMethodCall METHOD_NAME] isEqualToString:call.method ]) {
+      [[[TbSetupMethodCall alloc] initWithCall:call result:result plugin:self] execute];
+  }
+  else if ([[TbBarcodeMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[TbBarcodeMethodCall alloc] initWithCall:call result:result plugin:self] execute];
+  }
+  else if ([[TbClearBufferMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[TbClearBufferMethodCall alloc] initWithCall:call result:result plugin:self] execute];
+  }
+  else if ([[TbDownloadPcxMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[TbDownloadPcxMethodCall alloc] initWithCall:call result:result plugin:self] execute];
+  }
+  else if ([[TbDownloadBmpMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[TbDownloadBmpMethodCall alloc] initWithCall:call result:result plugin:self] execute];
+  }
+  else if ([[TbFormFeedMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[TbFormFeedMethodCall alloc] initWithCall:call result:result plugin:self] execute];
+  }
+  else if ([[TbNoBackFeedMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[TbNoBackFeedMethodCall alloc] initWithCall:call result:result plugin:self] execute];
+  }
+  else if ([[TbPrintLabelMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[TbPrintLabelMethodCall alloc] initWithCall:call result:result plugin:self] execute];
+  }
+  else if ([[TbPrinterFontMethodCall METHOD_NAME] isEqualToString:call.method]) {
+      [[[TbPrinterFontMethodCall alloc] initWithCall:call result:result plugin:self] execute];
+  }
   else {
       result(FlutterMethodNotImplemented);
   }
     
 }
 
+- (void)trackTypeBPrinterWithId:(NSString *)printerId typeBPrinter:(BROTHERSDK *)typeBPrinter {
+    if (_mActiveTypeBPrinters == NULL) {
+        _mActiveTypeBPrinters = [[NSMutableDictionary<NSString *, BROTHERSDK *> alloc] init];
+    }
+    
+    [_mActiveTypeBPrinters setObject:typeBPrinter forKey:printerId ] ;
+}
 
+- (void)untrackTypeBPrinterWithId:(NSString *)printerId {
+    [_mActiveTypeBPrinters removeObjectForKey:printerId];
+}
+
+- (BROTHERSDK *)getTypeBPrinterWithId:(NSString *)printerId {
+    return [_mActiveTypeBPrinters objectForKey:printerId];
+}
 
 
 @end

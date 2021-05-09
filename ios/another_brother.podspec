@@ -26,6 +26,8 @@ A new flutter plugin project.
   #s.vendored_frameworks = 'BRPtouchPrinterKit.framework'
   
   s.dependency 'BRLMPrinterKit'
+  s.dependency 'BROTHERSDK'
+  
   #s.dependency 'BRLMPrinterKitBind'
   
   s.dependency 'Flutter'

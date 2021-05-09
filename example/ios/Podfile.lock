@@ -1,8 +1,10 @@
 PODS:
   - another_brother (0.0.1):
     - BRLMPrinterKit
+    - BROTHERSDK
     - Flutter
   - BRLMPrinterKit (4.0.2.1)
+  - BROTHERSDK (0.1.0)
   - DKImagePickerController/Core (4.3.2):
     - DKImagePickerController/ImageDataManager
     - DKImagePickerController/Resource
@@ -44,6 +46,8 @@ PODS:
   - flutter_blue/Protos (0.0.1):
     - Flutter
     - Protobuf (~> 3.11.4)
+  - path_provider (0.0.1):
+    - Flutter
   - Protobuf (3.11.4)
   - SDWebImage (5.11.0):
     - SDWebImage/Core (= 5.11.0)
@@ -55,10 +59,12 @@ DEPENDENCIES:
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - Flutter (from `Flutter`)
   - flutter_blue (from `.symlinks/plugins/flutter_blue/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
 
 SPEC REPOS:
   trunk:
     - BRLMPrinterKit
+    - BROTHERSDK
     - DKImagePickerController
     - DKPhotoGallery
     - Protobuf
@@ -74,15 +80,19 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_blue:
     :path: ".symlinks/plugins/flutter_blue/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
 
 SPEC CHECKSUMS:
-  another_brother: d81929220683ec2e9c1d66f9c4c190300e26c599
+  another_brother: 14a7865809340ab48049fb9861f57bb5151c787c
   BRLMPrinterKit: 79ca593275bdae5309c8ee93674df2e5177a1b52
+  BROTHERSDK: ea7f08981c315f742fc833d857dc85cb324ab195
   DKImagePickerController: b5eb7f7a388e4643264105d648d01f727110fc3d
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   file_picker: 3e6c3790de664ccf9b882732d9db5eaf6b8d4eb1
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   flutter_blue: eeb381dc4727a0954dede73515f683865494b370
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   SDWebImage: 7acbb57630ac7db4a495547fb73916ff3e432f6b
   SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7

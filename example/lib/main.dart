@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> {
   Future<PrinterStatus> printLabelTypeB() async {
 
     TbPrinterInfo printerInfo = TbPrinterInfo(
-      printerModel: TbModel.RJ_2055WB,
+      printerModel: TbModel.RJ_3035B,
         port: Port.BLUETOOTH,
         //port: Port.USB,
       //btAddress: "34:81:F4:9A:5A:EC"
@@ -86,16 +86,16 @@ class _MyAppState extends State<MyApp> {
 
     //var printersFound = await printer.getBLEPrinters();
     //print ("Found LE Printers: $printersFound");
-    var printerFound = await printer.getBluetoothPrinters([TbModel.RJ_2055WB.getName()]);
-    print("Found Printers: $printerFound");
+    //var printerFound = await printer.getBluetoothPrinters([TbModel.RJ_3035B.getName()]);
+    //print("Found Printers: $printerFound");
 
-    printerInfo.btAddress = printerFound.single.macAddress;
-    await printer.setPrinterInfo(printerInfo);
+    //printerInfo.btAddress = printerFound.single.macAddress;
+    //await printer.setPrinterInfo(printerInfo);
 
     bool success = await printer.startCommunication();
     print("TypeB: Connection Success? $success");
 
-    //bool bleEnabled = await printer.toggleBle(true);
+    //bool bleEnabled = await printer.toggleBle(false);
     //print("BLE Enabled: $bleEnabled");
 
     //success = await printer.formFeed();
@@ -107,11 +107,11 @@ class _MyAppState extends State<MyApp> {
     //success = await printer.downloadBmpAsset("assets/LOGO.BMP");
     //print ("TypeB: Download BMP Success? $success");
 
-    success = await printer.setup();
-    print ("TypeB: Print Setup Success? $success");
+    //success = await printer.setup();
+    //print ("TypeB: Print Setup Success? $success");
 
-    success = await printer.clearBuffer();
-    print ("TypeB: Clear Buffer Success? $success");
+    //success = await printer.clearBuffer();
+    //print ("TypeB: Clear Buffer Success? $success");
 
     //success = await printer.barcode("1234567");
     //print ("TypeB: Barcode Success? $success");
@@ -128,11 +128,11 @@ class _MyAppState extends State<MyApp> {
     //success = await printer.sendTbCommand(TbCommandPutBmp(10, 190, "assets/logos.bmp"));
     //print ("TypeB: Send Command Success? $success");
 
-    var assetImage = await loadImage("assets/brother_hack.png");
+    //var assetImage = await loadImage("assets/brother_hack.png");
     //success = await printer.downloadImage(assetImage, scale: 0.6);
     success = await printer.downloadImageAsset("assets/brother_hack.png", scale: 0.2);
+    print ("TypeB: Image Download Success? $success");
 
-    //print ("TypeB: Image Download Success? $success");
     //var grayImage = await printer.downloadImage(assetImage, scale: 0.25);
     //_imageBytes = (await grayImage.toByteData(format: ImageByteFormat.png)).buffer.asUint8List();
     //setState(() {
@@ -169,8 +169,8 @@ class _MyAppState extends State<MyApp> {
     //bool fileSent = await printer.updateFirmAsset("assets/RJ-3035B_EZC_B1.00.Q38.NEW");
     //print("File Sent: $fileSent");
 
-    //success = await printer.endCommunication(timeoutMillis: 35000);
-    //print("TypeB: Connection Closed? $success");
+    success = await printer.endCommunication(timeoutMillis: 5000);
+    print("TypeB: Connection Closed? $success");
 
   }
 
