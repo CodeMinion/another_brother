@@ -332,8 +332,8 @@ public class BrotherUSBActivity extends Activity implements Runnable {
             String string_value = "\"" + string + "\"";
             message = barcode + position + " ," + mode + " ," + height_value + " ," + human_value + " ," + rota + " ," + narrow_value + " ," + wide_value + " ," + string_value + "\r\n";
             byte[] msgBuffer = message.getBytes();
-            this.sendcommand(msgBuffer);
-            return "1";
+            return this.sendcommand(msgBuffer);
+            //return "1";
         }
     }
 
@@ -384,7 +384,8 @@ public class BrotherUSBActivity extends Activity implements Runnable {
             } catch (InterruptedException var4) {
             }
 
-            return "-1";
+            //return "-1";
+            return "1";
         }
     }
 

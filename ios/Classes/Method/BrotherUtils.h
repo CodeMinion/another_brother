@@ -12,6 +12,9 @@
 #import <BRLMPrinterKit/BRLMPrinterKit.h>
 #import <BRLMPrinterKit/BRLMPrinterDefine.h>
 #import <BRLMPrinterKit/BRPtouchPrinterKit.h>
+#import <CoreBluetooth/CBCentralManager.h>
+#import <ExternalAccessory/ExternalAccessory.h>
+
 
 @interface LabelName : NSObject
 
@@ -116,6 +119,10 @@
 
 + (BRLMMWPrintSettingsPaperSize) mwPaperSizeFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
+
++ (NSDictionary<NSString *, NSObject *> *) cpPeripheralToBluetoothPrinterMap:(CBPeripheral *) peripheral;
+
++ (NSDictionary<NSString *, NSObject *> *) eaAccessoryToBluetoothPrinterMap:(EAAccessory *) accessory;
 
 @end
 
