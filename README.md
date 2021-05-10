@@ -10,3 +10,38 @@ Another Bother SDK library for Flutter.
 ## iOS Support
 - Bluetooth/BLE
 - WiFi
+
+# iOS Info.plist
+
+Add the following to your Info.plist
+```
+<key>NSLocalNetworkUsageDescription</key>
+        <string>Looking for local tcp Bonjour service</string>
+        <key>NSBonjourServices</key>
+        <array>
+        	<string>_ipp._tcp</string>
+        	<string>_printer._tcp</string>
+        	<string>_pdl-datastream._tcp</string>
+        </array>
+        <key>UIBackgroundModes</key>
+        <array>
+        	<string>fetch</string>
+        	<string>remote-notifications</string>
+        </array>
+        <key>NSBluetoothAlwaysUsageDescription</key>
+    	<string>Need BLE permission</string>
+    	<key>NSBluetoothPeripheralUsageDescription</key>
+    	<string>Need BLE permission</string>
+    	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    	<string>Need Location permission</string>
+    	<key>NSLocationAlwaysUsageDescription</key>
+    	<string>Need Location permission</string>
+    	<key>NSLocationWhenInUseUsageDescription</key>
+    	<string>Need Location permission</string>
+    	<key>UISupportedExternalAccessoryProtocols</key>
+    	<array>
+    		<string>com.brother.ptcbp</string>
+    		<string>com.issc.datapath</string>
+    	</array>
+```
+Also make sure to mark the libBROTHERSDK.a as belonging to another_brother in xCode.
