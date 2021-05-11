@@ -2594,6 +2594,26 @@ class Printer {
   }
 
 
+  // Print the text using print settings.
+  Future<PrinterStatus> printText(String content, Paragraph paragraph, {Offset offset = Offset.zero, Color background = const Color(0xFFFFFFFF)}) async {
+    PictureRecorder recorder = PictureRecorder();
+    Canvas c = Canvas(recorder);
+    Paint paint = new Paint()..color = background;
+
+    double height =  offset.dy + paragraph.height;
+
+    // TODO Move to constant
+    if (height < 100) {
+      height = 100;
+    }
+
+    c.drawRect(Rect.fromLTWH(0, 0, offset.dx + paragraph.width, height), paint);
+    c.drawParagraph(paragraph, offset);
+    var picture = await recorder.endRecording().toImage(offset.dx.toInt() + paragraph.width.toInt(), height.toInt());
+
+    return printImage(picture);
+  }
+
   /// Print the image using print settings set by setPrinterInfo.
   Future<PrinterStatus> printImage(Image image) async {
 

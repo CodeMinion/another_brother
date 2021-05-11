@@ -518,7 +518,7 @@ class _MyAppState extends State<MyApp> {
     printInfo.printerModel = Model.QL_1110NWB;
     printInfo.printMode = PrintMode.FIT_TO_PAGE;
     printInfo.isAutoCut = true;
-    printInfo.port = Port.BLUETOOTH;
+    printInfo.port = Port.NET;
     printInfo.numberOfCopies = 2;
     //printInfo.macAddress = "58:93:D8:BD:69:95"; // Printer BLuetooth Mac
     //printInfo.port = Port.NET;
@@ -526,12 +526,18 @@ class _MyAppState extends State<MyApp> {
 
     // Ask the printer what label it has on.
     //printInfo.labelNameIndex = (await printer.getLabelInfo()).labelNameIndex; //QL1100.ordinalFromID(QL1100.W103.getId());
-    printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W103.getId());
+    printInfo.labelNameIndex = QL1100.ordinalFromID(QL1100.W62.getId());
 
+    /*
     List<BluetoothPrinter> netPrinters =
         await printer.getBluetoothPrinters([Model.QL_1110NWB.getName()]);
     print("Bt Printers Found: $netPrinters");
     printInfo.macAddress = netPrinters.single.macAddress;
+*/
+    List<NetPrinter> netPrinters =
+    await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
+    print("Net Printers Found: $netPrinters");
+    printInfo.ipAddress = netPrinters.single.ipAddress;
 
     /*
     var printer = new Printer();
@@ -555,6 +561,7 @@ class _MyAppState extends State<MyApp> {
 
     await printer.setPrinterInfo(printInfo);
 
+    /*
     PictureRecorder recorder = PictureRecorder();
     Canvas c = Canvas(recorder);
     Paint paint = new Paint();
@@ -563,6 +570,30 @@ class _MyAppState extends State<MyApp> {
     c.drawRect(bounds, paint);
     var picture = await recorder.endRecording().toImage(300, 100);
     PrinterStatus status = await printer.printImage(picture);
+*/
+
+    TextStyle style = TextStyle(
+        color: Colors.black,
+        fontSize: 30,
+        fontWeight: FontWeight.bold
+    );
+
+    ui.ParagraphBuilder paragraphBuilder = ui.ParagraphBuilder(
+        ui.ParagraphStyle(
+          fontSize:   style.fontSize,
+          fontFamily: style.fontFamily,
+          fontStyle:  style.fontStyle,
+          fontWeight: style.fontWeight,
+          textAlign: TextAlign.center,
+          maxLines: 10,
+        )
+    )
+      ..pushStyle(style.getTextStyle())
+      ..addText("Hello World This is a long text ");
+
+    ui.Paragraph paragraph = paragraphBuilder.build()..layout(ui.ParagraphConstraints(width: 300));
+
+    PrinterStatus status = await printer.printText("Hello World", paragraph);
 
     //FilePickerResult result = await FilePicker.platform.pickFiles();
 
@@ -629,8 +660,8 @@ class _MyAppState extends State<MyApp> {
                   child: ElevatedButton(
                       onPressed: () {
                         //printBle();
-                        //printImageBluetooth();
-                        printLabelTypeB();
+                        printImageBluetooth();
+                        //printLabelTypeB();
                       },
                       child: Text("Print Bluetooth")),
                 ),
