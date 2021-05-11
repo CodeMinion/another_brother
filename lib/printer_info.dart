@@ -2595,7 +2595,7 @@ class Printer {
 
 
   // Print the text using print settings.
-  Future<PrinterStatus> printText(String content, Paragraph paragraph, {Offset offset = Offset.zero, Color background = const Color(0xFFFFFFFF)}) async {
+  Future<PrinterStatus> printText(Paragraph paragraph, {Offset offset = Offset.zero, Color background = const Color(0xFFFFFFFF)}) async {
     PictureRecorder recorder = PictureRecorder();
     Canvas c = Canvas(recorder);
     Paint paint = new Paint()..color = background;

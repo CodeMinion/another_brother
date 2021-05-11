@@ -593,7 +593,7 @@ class _MyAppState extends State<MyApp> {
 
     ui.Paragraph paragraph = paragraphBuilder.build()..layout(ui.ParagraphConstraints(width: 300));
 
-    PrinterStatus status = await printer.printText("Hello World", paragraph);
+    PrinterStatus status = await printer.printText(paragraph);
 
     //FilePickerResult result = await FilePicker.platform.pickFiles();
 
