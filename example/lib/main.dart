@@ -29,6 +29,18 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
+class Task {
+  final String _name;
+  final bool _checked;
+  
+  const Task(this._name, this._checked);
+  
+  bool isChecked() => _checked;
+  
+  String getName()=> _name;
+  
+}
+
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   File _selectedImage = null;
@@ -174,6 +186,7 @@ class _MyAppState extends State<MyApp> {
 
   }
 
+
   Future<ui.Image> loadImage(String assetPath) async {
     final ByteData img = await rootBundle.load(assetPath);
     final Completer<ui.Image> completer = new Completer();
@@ -184,11 +197,62 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<PrinterStatus> printImageUsb() async {
+
     PictureRecorder recorder = PictureRecorder();
     Canvas c = Canvas(recorder);
     Paint paint = new Paint();
     paint.color = Color.fromRGBO(255, 0, 0, 1);
     Rect bounds = new Rect.fromLTWH(0, 0, 300, 100);
+
+    List<Task> myTask = [
+      Task("Go shopping", true),
+      Task("Give workshop", false),
+      Task("This is a very long ToDo for testing the wrapping of the checks and the items in the list when they are too long", false),
+
+    ];
+
+    TextStyle textStyle = TextStyle(
+      fontSize: 12,
+      color: Colors.black
+    );
+
+    double nextY = 0;
+    double padding = 10;
+    myTask.forEach((task) {
+
+      final icon = task.isChecked() ? Icons.check_box : Icons.check_box_outline_blank;
+      TextPainter textPainter = TextPainter(textDirection: TextDirection.ltr);
+      textPainter.text = TextSpan(
+        text: String.fromCharCode(icon.codePoint),
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 12,
+          fontFamily: icon.fontFamily,
+          package: icon.fontPackage, // This line is mandatory for external icon packs
+        ),
+      );
+      textPainter.layout();
+      textPainter.paint(c, Offset(0, nextY));
+
+      ParagraphBuilder builder = ParagraphBuilder(
+          ParagraphStyle(
+            fontSize: 12,
+          ),
+      )..pushStyle(textStyle.getTextStyle())
+
+        ..addText(task.getName());
+
+
+      Paragraph taskLine = builder.build();
+      taskLine.layout(ParagraphConstraints(width:200));
+
+      c.drawParagraph(taskLine, Offset(textPainter.width + padding, nextY));
+
+      nextY += taskLine.height + padding;
+    });
+
+
+    /*
     c.save();
     c.translate(150, 150);
     c.rotate(1.57);
@@ -196,8 +260,8 @@ class _MyAppState extends State<MyApp> {
     c.drawRect(bounds, paint);
 
     c.restore();
-
-    var picture = await recorder.endRecording().toImage(300, 300);
+*/
+    var picture = await recorder.endRecording().toImage(300, nextY.toInt());
 
     _imageBytes = (await picture.toByteData(format: ImageByteFormat.png))
         .buffer
@@ -635,6 +699,8 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text("Hello World"),
+
             Center(
               child: Text('Running on: $_platformVersion\n'),
             ),
