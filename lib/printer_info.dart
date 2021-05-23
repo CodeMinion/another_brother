@@ -2231,7 +2231,7 @@ class BatteryInfo {
   }
 }
 
-class NetPrinter {
+class NetPrinter implements ABrotherPrinter {
   String modelName;
   String serNo;
   String ipAddress;
@@ -2272,6 +2272,9 @@ class NetPrinter {
   String toString() {
     return "{modelName: $modelName, serNo: $serNo, ipAddress: $ipAddress, macAddress:$macAddress, nodeName: $nodeName, location: $location}";
   }
+
+  @override
+  String getName() => modelName;
 
 }
 
@@ -2479,7 +2482,7 @@ class BLEPrinter implements ABrotherPrinter {
 }
 
 // TODO Integrate with new API getBluetoothPrinters(List<String> modelNames)
-class BluetoothPrinter extends ABrotherPrinter {
+class BluetoothPrinter implements ABrotherPrinter {
   final String modelName;
   final String macAddress;
 
