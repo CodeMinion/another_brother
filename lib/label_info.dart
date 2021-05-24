@@ -216,6 +216,7 @@ class LabelColor {
 
 abstract class ALabelName {
   Map<String, dynamic> toMap();
+  String getName();
 
 }
 class PT3 implements ALabelName {
@@ -283,6 +284,9 @@ class PT3 implements ALabelName {
       "model": _model
     };
   }
+
+  @override
+  String getName() => _name;
 }
 
 class PT implements ALabelName {
@@ -342,6 +346,7 @@ class PT implements ALabelName {
     return _id;
   }
 
+  @override
   String getName() {
     return _name;
   }
@@ -449,6 +454,7 @@ class QL700 implements ALabelName {
     return _id;
   }
 
+  @override
   String getName() {
     return _name;
   }
@@ -470,6 +476,8 @@ class QL700 implements ALabelName {
     }
     return UNSUPPORT;
   }
+
+  static List<QL700> getValues() => _values;
 
   static int ordinalFromID(int id) {
     for (int i = 0; i < _values.length; ++i) {
@@ -566,9 +574,14 @@ class QL1115 implements ALabelName {
     UNSUPPORT
   ];
 
+  @override
+  String getName() => _name;
+
   int getId() {
     return _id;
   }
+
+  static List<QL1115> getValues() => _values;
 
   static int getItemId(index) {
     if (index < 0 || index > _values.length) {
@@ -643,7 +656,7 @@ class QL1100 implements ALabelName {
   static const W54 = const QL1100._internal(15, "W54");
   static const W62 = const QL1100._internal(16, "W62");
   static const W60H86 = const QL1100._internal(17, "W60H86");
-  static const W102 = const QL1100._internal(40, "W60H86");
+  static const W102 = const QL1100._internal(40, "W102");
   static const W102H51 = const QL1100._internal(41, "W102H51");
   static const W102H152 = const QL1100._internal(48, "W102H152");
   static const W103 = const QL1100._internal(49, "W103");
@@ -680,9 +693,12 @@ class QL1100 implements ALabelName {
     return _id;
   }
 
+  @override
   String getName() {
     return _name;
   }
+
+  static List<QL1100> getValues() => _values;
 
   static int getItemId(index) {
     if (index < 0 || index > _values.length) {

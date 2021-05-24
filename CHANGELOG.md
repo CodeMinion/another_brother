@@ -5,4 +5,9 @@
 
 ## 0.0.7
 - Updates NetPrint to use common Printer interface.
-* TODO: Describe initial release.
+
+## 0.0.8
+- Exposes getName from papers.
+
+## 0.0.9
+- Fixes name for QL1100's W102 paper.

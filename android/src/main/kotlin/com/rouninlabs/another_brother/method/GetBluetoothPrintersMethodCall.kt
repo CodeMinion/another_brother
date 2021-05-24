@@ -70,8 +70,8 @@ class GetBluetoothPrintersMethodCall(val flutterAssets: FlutterPlugin.FlutterAss
                 bluetoothDevice -> models.filter { modelName -> bluetoothDevice.name.contains(modelName) }.isNotEmpty()
             }
 
-            Log.e("Frank", "Found Printers ${BluetoothAdapter.getDefaultAdapter().bondedDevices}")
-            Log.e("Frank" , "Filtered Printers $matchingPrinters")
+            //Log.e("Frank", "Found Printers ${BluetoothAdapter.getDefaultAdapter().bondedDevices}")
+            //Log.e("Frank" , "Filtered Printers $matchingPrinters")
 
             val dartPrinters = matchingPrinters.map { it.toBluetoothPrinter() }
             withContext(Dispatchers.Main) {
