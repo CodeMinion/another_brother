@@ -11,3 +11,7 @@
 
 ## 0.0.9
 - Fixes name for QL1100's W102 paper.
+
+## 0.0.10
+- Exposes getValues for additional papers.
+- Paper now return an immutable list from getValues()

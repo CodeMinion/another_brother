@@ -20,7 +20,7 @@ class BinPaper_RJ2050 implements ACustomPaper {
     RD_W58mm
   ];
 
-  static List<BinPaper_RJ2050> getValues() => _values;
+  static List<BinPaper_RJ2050> getValues() => List.from(_values);
 
   @override
   String getName() {
@@ -62,7 +62,7 @@ class BinPaper_RJ2150 implements ACustomPaper {
     RD_W2_1H1_5in
   ];
 
-  static List<BinPaper_RJ2150> getValues() => _values;
+  static List<BinPaper_RJ2150> getValues() => List.from(_values);
   @override
   String getName() {
     return _name;
@@ -99,7 +99,7 @@ class BinPaper_RJ3050Ai implements ACustomPaper {
     RD_W80mm
   ];
 
-  static List<BinPaper_RJ3050Ai> getValues() => _values;
+  static List<BinPaper_RJ3050Ai> getValues() => List.from(_values);
   @override
   String getName() {
     return _name;
@@ -134,7 +134,7 @@ class BinPaper_RJ3050 implements ACustomPaper {
     RD_W3_15in
   ];
 
-  List<BinPaper_RJ3050> getValues() => _values;
+  List<BinPaper_RJ3050> getValues() => List.from(_values);
   @override
   String getName() {
     return _name;
@@ -173,7 +173,7 @@ class BinPaper_RJ3150Ai implements ACustomPaper {
     RD_W80mm
   ];
 
-  static List<BinPaper_RJ3150Ai> getValues() => _values;
+  static List<BinPaper_RJ3150Ai> getValues() => List.from(_values);
   @override
   String getName() {
     return _name;
@@ -225,7 +225,7 @@ class BinPaper_RJ3150 implements ACustomPaper {
     RD_W76H44mm
   ];
 
-  static List<BinPaper_RJ3150> getValues() => _values;
+  static List<BinPaper_RJ3150> getValues() => List.from(_values);
   @override
   String getName() {
     return _name;
@@ -270,7 +270,7 @@ class BinPaper_RJ4030Ai implements ACustomPaper {
     RD_W4H6in
   ];
 
-  static List<BinPaper_RJ4030Ai> getValues() => _values;
+  static List<BinPaper_RJ4030Ai> getValues() => List.from(_values);
   @override
   String getName() {
     return _name;
@@ -321,7 +321,7 @@ class BinPaper_RJ4040 implements ACustomPaper {
     RD_W115H80mm
   ];
 
-  static List<BinPaper_RJ4040> getValues() => _values;
+  static List<BinPaper_RJ4040> getValues() => List.from(_values);
 
   @override
   String getName() {
@@ -371,7 +371,7 @@ class BinPaper_RJ4230 implements ACustomPaper {
     RD_W80mm
   ];
 
-  static List<BinPaper_RJ4230> getValues() => _values;
+  static List<BinPaper_RJ4230> getValues() => List.from(_values);
   @override
   String getName() {
     return _name;
@@ -427,7 +427,7 @@ class BinPaper_RJ4250 implements ACustomPaper {
     RD_W80mm
   ];
 
-  static List<BinPaper_RJ4250> getValues() => _values;
+  static List<BinPaper_RJ4250> getValues() => List.from(_values);
 
   @override
   String getName() {
@@ -480,7 +480,7 @@ class BinPaper_TD2120N implements ACustomPaper {
     RD_W51H26mm
   ];
 
-  static List<BinPaper_TD2120N> getValues() => _values;
+  static List<BinPaper_TD2120N> getValues() => List.from(_values);
 
   @override
   String getName() {
@@ -533,7 +533,7 @@ class BinPaper_TD2130N implements ACustomPaper {
     RD_W51H26mm
   ];
 
-  static List<BinPaper_TD2130N> getValues() => _values;
+  static List<BinPaper_TD2130N> getValues() => List.from(_values);
 
   @override
   String getName() {
@@ -571,6 +571,26 @@ class BinPaper_TD4550 implements ACustomPaper {
   static const RD_W76H26mm = const BinPaper_TD4550._internal("TD4550DNWB-RD76_26mm", "$_rootDir/TD4550DNWB-RD76_26mm.bin");
   static const RD_W76mm = const BinPaper_TD4550._internal("TD4550DNWB-RD76mm", "$_rootDir/TD4550DNWB-RD76mm.bin");
   static const RD_W90mm = const BinPaper_TD4550._internal("TD4550DNWB-RD90mm", "$_rootDir/TD4550DNWB-RD90mm.bin");
+
+  static final _values = [
+    RD_W2_2in,
+    RD_W2_9in,
+    RD_W2H1in,
+    RD_W3_5in,
+    RD_W3H1in,
+    RD_W4in,
+    RD_W4H1in,
+    RD_W4H2in,
+    RD_W4H3in,
+    RD_W4H4in,
+    RD_W4H6in,
+    RD_W51H26mm,
+    RD_W76H26mm,
+    RD_W76mm,
+    RD_W90mm
+  ];
+
+  static List<BinPaper_TD4550> getValues() => List.from(_values);
 
   @override
   String getName() {

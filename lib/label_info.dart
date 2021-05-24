@@ -208,6 +208,8 @@ class LabelColor {
     };
   }
 
+  static List<LabelColor> getValues() => List.from(_values);
+
   @override
   String toString() {
     return _name;
@@ -283,6 +285,10 @@ class PT3 implements ALabelName {
       "name": _name,
       "model": _model
     };
+  }
+
+  static List<PT3> getValues() {
+    return List.from(_values);
   }
 
   @override
@@ -397,6 +403,10 @@ class PT implements ALabelName {
       "model": _model
     };
   }
+
+  static List<PT> getValues() {
+    return List.from(_values);
+  }
 }
 
 class QL700 implements ALabelName {
@@ -477,7 +487,7 @@ class QL700 implements ALabelName {
     return UNSUPPORT;
   }
 
-  static List<QL700> getValues() => _values;
+  static List<QL700> getValues() => List.from(_values);
 
   static int ordinalFromID(int id) {
     for (int i = 0; i < _values.length; ++i) {
@@ -581,7 +591,7 @@ class QL1115 implements ALabelName {
     return _id;
   }
 
-  static List<QL1115> getValues() => _values;
+  static List<QL1115> getValues() => List.from(_values);
 
   static int getItemId(index) {
     if (index < 0 || index > _values.length) {
@@ -698,7 +708,7 @@ class QL1100 implements ALabelName {
     return _name;
   }
 
-  static List<QL1100> getValues() => _values;
+  static List<QL1100> getValues() => List.from(_values);
 
   static int getItemId(index) {
     if (index < 0 || index > _values.length) {

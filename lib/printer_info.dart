@@ -975,6 +975,8 @@ class ErrorCode {
       "name": _name
     };
   }
+
+  static List<ErrorCode> getValues() => List.from(_values);
 }
 
 class Msg {
