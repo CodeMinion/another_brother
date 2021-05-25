@@ -15,3 +15,7 @@
 ## 0.0.10
 - Exposes getValues for additional papers.
 - Paper now return an immutable list from getValues()
+
+## 0.0.11
+- Fixes dimension calculation for Type B download Image.
+- Handles missing BT address when trying to connect over BT on Type B.
