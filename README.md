@@ -44,4 +44,4 @@ Add the following to your Info.plist
     		<string>com.issc.datapath</string>
     	</array>
 ```
-Also make sure to mark the libBROTHERSDK.a as belonging to another_brother in xCode.
+Also make sure to mark the libBROTHERSDK.a as belonging to another_brother in xCode: https://www.youtube.com/watch?v=42dBVdXU8gk
