@@ -192,13 +192,25 @@ class TbCommandDeleteFile implements ITbCommand {
   String outCommand = "";
 
 
-  TbCommandDeleteFile(String? filePath) {
+  TbCommandDeleteFile({String? filePath, bool fromFlash = true}) {
     if (filePath == null) {
-      outCommand = "KILL \"* \"\r\n";
+      if (fromFlash) {
+        outCommand = "KILL F, \"* \"\r\n";
+      }
+      else {
+        outCommand = "KILL \"* \"\r\n";
+      }
 
     }
     else {
-      outCommand = "KILL \"${ITbCommand.pathToBrotherFileName(filePath)}\"\r\n";
+      if (fromFlash) {
+        outCommand =
+        "KILL F, \"${ITbCommand.pathToBrotherFileName(filePath)}\"\r\n";
+      }
+      else {
+        outCommand =
+        "KILL \"${ITbCommand.pathToBrotherFileName(filePath)}\"\r\n";
+      }
     }
 
   }

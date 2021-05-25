@@ -13,8 +13,14 @@ class TbPrinterBluetooth(val context: Context, val btAddress:String):ITbPrinterA
     private val mPrintConnector: BrotherActivity = BrotherActivity()
 
     override fun openPort(): Boolean {
-        val result = mPrintConnector.openport(btAddress)
-        return result == RESULT_SUCCESS
+        try {
+            val result = mPrintConnector.openport(btAddress)
+            return result == RESULT_SUCCESS
+        }
+        catch (e:Exception) {
+            Log.w("another_brother", "openPort Failed:", e)
+            return false;
+        }
     }
 
     override fun downloadPcx(filePath: String, brotherFileName:String): Boolean {

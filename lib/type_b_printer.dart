@@ -300,6 +300,7 @@ class TbPrinter {
 
   /// Downloads the image from the Flutter assets into the printer
   /// under the specified file name,
+  //Future<Image> downloadImageAsset(String assetKey,
   Future<bool> downloadImageAsset(String assetKey,
       {int x = 0, int y = 0, double scale = 1, int printerDpi = 203}) async {
     Image image = await BrotherUtils.loadImage(assetKey);
@@ -308,9 +309,10 @@ class TbPrinter {
   }
 
   /// Converts an image to gray scanle and sends it to the printer?
+  //Future<Image> downloadImage(Image image,
   Future<bool> downloadImage(Image image,
       {int x = 0, int y = 0, double scale = 1, int printerDpi = 203}) async {
-    double ratio = image.width / image.height;
+    double ratio = image.height / image.width ;
     double desiredImageWidth =
         image.width * scale; //image.height * printerDpi / 72 * scale;
     double desiredImageHeight =
@@ -379,6 +381,8 @@ class TbPrinter {
     }
 
 
+    //BrotherUtils.printBytes(outImageBytes, pictureWidthBytes);
+
     /*
     String binLine = "";
     for (int i = 0; i < outImageBytes.length; i++) {
@@ -393,17 +397,33 @@ class TbPrinter {
 
     print("String version: --- ");
 
-    binLine = "";
-    var stringBytes = Uint8List.fromList(String.fromCharCodes(outImageBytes).codeUnits);
-    for (int i = 0; i < outImageBytes.length; i++) {
-      if (i % pictureWidthBytes == 0) {
-        print(binLine + " -- $i");
-        binLine = "";
-      }
+    */
 
-      binLine =
-          binLine + " " + (outImageBytes[i].toRadixString(2).padLeft(8, '0'));
-    }*/
+    /*
+    // TODO Since iOS does not have the sentCommand(byte[])
+    //  exposed we instead write make the image a BMP and use the downloadBmp instead.
+    // TODO check if iOS
+    // Convert image to BMP
+    Uint8List bmpImageBytes = _wrapInWindowBmp(width:desiredImageWidth.toInt(),
+        height:desiredImageHeight.toInt(),
+        imageBytes:outImageBytes,
+        printerDpi:printerDpi);
+
+    //BrotherUtils.printBytes(bmpImageBytes, pictureWidthBytes);
+    BrotherUtils.printBytesHex(bmpImageBytes, 16);
+
+    //Image bmpImage = await BrotherUtils.bytesToImage(bmpImageBytes);
+    // Save image to temp storage location.
+    String tempBmpFilename = "temp.bmp";//"temp_${DateTime.now().microsecondsSinceEpoch}.bmp";
+    String tempBmpFilePath = await BrotherUtils.bytesToTempFile(bmpImageBytes, tempBmpFilename);
+    // downloadBmp
+    bool downloadSuccess = await downloadBmp(tempBmpFilePath);
+    bool putSuccess = await sendTbCommand(TbCommandPutBmp(0, 0, tempBmpFilePath));
+    // Delete bmp file
+    await File(tempBmpFilePath).delete();
+    // TODO Return success value.
+    return putSuccess;
+    */
 
     TbCommandSendBitmap sendBitmapCmd = TbCommandSendBitmap(
         x,
@@ -417,9 +437,123 @@ class TbPrinter {
             outImageBytes); //sendCommand(String.fromCharCodes(outImageBytes));
     result = result && await sendCommand("\"\r\n");
 
-    return result;
 
+    return result;
+    //return bmpImage;
     //return grayPicture;
+  }
+
+  /// Given a raw array of bytes of a 1-color image
+  /// this method adds the windows BMP headers and
+  /// returns the completed BMP bytes.
+  /// Type B uses Windows BMP format (BM)
+  /// Reference: https://en.wikipedia.org/wiki/BMP_file_format
+  Uint8List _wrapInWindowBmp({required int width, required int height, required Uint8List imageBytes, required int printerDpi}) {
+
+    // BMP Header
+    int headerByteSize =  2 // header field
+        + 4 // size of bmp file in bytes
+        + 2 // Reserved
+        + 2 // Reserved
+        + 4 // The offset, starting address of the byte where the image data can be found
+        ;
+
+    // DIB Header
+    int bitmapInfoHeaderByteSize =  4 // Size of this header in bytes (40)
+        + 4 //bitmap width in pixels
+        + 4 // bitmap height in pixels
+        + 2 // number of color planes,
+        + 2 // number of bit per pixel, 1, 4 ,8 24 or 32
+        + 4 // compression method being used.
+        + 4 // the size of the raw image bitmap data
+        + 4 // horizontal resolution of the image
+        + 4 // vertical resolution of the image
+        + 4 // the number of colors in teh color palette, or 0 to default to 2^n
+        + 4 // the number of important colors used, or 0 when every color is important, generally ignored
+        + 8 // Unknown extra bytes in brother bitmap.
+    ;
+
+
+    final BytesBuilder bytesBuilder = BytesBuilder();
+    // BMP Header
+    // Header Field - 2 bytes
+    bytesBuilder.addByte(0x42); // B - 0X42
+    bytesBuilder.addByte(0x4D); // M - 0x4D
+    // Size of BMP in bytes - 4 bytes
+    int sizeOfBmpFile = headerByteSize +  bitmapInfoHeaderByteSize + imageBytes.length;
+    ByteData sizeData = ByteData(4);
+    sizeData.setInt32(0, sizeOfBmpFile, Endian.little);
+    bytesBuilder.add(sizeData.buffer.asUint8List());
+    // Reserved - 2 bytes
+    bytesBuilder.addByte(0);
+    bytesBuilder.addByte(0);
+    // Reserved - 2 bytes
+    bytesBuilder.addByte(0);
+    bytesBuilder.addByte(0);
+    // Offset, - 4 bytes i.e. starting address of the byte where the image data can be found
+    int imageDataOffset = headerByteSize +  bitmapInfoHeaderByteSize;
+    ByteData imageDataOffsetData = ByteData(4);
+    imageDataOffsetData.setInt32(0, imageDataOffset, Endian.little);
+    bytesBuilder.add(imageDataOffsetData.buffer.asUint8List());
+
+    // DIB BITMAPINFOHEADER - Start
+    // Size of this header in bytes (40) - 4 bytes
+    ByteData sizeOfInfoHeaderData = ByteData(4);
+    sizeOfInfoHeaderData.setInt32(0, 40, Endian.little);
+    bytesBuilder.add(sizeOfInfoHeaderData.buffer.asUint8List());
+    // Width of the bitmap in pixels (signed integer) - 4 bytes.
+    ByteData imgPixelWidthData = ByteData(4);
+    imgPixelWidthData.setInt32(0, width, Endian.little);
+    bytesBuilder.add(imgPixelWidthData.buffer.asUint8List());
+    // Height of the bitmap in pixels - 4 bytes.
+    ByteData imgPixelHeightData = ByteData(4);
+    imgPixelHeightData.setInt32(0, height, Endian.little);
+    bytesBuilder.add(imgPixelHeightData.buffer.asUint8List());
+    // Number of color planes (must be 1) - 2 bytes
+    ByteData colorPlaneData = ByteData(2);
+    colorPlaneData.setInt16(0, 1, Endian.little);
+    bytesBuilder.add(colorPlaneData.buffer.asUint8List());
+    // Number of color per pixels - 2 Bytes
+    // This is a 1-color data.
+    ByteData colorPerPixelData = ByteData(2);
+    colorPerPixelData.setInt16(0, 1, Endian.little);
+    bytesBuilder.add(colorPerPixelData.buffer.asUint8List());
+    // Compression method used - 4 bytes
+    ByteData compressionMethodData = ByteData(4);
+    compressionMethodData.setInt32(0, 0, Endian.little); // None
+    bytesBuilder.add(compressionMethodData.buffer.asUint8List());
+    // Raw size of the bitmap data - 4 bytes.
+    ByteData rawBmpDataSizeData = ByteData(4);
+    rawBmpDataSizeData.setInt32(0, imageBytes.length, Endian.little);
+    bytesBuilder.add(rawBmpDataSizeData.buffer.asUint8List());
+    // Horizontal resolution (pixel per meter) - 4 bytes
+    // TODO Update to using dotsToMillimeters()
+    int horizontalResolution = (printerDpi * 39.3701).toInt();
+    ByteData horizontalResolutionData = ByteData(4);
+    horizontalResolutionData.setInt32(0, horizontalResolution, Endian.little);
+    bytesBuilder.add(horizontalResolutionData.buffer.asUint8List());
+    // Vertical resolution (pixel per meter) - 4 bytes
+    // TODO Update to using dotsToMillimeters()
+    int verticalResolution = (printerDpi * 39.3701).toInt();
+    ByteData verticalResolutionData = ByteData(4);
+    verticalResolutionData.setInt32(0, verticalResolution, Endian.little);
+    bytesBuilder.add(verticalResolutionData.buffer.asUint8List());
+    // Number of colors in palette - 4 bytes
+    ByteData colorsInPaletteData = ByteData(4);
+    colorsInPaletteData.setInt32(0, 0, Endian.little);
+    bytesBuilder.add(colorsInPaletteData.buffer.asUint8List());
+    // Number of important colors - 4 bytes
+    ByteData importantColorData = ByteData(4);
+    importantColorData.setInt32(0, 0, Endian.little); // 0 - every color is important.
+    bytesBuilder.add(importantColorData.buffer.asUint8List());
+    // Add unknown 8 bytes in brother bmp ??
+    bytesBuilder.add([0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x00]);
+    // Image Data - (imgBytes.length) bytes
+    bytesBuilder.add(imageBytes);
+
+    // Build image data.
+    Uint8List bmpBytes = bytesBuilder.toBytes();
+    return bmpBytes;
   }
 
   /// Clams the colors to either 0 or 1
@@ -896,6 +1030,7 @@ class BrotherUtils {
   /// @param assetPath path to retrieve the asset.
   static Future<Image> loadImage(String assetPath) async {
     final ByteData img = await rootBundle.load(assetPath);
+    BrotherUtils.printBytesHex(img.buffer.asUint8List(), 16);
     final Completer<Image> completer = new Completer();
     decodeImageFromList(new Uint8List.view(img.buffer), (Image img) {
       return completer.complete(img);
@@ -904,7 +1039,9 @@ class BrotherUtils {
   }
 
   static Future<String> assetFileToPath(String assetKey) async {
-    String fileName = assetKey.split("/").last;
+    String fileName = assetKey
+        .split("/")
+        .last;
     // Load byte date from file.
     ByteData fileData = await PlatformAssetBundle().load(assetKey);
     // Save to a file.
@@ -915,6 +1052,40 @@ class BrotherUtils {
     return destFile.path;
   }
 
+  /// Helper funtion to write a set of bytes to a temp file.
+  static Future<String> bytesToTempFile(Uint8List bytesToWrite, String fileName) async {
+    Directory directory = await getTemporaryDirectory();
+    String dirPath = directory.path;
+    File destFile = File('$dirPath/$fileName');
+    destFile.writeAsBytesSync(bytesToWrite);
+    return destFile.path;
+  }
+
+  static printBytes(Uint8List outImageBytes, int pictureWidthBytes) {
+    String binLine = "";
+    for (int i = 0; i < outImageBytes.length; i++) {
+      if (i % pictureWidthBytes == 0) {
+        print(binLine + " -- $i");
+        binLine = "";
+      }
+
+      binLine =
+          binLine + " " + (outImageBytes[i].toRadixString(2).padLeft(8, '0'));
+    }
+  }
+
+  static printBytesHex(Uint8List bytes, int hexColCount) {
+    String binLine = "";
+    for (int i = 0; i < bytes.length; i++) {
+      if (i % hexColCount == 0) {
+        print(binLine + " -- $i");
+        binLine = "";
+      }
+
+      binLine =
+          binLine + " " + (bytes[i].toRadixString(16).padLeft(2, '0'));
+    }
+  }
 }
 /*
 class RJ2055WB implements ALabelName {

@@ -89,10 +89,11 @@ class _MyAppState extends State<MyApp> {
     var printerFound = await printer.getBluetoothPrinters([TbModel.RJ_3035B.getName()]);
     print("Found Printers: $printerFound");
 
-    //printerInfo.btAddress = printerFound.single.macAddress;
-    //await printer.setPrinterInfo(printerInfo);
+    printerInfo.btAddress = printerFound.single.macAddress;
+    await printer.setPrinterInfo(printerInfo);
 
-    bool success = await printer.startCommunication();
+    bool success = false;
+    success = await printer.startCommunication();
     print("TypeB: Connection Success? $success");
 
     //bool bleEnabled = await printer.toggleBle(false);
@@ -125,18 +126,18 @@ class _MyAppState extends State<MyApp> {
 
     //success = await printer.sendCommand("PUTBMP 10,190,\"LOGO.BMP\"\r\n");
     success = await printer.sendTbCommand(TbCommandPutBmp(10, 190, "assets/LOGO.BMP"));
-    //success = await printer.sendTbCommand(TbCommandPutBmp(10, 190, "assets/logos.bmp"));
     print ("TypeB: Send Command Success? $success");
 
     //var assetImage = await loadImage("assets/brother_hack.png");
     //success = await printer.downloadImage(assetImage, scale: 0.6);
-    //success = await printer.downloadImageAsset("assets/brother_hack.png", scale: 0.2);
-    //print ("TypeB: Image Download Success? $success");
+    success = await printer.downloadImageAsset("assets/brother_hack.png", x: 10, y:10, scale: 0.6);
+    //success = await printer.downloadImageAsset("assets/LOGO.BMP", scale: 1, printerDpi: 95);
+    print ("TypeB: Image Download Success? $success");
 
-    //var grayImage = await printer.downloadImage(assetImage, scale: 0.25);
-    //_imageBytes = (await grayImage.toByteData(format: ImageByteFormat.png)).buffer.asUint8List();
+    //var grayImage = await printer.downloadImageAsset("assets/brother_hack.png", scale: 0.2);
+    //_imageBytes = (await grayImage.toByteData(format: ImageByteFormat.rawUnmodified)).buffer.asUint8List();
     //setState(() {
-    //_imageToShow = picture;
+    //_imageToShow = grayImage;
     //});
 
     //print ("TypeB: Image Download Success? $success");
@@ -160,11 +161,15 @@ class _MyAppState extends State<MyApp> {
     //success = await printer.sendTbCommand(TbCommandSelfTest(page: TbSelfTestPage.SYSTEM));
     //print("TypeB: WLAN Test Command Success? $success");
 
-    //success = await printer.printLabel();
-    //print ("TypeB: Print Success? $success");
+    success = await printer.printLabel();
+    print ("TypeB: Print Success? $success");
 
     TbPrinterStatus printerStatus = await printer.printerStatus();
     print ("TypeB: Printer Status? ${printerStatus.getStatusValue()}");
+
+    // Delete all files downloaded to the printer memory
+    success = await printer.sendTbCommand(TbCommandDeleteFile());
+    print ("TypeB: Dile delete Success? $success");
 
     //bool fileSent = await printer.updateFirmAsset("assets/RJ-3035B_EZC_B1.00.Q38.NEW");
     //print("File Sent: $fileSent");
@@ -660,8 +665,8 @@ class _MyAppState extends State<MyApp> {
                   child: ElevatedButton(
                       onPressed: () {
                         //printBle();
-                        printImageBluetooth();
-                        //printLabelTypeB();
+                        //printImageBluetooth();
+                        printLabelTypeB();
                       },
                       child: Text("Print Bluetooth")),
                 ),
