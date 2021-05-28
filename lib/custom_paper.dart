@@ -507,9 +507,9 @@ class BinPaper_RJ4250 implements ACustomPaper {
   static const RD_W4H3in = const BinPaper_RJ4250._internal("RJ4250WB-RD4x3in", "$_rootDir/RJ4250WB-RD4x3.bin");
   static const RD_W4H4in = const BinPaper_RJ4250._internal("RJ4250WB-RD4x4in", "$_rootDir/RJ4250WB-RD4x4.bin");
   static const RD_W4H6in = const BinPaper_RJ4250._internal("RJ4250WB-RD4x6in", "$_rootDir/RJ4250WB-RD4x6.bin");
-  static const RD_W50H85mm = const BinPaper_RJ4250._internal("RJ4250WB-RD50_85mm", "$_rootDir/RJ4250WB-RD50_85mm.bin");
-  static const RD_W60H92mm = const BinPaper_RJ4250._internal("RJ4250WB-RD60_92mm", "$_rootDir/RJ4250WB-RD60_92mm.bin");
-  static const RD_W80H115mm = const BinPaper_RJ4250._internal("RJ4250WB-RD80_115mm", "$_rootDir/RJ4250WB-RD80_115mm.bin");
+  static const RD_W50H85mm = const BinPaper_RJ4250._internal("RJ4250WB-RD50x85mm", "$_rootDir/RJ4250WB-RD50_85mm.bin");
+  static const RD_W60H92mm = const BinPaper_RJ4250._internal("RJ4250WB-RD60x92mm", "$_rootDir/RJ4250WB-RD60_92mm.bin");
+  static const RD_W80H115mm = const BinPaper_RJ4250._internal("RJ4250WB-RD80x115mm", "$_rootDir/RJ4250WB-RD80_115mm.bin");
   static const RD_W80mm = const BinPaper_RJ4250._internal("RJ4250WB-RD80mm", "$_rootDir/RJ4250WB-RD80mm.bin");
   static const UNSUPPORTED = const BinPaper_RJ4250._internal("UNSUPPORTED", "");
 

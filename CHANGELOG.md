@@ -26,3 +26,6 @@
 
 ## 0.0.13
 - Updated the names for the RJ-4250 bin papers.
+
+## 0.0.14
+- Additional Updates for the names of the RJ-4250 bin papers.
