@@ -15,7 +15,8 @@ Another Bother SDK library for Flutter.
 
 Add the following to your Info.plist
 ```
-<key>NSLocalNetworkUsageDescription</key>
+	<!-- Another Brother Section -->
+	<key>NSLocalNetworkUsageDescription</key>
         <string>Looking for local tcp Bonjour service</string>
         <key>NSBonjourServices</key>
         <array>
@@ -43,5 +44,7 @@ Add the following to your Info.plist
     		<string>com.brother.ptcbp</string>
     		<string>com.issc.datapath</string>
     	</array>
+    	<!-- End Another Brother Section -->
 ```
+On your Runner make sure to mark: Allow non-modular includes as yes.
 Also make sure to mark the libBROTHERSDK.a as belonging to another_brother in xCode: https://www.youtube.com/watch?v=42dBVdXU8gk
