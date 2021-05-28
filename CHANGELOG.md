@@ -19,3 +19,7 @@
 ## 0.0.11
 - Fixes dimension calculation for Type B download Image.
 - Handles missing BT address when trying to connect over BT on Type B.
+
+## 0.0.12
+- Added valueFromName to Bin papers.
+- Added UNSUPPORTED to Bin papers.

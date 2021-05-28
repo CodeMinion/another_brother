@@ -1516,6 +1516,8 @@ class PrinterInfo {
     }
   }
 
+  ACustomPaper? getCustomPaper() => binCustomPaper;
+
   static PrinterInfo fromMap(Map<dynamic, dynamic> map) {
     Model model = Model.fromMap(map["printerModel"]);
     TimeoutSetting timeout = TimeoutSetting.fromMap(map["timeout"]);
