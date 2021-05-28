@@ -23,3 +23,6 @@
 ## 0.0.12
 - Added valueFromName to Bin papers.
 - Added UNSUPPORTED to Bin papers.
+
+## 0.0.13
+- Updated the names for the RJ-4250 bin papers.

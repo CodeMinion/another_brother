@@ -58,8 +58,8 @@ class BinPaper_RJ2150 implements ACustomPaper {
   static const String _rootDir = "packages/another_brother/custom_paper/CustomRJ2150Paper";
   const BinPaper_RJ2150._internal(this._name, this._assetPath);
 
-  static const RD_W2H4in = const BinPaper_RJ2150._internal("RJ2150-2x4inch", "$_rootDir/RJ2150-2x4inch.bin");
-  static const RD_W1_9H3_3in = const BinPaper_RJ2150._internal("RJ2150-RD1.9x3.3inch", "$_rootDir/RJ2150-RD1.9x3.3inch.bin");
+  static const RD_W2H4in = const BinPaper_RJ2150._internal("RJ2150-2x4in", "$_rootDir/RJ2150-2x4inch.bin");
+  static const RD_W1_9H3_3in = const BinPaper_RJ2150._internal("RJ2150-RD1.9x3.3i", "$_rootDir/RJ2150-RD1.9x3.3inch.bin");
   static const RD_W50mm = const BinPaper_RJ2150._internal("RJ2150-RD50mm", "$_rootDir/RJ2150-RD50mm.bin");
   static const RD_W50H85mm = const BinPaper_RJ2150._internal("RJ2150-RD50x85mm", "$_rootDir/RJ2150-RD50x85mm.bin");
   static const RD_W58mm = const BinPaper_RJ2150._internal("RJ2150-RD58mm", "$_rootDir/RJ2150-RD58mm.bin");
@@ -497,16 +497,16 @@ class BinPaper_RJ4250 implements ACustomPaper {
   static const String _rootDir = "packages/another_brother/custom_paper/CustomRJ4250Paper";
   const BinPaper_RJ4250._internal(this._name, this._assetPath);
 
-  static const RD_W1_9H3_3in = const BinPaper_RJ4250._internal("RJ4250WB-RD1.9x3.3", "$_rootDir/RJ4250WB-RD1.9x3.3.bin");
-  static const RD_W2_2in = const BinPaper_RJ4250._internal("RJ4250WB-RD2.2inch", "$_rootDir/RJ4250WB-RD2.2inch.bin");
-  static const RD_W2_3H3_6in = const BinPaper_RJ4250._internal("RJ4250WB-RD2.3x3.6", "$_rootDir/RJ4250WB-RD2.3x3.6.bin");
-  static const RD_W3_1H4_5in = const BinPaper_RJ4250._internal("RJ4250WB-RD3.1x4.5", "$_rootDir/RJ4250WB-RD3.1x4.5.bin");
-  static const RD_W4in = const BinPaper_RJ4250._internal("RJ4250WB-RD4inch", "$_rootDir/RJ4250WB-RD4inch.bin");
-  static const RD_W4H1in = const BinPaper_RJ4250._internal("RJ4250WB-RD4x1", "$_rootDir/RJ4250WB-RD4x1.bin");
-  static const RD_W4H2in = const BinPaper_RJ4250._internal("RJ4250WB-RD4x2", "$_rootDir/RJ4250WB-RD4x2.bin");
-  static const RD_W4H3in = const BinPaper_RJ4250._internal("RJ4250WB-RD4x3", "$_rootDir/RJ4250WB-RD4x3.bin");
-  static const RD_W4H4in = const BinPaper_RJ4250._internal("RJ4250WB-RD4x4", "$_rootDir/RJ4250WB-RD4x4.bin");
-  static const RD_W4H6in = const BinPaper_RJ4250._internal("RJ4250WB-RD4x6", "$_rootDir/RJ4250WB-RD4x6.bin");
+  static const RD_W1_9H3_3in = const BinPaper_RJ4250._internal("RJ4250WB-RD1.9x3.3in", "$_rootDir/RJ4250WB-RD1.9x3.3.bin");
+  static const RD_W2_2in = const BinPaper_RJ4250._internal("RJ4250WB-RD2.2in", "$_rootDir/RJ4250WB-RD2.2inch.bin");
+  static const RD_W2_3H3_6in = const BinPaper_RJ4250._internal("RJ4250WB-RD2.3x3.6in", "$_rootDir/RJ4250WB-RD2.3x3.6.bin");
+  static const RD_W3_1H4_5in = const BinPaper_RJ4250._internal("RJ4250WB-RD3.1x4.5in", "$_rootDir/RJ4250WB-RD3.1x4.5.bin");
+  static const RD_W4in = const BinPaper_RJ4250._internal("RJ4250WB-RD4in", "$_rootDir/RJ4250WB-RD4inch.bin");
+  static const RD_W4H1in = const BinPaper_RJ4250._internal("RJ4250WB-RD4x1in", "$_rootDir/RJ4250WB-RD4x1.bin");
+  static const RD_W4H2in = const BinPaper_RJ4250._internal("RJ4250WB-RD4x2in", "$_rootDir/RJ4250WB-RD4x2.bin");
+  static const RD_W4H3in = const BinPaper_RJ4250._internal("RJ4250WB-RD4x3in", "$_rootDir/RJ4250WB-RD4x3.bin");
+  static const RD_W4H4in = const BinPaper_RJ4250._internal("RJ4250WB-RD4x4in", "$_rootDir/RJ4250WB-RD4x4.bin");
+  static const RD_W4H6in = const BinPaper_RJ4250._internal("RJ4250WB-RD4x6in", "$_rootDir/RJ4250WB-RD4x6.bin");
   static const RD_W50H85mm = const BinPaper_RJ4250._internal("RJ4250WB-RD50_85mm", "$_rootDir/RJ4250WB-RD50_85mm.bin");
   static const RD_W60H92mm = const BinPaper_RJ4250._internal("RJ4250WB-RD60_92mm", "$_rootDir/RJ4250WB-RD60_92mm.bin");
   static const RD_W80H115mm = const BinPaper_RJ4250._internal("RJ4250WB-RD80_115mm", "$_rootDir/RJ4250WB-RD80_115mm.bin");
