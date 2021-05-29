@@ -73,7 +73,15 @@ class PrintImageMethodCall(val flutterAssets: FlutterPlugin.FlutterAssets, val c
             }
 
             // Print Image
-            val printResult = printer.printImage(bitmap)
+            val printResult = try {
+                printer.printImage(bitmap)
+            }
+            catch (e:Exception ) {
+                Log.e("another-brother", "Print image error: ", e);
+                PrinterStatus().apply {
+                    errorCode = PrinterInfo.ErrorCode.ERROR_SYSTEM_ERROR
+                }
+            }
 
             // End Communication
             if (isOneTime) {
