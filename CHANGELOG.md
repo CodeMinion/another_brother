@@ -29,3 +29,6 @@
 
 ## 0.0.14
 - Additional Updates for the names of the RJ-4250 bin papers.
+
+## 0.0.15
+- Discovered TypeB printers now share the common interface ABrotherTbPrinter.

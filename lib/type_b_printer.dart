@@ -706,7 +706,7 @@ class TbPrinter {
         await _channel.invokeMethod("typeB-getBluetoothPrinters", params);
 
     final List<BluetoothPrinter> outList = resultList
-        .map((bluetoothPrinter) => BluetoothPrinter.fromMap(bluetoothPrinter))
+        .map((bluetoothPrinter) => TbBluetoothPrinter._(BluetoothPrinter.fromMap(bluetoothPrinter)))
         .toList();
     return outList;
   }
@@ -731,7 +731,8 @@ class TbPrinter {
       for (ScanResult r in results) {
         print("Scan Result: ${r.device}");
 
-        BLEPrinter found = BLEPrinter(localName: r.device.name);
+        BLEPrinter foundSt = BLEPrinter(localName: r.device.name);
+        TbBlePrinter found = TbBlePrinter._(foundSt);
 
         // For now just filter by device name until we get service working.
         if (found.localName.startsWith(_printerInfo.printerModel.getName()) && !foundDevices.contains(found)) {
@@ -1086,6 +1087,42 @@ class BrotherUtils {
           binLine + " " + (bytes[i].toRadixString(16).padLeft(2, '0'));
     }
   }
+}
+
+abstract class ABrotherTbPrinter {
+  String getName();
+}
+
+class TbBlePrinter implements BLEPrinter, ABrotherTbPrinter {
+  final BLEPrinter _printer;
+  const TbBlePrinter._(this._printer);
+
+  @override
+  String getName() => _printer.getName();
+
+  @override
+  String get localName => _printer.localName;
+
+  @override
+  Map<String, dynamic> toMap() => _printer.toMap();
+
+}
+
+class TbBluetoothPrinter implements BluetoothPrinter, ABrotherTbPrinter {
+  final BluetoothPrinter _printer;
+  const TbBluetoothPrinter._(this._printer);
+
+  @override
+  String getName() => _printer.getName();
+
+  @override
+  String get macAddress => _printer.macAddress;
+
+  @override
+  String get modelName => _printer.modelName;
+
+  @override
+  Map<String, dynamic> toMap() => _printer.toMap();
 }
 /*
 class RJ2055WB implements ALabelName {
