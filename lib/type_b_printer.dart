@@ -22,6 +22,7 @@ class TbPrinterInfo {
   Port port;
   String _btIOsPath = "com.issc.datapath";
   TbModel printerModel;
+  ATbLabelName labelName = TbLabelName.Unsupported;
 
   //ALabelName? labelName;
 
@@ -31,12 +32,14 @@ class TbPrinterInfo {
       String btAddress = "",
       String localName = "",
       TbModel printerModel = TbModel.RJ_2055WB,
+        ATbLabelName? labelName,
       this.port = Port.NET})
       : this.ipAddress = ipAddress,
         this.portNumber = portNumber,
         this.btAddress = btAddress,
         this.localName = localName,
-        this.printerModel = printerModel;
+        this.printerModel = printerModel,
+        this.labelName = labelName ?? TbLabelName.Unsupported;
 
   Map<String, dynamic> toMap() {
     return {
@@ -418,8 +421,10 @@ class TbPrinter {
           bmpImageBytes, tempBmpFilename);
       // downloadBmp
       bool downloadSuccess = await downloadBmp(tempBmpFilePath);
+      // The position is set on the canvas instead of the put, so we
+      // place at 0,0
       bool putSuccess = await sendTbCommand(
-          TbCommandPutBmp(x, y, tempBmpFilePath));
+          TbCommandPutBmp(0, 0, tempBmpFilePath));
       // Delete bmp file
       await File(tempBmpFilePath).delete();
       // Return success value.
@@ -932,6 +937,27 @@ class TbSensor {
   String getName() => _name;
 
   int getValue() => _value;
+
+  static valueFromName(String name) {
+    for (int i = 0; i < _values.length; i ++ ) {
+      if (_values[i].getName() == name) {
+        return _values[i];
+      }
+    }
+
+    return GAP;
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "name": _name
+    };
+  }
+
+  static TbSensor fromMap(Map<String, dynamic> map) {
+    String name = map["name"];
+    return valueFromName(name);
+  }
 }
 
 class TbPrinterStatus {
@@ -1153,6 +1179,113 @@ class TbBluetoothPrinter implements BluetoothPrinter, ABrotherTbPrinter {
   @override
   Map<String, dynamic> toMap() => _printer.toMap();
 }
+
+abstract class ATbLabelName extends ALabelName {
+
+  int getWidth() => 50;
+  int getHeight() => 50;
+  int getSpeed() => 1;
+  int getDensity() => 15;
+  TbSensor getSensor() => TbSensor.GAP;
+  int getSensorDistance() => 0;
+  int getSensorOffset() => 0;
+}
+
+class TbLabelName implements ATbLabelName {
+
+  static const int _kDefWidth = 50;
+  static const int _kDefHeight = 50;
+  static const int _kDefSpeed = 1;
+  static const int _kDefDensity = 15;
+  static const TbSensor _kDefSensor = TbSensor.GAP;
+  static const int _kDefDistance = 0;
+  static const int _kDefOffset = 0;
+
+  final String _name;
+  final int _width;
+  final int _height;
+  final int _speed;
+  final int _density;
+  final TbSensor _sensor;
+  final int _sensorDistance;
+  final int _sensorOffset;
+
+  const TbLabelName._(this._name,
+      this._width, this._height,
+      this._speed, this._density,
+      this._sensor, this._sensorDistance, this._sensorOffset);
+
+  factory TbLabelName({required String name, int width = _kDefWidth, int height = _kDefHeight,
+    int speed = _kDefSpeed,  int density = _kDefDensity, TbSensor sensor = _kDefSensor,
+    int sensorDistance = _kDefDistance,
+    int sensorOffset = _kDefOffset
+  }) {
+    return TbLabelName(name: name, width: width, height: height, speed: speed,
+        density: density, sensor: sensor, sensorDistance: sensorDistance,
+        sensorOffset: sensorOffset);
+  }
+
+  static const Unsupported = const TbLabelName._("Unsupported", 50, 50, 1, 15, TbSensor.GAP, 0, 0);
+
+  static final _values = [
+    Unsupported
+  ];
+
+  static getValues() => List.of(_values);
+
+  @override
+  String getName() =>_name;
+
+  @override
+  Map<String, dynamic> toMap() {
+    return {
+      "name": _name,
+      "width": _width,
+      "height": _height,
+      "speed": _speed,
+      "density": _density,
+      "sensor": _sensor.toMap(),
+      "sensorDistance": _sensorDistance,
+      "sensorOffset": _sensorOffset
+    };
+  }
+
+  static TbLabelName fromMap(Map<String, dynamic> map) {
+    return TbLabelName(
+    name: map["name"],
+    width: map["width"],
+      height: map["height"],
+      speed: map["speed"],
+      density: map["density"],
+      sensor: TbSensor.fromMap(map["sensor"]),
+      sensorDistance: map["sensorDistance"],
+      sensorOffset: map["sensorOffset"]
+    );
+  }
+
+  @override
+  int getDensity() => _density;
+
+  @override
+  int getWidth() => _width;
+
+  @override
+  int getHeight() => _height;
+
+  @override
+  TbSensor getSensor() => _sensor;
+
+  @override
+  int getSensorDistance() => _sensorDistance;
+
+  @override
+  int getSensorOffset() => _sensorOffset;
+
+  @override
+  int getSpeed() => _speed;
+
+}
+
 /*
 class RJ2055WB implements ALabelName {
   final String _name;
