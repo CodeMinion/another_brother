@@ -399,9 +399,8 @@ class TbPrinter {
     */
 
     if (Platform.isIOS) {
-      // TODO Since iOS does not have the sentCommand(byte[])
+      // Since iOS does not have the sentCommand(byte[])
       //  exposed we instead write make the image a BMP and use the downloadBmp instead.
-      // TODO check if iOS
       // Convert image to BMP
       Uint8List bmpImageBytes = _wrapInWindowBmp(
           width: desiredImageWidth.toInt(),
@@ -423,7 +422,7 @@ class TbPrinter {
           TbCommandPutBmp(x, y, tempBmpFilePath));
       // Delete bmp file
       await File(tempBmpFilePath).delete();
-      // TODO Return success value.
+      // Return success value.
       return putSuccess;
     }
     else {
@@ -553,13 +552,19 @@ class TbPrinter {
     // Color table, 2 colors (black and white) required if bpp <= 8
     bytesBuilder.add([0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x00]);
     // Image Data - (imgBytes.length) bytes
-    // TODO Each row must be padded to be a multiple of 4 bytes (32 bits.)
+    // Each row must be padded to be a multiple of 4 bytes (32 bits.)
     int requiredRowWidth = (width ~/ 32 + 1) * 32;
 
     if (requiredRowWidth == width) {
       // Just add since no padding is needed.
       // TODO: Revisit if image prints updside down Note the image is also built bottom up starting from the last row.
-      bytesBuilder.add(imageBytes.reversed.toList());
+      for (int i = height -1; i >= 0; i--) {
+        int start = i * width~/8;
+        int end = start + width~/8;
+        //print ("Start: $start - End: $end - Size: ${imageBytes.length}");
+        bytesBuilder.add(imageBytes.getRange(start, end).toList());
+      }
+
     }
     else {
       // Add row and pad with extra bits.

@@ -169,12 +169,12 @@ class _MyAppState extends State<MyApp> {
 
     // Delete all files downloaded to the printer memory
     success = await printer.sendTbCommand(TbCommandDeleteFile());
-    print ("TypeB: Dile delete Success? $success");
+    print ("TypeB: Delete delete Success? $success");
 
     //bool fileSent = await printer.updateFirmAsset("assets/RJ-3035B_EZC_B1.00.Q38.NEW");
     //print("File Sent: $fileSent");
 
-    success = await printer.endCommunication(timeoutMillis: 5000);
+    success = await printer.endCommunication(timeoutMillis: 50000);
     print("TypeB: Connection Closed? $success");
 
   }
