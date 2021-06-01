@@ -32,3 +32,6 @@
 
 ## 0.0.15
 - Discovered TypeB printers now share the common interface ABrotherTbPrinter.
+
+## 0.0.16
+- Adds support for downloadImage in iOS. This allows for printing of custom images on a TypeB printer.
