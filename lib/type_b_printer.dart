@@ -380,7 +380,6 @@ class TbPrinter {
       }
     }
 
-
     //BrotherUtils.printBytes(outImageBytes, pictureWidthBytes);
 
     /*
@@ -399,48 +398,52 @@ class TbPrinter {
 
     */
 
-    /*
-    // TODO Since iOS does not have the sentCommand(byte[])
-    //  exposed we instead write make the image a BMP and use the downloadBmp instead.
-    // TODO check if iOS
-    // Convert image to BMP
-    Uint8List bmpImageBytes = _wrapInWindowBmp(width:desiredImageWidth.toInt(),
-        height:desiredImageHeight.toInt(),
-        imageBytes:outImageBytes,
-        printerDpi:printerDpi);
+    if (Platform.isIOS) {
+      // Since iOS does not have the sentCommand(byte[])
+      //  exposed we instead write make the image a BMP and use the downloadBmp instead.
+      // Convert image to BMP
+      Uint8List bmpImageBytes = _wrapInWindowBmp(
+          width: desiredImageWidth.toInt(),
+          height: desiredImageHeight.toInt(),
+          imageBytes: outImageBytes,
+          printerDpi: printerDpi);
 
-    //BrotherUtils.printBytes(bmpImageBytes, pictureWidthBytes);
-    BrotherUtils.printBytesHex(bmpImageBytes, 16);
+      //BrotherUtils.printBytes(bmpImageBytes, pictureWidthBytes);
+      BrotherUtils.printBytesHex(bmpImageBytes, 16);
 
-    //Image bmpImage = await BrotherUtils.bytesToImage(bmpImageBytes);
-    // Save image to temp storage location.
-    String tempBmpFilename = "temp.bmp";//"temp_${DateTime.now().microsecondsSinceEpoch}.bmp";
-    String tempBmpFilePath = await BrotherUtils.bytesToTempFile(bmpImageBytes, tempBmpFilename);
-    // downloadBmp
-    bool downloadSuccess = await downloadBmp(tempBmpFilePath);
-    bool putSuccess = await sendTbCommand(TbCommandPutBmp(0, 0, tempBmpFilePath));
-    // Delete bmp file
-    await File(tempBmpFilePath).delete();
-    // TODO Return success value.
-    return putSuccess;
-    */
+      //Image bmpImage = await BrotherUtils.bytesToImage(bmpImageBytes);
+      // Save image to temp storage location.
+      String tempBmpFilename = "temp.bmp"; //"temp_${DateTime.now().microsecondsSinceEpoch}.bmp";
+      String tempBmpFilePath = await BrotherUtils.bytesToTempFile(
+          bmpImageBytes, tempBmpFilename);
+      // downloadBmp
+      bool downloadSuccess = await downloadBmp(tempBmpFilePath);
+      bool putSuccess = await sendTbCommand(
+          TbCommandPutBmp(x, y, tempBmpFilePath));
+      // Delete bmp file
+      await File(tempBmpFilePath).delete();
+      // Return success value.
+      return putSuccess;
+    }
+    else {
+      TbCommandSendBitmap sendBitmapCmd = TbCommandSendBitmap(
+          x,
+          y,
+          pictureWidthBytes,
+          pictureHeight,
+          Uint8List(outImageBytes.buffer.asUint8List().length));
+      bool result = await sendTbCommand(sendBitmapCmd);
+      result = result &&
+          await sendCommandBin(
+              outImageBytes); //sendCommand(String.fromCharCodes(outImageBytes));
+      result = result && await sendCommand("\"\r\n");
 
-    TbCommandSendBitmap sendBitmapCmd = TbCommandSendBitmap(
-        x,
-        y,
-        pictureWidthBytes,
-        pictureHeight,
-        Uint8List(outImageBytes.buffer.asUint8List().length));
-    bool result = await sendTbCommand(sendBitmapCmd);
-    result = result &&
-        await sendCommandBin(
-            outImageBytes); //sendCommand(String.fromCharCodes(outImageBytes));
-    result = result && await sendCommand("\"\r\n");
 
+      return result;
+      //return bmpImage;
+      //return grayPicture;
 
-    return result;
-    //return bmpImage;
-    //return grayPicture;
+    }
   }
 
   /// Given a raw array of bytes of a 1-color image
@@ -470,7 +473,7 @@ class TbPrinter {
         + 4 // vertical resolution of the image
         + 4 // the number of colors in teh color palette, or 0 to default to 2^n
         + 4 // the number of important colors used, or 0 when every color is important, generally ignored
-        + 8 // Unknown extra bytes in brother bitmap.
+        + 8 // Color Table. because bpp < 8
     ;
 
 
@@ -546,11 +549,37 @@ class TbPrinter {
     ByteData importantColorData = ByteData(4);
     importantColorData.setInt32(0, 0, Endian.little); // 0 - every color is important.
     bytesBuilder.add(importantColorData.buffer.asUint8List());
-    // Add unknown 8 bytes in brother bmp ??
+    // Color table, 2 colors (black and white) required if bpp <= 8
     bytesBuilder.add([0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x00]);
     // Image Data - (imgBytes.length) bytes
-    bytesBuilder.add(imageBytes);
+    // Each row must be padded to be a multiple of 4 bytes (32 bits.)
+    int requiredRowWidth = (width ~/ 32 + 1) * 32;
 
+    if (requiredRowWidth == width) {
+      // Just add since no padding is needed.
+      // TODO: Revisit if image prints updside down Note the image is also built bottom up starting from the last row.
+      for (int i = height -1; i >= 0; i--) {
+        int start = i * width~/8;
+        int end = start + width~/8;
+        //print ("Start: $start - End: $end - Size: ${imageBytes.length}");
+        bytesBuilder.add(imageBytes.getRange(start, end).toList());
+      }
+
+    }
+    else {
+      // Add row and pad with extra bits.
+      int paddingBitCount = requiredRowWidth - width;
+      // Important: This only works because the image width is a multiple of 8 as is
+      ByteData paddingByteData = ByteData(paddingBitCount~/8);
+      //for (int i = 0; i < height; i++) {
+      for (int i = height -1; i >= 0; i--) {
+        int start = i * width~/8;
+        int end = start + width~/8;
+        //print ("Start: $start - End: $end - Size: ${imageBytes.length}");
+        bytesBuilder.add(imageBytes.getRange(start, end).toList());
+        bytesBuilder.add(paddingByteData.buffer.asUint8List());
+      }
+    }
     // Build image data.
     Uint8List bmpBytes = bytesBuilder.toBytes();
     return bmpBytes;
@@ -1031,7 +1060,7 @@ class BrotherUtils {
   /// @param assetPath path to retrieve the asset.
   static Future<Image> loadImage(String assetPath) async {
     final ByteData img = await rootBundle.load(assetPath);
-    BrotherUtils.printBytesHex(img.buffer.asUint8List(), 16);
+    //BrotherUtils.printBytesHex(img.buffer.asUint8List(), 16);
     final Completer<Image> completer = new Completer();
     decodeImageFromList(new Uint8List.view(img.buffer), (Image img) {
       return completer.complete(img);
