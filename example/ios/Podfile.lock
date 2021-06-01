@@ -84,7 +84,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider/ios"
 
 SPEC CHECKSUMS:
-  another_brother: 103474df197e5708f439e443071aa4b0016398aa
+  another_brother: 14a7865809340ab48049fb9861f57bb5151c787c
   BRLMPrinterKit: 79ca593275bdae5309c8ee93674df2e5177a1b52
   BROTHERSDK: ea7f08981c315f742fc833d857dc85cb324ab195
   DKImagePickerController: b5eb7f7a388e4643264105d648d01f727110fc3d

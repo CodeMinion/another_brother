@@ -398,49 +398,53 @@ class TbPrinter {
 
     */
 
-    // TODO Since iOS does not have the sentCommand(byte[])
-    //  exposed we instead write make the image a BMP and use the downloadBmp instead.
-    // TODO check if iOS
-    // Convert image to BMP
-    Uint8List bmpImageBytes = _wrapInWindowBmp(width:desiredImageWidth.toInt(),
-        height:desiredImageHeight.toInt(),
-        imageBytes:outImageBytes,
-        printerDpi:printerDpi);
+    if (Platform.isIOS) {
+      // TODO Since iOS does not have the sentCommand(byte[])
+      //  exposed we instead write make the image a BMP and use the downloadBmp instead.
+      // TODO check if iOS
+      // Convert image to BMP
+      Uint8List bmpImageBytes = _wrapInWindowBmp(
+          width: desiredImageWidth.toInt(),
+          height: desiredImageHeight.toInt(),
+          imageBytes: outImageBytes,
+          printerDpi: printerDpi);
 
-    //BrotherUtils.printBytes(bmpImageBytes, pictureWidthBytes);
-    BrotherUtils.printBytesHex(bmpImageBytes, 16);
+      //BrotherUtils.printBytes(bmpImageBytes, pictureWidthBytes);
+      BrotherUtils.printBytesHex(bmpImageBytes, 16);
 
-    //Image bmpImage = await BrotherUtils.bytesToImage(bmpImageBytes);
-    // Save image to temp storage location.
-    String tempBmpFilename = "temp.bmp";//"temp_${DateTime.now().microsecondsSinceEpoch}.bmp";
-    String tempBmpFilePath = await BrotherUtils.bytesToTempFile(bmpImageBytes, tempBmpFilename);
-    // downloadBmp
-    bool downloadSuccess = await downloadBmp(tempBmpFilePath);
-    bool putSuccess = await sendTbCommand(TbCommandPutBmp(x, y, tempBmpFilePath));
-    // Delete bmp file
-    await File(tempBmpFilePath).delete();
-    // TODO Return success value.
-    return putSuccess;
+      //Image bmpImage = await BrotherUtils.bytesToImage(bmpImageBytes);
+      // Save image to temp storage location.
+      String tempBmpFilename = "temp.bmp"; //"temp_${DateTime.now().microsecondsSinceEpoch}.bmp";
+      String tempBmpFilePath = await BrotherUtils.bytesToTempFile(
+          bmpImageBytes, tempBmpFilename);
+      // downloadBmp
+      bool downloadSuccess = await downloadBmp(tempBmpFilePath);
+      bool putSuccess = await sendTbCommand(
+          TbCommandPutBmp(x, y, tempBmpFilePath));
+      // Delete bmp file
+      await File(tempBmpFilePath).delete();
+      // TODO Return success value.
+      return putSuccess;
+    }
+    else {
+      TbCommandSendBitmap sendBitmapCmd = TbCommandSendBitmap(
+          x,
+          y,
+          pictureWidthBytes,
+          pictureHeight,
+          Uint8List(outImageBytes.buffer.asUint8List().length));
+      bool result = await sendTbCommand(sendBitmapCmd);
+      result = result &&
+          await sendCommandBin(
+              outImageBytes); //sendCommand(String.fromCharCodes(outImageBytes));
+      result = result && await sendCommand("\"\r\n");
 
-    /*
-    TbCommandSendBitmap sendBitmapCmd = TbCommandSendBitmap(
-        x,
-        y,
-        pictureWidthBytes,
-        pictureHeight,
-        Uint8List(outImageBytes.buffer.asUint8List().length));
-    bool result = await sendTbCommand(sendBitmapCmd);
-    result = result &&
-        await sendCommandBin(
-            outImageBytes); //sendCommand(String.fromCharCodes(outImageBytes));
-    result = result && await sendCommand("\"\r\n");
 
+      return result;
+      //return bmpImage;
+      //return grayPicture;
 
-    return result;
-    //return bmpImage;
-    //return grayPicture;
-
-     */
+    }
   }
 
   /// Given a raw array of bytes of a 1-color image
