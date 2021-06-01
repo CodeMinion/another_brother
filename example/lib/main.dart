@@ -102,11 +102,11 @@ class _MyAppState extends State<MyApp> {
     //success = await printer.formFeed();
     //print ("TypeB: Form Feed Success? $success");
 
-    success = await printer.downloadPcxAsset("assets/UL.PCX");
-    print ("TypeB: Download PCX Success? $success");
+    //success = await printer.downloadPcxAsset("assets/UL.PCX");
+    //print ("TypeB: Download PCX Success? $success");
 
-    success = await printer.downloadBmpAsset("assets/LOGO.BMP");
-    print ("TypeB: Download BMP Success? $success");
+    //success = await printer.downloadBmpAsset("assets/LOGO.BMP");
+    //print ("TypeB: Download BMP Success? $success");
 
     success = await printer.setup();
     print ("TypeB: Print Setup Success? $success");
@@ -114,19 +114,19 @@ class _MyAppState extends State<MyApp> {
     success = await printer.clearBuffer();
     print ("TypeB: Clear Buffer Success? $success");
 
-    success = await printer.barcode("1234567");
-    print ("TypeB: Barcode Success? $success");
+    //success = await printer.barcode("1234567");
+    //print ("TypeB: Barcode Success? $success");
 
-    success = await printer.printerFont("printerFont", x: 10, y: 150);
-    print ("TypeB: Printer Font Success? $success");
+    //success = await printer.printerFont("printerFont", x: 10, y: 150);
+    //print ("TypeB: Printer Font Success? $success");
 
     //success = await printer.sendCommand("PUTPCX 145,15,\"UL.PCX\"\r\n");
-    success = await printer.sendTbCommand(TbCommandPutPcx(145, 15, "assets/UL.PCX"));
-    print ("TypeB: Send Command Success? $success");
+    //success = await printer.sendTbCommand(TbCommandPutPcx(145, 15, "assets/UL.PCX"));
+    //print ("TypeB: Send Command Success? $success");
 
     //success = await printer.sendCommand("PUTBMP 10,190,\"LOGO.BMP\"\r\n");
-    success = await printer.sendTbCommand(TbCommandPutBmp(10, 190, "assets/LOGO.BMP"));
-    print ("TypeB: Send Command Success? $success");
+    //success = await printer.sendTbCommand(TbCommandPutBmp(10, 190, "assets/LOGO.BMP"));
+    //print ("TypeB: Send Command Success? $success");
 
     //var assetImage = await loadImage("assets/brother_hack.png");
     //success = await printer.downloadImage(assetImage, scale: 0.6);
