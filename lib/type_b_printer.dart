@@ -1018,11 +1018,19 @@ class TbPrinterStatus {
   }
 }
 
-class TbModel {
+abstract class ATbModel implements AModel {
+
+}
+
+class TbModel implements ATbModel {
   final String _displayName;
   final String _name;
 
   const TbModel._internal(this._displayName, this._name);
+
+  factory TbModel({required String displayName, String discoveryName = "PS-"}){
+    return TbModel._internal(displayName, displayName);
+  }
 
   static const TD_4650TNWB = const TbModel._internal("TD-4650TNWB", "PS-");
   static const TD_4750TNWB = const TbModel._internal("TD_4750TNWB", "PS-");

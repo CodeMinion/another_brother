@@ -67,7 +67,11 @@ class PaperSize {
   }
 }
 
-class Model {
+abstract class AModel {
+  String getDisplayName();
+}
+
+class Model implements AModel {
   final int _defaultPaper;
   final int _id;
   final PrinterSeries _series;
@@ -336,6 +340,9 @@ class Model {
     "name": _name
     };
   }
+
+  @override
+  String getDisplayName() => getName();
 }
 
 class PrinterSeries {
