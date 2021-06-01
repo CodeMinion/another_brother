@@ -562,7 +562,8 @@ class TbPrinter {
       int paddingBitCount = requiredRowWidth - width;
       // Important: This only works because the image width is a multiple of 8 as is
       ByteData paddingByteData = ByteData(paddingBitCount~/8);
-      for (int i = 0; i < height; i++) {
+      //for (int i = 0; i < height; i++) {
+      for (int i = height -1; i >= 0; i--) {
         int start = i * width~/8;
         int end = start + width~/8;
         //print ("Start: $start - End: $end - Size: ${imageBytes.length}");
