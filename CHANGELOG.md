@@ -39,3 +39,9 @@
 ## 0.0.17
 - RJ-Go models now share model interface with label printers.
 - RJ-Go Labels now share label interface with label printers.
+
+## 0.0.18
+- Exposes getName in common printer model interface.
+
+## 0.0.19
+- Updates TypeB unsupported label name for parity.

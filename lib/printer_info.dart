@@ -69,6 +69,7 @@ class PaperSize {
 
 abstract class AModel {
   String getDisplayName();
+  String getName();
 }
 
 class Model implements AModel {

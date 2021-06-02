@@ -1029,7 +1029,7 @@ class TbModel implements ATbModel {
   const TbModel._internal(this._displayName, this._name);
 
   factory TbModel({required String displayName, String discoveryName = "PS-"}){
-    return TbModel._internal(displayName, displayName);
+    return TbModel._internal(displayName, discoveryName);
   }
 
   static const TD_4650TNWB = const TbModel._internal("TD-4650TNWB", "PS-");
@@ -1218,7 +1218,7 @@ class TbLabelName implements ATbLabelName {
   final int _sensorDistance;
   final int _sensorOffset;
 
-  const TbLabelName._(this._name,
+  const TbLabelName._internal(this._name,
       this._width, this._height,
       this._speed, this._density,
       this._sensor, this._sensorDistance, this._sensorOffset);
@@ -1247,12 +1247,12 @@ class TbLabelName implements ATbLabelName {
     int sensorDistance = _kDefDistance,
     int sensorOffset = _kDefOffset
   }) {
-    return TbLabelName(name: name, width: width, height: height, speed: speed,
-        density: density, sensor: sensor, sensorDistance: sensorDistance,
-        sensorOffset: sensorOffset);
+    return TbLabelName._internal(name, width, height, speed,
+        density, sensor, sensorDistance,
+        sensorOffset);
   }
 
-  static const Unsupported = const TbLabelName._("Unsupported", 50, 50, 1, 15, TbSensor.GAP, 0, 0);
+  static const Unsupported = const TbLabelName._internal("UNSUPPORTED", 50, 50, 1, 15, TbSensor.GAP, 0, 0);
 
   static final _values = [
     Unsupported
