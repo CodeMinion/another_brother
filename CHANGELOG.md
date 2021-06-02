@@ -45,3 +45,9 @@
 
 ## 0.0.19
 - Updates TypeB unsupported label name for parity.
+
+## 0.0.20
+- Adds missing toMap/fromMap for Type B models and Type B labels.
+
+## 0.0.21
+- Fixes toMap on TbModel.

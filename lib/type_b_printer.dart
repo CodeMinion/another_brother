@@ -48,8 +48,20 @@ class TbPrinterInfo {
       "btAddress": btAddress,
       "iOSBtPath": _btIOsPath,
       "localName": localName,
-      "port": port.toMap()
+      "port": port.toMap(),
+      "labelName": labelName.toMap()
     };
+  }
+
+  factory TbPrinterInfo.fromMap(Map<String, dynamic> map) {
+    return TbPrinterInfo(
+      ipAddress: map["ipAddress"],
+      portNumber: map["portNumber"],
+      btAddress: map["btAddress"],
+        localName:map["localName"],
+      port: Port.fromMap(map["port"]),
+      labelName: TbLabelName.fromMap(map["labelName"])
+    );
   }
 }
 
@@ -63,7 +75,7 @@ class TbPrinter {
   TbPrinterInfo _printerInfo = TbPrinterInfo();
 
   static double millimeterToDots(double resolution, double millimeters) {
-    return millimeters / (resolution * _MM_IN_INCHE);
+    return resolution * millimeters / (_MM_IN_INCHE);
   }
 
   static double inchesToDot(double resolution, double inches) {
@@ -1032,6 +1044,7 @@ class TbModel implements ATbModel {
     return TbModel._internal(displayName, discoveryName);
   }
 
+  static const UNKNOWN = const TbModel._internal("UNKNOWN", "");
   static const TD_4650TNWB = const TbModel._internal("TD-4650TNWB", "PS-");
   static const TD_4750TNWB = const TbModel._internal("TD_4750TNWB", "PS-");
   static const TD_4650TNWBR = const TbModel._internal("TD-4650TNWBR", "PS-");
@@ -1060,11 +1073,21 @@ class TbModel implements ATbModel {
     TJ_4620TN,
     TJ_4422TN,
     TJ_4522TN,
+    UNKNOWN,
   ];
 
   List<TbModel> getValues() => List.of(_values);
 
   String getDisplayName() => _displayName;
+
+  static TbModel valueFromName(String name) {
+    for (int i =0; i < _values.length; i ++) {
+      if (_values[i]._displayName == name) {
+        return _values[i];
+      }
+    }
+    return UNKNOWN;
+  }
 
   /// Used for searching during things like bt.
   String getName() {
@@ -1074,7 +1097,18 @@ class TbModel implements ATbModel {
     else {
       return _name;
     }
+  }
 
+  Map<String, dynamic> toMap() {
+    return {
+      "name":_name,
+      "displayName": _displayName
+    };
+  }
+
+  factory TbModel.fromMap(Map<String, dynamic> map) {
+    String displayName = map["displayName"];
+    return valueFromName(displayName);
   }
 }
 
