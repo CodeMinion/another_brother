@@ -35,3 +35,7 @@
 
 ## 0.0.16
 - Adds support for downloadImage in iOS. This allows for printing of custom images on a TypeB printer.
+
+## 0.0.17
+- RJ-Go models now share model interface with label printers.
+- RJ-Go Labels now share label interface with label printers.

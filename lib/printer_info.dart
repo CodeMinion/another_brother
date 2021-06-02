@@ -341,6 +341,8 @@ class Model implements AModel {
     };
   }
 
+  static List<Model> getValues() => List.of(_values);
+
   @override
   String getDisplayName() => getName();
 }

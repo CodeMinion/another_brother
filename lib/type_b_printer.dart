@@ -1062,7 +1062,7 @@ class TbModel implements ATbModel {
     TJ_4522TN,
   ];
 
-  List<TbModel> getValues() => _values;
+  List<TbModel> getValues() => List.of(_values);
 
   String getDisplayName() => _displayName;
 
@@ -1223,6 +1223,25 @@ class TbLabelName implements ATbLabelName {
       this._speed, this._density,
       this._sensor, this._sensorDistance, this._sensorOffset);
 
+  /// Set up the label width, label height, print speed, print density, media sensor type, gap/black
+  /// mark vertical distance, gap/black mark shift distance.
+  /// @param width Width of the label in mm
+  /// @param height Height of the label in mm
+  /// @param speed Print Speed in inches/second
+  ///   1.0 : 1.0 inch/second
+  ///   1.5: 1.5 inches/second
+  ///   2.0: 2.0 inches/second
+  ///   3.0: 3.0 inches/second
+  ///   4.0: 4.0 inches/second
+  ///   6.0: 6.0 inches/second
+  ///   8.0: 8.0 inches/second
+  ///   10.0: 10.0 inches/second
+  ///   13.0: 13.0 inches/second
+  ///   14.0: 14.0 inches/second
+  /// @param density Print Density in the range from 0 to 15
+  /// @sensor Media Sensor Type
+  /// @sensorDistance Sensor Distance - Vertical gap height of the gap/black mark in mm
+  /// @sensorOffset Sensor Offset - Shift distance of the gap/black mark in mm.
   factory TbLabelName({required String name, int width = _kDefWidth, int height = _kDefHeight,
     int speed = _kDefSpeed,  int density = _kDefDensity, TbSensor sensor = _kDefSensor,
     int sensorDistance = _kDefDistance,
