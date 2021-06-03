@@ -594,6 +594,7 @@ class TbPrinter {
         int end = start + width~/8;
         //print ("Start: $start - End: $end - Size: ${imageBytes.length}");
         bytesBuilder.add(imageBytes.getRange(start, end).toList());
+        // TODO Revisit this because right now it's relying on the format from the data above.
         bytesBuilder.add(paddingByteData.buffer.asUint8List());
       }
     }
