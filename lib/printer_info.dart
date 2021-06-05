@@ -10,7 +10,7 @@ import 'custom_paper.dart';
 import "label_info.dart";
 import 'bluetooth_preference.dart';
 
-class PaperSize {
+class PaperSize implements ALabelName {
   final int _id;
   final String _name;
 
@@ -34,6 +34,8 @@ class PaperSize {
   String getName() {
     return _name;
   }
+
+  List<PaperSize> getValues() => List.of(_values);
 
   static int getItemId(index) {
     if (index < 0 || index > _values.length) {

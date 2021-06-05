@@ -51,3 +51,6 @@
 
 ## 0.0.21
 - Fixes toMap on TbModel.
+
+## 0.0.22
+- PaperSize now shares common interface as other labels.
