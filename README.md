@@ -11,7 +11,10 @@ Another Bother SDK library for Flutter.
 - Bluetooth/BLE
 - WiFi
 
-# iOS Info.plist
+## Android Min SDK
+- Requires minSdkVersion 19
+
+## iOS Info.plist
 
 Add the following to your Info.plist
 ```
