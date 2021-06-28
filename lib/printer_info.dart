@@ -3100,7 +3100,7 @@ class Printer {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
       "key": key,
-      "encode":key
+      "encode": encode
     };
 
     final bool success = await _channel.invokeMethod("startPTTPrint", params);
