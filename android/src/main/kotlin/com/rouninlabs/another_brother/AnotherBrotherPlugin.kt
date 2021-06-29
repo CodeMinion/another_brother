@@ -126,7 +126,7 @@ class AnotherBrotherPlugin : FlutterPlugin, MethodCallHandler {
         else if (call.method == ReplaceTextNameMethodCall.METHOD_NAME) {
             ReplaceTextNameMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
         }
-		else if (call.method == FlushPttPrintMethodCall.METHOD_NAME) {
+        else if (call.method == FlushPttPrintMethodCall.METHOD_NAME) {
             FlushPttPrintMethodCall(flutterAssets = mFlutterAssets, context = mContext, call = call, result = result).execute()
         }
         else if (call.method == GetNetPrintersMethodCall.METHOD_NAME) {
