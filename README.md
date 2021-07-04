@@ -10,6 +10,7 @@ Another Bother SDK library for Flutter.
 ## iOS Support
 - Bluetooth/BLE
 - WiFi
+Note: This branch does not include RJ-Go support on IOS.
 
 ## Android Min SDK
 - Requires minSdkVersion 19

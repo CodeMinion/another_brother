@@ -26,7 +26,8 @@ A new flutter plugin project.
   #s.vendored_frameworks = 'BRPtouchPrinterKit.framework'
   
   s.dependency 'BRLMPrinterKit'
-  s.dependency 'BROTHERSDK'
+  # Removing RJ-GO libs because they seem to prevent publishing to Apple Store.
+  #s.dependency 'BROTHERSDK'
   
   #s.dependency 'BRLMPrinterKitBind'
   
