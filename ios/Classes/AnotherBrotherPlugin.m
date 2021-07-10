@@ -87,21 +87,5 @@
     
 }
 
-- (void)trackTypeBPrinterWithId:(NSString *)printerId typeBPrinter:(BROTHERSDK *)typeBPrinter {
-    if (_mActiveTypeBPrinters == NULL) {
-        _mActiveTypeBPrinters = [[NSMutableDictionary<NSString *, BROTHERSDK *> alloc] init];
-    }
-    
-    [_mActiveTypeBPrinters setObject:typeBPrinter forKey:printerId ] ;
-}
-
-- (void)untrackTypeBPrinterWithId:(NSString *)printerId {
-    [_mActiveTypeBPrinters removeObjectForKey:printerId];
-}
-
-- (BROTHERSDK *)getTypeBPrinterWithId:(NSString *)printerId {
-    return [_mActiveTypeBPrinters objectForKey:printerId];
-}
-
 
 @end
