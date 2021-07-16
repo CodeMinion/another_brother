@@ -51,3 +51,9 @@ Add the following to your Info.plist
 ```
 On your Runner make sure to mark: Allow non-modular includes as yes.
 Also make sure to mark the libBROTHERSDK.a as belonging to another_brother in xCode: https://www.youtube.com/watch?v=42dBVdXU8gk
+
+## Apps Built with another_brother
+Have an app built using another_brother let me know and I will add it here!
+
+- Easy Menu: https://www.youtube.com/watch?v=xy9qYo03pOQ
+- QR Storage: https://play.google.com/store/apps/details?id=com.rouninlabs.qrstorage

@@ -54,3 +54,6 @@
 
 ## 0.0.22
 - PaperSize now shares common interface as other labels.
+
+## 0.0.23
+- Fixes issue with startPTTPrint. Special thanks to rendesg for the fixes.
