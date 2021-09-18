@@ -57,3 +57,6 @@
 
 ## 0.0.23
 - Fixes issue with startPTTPrint. Special thanks to rendesg for the fixes.
+
+## 0.0.24
+- Fixes exception on iOS print. Special thanks to BentEngbers for the report.
