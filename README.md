@@ -57,3 +57,4 @@ Have an app built using another_brother let me know and I will add it here!
 
 - Easy Menu: https://www.youtube.com/watch?v=xy9qYo03pOQ
 - QR Storage: https://play.google.com/store/apps/details?id=com.rouninlabs.qrstorage
+- Speed Dater: https://youtu.be/z4jxO9HWze8
