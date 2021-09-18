@@ -1499,7 +1499,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
         @"labelId": [[NSNumber alloc] initWithInt:(-1)], // TODO
         @"labelType": [[NSNumber alloc] initWithInt:(-1)], // TODO
         @"isACConnected": @{@"id": [[NSNumber alloc] initWithInt:(-1)], @"name": @"Unknown" }, // TODO
-        @"isBatteryMounted": @{@"id": [[NSNumber alloc] initWithInt:(-1)]}, // TODO
+        @"isBatteryMounted": @{@"id": [[NSNumber alloc] initWithInt:(-1)], @"name": @"Unknown" }, // TODO
         @"batteryLevel": [[NSNumber alloc] initWithInt:(-1)], // TODO
         @"batteryResidualQuantityLevel":[[NSNumber alloc] initWithInt:(-1)], // TODO
         @"maxOfBatteryResidualQuantityLevel":[[NSNumber alloc] initWithInt:(-1)], // TODO
