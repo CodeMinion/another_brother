@@ -2,11 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>fetch</string>
-		<string>remote-notifications</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -27,10 +22,38 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Need BLE permission</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Need BLE permission</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_ipp._tcp</string>
+		<string>_printer._tcp</string>
+		<string>_pdl-datastream._tcp</string>
+	</array>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Looking for local tcp Bonjour service</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Need Location permission</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Need Location permission</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Need Location permission</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notifications</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UISupportedExternalAccessoryProtocols</key>
+	<array>
+		<string>com.brother.ptcbp</string>
+		<string>com.issc.datapath</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -46,34 +69,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-
-		<key>NSLocalNetworkUsageDescription</key>
-        <string>Looking for local tcp Bonjour service</string>
-        <key>NSBonjourServices</key>
-        <array>
-        	<string>_ipp._tcp</string>
-        	<string>_printer._tcp</string>
-        	<string>_pdl-datastream._tcp</string>
-        </array>
-        <key>UIBackgroundModes</key>
-        <array>
-        	<string>fetch</string>
-        	<string>remote-notifications</string>
-        </array>
-        <key>NSBluetoothAlwaysUsageDescription</key>
-    	<string>Need BLE permission</string>
-    	<key>NSBluetoothPeripheralUsageDescription</key>
-    	<string>Need BLE permission</string>
-    	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    	<string>Need Location permission</string>
-    	<key>NSLocationAlwaysUsageDescription</key>
-    	<string>Need Location permission</string>
-    	<key>NSLocationWhenInUseUsageDescription</key>
-    	<string>Need Location permission</string>
-    	<key>UISupportedExternalAccessoryProtocols</key>
-    	<array>
-    		<string>com.brother.ptcbp</string>
-    		<string>com.issc.datapath</string>
-    	</array>
 </dict>
 </plist>

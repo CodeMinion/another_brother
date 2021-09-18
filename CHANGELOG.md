@@ -54,3 +54,7 @@
 
 ## 0.0.22
 - PaperSize now shares common interface as other labels.
+
+## 0.0.23
+- Fixes PTT print.
+- Fixes exception on iOS print.
