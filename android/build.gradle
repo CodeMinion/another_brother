@@ -18,7 +18,8 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        //jcenter()
         maven {
             url "https://rouninlabs.jfrog.io/artifactory/rounin-libs-external/"
         }

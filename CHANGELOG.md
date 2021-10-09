@@ -60,3 +60,6 @@
 
 ## 0.0.24
 - Fixes exception on iOS print. Special thanks to BentEngbers for the report.
+
+## 0.0.25
+- Moved from JCenter to MavenCentral for Android dependencies.
