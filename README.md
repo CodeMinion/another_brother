@@ -60,7 +60,7 @@ Have an app built using another_brother let me know and I will add it here!
 - Speed Dater: https://youtu.be/z4jxO9HWze8
 - 4.events: https://play.google.com/store/apps/details?id=com.fourevents.app
 
-# Bother Hackathon
+# Brother Hackathon
 Feel free to use any of my GitHub repositories in your apps. You should also consider
 attending the free Brother Hackathon happening this year. You get a free Brother QL-1110NWB,
 a PT-P910BT, and possibly an awesome DS-940DW mobile scanner. Visit brotherhackathon.com for
