@@ -63,3 +63,6 @@
 
 ## 0.0.25
 - Moved from JCenter to MavenCentral for Android dependencies.
+
+## 0.0.26
+- Added Bluetooth permissions required by Android 12

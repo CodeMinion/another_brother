@@ -93,7 +93,7 @@ class PrintImageMethodCall(val flutterAssets: FlutterPlugin.FlutterAssets, val c
             }
 
             // Encode PrinterStatus
-            val dartPrintStatus = printResult.toMap()
+            val dartPrintStatus = printResult.toMap(context = context)
            withContext(Dispatchers.Main) {
                // Set result Printer status.
                result.success(dartPrintStatus)
