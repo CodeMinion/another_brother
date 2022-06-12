@@ -1,6 +1,6 @@
 name: another_brother
 description: A flutter plugin for printing with the Brother label and TypeB printers.
-version: 0.0.22
+version: 0.0.27
 repository: https://github.com/CodeMinion/another_brother
 
 environment:
@@ -11,8 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_blue: ^0.8.0
-  path_provider: ^2.0.1
+  flutter_blue_plus: ^1.1.3
+  path_provider: ^2.0.11
 
 
 dev_dependencies:

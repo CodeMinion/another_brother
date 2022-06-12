@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 import 'custom_paper.dart';
 import "label_info.dart";
@@ -3258,7 +3258,7 @@ class Printer {
     // TODO Consider moving this to iOS side.
     if (Platform.isIOS) {
       //BLE Scanning
-      FlutterBlue flutterBlue = FlutterBlue.instance;
+      FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
 
       // Start scanning
       flutterBlue.startScan(withServices: [Guid("A76EB9E0-F3AC-4990-84CF-3A94D2426B2B")], timeout: Duration(seconds: timeout~/1000));
