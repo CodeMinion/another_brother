@@ -1,6 +1,6 @@
 # another_brother
 
-Another Bother SDK library for Flutter.
+Another Bother SDK library for Flutter. For full demo app see Another-Brother-Demo-Prime https://github.com/CodeMinion/Demo-Another-Brother-Prime
 
 ## Android Support
 - Bluetooth/BLE
@@ -53,6 +53,8 @@ On your Runner make sure to mark: Allow non-modular includes as yes.
 Also make sure to mark the libBROTHERSDK.a as belonging to another_brother in xCode: https://www.youtube.com/watch?v=42dBVdXU8gk
 
 iOS Setup Video: https://www.youtube.com/watch?v=AcFnd-6hSew
+
+
 
 ## Apps Built with another_brother
 Have an app built using another_brother let me know and I will add it here!
