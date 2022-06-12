@@ -66,3 +66,6 @@
 
 ## 0.0.26
 - Added Bluetooth permissions required by Android 12
+
+## 0.0.27
+- Replaces flutter_blue with flutter_blu_plus

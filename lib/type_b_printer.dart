@@ -9,7 +9,7 @@ import 'package:another_brother/printer_info.dart';
 import 'package:another_brother/type_b_commands.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'label_info.dart';
@@ -762,7 +762,7 @@ class TbPrinter {
   /// on Android 5.0 or later.
   Future<List<BLEPrinter>> getBLEPrinters({int timeout = 5000}) async {
     //BLE Scanning
-    FlutterBlue flutterBlue = FlutterBlue.instance;
+    FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
 
     // Start scanning
     flutterBlue.startScan(

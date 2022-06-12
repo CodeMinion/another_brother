@@ -15,7 +15,6 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:another_brother/another_brother.dart';
-import 'package:flutter_blue/flutter_blue.dart';
 
 //import 'package:flutter_scan_bluetooth/flutter_scan_bluetooth.dart';
 // To add platforms, run `flutter create -t plugin --platforms <platforms> .` under another_brother.
