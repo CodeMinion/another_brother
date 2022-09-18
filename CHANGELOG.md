@@ -69,3 +69,6 @@
 
 ## 0.0.27
 - Replaces flutter_blue with flutter_blu_plus
+
+## 0.0.28
+- Resolves issue where app UI freezes while calling printImage on iOS.
