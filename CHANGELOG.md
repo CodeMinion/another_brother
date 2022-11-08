@@ -72,3 +72,6 @@
 
 ## 0.0.28
 - Resolves issue where app UI freezes while calling printImage on iOS.
+
+## 0.0.29
+- Upgrades Android libs to v4.6.1 of the Brother SDK.
