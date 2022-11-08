@@ -50,12 +50,14 @@ static NSString * METHOD_NAME = @"printImage";
                 // On Error report error
                 NSDictionary<NSString *, NSObject *> * printStatus = [BrotherUtils printerStatusToMapWithError:BRLMPrintErrorCodePrinterStatusErrorCommunicationError  status:nil];
                 //_result(printStatus);
-                
+                BRLMPrinterDriver *printerDriver = driverGenerateResult.driver;
+                [printerDriver closeChannel];
+
+
                 dispatch_sync(dispatch_get_main_queue(), ^{
                                             // Update UI
                                             self->_result(printStatus);
                                         });
-                
                 return;
             }
 
