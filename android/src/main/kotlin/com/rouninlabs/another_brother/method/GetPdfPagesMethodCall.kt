@@ -62,7 +62,7 @@ class GetPdfPagesMethodCall(val flutterAssets: FlutterPlugin.FlutterAssets, val 
                 val started: Boolean = printer.startCommunication()
             }
 
-            val pages = printer.getPDFPages(filePath)
+            val pages = printer.getPDFFilePages(filePath)
 
             // End Communication
             if (isOneTime) {
