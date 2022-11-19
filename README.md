@@ -64,7 +64,7 @@ Have an app built using another_brother let me know and I will add it here!
 - Speed Dater: https://youtu.be/z4jxO9HWze8
 - 4.events: https://play.google.com/store/apps/details?id=com.fourevents.app
 - PoachMe.dev: https://poachme.dev/#/devLand?reqCode=SAVETIME&
-- OkosHACCP: https://play.google.com/store/apps/details?id=hu.okoshaccp.operator
+- OkosHACCP: https://play.google.com/store/apps/details?id=hu.okoshaccp.operator built by https://wunderbytes.eu/
 
 # Brother Hackathon
 Feel free to use any of my GitHub repositories in your apps. You should also consider
