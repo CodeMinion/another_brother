@@ -100,7 +100,7 @@ fun customPaperInfoFromMap(map:Map<String, Any>?):CustomPaperInfo? {
 
         val customPaperInfo:CustomPaperInfo = when(paperKind) {
             PaperKind.DIE_CUT -> {
-                CustomPaperInfo.newCustomDiaCutPaper(printerModel,
+                CustomPaperInfo.newCustomDieCutPaper(printerModel,
                         unit, tapeWidth, tapeLength, rightMargin, leftMargin, topMargin, bottomMargin, labelPitch)
             }
             PaperKind.MARKED_ROLL -> {
