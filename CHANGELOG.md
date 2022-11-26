@@ -75,3 +75,6 @@
 
 ## 0.0.29
 - Upgrades Android libs to v4.6.1 of the Brother SDK.
+
+## 0.0.30
+- Adds support for getPDFFilePages on iOS.
