@@ -52,8 +52,11 @@ static NSString * METHOD_NAME = @"getPrinterStatus";
     
     [printerDriver closeChannel];
 
+
+    BRLMPrintErrorCode errorCode = [BrotherUtils statusErrorCodeToMapWithRawStatus:status.status.ptStatus];
+    
     // Notify status to Flutter.
-    NSDictionary<NSString *, NSObject *> * printStatus = [BrotherUtils printerStatusToMapWithError:BRLMPrintErrorCodeNoError  status:status.status];
+    NSDictionary<NSString *, NSObject *> * printStatus = [BrotherUtils printerStatusToMapWithError:errorCode status:status.status];
     
     _result(printStatus);
    
