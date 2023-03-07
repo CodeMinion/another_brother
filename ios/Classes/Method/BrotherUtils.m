@@ -1270,6 +1270,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     
     bool forceVanishingMargin = [[map objectForKey:@"banishMargin"] isEqual:@(YES)];
     
+    NSDictionary<NSString*, NSObject*> * dartOrientation = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"orientation"];
     
     BRLMPTPrintSettings * printerSettings = [[BRLMPTPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
     
@@ -1280,6 +1281,8 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     printerSettings.specialTapePrint = specialTapePrint;
     printerSettings.resolution = [BrotherUtils printResolutionFromMapWithValue:dartResolution];
     printerSettings.forceVanishingMargin = forceVanishingMargin;
+    printerSettings.printOrientation = [BrotherUtils orientationFromMapWithValue:dartOrientation];
+    
     
     // chainPrint @"???"
     // highResolutionPrint @"???"

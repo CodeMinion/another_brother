@@ -78,3 +78,6 @@
 
 ## 0.0.30
 - Adds support for getPDFFilePages on iOS.
+
+## 0.0.31
+- Adds orientation support for PT printers on iOS.
