@@ -81,3 +81,6 @@
 
 ## 0.0.31
 - Adds orientation support for PT printers on iOS.
+
+## 0.0.32
+- Updates Bluetooth printer filter on Android.
