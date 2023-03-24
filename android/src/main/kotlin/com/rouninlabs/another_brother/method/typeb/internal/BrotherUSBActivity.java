@@ -135,7 +135,7 @@ public class BrotherUSBActivity extends Activity implements Runnable {
         super.onCreate(savedInstanceState);
         this.setContentView(2130903040);
         this.mUsbManager = (UsbManager)this.getSystemService("usb");
-        BrotherUSBActivity.mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent("com.android.example.USB_PERMISSION"), 0);
+        BrotherUSBActivity.mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent("com.android.example.USB_PERMISSION"), Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PendingIntent.FLAG_IMMUTABLE : 0);
         IntentFilter filter = new IntentFilter("com.android.example.USB_PERMISSION");
         this.registerReceiver(this.mUsbReceiver_main, filter);
         UsbAccessory[] accessoryList = this.mUsbManager.getAccessoryList();

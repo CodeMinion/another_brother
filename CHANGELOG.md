@@ -84,3 +84,6 @@
 
 ## 0.0.32
 - Updates Bluetooth printer filter on Android.
+
+## 0.0.33
+- Updates USB permissions check for Android 13.
