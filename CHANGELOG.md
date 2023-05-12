@@ -87,3 +87,6 @@
 
 ## 0.0.33
 - Updates USB permissions check for Android 13.
+
+## 0.0.34
+- Adds support for: RJ_3230B, RJ_3250WB, PT_D410, PT_D460BT, PT_D610BT, PJ_822, PJ_823, PJ_862, PJ_863, PJ_883, TD_2030A, TD_2125N, TD_2125NWB, TD_2135N, TD_2135NWB.
