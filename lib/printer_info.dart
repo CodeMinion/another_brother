@@ -181,11 +181,11 @@ class Model implements AModel {
   static final PJ_862 = Model._internal2("PJ_862", 77, PJ_522);
   static final PJ_863 = Model._internal2("PJ_863", 78, PJ_522);
   static final PJ_883 = Model._internal2("PJ_883", 79, PJ_522);
-  static final TD_2030A = Model._internal2("TD_2030A", 80, TD_4410D);
-  static final TD_2125N = Model._internal2("TD_2125N", 81, TD_4410D);
-  static final TD_2125NWB = Model._internal2("TD_2125NWB", 82, TD_4410D);
-  static final TD_2135N = Model._internal2("TD_2135N", 83, TD_4410D);
-  static final TD_2135NWB = Model._internal2("TD_2135NWB", 84, TD_4410D);
+  static final TD_2030A = Model._internal2("TD_2030A", 80, RJ_4030);
+  static final TD_2125N = Model._internal2("TD_2125N", 81, RJ_4030);
+  static final TD_2125NWB = Model._internal2("TD_2125NWB", 82, RJ_4030);
+  static final TD_2135N = Model._internal2("TD_2135N", 83, RJ_4030);
+  static final TD_2135NWB = Model._internal2("TD_2135NWB", 84, RJ_4030);
 
 
   static final UNSUPPORTED = Model._internal("UNSUPPORTED", 255,
