@@ -620,6 +620,91 @@ class BinPaper_TD2120N implements ACustomPaper {
   }
 }
 
+class BinPaper_TD2125N implements ACustomPaper {
+  final String _name;
+  final String _assetPath;
+
+  static const String _rootDir = "packages/another_brother/custom_paper/CustomTD2125NPaper";
+  const BinPaper_TD2125N._internal(this._name, this._assetPath);
+
+  static const W40_H40mm = const BinPaper_TD2125N._internal("TD2125N-40mm40mm", "$_rootDir/TD2125N-40mm40mm.bin");
+  static const W57mm = const BinPaper_TD2125N._internal("TD2125N-57mm", "$_rootDir/TD2125N-57mm.bin");
+  static const UNSUPPORTED = const BinPaper_TD2125N._internal("UNSUPPORTED", "");
+
+  static final _values = [
+    W40_H40mm,
+    W57mm,
+    UNSUPPORTED
+  ];
+
+  static List<BinPaper_TD2125N> getValues() => List.from(_values);
+
+  @override
+  String getName() {
+    return _name;
+  }
+
+  static BinPaper_TD2125N valueFromName(String name) {
+    for (int i = 0; i < _values.length; i++) {
+      if (_values[i].getName() == name) {
+        return _values[i];
+      }
+    }
+    return UNSUPPORTED;
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    return {
+      "name": _name,
+      "assetPath": _assetPath
+    };
+  }
+}
+
+class BinPaper_TD2125NWB implements ACustomPaper {
+  final String _name;
+  final String _assetPath;
+
+  static const String _rootDir = "packages/another_brother/custom_paper/CustomTD2125NWBPaper";
+  const BinPaper_TD2125NWB._internal(this._name, this._assetPath);
+
+  static const W40_H40mm = const BinPaper_TD2125NWB._internal("TD2125NWB-40mm40mm", "$_rootDir/TD2125NWB-40mm40mm.bin");
+  static const W57mm = const BinPaper_TD2125NWB._internal("TD2125NWB-57mm", "$_rootDir/TD2125NWB-57mm.bin");
+  static const UNSUPPORTED = const BinPaper_TD2125NWB._internal("UNSUPPORTED", "");
+
+  static final _values = [
+    W40_H40mm,
+    W57mm,
+    UNSUPPORTED
+  ];
+
+  static List<BinPaper_TD2125NWB> getValues() => List.from(_values);
+
+  @override
+  String getName() {
+    return _name;
+  }
+
+  static BinPaper_TD2125NWB valueFromName(String name) {
+    for (int i = 0; i < _values.length; i++) {
+      if (_values[i].getName() == name) {
+        return _values[i];
+      }
+    }
+    return UNSUPPORTED;
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    return {
+      "name": _name,
+      "assetPath": _assetPath
+    };
+  }
+}
+
+
 class BinPaper_TD2130N implements ACustomPaper {
   final String _name;
   final String _assetPath;
