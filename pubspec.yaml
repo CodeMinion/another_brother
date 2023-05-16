@@ -51,6 +51,8 @@ flutter:
     - custom_paper/CustomRJ4230Paper/
     - custom_paper/CustomRJ4250Paper/
     - custom_paper/CustomTD2120NPaper/
+    - custom_paper/CustomTD2125NPaper/
+    - custom_paper/CustomTD2125NWBPaper/
     - custom_paper/CustomTD2130NPaper/
     - custom_paper/CustomTD4550Paper/
   #   - images/a_dot_burr.jpeg
