@@ -1,3 +1,5 @@
+package android
+
 group 'com.rouninlabs.another_brother'
 version '1.0-SNAPSHOT'
 
