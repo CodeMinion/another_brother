@@ -153,6 +153,10 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if([@"PT_E850TKW" isEqualToString:name]) {
         return BRLMPrinterModelPT_E850TKW;
     }
+    else if([@"PT_D610BT" isEqualToString:name]) {
+        // Returns some PT model to see if we can print since the sdk doesn't seem to have a constant for it.
+        return BRLMPrinterModelPT_D800W;
+    }
     else if([@"PT_D800W" isEqualToString:name]) {
         return BRLMPrinterModelPT_D800W;
     }
@@ -679,6 +683,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     printerSettings.autoCut = [[map objectForKey:@"isAutoCut"] isEqual:@(YES)];
     printerSettings.cutAtEnd = [[map objectForKey:@"isEndCut"] isEqual:@(YES)];
     printerSettings.resolution = [BrotherUtils printResolutionFromMapWithValue:dartPrintQuality];
+    
     // TODO Extract info from map.
     //[x]labelSize
     //autoCutForEachPageCount
@@ -1269,6 +1274,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     
     bool forceVanishingMargin = [[map objectForKey:@"banishMargin"] isEqual:@(YES)];
     
+    NSDictionary<NSString*, NSObject*> * dartOrientation = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"orientation"];
     
     BRLMPTPrintSettings * printerSettings = [[BRLMPTPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
     
@@ -1279,6 +1285,8 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     printerSettings.specialTapePrint = specialTapePrint;
     printerSettings.resolution = [BrotherUtils printResolutionFromMapWithValue:dartResolution];
     printerSettings.forceVanishingMargin = forceVanishingMargin;
+    printerSettings.printOrientation = [BrotherUtils orientationFromMapWithValue:dartOrientation];
+    
     
     // chainPrint @"???"
     // highResolutionPrint @"???"
@@ -1489,13 +1497,706 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     return dartErrorCode;
 }
 
++ (NSDictionary<NSString *, NSObject *> *) errorCodeToMapWithId:(NSNumber *)errorId {
+    
+    NSString * errorName = @"ERROR_NONE";
+    if ([errorId isEqualToNumber:@1]) {
+        errorName = @"ERROR_NONE";
+    }
+    else if ([errorId isEqualToNumber:@2]) {
+        errorName = @"ERROR_NOT_SAME_MODEL";
+    }
+    else if ([errorId isEqualToNumber:@3]) {
+        errorName = @"ERROR_BROTHER_PRINTER_NOT_FOUND";
+    }
+    else if ([errorId isEqualToNumber:@4]) {
+        errorName = @"ERROR_PAPER_EMPTY";
+    }
+    else if ([errorId isEqualToNumber:@5]) {
+        errorName = @"ERROR_BATTERY_EMPTY";
+    }
+    else if ([errorId isEqualToNumber:@6]) {
+        errorName = @"ERROR_COMMUNICATION_ERROR";
+    }
+    else if ([errorId isEqualToNumber:@7]) {
+        errorName = @"ERROR_OVERHEAT";
+    }
+    else if ([errorId isEqualToNumber:@8]) {
+        errorName = @"ERROR_PAPER_JAM";
+    }
+    else if ([errorId isEqualToNumber:@9]) {
+        errorName = @"ERROR_HIGH_VOLTAGE_ADAPTER";
+    }
+    else if ([errorId isEqualToNumber:@10]) {
+        errorName = @"ERROR_CHANGE_CASSETTE";
+    }
+    else if ([errorId isEqualToNumber:@11]) {
+        errorName = @"ERROR_FEED_OR_CASSETTE_EMPTY";
+    }
+    else if ([errorId isEqualToNumber:@12]) {
+        errorName = @"ERROR_SYSTEM_ERROR";
+    }
+    else if ([errorId isEqualToNumber:@13]) {
+        errorName = @"ERROR_NO_CASSETTE";
+    }
+    else if ([errorId isEqualToNumber:@14]) {
+        errorName = @"ERROR_WRONG_CASSETTE_DIRECT";
+    }
+    else if ([errorId isEqualToNumber:@15]) {
+        errorName = @"ERROR_CREATE_SOCKET_FAILED";
+    }
+    else if ([errorId isEqualToNumber:@16]) {
+        errorName = @"ERROR_CONNECT_SOCKET_FAILED";
+    }
+    else if ([errorId isEqualToNumber:@17]) {
+        errorName = @"ERROR_GET_OUTPUT_STREAM_FAILED";
+    }
+    else if ([errorId isEqualToNumber:@18]) {
+        errorName = @"ERROR_GET_INPUT_STREAM_FAILED";
+    }
+    else if ([errorId isEqualToNumber:@19]) {
+        errorName = @"ERROR_CLOSE_SOCKET_FAILED";
+    }
+    else if ([errorId isEqualToNumber:@20]) {
+        errorName = @"ERROR_OUT_OF_MEMORY";
+    }
+    else if ([errorId isEqualToNumber:@21]) {
+        errorName = @"ERROR_SET_OVER_MARGIN";
+    }
+    else if ([errorId isEqualToNumber:@22]) {
+        errorName = @"ERROR_NO_SD_CARD";
+    }
+    else if ([errorId isEqualToNumber:@23]) {
+        errorName = @"ERROR_FILE_NOT_SUPPORTED";
+    }
+    else if ([errorId isEqualToNumber:@24]) {
+        errorName = @"ERROR_EVALUATION_TIMEUP";
+    }
+    else if ([errorId isEqualToNumber:@25]) {
+        errorName = @"ERROR_WRONG_CUSTOM_INFO";
+    }
+    else if ([errorId isEqualToNumber:@26]) {
+        errorName = @"ERROR_NO_ADDRESS";
+    }
+    else if ([errorId isEqualToNumber:@27]) {
+        errorName = @"ERROR_NOT_MATCH_ADDRESS";
+    }
+    else if ([errorId isEqualToNumber:@28]) {
+        errorName = @"ERROR_FILE_NOT_FOUND";
+    }
+    else if ([errorId isEqualToNumber:@29]) {
+        errorName = @"ERROR_TEMPLATE_FILE_NOT_MATCH_MODEL";
+    }
+    else if ([errorId isEqualToNumber:@30]) {
+        errorName = @"ERROR_TEMPLATE_NOT_TRANS_MODEL";
+    }
+    else if ([errorId isEqualToNumber:@31]) {
+        errorName = @"ERROR_COVER_OPEN";
+    }
+    else if ([errorId isEqualToNumber:@32]) {
+        errorName = @"ERROR_WRONG_LABEL";
+    }
+    else if ([errorId isEqualToNumber:@33]) {
+        errorName = @"ERROR_PORT_NOT_SUPPORTED";
+    }
+    else if ([errorId isEqualToNumber:@34]) {
+        errorName = @"ERROR_WRONG_TEMPLATE_KEY";
+    }
+    else if ([errorId isEqualToNumber:@35]) {
+        errorName = @"ERROR_BUSY";
+    }
+    else if ([errorId isEqualToNumber:@36]) {
+        errorName = @"ERROR_TEMPLATE_NOT_PRINT_MODEL";
+    }
+    else if ([errorId isEqualToNumber:@37]) {
+        errorName = @"ERROR_CANCEL";
+    }
+    else if ([errorId isEqualToNumber:@38]) {
+        errorName = @"ERROR_PRINTER_SETTING_NOT_SUPPORTED";
+    }
+    else if ([errorId isEqualToNumber:@39]) {
+        errorName = @"ERROR_INVALID_PARAMETER";
+    }
+    else if ([errorId isEqualToNumber:@40]) {
+        errorName = @"ERROR_INTERNAL_ERROR";
+    }
+    else if ([errorId isEqualToNumber:@41]) {
+        errorName = @"ERROR_TEMPLATE_NOT_CONTROL_MODEL";
+    }
+    else if ([errorId isEqualToNumber:@42]) {
+        errorName = @"ERROR_TEMPLATE_NOT_EXIST";
+    }
+    else if ([errorId isEqualToNumber:@44]) {
+        errorName = @"ERROR_BUFFER_FULL";
+    }
+    else if ([errorId isEqualToNumber:@45]) {
+        errorName = @"ERROR_TUBE_EMPTY";
+    }
+    else if ([errorId isEqualToNumber:@46]) {
+        errorName = @"ERROR_TUBE_RIBBON_EMPTY";
+    }
+    else if ([errorId isEqualToNumber:@47]) {
+        errorName = @"ERROR_UPDATE_FRIM_NOT_SUPPORTED";
+    }
+    else if ([errorId isEqualToNumber:@48]) {
+        errorName = @"ERROR_OS_VERSION_NOT_SUPPORTED";
+    }
+    else if ([errorId isEqualToNumber:@49]) {
+        errorName = @"ERROR_RESOLUTION_MODE";
+    }
+    else if ([errorId isEqualToNumber:@50]) {
+        errorName = @"ERROR_POWER_CABLE_UNPLUGGING";
+    }
+    else if ([errorId isEqualToNumber:@51]) {
+        errorName = @"ERROR_BATTERY_TROUBLE";
+    }
+    else if ([errorId isEqualToNumber:@52]) {
+        errorName = @"ERROR_UNSUPPORTED_MEDIA";
+    }
+    else if ([errorId isEqualToNumber:@53]) {
+        errorName = @"ERROR_TUBE_CUTTER";
+    }
+    else if ([errorId isEqualToNumber:@54]) {
+        errorName = @"ERROR_UNSUPPORTED_TWO_COLOR";
+    }
+    else if ([errorId isEqualToNumber:@55]) {
+        errorName = @"ERROR_UNSUPPORTED_MONO_COLOR";
+    }
+    else if ([errorId isEqualToNumber:@56]) {
+        errorName = @"ERROR_MINIMUM_LENGTH_LIMIT";
+    }
+    else if ([errorId isEqualToNumber:@57]) {
+        errorName = @"ERROR_WORKPATH_NOT_SET";
+    }
+    
+    NSDictionary<NSString*, NSObject *> * dartErrorCode = @{
+        @"name":errorName,
+        @"id": errorId
+    };
+
+    return dartErrorCode;
+}
+
++ (BRLMPrintErrorCode) statusErrorCodeToMapWithRawStatus:(BRLMPrinterStatusRawDataStructure)status {
+    
+    Byte statusType = status.byStatusType;
+    Byte errorInfo1 = status.byErrorInf;
+    Byte errorInfo2 = status.byErrorInf2;
+    
+    if ((errorInfo1 & 1) > 0) {
+        return BRLMPrintErrorCodePrinterStatusErrorPaperEmpty;
+    }
+    
+    if ((errorInfo1 & 2) > 0) {
+        return BRLMPrintErrorCodePrinterStatusErrorMediaCannotBeFed;
+    }
+    
+    if ((errorInfo1 & 4) > 0) {
+        return BRLMPrintErrorCodePrinterStatusErrorPaperJam;
+    }
+    
+    if ((errorInfo1 & 10) > 0) {
+        return BRLMPrintErrorCodePrinterStatusErrorBusy;
+    }
+    
+    if ((errorInfo1 & 20) > 0) {
+        return BRLMPrintErrorCodePrinterStatusErrorPrinterTurnedOff;
+    }
+    
+    if ((errorInfo1 & 40) > 0) {
+        return BRLMPrintErrorCodePrinterStatusErrorHighVoltageAdapter;
+    }
+    
+    if ((errorInfo1 & 80) > 0) {
+        return BRLMPrintErrorCodePrinterStatusErrorOverHeat;
+    }
+    
+    if ((errorInfo2 & 1) > 0) {
+        return BRLMPrintErrorCodeSetLabelSizeError;
+    }
+    
+    if ((errorInfo2 & 2) > 0) {
+        return BRLMPrintErrorCodePrinterStatusErrorExpansionBufferFull;
+    }
+    
+    if ((errorInfo2 & 4) > 0) {
+        return BRLMPrintErrorCodePrinterStatusErrorCommunicationError;
+    }
+    
+    if ((errorInfo2 & 8) > 0) {
+        return BRLMPrintErrorCodeDataBufferError;
+    }
+    
+    if ((errorInfo2 & 10) > 0) {
+        return BRLMPrintErrorCodePrinterStatusErrorCoverOpen;
+    }
+    
+    if ((errorInfo2 & 20) > 0) {
+        return BRLMPrintErrorCodeCanceled;
+    }
+    
+    if ((errorInfo2 & 40) > 0) {
+        return BRLMPrintErrorCodePrinterStatusErrorPaperJam;
+    }
+    
+    if ((errorInfo2 & 80) > 0) {
+        return BRLMPrintErrorCodePrinterStatusErrorUnknownError;
+    }
+    
+    
+    
+    return BRLMPrintErrorCodeNoError;
+}
+
++ (NSNumber *) labelIdTypeToNumberWithValue:(LabelIdType) labelTypeId {
+    
+    if (labelTypeId == LabelIdTypeW17H54) {
+        return [[NSNumber alloc] initWithInt:(0x01)];
+    }
+    if (labelTypeId == LabelIdTypeW17H87) {
+        return [[NSNumber alloc] initWithInt:(0x02)];
+    }
+    if (labelTypeId == LabelIdTypeW23H23) {
+        return [[NSNumber alloc] initWithInt:(0x03)];
+    }
+    if (labelTypeId == LabelIdTypeW29H42) {
+        return [[NSNumber alloc] initWithInt:(0x04)];
+    }
+    if (labelTypeId == LabelIdTypeW29H90) {
+        return [[NSNumber alloc] initWithInt:(0x05)];
+    }
+    if (labelTypeId == LabelIdTypeW38H90) {
+        return [[NSNumber alloc] initWithInt:(0x06)];
+    }
+    if (labelTypeId == LabelIdTypeW39H48) {
+        return [[NSNumber alloc] initWithInt:(0x07)];
+    }
+    if (labelTypeId == LabelIdTypeW52H29) {
+        return [[NSNumber alloc] initWithInt:(0x08)];
+    }
+    if (labelTypeId == LabelIdTypeW62H29) {
+        return [[NSNumber alloc] initWithInt:(0x09)];
+    }
+    if (labelTypeId == LabelIdTypeW62H100) {
+        return [[NSNumber alloc] initWithInt:(0x0a)];
+    }
+    if (labelTypeId == LabelIdTypeW12) {
+        return [[NSNumber alloc] initWithInt:(0x0b)];
+    }
+    if (labelTypeId == LabelIdTypeW29) {
+        return [[NSNumber alloc] initWithInt:(0x0c)];
+    }
+    if (labelTypeId == LabelIdTypeW38) {
+        return [[NSNumber alloc] initWithInt:(0x0d)];
+    }
+    if (labelTypeId == LabelIdTypeW50) {
+        return [[NSNumber alloc] initWithInt:(0x0e)];
+    }
+    if (labelTypeId == LabelIdTypeW54) {
+        return [[NSNumber alloc] initWithInt:(0x0f)];
+    }
+    if (labelTypeId == LabelIdTypeW62) {
+        return [[NSNumber alloc] initWithInt:(0x10)];
+    }
+    if (labelTypeId == LabelIdTypeW60H86) {
+        return [[NSNumber alloc] initWithInt:(0x11)];
+    }
+    //PT
+    if (labelTypeId == LabelIdTypeW3_5) {
+        return [[NSNumber alloc] initWithInt:(0x12)];
+    }
+    if (labelTypeId == LabelIdTypeW6) {
+        return [[NSNumber alloc] initWithInt:(0x13)];
+    }
+    if (labelTypeId == LabelIdTypeW9) {
+        return [[NSNumber alloc] initWithInt:(0x14)];
+    }
+    if (labelTypeId == LabelIdTypeW18) {
+        return [[NSNumber alloc] initWithInt:(0x15)];
+    }
+    if (labelTypeId == LabelIdTypeW24) {
+        return [[NSNumber alloc] initWithInt:(0x16)];
+    }
+    if (labelTypeId == LabelIdTypeHS_W6) {
+        return [[NSNumber alloc] initWithInt:(0x17)];
+    }
+    if (labelTypeId == LabelIdTypeHS_W9) {
+        return [[NSNumber alloc] initWithInt:(0x18)];
+    }
+    if (labelTypeId == LabelIdTypeHS_W12) {
+        return [[NSNumber alloc] initWithInt:(0x19)];
+    }
+    if (labelTypeId == LabelIdTypeHS_W18) {
+        return [[NSNumber alloc] initWithInt:(0x1a)];
+    }
+    if (labelTypeId == LabelIdTypeHS_W24) {
+        return [[NSNumber alloc] initWithInt:(0x1b)];
+    }
+    if (labelTypeId == LabelIdTypeW36) {
+        return [[NSNumber alloc] initWithInt:(0x1c)];
+    }
+    if (labelTypeId == LabelIdTypeR6_5) {
+        return [[NSNumber alloc] initWithInt:(0x1d)];
+    }
+    if (labelTypeId == LabelIdTypeR6_0) {
+        return [[NSNumber alloc] initWithInt:(0x1f)];
+    }
+    if (labelTypeId == LabelIdTypeR5_0) {
+        return [[NSNumber alloc] initWithInt:(0x20)];
+    }
+    if (labelTypeId == LabelIdTypeR4_0) {
+        return [[NSNumber alloc] initWithInt:(0x21)];
+    }
+    if (labelTypeId == LabelIdTypeR3_5) {
+        return [[NSNumber alloc] initWithInt:(0x22)];
+    }
+    if (labelTypeId == LabelIdTypeR3_0) {
+        return [[NSNumber alloc] initWithInt:(0x23)];
+    }
+    if (labelTypeId == LabelIdTypeR2_5) {
+        return [[NSNumber alloc] initWithInt:(0x24)];
+    }
+    if (labelTypeId == LabelIdTypeFLE_W21H45) {
+        return [[NSNumber alloc] initWithInt:(0x25)];
+    }
+    //QL-8対応
+    if (labelTypeId == LabelIdTypeW62RB) {
+        return [[NSNumber alloc] initWithInt:(0x26)];
+    }
+    if (labelTypeId == LabelIdTypeW54H29) {
+        return [[NSNumber alloc] initWithInt:(0x27)];
+    }
+    //QL_1100
+    if (labelTypeId == LabelIdTypeW102) {
+        return [[NSNumber alloc] initWithInt:(0x28)];
+    }
+    if (labelTypeId == LabelIdTypeW102H51) {
+        return [[NSNumber alloc] initWithInt:(0x29)];
+    }
+    if (labelTypeId == LabelIdTypeW102H152) {
+        return [[NSNumber alloc] initWithInt:(0x30)];
+    }
+    if (labelTypeId == LabelIdTypeW103) {
+        return [[NSNumber alloc] initWithInt:(0x31)];
+    }
+    if (labelTypeId == LabelIdTypeW103H164) {
+        return [[NSNumber alloc] initWithInt:(0x32)];
+    }
+    if (labelTypeId == LabelIdTypeDT_W90) {
+        return [[NSNumber alloc] initWithInt:(0x33)];
+    }
+    if (labelTypeId == LabelIdTypeDT_W102) {
+        return [[NSNumber alloc] initWithInt:(0x34)];
+    }
+    if (labelTypeId == LabelIdTypeDT_W102H51) {
+        return [[NSNumber alloc] initWithInt:(0x35)];
+    }
+    if (labelTypeId == LabelIdTypeDT_W102H152) {
+        return [[NSNumber alloc] initWithInt:(0x36)];
+    }
+    
+    return [[NSNumber alloc] initWithInt:(-1)];
+}
+
++ (NSNumber *) colorTypeToNumberWithValue:(ColorType) colorType {
+    
+    if (colorType == WHITE) {
+        return [[NSNumber alloc] initWithInt:(0x01)];
+    }
+    if (colorType == OTHERS) {
+        return [[NSNumber alloc] initWithInt:(0x02)];
+    }
+    if (colorType == CLEAR) {
+        return [[NSNumber alloc] initWithInt:(0x03)];
+    }
+    if (colorType == RED) {
+        return [[NSNumber alloc] initWithInt:(0x04)];
+    }
+    if (colorType == BLUE) {
+        return [[NSNumber alloc] initWithInt:(0x05)];
+    }
+    if (colorType == YELLOW) {
+        return [[NSNumber alloc] initWithInt:(0x06)];
+    }
+    if (colorType == GREEN) {
+        return [[NSNumber alloc] initWithInt:(0x07)];
+    }
+    if (colorType == BLACK) {
+        return [[NSNumber alloc] initWithInt:(0x08)];
+    }
+    if (colorType == CLEAR_WHITE) {
+        return [[NSNumber alloc] initWithInt:(0x09)];
+    }
+    if (colorType == GOLD) {
+        return [[NSNumber alloc] initWithInt:(0x0A)];
+    }
+    if (colorType == GOLD_PREMIUM) {
+        return [[NSNumber alloc] initWithInt:(0x0B)];
+    }
+    if (colorType == SILVER_PREMIUM) {
+        return [[NSNumber alloc] initWithInt:(0x0C)];
+    }
+    if (colorType == OTHERS_PREMIUM) {
+        return [[NSNumber alloc] initWithInt:(0x0D)];
+    }
+    if (colorType == OTHERS_MASKING) {
+        return [[NSNumber alloc] initWithInt:(0x0E)];
+    }
+    if (colorType == SATIN_LIGHTBLUE) {
+        return [[NSNumber alloc] initWithInt:(0x0F)];
+    }
+    if (colorType == SATIN_MINT) {
+        return [[NSNumber alloc] initWithInt:(0x10)];
+    }
+    /*
+    if (colorType == SILVER_SATIN) {
+        return [[NSNumber alloc] initWithInt:(0x11)];
+    }
+     */
+    if (colorType == MATTE_WHITE) {
+        return [[NSNumber alloc] initWithInt:(0x20)];
+    }
+    if (colorType == MATTE_CLEAR) {
+        return [[NSNumber alloc] initWithInt:(0x21)];
+    }
+    if (colorType == MATTE_SILVER) {
+        return [[NSNumber alloc] initWithInt:(0x22)];
+    }
+    if (colorType == SATIN_GOLD) {
+        return [[NSNumber alloc] initWithInt:(0x23)];
+    }
+    if (colorType == SATIN_SILVER) {
+        return [[NSNumber alloc] initWithInt:(0x24)];
+    }
+    /*
+    if (colorType == PASTEL_PURPLE) {
+        return [[NSNumber alloc] initWithInt:(0x25)];
+    }
+     */
+    if (colorType == BLUE_WHITE) {
+        return [[NSNumber alloc] initWithInt:(0x30)];
+    }
+    if (colorType == RED_WHITE) {
+        return [[NSNumber alloc] initWithInt:(0x31)];
+    }
+    if (colorType == FLOURESCENT_ORANGE) {
+        return [[NSNumber alloc] initWithInt:(0x40)];
+    }
+    if (colorType == FLOURESCENT_YELLOW) {
+        return [[NSNumber alloc] initWithInt:(0x41)];
+    }
+    if (colorType == BERRY_PINK) {
+        return [[NSNumber alloc] initWithInt:(0x50)];
+    }
+    if (colorType == LIGHT_GLAY) {
+        return [[NSNumber alloc] initWithInt:(0x51)];
+    }
+    if (colorType == LIME_GREEN) {
+        return [[NSNumber alloc] initWithInt:(0x52)];
+    }
+    /*
+    if (colorType == NAVY_BLUE_SATIN) {
+        return [[NSNumber alloc] initWithInt:(0x53)];
+    }
+    */
+    /*
+    if (colorType == WINE_RED_SATIN) {
+        return [[NSNumber alloc] initWithInt:(0x54)];
+    }
+    */
+    if (colorType == FABRIC_YELLOW) {
+        return [[NSNumber alloc] initWithInt:(0x60)];
+    }
+    if (colorType == FABRIC_PINK) {
+        return [[NSNumber alloc] initWithInt:(0x61)];
+    }
+    if (colorType == FABRIC_BLUE) {
+        return [[NSNumber alloc] initWithInt:(0x62)];
+    }
+    if (colorType == TUBE_WHITE) {
+        return [[NSNumber alloc] initWithInt:(0x70)];
+    }
+    if (colorType == SELF_WHITE) {
+        return [[NSNumber alloc] initWithInt:(0x80)];
+    }
+    if (colorType == FLEXIBLE_WHITE) {
+        return [[NSNumber alloc] initWithInt:(0x90)];
+    }
+    if (colorType == FLEXIBLE_YELLOW) {
+        return [[NSNumber alloc] initWithInt:(0x91)];
+    }
+    if (colorType == CLEANING) {
+        return [[NSNumber alloc] initWithInt:(0xF0)];
+    }
+    if (colorType == STENCIL) {
+        return [[NSNumber alloc] initWithInt:(0xF1)];
+    }
+    if (colorType == UNSUPPORT) {
+        return [[NSNumber alloc] initWithInt:(0xFF)];
+    }
+    return [[NSNumber alloc] initWithInt:(-1)];
+}
+
++ (NSString *) colorTypeToNameWithValue:(ColorType) colorType {
+    
+    if (colorType == WHITE) {
+        return @"WHITE";
+    }
+    if (colorType == OTHERS) {
+        return @"OTHERS";
+    }
+    if (colorType == CLEAR) {
+        return @"CLEAR";
+    }
+    if (colorType == RED) {
+        return @"RED";
+    }
+    if (colorType == BLUE) {
+        return @"BLUE";
+    }
+    if (colorType == YELLOW) {
+        return @"YELLOW";
+    }
+    if (colorType == GREEN) {
+        return @"GREEN";
+    }
+    if (colorType == BLACK) {
+        return @"BLACK";
+    }
+    if (colorType == CLEAR_WHITE) {
+        return @"CLEAR_WHITE";
+    }
+    if (colorType == GOLD) {
+        return @"GOLD";
+    }
+    if (colorType == GOLD_PREMIUM) {
+        return @"GOLD_PREMIUM";
+    }
+    if (colorType == SILVER_PREMIUM) {
+        return @"SILVER_PREMIUM";
+    }
+    if (colorType == OTHERS_PREMIUM) {
+        return @"OTHERS_PREMIUM";
+    }
+    if (colorType == OTHERS_MASKING) {
+        return @"OTHERS_MASKING";
+    }
+    if (colorType == SATIN_LIGHTBLUE) {
+        return @"SATIN_LIGHTBLUE";
+    }
+    if (colorType == SATIN_MINT) {
+        return @"SATIN_MINT";
+    }
+    /*
+    if (colorType == SILVER_SATIN) {
+        return @"SILVER_SATIN";
+    }
+     */
+    if (colorType == MATTE_WHITE) {
+        return @"MATTE_WHITE";
+    }
+    if (colorType == MATTE_CLEAR) {
+        return @"MATTE_CLEAR";
+    }
+    if (colorType == MATTE_SILVER) {
+        return @"MATTE_SILVER";
+    }
+    if (colorType == SATIN_GOLD) {
+        return @"SATIN_GOLD";
+    }
+    if (colorType == SATIN_SILVER) {
+        return @"SATIN_SILVER";
+    }
+    /*
+    if (colorType == PASTEL_PURPLE) {
+        return @"PASTEL_PURPLE";
+    }
+     */
+    if (colorType == BLUE_WHITE) {
+        return @"BLUE_WHITE";
+    }
+    if (colorType == RED_WHITE) {
+        return @"RED_WHITE";
+    }
+    if (colorType == FLOURESCENT_ORANGE) {
+        return [[NSNumber alloc] initWithInt:(0x40)];
+    }
+    if (colorType == FLOURESCENT_YELLOW) {
+        return @"FLOURESCENT_ORANGE";
+    }
+    if (colorType == BERRY_PINK) {
+        return @"BERRY_PINK";
+    }
+    if (colorType == LIGHT_GLAY) {
+        return @"LIGHT_GLAY";
+    }
+    if (colorType == LIME_GREEN) {
+        return @"LIME_GREEN";
+    }
+    /*
+    if (colorType == NAVY_BLUE_SATIN) {
+        return @"NAVY_BLUE_SATIN";
+    }
+    */
+    /*
+    if (colorType == WINE_RED_SATIN) {
+        return @"WINE_RED_SATIN";
+    }
+    */
+    if (colorType == FABRIC_YELLOW) {
+        return @"FABRIC_YELLOW";
+    }
+    if (colorType == FABRIC_PINK) {
+        return @"FABRIC_PINK";
+    }
+    if (colorType == FABRIC_BLUE) {
+        return @"FABRIC_BLUE";
+    }
+    if (colorType == TUBE_WHITE) {
+        return @"TUBE_WHITE";
+    }
+    if (colorType == SELF_WHITE) {
+        return @"SELF_WHITE";
+    }
+    if (colorType == FLEXIBLE_WHITE) {
+        return @"FLEXIBLE_WHITE";
+    }
+    if (colorType == FLEXIBLE_YELLOW) {
+        return @"FLEXIBLE_YELLOW";
+    }
+    if (colorType == CLEANING) {
+        return @"CLEANING";
+    }
+    if (colorType == STENCIL) {
+        return @"STENCIL";
+    }
+    if (colorType == UNSUPPORT) {
+        return @"UNSUPPORT";
+    }
+    return @"UNSUPPORT";
+}
+
++ (NSDictionary<NSString *, NSObject *> *) colorTypeToMapWithValue:(ColorType)colorType {
+ 
+    NSDictionary<NSString*, NSObject *> * dartLabelColor = @{
+        @"id":[BrotherUtils colorTypeToNumberWithValue:colorType],
+        @"name": [BrotherUtils colorTypeToNameWithValue:colorType]
+    };
+    
+    return dartLabelColor;
+    
+}
+
 + (NSDictionary<NSString *,NSObject *> *)printerStatusToMapWithError:(BRLMPrintErrorCode)error status:(BRLMPrinterStatus *)status {
     
     NSObject * dartError = [BrotherUtils errorCodeToMapWithValue: error];
     
+    // TODO Figure out good way to get status from raw status data.
+    //NSObject * dartError2 = [BrotherUtils errorCodeToMapWithId: [NSNumber numberWithInt:status.ptStatus.byStatusType] ];
+    
     // TODO Translate status if not nill
     NSDictionary<NSString*, NSObject *> * dartPrintStatus = @{
-        @"errorCode":dartError,
+        @"errorCode":dartError,//dartError,
         @"labelId": [[NSNumber alloc] initWithInt:(-1)], // TODO
         @"labelType": [[NSNumber alloc] initWithInt:(-1)], // TODO
         @"isACConnected": @{@"id": [[NSNumber alloc] initWithInt:(-1)], @"name": @"Unknown" }, // TODO
@@ -1507,6 +2208,25 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     
     return dartPrintStatus;
 }
+
++ (NSDictionary<NSString *, NSObject *> *) labelInfoStatuesToMapWithStatus:(BRPtouchLabelInfoStatus *) status{
+    
+    // TODO Continue implementation after color type is added
+    NSDictionary<NSString*, NSObject *> * dartLabelInfoStatus = @{
+        @"labelNameIndex": [BrotherUtils labelIdTypeToNumberWithValue: [status labelID ]],
+        @"isAutoCut": @FALSE, // TODO
+        @"isEndCut": @FALSE, // TODO
+        @"isHalfCut": @FALSE, // TODO
+        @"isSpecialTape": @FALSE, // TODO
+        @"isCutMark": @FALSE, // TODO
+        @"labelColor": [BrotherUtils colorTypeToMapWithValue:[status labelColor]],
+        @"labelFontColor": [BrotherUtils colorTypeToMapWithValue:[status fontColor]],
+        @"labelType": [BrotherUtils labelIdTypeToNumberWithValue: [status labelID ]]
+    };
+    
+    return dartLabelInfoStatus;
+}
+
 
 + (NSDictionary<NSString *,NSObject *> *)bRPtouchDeviceInfoToNetPrinterMap:(BRPtouchDeviceInfo *)deviceInfo {
     

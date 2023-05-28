@@ -26,6 +26,8 @@ static NSString * METHOD_NAME = @"printFile";
     return METHOD_NAME;
 }
 - (void)execute {
+    // TODO Move to background thread.
+
     // Get printInfo dart params from call
     NSDictionary<NSString *, NSObject *> * dartPrintInfo = _call.arguments[@"printInfo"];
     // Get file path from call

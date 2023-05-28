@@ -1,6 +1,6 @@
 # another_brother
 
-Another Bother SDK library for Flutter.
+Another Bother SDK library for Flutter. For full demo app see Another-Brother-Demo-Prime https://github.com/CodeMinion/Demo-Another-Brother-Prime
 
 ## Android Support
 - Bluetooth/BLE
@@ -52,3 +52,25 @@ Add the following to your Info.plist
 ```
 On your Runner make sure to mark: Allow non-modular includes as yes.
 Also make sure to mark the libBROTHERSDK.a as belonging to another_brother in xCode: https://www.youtube.com/watch?v=42dBVdXU8gk
+
+iOS Setup Video: https://www.youtube.com/watch?v=AcFnd-6hSew
+
+
+
+## Apps Built with another_brother
+Have an app built using another_brother let me know and I will add it here!
+
+- Easy Menu: https://www.youtube.com/watch?v=xy9qYo03pOQ
+- QR Storage: https://play.google.com/store/apps/details?id=com.rouninlabs.qrstorage
+- Speed Dater: https://youtu.be/z4jxO9HWze8
+- 4.events: https://play.google.com/store/apps/details?id=com.fourevents.app
+- PoachMe.dev: https://poachme.dev/#/devLand?reqCode=SAVETIME&
+- OkosHACCP: https://play.google.com/store/apps/details?id=hu.okoshaccp.operator built by https://wunderbytes.eu/
+
+# Brother Hackathon
+Feel free to use any of my GitHub repositories in your apps. You should also consider
+attending the free Brother Hackathon happening this year. You get a free Brother QL-1110NWB,
+a PT-P910BT, and possibly an awesome DS-940DW mobile scanner. Visit brotherhackathon.com for
+more information. I will be teaching workshops, and they are free. You can ask me any questions.
+Thank you.
+

@@ -81,9 +81,24 @@
     // DONE
 + (BRLMMWPrintSettings *) mwPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map;
 
++ (NSNumber *) labelIdTypeToNumberWithValue:(LabelIdType) labelTypeId;
+
++ (NSNumber *) colorTypeToNumberWithValue:(ColorType) colorType;
++ (NSString *) colorTypeToNameWithValue:(ColorType) colorType;
+
++ (NSDictionary<NSString *, NSObject *> *) colorTypeToMapWithValue:(ColorType)colorType;
+
 + (NSDictionary<NSString *, NSObject *> *) errorCodeToMapWithValue:(BRLMPrintErrorCode)error;
 
+//+ (NSDictionary<NSString *, NSObject *> *) statusErrorCodeToMapWithValue:(BRLMPrinterStatusErrorCode)error;
+
++ (BRLMPrintErrorCode) statusErrorCodeToMapWithRawStatus:(BRLMPrinterStatusRawDataStructure)status;
+
++ (NSDictionary<NSString *, NSObject *> *) errorCodeToMapWithId:(NSNumber* )errorId;
+
 + (NSDictionary<NSString *, NSObject *> *) printerStatusToMapWithError:(BRLMPrintErrorCode)error status:(BRLMPrinterStatus *) status;
+
++ (NSDictionary<NSString *, NSObject *> *) labelInfoStatuesToMapWithStatus:(BRPtouchLabelInfoStatus *) status;
 
 + (NSDictionary<NSString *, NSObject *> *) bRPtouchDeviceInfoToNetPrinterMap:(BRPtouchDeviceInfo *) deviceInfo;
 

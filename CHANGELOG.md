@@ -54,3 +54,39 @@
 
 ## 0.0.22
 - PaperSize now shares common interface as other labels.
+
+## 0.0.23
+- Fixes issue with startPTTPrint. Special thanks to rendesg for the fixes.
+
+## 0.0.24
+- Fixes exception on iOS print. Special thanks to BentEngbers for the report.
+
+## 0.0.25
+- Moved from JCenter to MavenCentral for Android dependencies.
+
+## 0.0.26
+- Added Bluetooth permissions required by Android 12
+
+## 0.0.27
+- Replaces flutter_blue with flutter_blu_plus
+
+## 0.0.28
+- Resolves issue where app UI freezes while calling printImage on iOS.
+
+## 0.0.29
+- Upgrades Android libs to v4.6.1 of the Brother SDK.
+
+## 0.0.30
+- Adds support for getPDFFilePages on iOS.
+
+## 0.0.31
+- Adds orientation support for PT printers on iOS.
+
+## 0.0.32
+- Updates Bluetooth printer filter on Android.
+
+## 0.0.33
+- Updates USB permissions check for Android 13.
+
+## 0.0.34
+- Adds support for: RJ_3230B, RJ_3250WB, PT_D410, PT_D460BT, PT_D610BT, PJ_822, PJ_823, PJ_862, PJ_863, PJ_883, TD_2030A, TD_2125N, TD_2125NWB, TD_2135N, TD_2135NWB.

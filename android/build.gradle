@@ -18,7 +18,8 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        //jcenter()
         maven {
             url "https://rouninlabs.jfrog.io/artifactory/rounin-libs-external/"
         }
@@ -29,7 +30,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
