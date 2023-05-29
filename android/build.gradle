@@ -19,7 +19,6 @@ rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
-        //jcenter()
         maven {
             url "https://rouninlabs.jfrog.io/artifactory/rounin-libs-external/"
         }
@@ -54,5 +53,4 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
     implementation 'com.brother.sdk:printer:4.6.1'
     implementation 'com.brother.typeb:print:1.0.0'
-    implementation 'androidx.annotation:annotation-jvm:1.6.0'
 }
