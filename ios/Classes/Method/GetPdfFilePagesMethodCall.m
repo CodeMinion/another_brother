@@ -1,15 +1,15 @@
 //
-//  PrintPdfFileMethodCall.m
+//  GetPdfFilePagesMethodCall.m
 //  another_brother
 //
-//  Created by admin on 4/15/21.
+//  Created by Frank Hernandez on 11/26/22.
 //
 
 #import <Foundation/Foundation.h>
-#import "PrintPdfFileMethodCall.h"
+#import "GetPdfFilePagesMethodCall.h"
 
-@implementation PrintPdfFileMethodCall
-static NSString * METHOD_NAME = @"printPdfFile";
+@implementation GetPdfFilePagesMethodCall
+static NSString * METHOD_NAME = @"getPDFFilePages";
 
 - (instancetype)initWithCall:(FlutterMethodCall *)call
                       result:(FlutterResult) result {
@@ -28,13 +28,23 @@ static NSString * METHOD_NAME = @"printPdfFile";
 - (void)execute {
     // TODO Move to background thread.
     // Get printInfo dart params from call
-    NSDictionary<NSString *, NSObject *> * dartPrintInfo = _call.arguments[@"printInfo"];
+    //NSDictionary<NSString *, NSObject *> * dartPrintInfo = _call.arguments[@"printInfo"];
     // Get file path from call
     NSString * filePath = _call.arguments[@"filePath"];
-    // Get page number
-    NSNumber * pageNum = _call.arguments[@"pagenum"];
+    // Get the printer ID
+    //NSString * printerId = _call.arguments[@"printerId"];
     
-    
+
+    //NSURL * url = [NSURL fileURLWithPath:filePath];
+    CFURLRef url = CFURLCreateWithFileSystemPath (NULL, (__bridge CFStringRef)filePath, kCFURLPOSIXPathStyle, 0);
+    CGPDFDocumentRef pdf = CGPDFDocumentCreateWithURL(url);
+    //CGPDFPageRef myPageRef = CGPDFDocumentGetPage(pdf, 1);
+    int totalPages= CGPDFDocumentGetNumberOfPages(pdf);
+
+    NSNumber *outPages = [NSNumber numberWithInt:totalPages];
+    _result(outPages);
+
+    /*
     // TODO Get channel from printInfo
     BRLMChannel *channel = [BrotherUtils printChannelWithPrintSettingsMap:dartPrintInfo];
     
@@ -69,8 +79,10 @@ static NSString * METHOD_NAME = @"printPdfFile";
     NSDictionary<NSString *, NSObject *> * printStatus = [BrotherUtils printerStatusToMapWithError:printError.code  status:nil];
     
     _result(printStatus);
+    */
    
 }
 
 
 @end
+

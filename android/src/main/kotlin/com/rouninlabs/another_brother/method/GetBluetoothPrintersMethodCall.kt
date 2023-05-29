@@ -67,7 +67,9 @@ class GetBluetoothPrintersMethodCall(val flutterAssets: FlutterPlugin.FlutterAss
             // TODO Only select the devices containing the model in them.
             // Brother names their printers with the model followed by what seems to be 4 digits.
             val matchingPrinters = BluetoothAdapter.getDefaultAdapter().bondedDevices.filter {
-                bluetoothDevice -> models.filter { modelName -> bluetoothDevice.name.contains(modelName) }.isNotEmpty()
+                bluetoothDevice -> models.filter { modelName ->
+                bluetoothDevice.name.contains(modelName) || bluetoothDevice.name.replace("-", "_").contains(modelName)
+                }.isNotEmpty()
             }
 
             //Log.e("Frank", "Found Printers ${BluetoothAdapter.getDefaultAdapter().bondedDevices}")
