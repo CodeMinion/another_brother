@@ -155,7 +155,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     }
     else if([@"PT_D610BT" isEqualToString:name]) {
         // Returns some PT model to see if we can print since the sdk doesn't seem to have a constant for it.
-        return BRLMPrinterModelPT_D800W;
+        return BRLMPrinterModelPT_D610BT;
     }
     else if([@"PT_D800W" isEqualToString:name]) {
         return BRLMPrinterModelPT_D800W;
