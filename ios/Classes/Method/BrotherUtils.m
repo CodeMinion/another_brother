@@ -1329,7 +1329,8 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
 }
 
 + (id<BRLMPrintSettingsProtocol>) printSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map {
-    
+
+    // TODO: Update this when new printers are added so the proper settings are returned. Otherwise users will see ERROR_PRINTER_SETTING_NOT_SUPPORTED when printing to the new printer.
     BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
     
     if (printerModel == BRLMPrinterModelQL_710W
@@ -1343,6 +1344,9 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if (printerModel == BRLMPrinterModelPJ_673
              || printerModel == BRLMPrinterModelPJ_773
              || printerModel == BRLMPrinterModelPJ_763MFi
+             || printerModel == BRLMPrinterModelPJ_862
+             || printerModel == BRLMPrinterModelPJ_863
+             || printerModel == BRLMPrinterModelPJ_883
              ) {
         return [BrotherUtils pjPrintSettingsFromMapWithValue:map];
     }
@@ -1354,6 +1358,8 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
              || printerModel == BRLMPrinterModelRJ_4040
              || printerModel == BRLMPrinterModelRJ_4230B
              || printerModel == BRLMPrinterModelRJ_4250WB
+             || printerModel == BRLMPrinterModelRJ_3230B
+             || printerModel == BRLMPrinterModelRJ_3250WB
              ) {
         return [BrotherUtils rjPrintSettingsFromMapWithValue:map];
     }
@@ -1363,6 +1369,10 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
              || printerModel == BRLMPrinterModelTD_4420DN
              || printerModel == BRLMPrinterModelTD_4520DN
              || printerModel == BRLMPrinterModelTD_4550DNWB
+             || printerModel == BRLMPrinterModelTD_2125N
+             || printerModel == BRLMPrinterModelTD_2125NWB
+             || printerModel == BRLMPrinterModelTD_2135N
+             || printerModel == BRLMPrinterModelTD_2135NWB
              ) {
         return [BrotherUtils tdPrintSettingsFromMapWithValue:map];
     }
@@ -1377,6 +1387,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
              || printerModel == BRLMPrinterModelPT_P950NW
              || printerModel == BRLMPrinterModelPT_E850TKW
              || printerModel == BRLMPrinterModelPT_P715eBT
+             || printerModel == BRLMPrinterModelPT_D610BT
              ) {
         return [BrotherUtils ptPrintSettingsFromMapWithValue:map];
     }
