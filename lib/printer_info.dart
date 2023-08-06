@@ -147,6 +147,7 @@ class Model implements AModel {
   static final QL_800 = Model._internal2("QL_800", 51, QL_580N);
   static final QL_810W = Model._internal2("QL_810W", 52, QL_580N);
   static final QL_820NWB = Model._internal2("QL_820NWB", 53, QL_580N);
+  static final QL_820NWBc = Model._internal2("QL_820NWBc", 53, QL_580N);
   static final QL_1100 = Model._internal(
       "QL_1100", 54, QL1100.W38.getId(), PrinterSeries.QL1100_LABEL_PRINTER);
   static final QL_1110NWB = Model._internal2("QL_1110NWB", 55, QL_1100);
@@ -243,6 +244,7 @@ class Model implements AModel {
     QL_800,
     QL_810W,
     QL_820NWB,
+    QL_820NWBc,
     QL_1100,
     QL_1110NWB,
     QL_1115NWB,
@@ -3297,14 +3299,14 @@ class Printer {
     // TODO Consider moving this to iOS side.
     if (Platform.isIOS) {
       //BLE Scanning
-      FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
+      FlutterBluePlus? flutterBlue = FlutterBluePlus();
 
       // Start scanning
-      flutterBlue.startScan(withServices: [Guid("A76EB9E0-F3AC-4990-84CF-3A94D2426B2B")], timeout: Duration(seconds: timeout~/1000));
+      FlutterBluePlus.startScan(withServices: [Guid("A76EB9E0-F3AC-4990-84CF-3A94D2426B2B")], timeout: Duration(seconds: timeout~/1000));
 
       Set<BLEPrinter> foundDevices = {};
       // Listen to scan results
-      var subscription = flutterBlue.scanResults.listen((results) {
+      var subscription = FlutterBluePlus.scanResults.listen((results) {
         for (ScanResult r in results) {
           BLEPrinter found = BLEPrinter(localName: r.device.name);
           if (!foundDevices.contains(found)) {

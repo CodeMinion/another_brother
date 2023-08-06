@@ -199,6 +199,9 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if([@"QL_820NWB" isEqualToString:name]) {
         return BRLMPrinterModelQL_820NWB;
     }
+    else if([@"QL_820NWBc" isEqualToString:name]) {
+        return BRLMPrinterModelQL_820NWB;
+    }
     else if([@"QL_1100" isEqualToString:name]) {
         return BRLMPrinterModelUnknown;
     }

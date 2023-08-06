@@ -762,10 +762,10 @@ class TbPrinter {
   /// on Android 5.0 or later.
   Future<List<BLEPrinter>> getBLEPrinters({int timeout = 5000}) async {
     //BLE Scanning
-    FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
+    //FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
 
     // Start scanning
-    flutterBlue.startScan(
+    FlutterBluePlus.startScan(
       // Note: For some reason it does not find the printer even though this is the service
       //withServices: [Guid("49535343-FE7D-4AE5-8FA9-9FAFD205E455"),
       // Guid("F0DD799C-C883-4976-96A5-8BB4907F41D6")
@@ -774,7 +774,7 @@ class TbPrinter {
 
     Set<BLEPrinter> foundDevices = {};
     // Listen to scan results
-    var subscription = flutterBlue.scanResults.listen((results) {
+    var subscription = FlutterBluePlus.scanResults.listen((results) {
       for (ScanResult r in results) {
         print("Scan Result: ${r.device}");
 
