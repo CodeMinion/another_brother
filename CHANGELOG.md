@@ -91,3 +91,7 @@
 ## 0.0.34
 - Adds support for: RJ_3230B, RJ_3250WB, PT_D410, PT_D460BT, PT_D610BT, PJ_822, PJ_823, PJ_862, PJ_863, PJ_883, TD_2030A, TD_2125N, TD_2125NWB, TD_2135N, TD_2135NWB.
 - Adds bin papers for TD_2135NWB. Special thanks to Alain Deseine for the support with this.
+
+## 1.0.0
+- Updates iOS SDK to 4.6.4
+- Updates flutter_blue_plus to 1.12.13
