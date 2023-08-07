@@ -31,10 +31,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-  File _selectedImage = null;
+  File? _selectedImage;
 
-  ui.Image _imageToShow = null;
-  Uint8List _imageBytes = null;
+  ui.Image? _imageToShow;
+  Uint8List? _imageBytes;
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  Future<PrinterStatus> printLabelTypeB() async {
+  Future<TbPrinterStatus> printLabelTypeB() async {
 
     TbPrinterInfo printerInfo = TbPrinterInfo(
       printerModel: TbModel.RJ_3035B,
@@ -177,6 +177,7 @@ class _MyAppState extends State<MyApp> {
     success = await printer.endCommunication(timeoutMillis: 50000);
     print("TypeB: Connection Closed? $success");
 
+    return printerStatus;
   }
 
   Future<ui.Image> loadImage(String assetPath) async {
@@ -205,7 +206,7 @@ class _MyAppState extends State<MyApp> {
     var picture = await recorder.endRecording().toImage(300, 300);
 
     _imageBytes = (await picture.toByteData(format: ImageByteFormat.png))
-        .buffer
+        !.buffer
         .asUint8List();
     setState(() {
       //_imageToShow = picture;
@@ -515,6 +516,7 @@ class _MyAppState extends State<MyApp> {
       }
 
        */
+     return status;
   }
 
   Future<PrinterStatus> printImageBluetooth() async {
@@ -644,10 +646,10 @@ class _MyAppState extends State<MyApp> {
               child: Text('Running on: $_platformVersion\n'),
             ),
             _selectedImage != null
-                ? Image.file(_selectedImage)
+                ? Image.file(_selectedImage!)
                 : Text("No Image Selected"),
             _imageBytes != null
-                ? Image.memory(_imageBytes)
+                ? Image.memory(_imageBytes!)
                 : Text("No Image From Canvas"),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

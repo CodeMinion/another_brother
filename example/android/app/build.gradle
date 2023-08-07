@@ -26,17 +26,18 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion flutter.compileSdkVersion
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+    print(flutter)
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.rouninlabs.another_brother_example"
-        minSdkVersion 21 // Bummped to 21 as a result of Type B Sdk print Pdf
-        targetSdkVersion 28
+        minSdkVersion 21// Bummped to 21 as a result of Type B Sdk print Pdf
+        targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -48,6 +49,7 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    namespace 'com.rouninlabs.another_brother_example'
 }
 
 flutter {
@@ -55,5 +57,5 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }

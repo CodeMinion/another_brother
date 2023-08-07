@@ -13,7 +13,7 @@ Another Bother SDK library for Flutter.
 Note: This branch does not include RJ-Go support on IOS.
 
 ## Android Min SDK
-- Requires minSdkVersion 19
+- Requires minSdkVersion 21
 
 ## iOS Info.plist
 
