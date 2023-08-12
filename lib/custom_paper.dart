@@ -310,6 +310,91 @@ class BinPaper_RJ3150 implements ACustomPaper {
 
 }
 
+class BinPaper_RJ3230B implements ACustomPaper {
+  final String _name;
+  final String _assetPath;
+
+  static const String _rootDir = "packages/another_brother/custom_paper/CustomRJ3230BPaper";
+  const BinPaper_RJ3230B._internal(this._name, this._assetPath);
+
+  static const RD_W76mm = const BinPaper_RJ3230B._internal("RJ-3230B-RD76mm", "$_rootDir/RJ-3230B-RD76mm.bin");
+  static const RD_W76_44mm = const BinPaper_RJ3230B._internal("RJ-3230b-RD76_44mm", "$_rootDir/RJ-3230b-RD76_44mm.bin");
+  static const UNSUPPORTED = const BinPaper_RJ3230B._internal("UNSUPPORTED", "");
+
+  static final _values = [
+    RD_W76mm,
+    RD_W76_44mm,
+    UNSUPPORTED
+  ];
+
+  static List<BinPaper_RJ4030Ai> getValues() => List.from(_values);
+  @override
+  String getName() {
+    return _name;
+  }
+
+  static BinPaper_RJ3230B valueFromName(String name) {
+    for (int i = 0; i < _values.length; i++) {
+      if (_values[i].getName() == name) {
+        return _values[i];
+      }
+    }
+    return UNSUPPORTED;
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    return {
+      "name": _name,
+      "assetPath": _assetPath
+    };
+  }
+
+}
+
+class BinPaper_RJ3250WB implements ACustomPaper {
+  final String _name;
+  final String _assetPath;
+
+  static const String _rootDir = "packages/another_brother/custom_paper/CustomRJ3250WBPaper";
+  const BinPaper_RJ3250WB._internal(this._name, this._assetPath);
+
+  static const RD_W76mm = const BinPaper_RJ3250WB._internal("RJ-3250WB-RD76mm", "$_rootDir/RJ-3250WB-RD76mm.bin");
+  static const RD_W76_44mm = const BinPaper_RJ3250WB._internal("RJ3250WB-RD76_44mm", "$_rootDir/RJ3250WB-RD76_44mm.bin");
+  static const UNSUPPORTED = const BinPaper_RJ3250WB._internal("UNSUPPORTED", "");
+
+  static final _values = [
+    RD_W76mm,
+    RD_W76_44mm,
+    UNSUPPORTED
+  ];
+
+  static List<BinPaper_RJ4030Ai> getValues() => List.from(_values);
+  @override
+  String getName() {
+    return _name;
+  }
+
+  static BinPaper_RJ3250WB valueFromName(String name) {
+    for (int i = 0; i < _values.length; i++) {
+      if (_values[i].getName() == name) {
+        return _values[i];
+      }
+    }
+    return UNSUPPORTED;
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    return {
+      "name": _name,
+      "assetPath": _assetPath
+    };
+  }
+
+}
+
+
 class BinPaper_RJ4030Ai implements ACustomPaper {
   final String _name;
   final String _assetPath;

@@ -95,3 +95,6 @@
 ## 1.0.0
 - Updates iOS SDK to 4.6.4
 - Updates flutter_blue_plus to 1.12.13
+
+## 1.0.1
+- Adds bin papers for RJ-3230B and RJ-3250WB. Special thanks to Linus Lee for the support with this.
