@@ -98,3 +98,6 @@
 
 ## 1.0.1
 - Adds bin papers for RJ-3230B and RJ-3250WB. Special thanks to Linus Lee for the support with this.
+
+## 1.0.2
+- Adds more bin papers for TD_2135NWB. Special thanks to Alain Deseine for the support with this.
