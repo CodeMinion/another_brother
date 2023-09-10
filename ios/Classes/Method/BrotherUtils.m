@@ -108,6 +108,12 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if([@"TD_2120N" isEqualToString:name]) {
         return BRLMPrinterModelTD_2120N;
     }
+    else if([@"TD_2125N" isEqualToString:name]) {
+        return BRLMPrinterModelTD_2125N;
+    }
+    else if([@"TD_2125NWB" isEqualToString:name]) {
+        return BRLMPrinterModelTD_2125NWB;
+    }
     else if([@"TD_2130N" isEqualToString:name]) {
         return BRLMPrinterModelTD_2130N;
     }

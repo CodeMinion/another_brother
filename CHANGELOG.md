@@ -100,4 +100,7 @@
 - Adds bin papers for RJ-3230B and RJ-3250WB. Special thanks to Linus Lee for the support with this.
 
 ## 1.0.2
-- Adds more bin papers for TD_2135NWB. Special thanks to Alain Deseine for the support with this.
+- Adds more bin papers for TD-2135NWB. Special thanks to Alain Deseine for the support with this.
+
+## 1.0.3
+- Fixes issue preventing printing on iOS using the TD-2125NWB and TD-2125NWB printer. 
