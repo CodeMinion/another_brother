@@ -104,3 +104,6 @@
 
 ## 1.0.3
 - Fixes issue preventing printing on iOS using the TD-2125NWB and TD-2125NWB printer. 
+
+## 2.0.0
+- Updates AGP to version 7.3.0. 
