@@ -274,7 +274,7 @@ fun powerSaveModeFromMap(map:Map<String, Any>):BluetoothPreference.PowerSaveMode
 
 
 fun PrinterInfo.ErrorCode.toMap(context:Context? = null): Map<String, Any> {
-    // TODO IF it is ERROR_INCORRECT_LABEL check if we have Storage permission
+    /*
     if (context != null && name == PrinterInfo.ErrorCode.ERROR_WRONG_LABEL.name && ContextCompat.checkSelfPermission(context, "android.permission.WRITE_EXTERNAL_STORAGE") != PackageManager.PERMISSION_GRANTED){
         // When the App does not have storage permissions the Brother libs fail with this error ERROR_WRONG_LABEL
         // We convert it to a more meaningful one.
@@ -283,6 +283,7 @@ fun PrinterInfo.ErrorCode.toMap(context:Context? = null): Map<String, Any> {
             "name" to "ERROR_STORAGE_PERMISSION_NOT_GRANTED"
         )
     }
+     */
     return hashMapOf(
             "id" to -1,
             "name" to name
