@@ -107,3 +107,6 @@
 
 ## 2.0.0
 - Updates AGP to version 7.3.0. 
+
+## 2.1.0
+- Adds bin papers for RJ-4030. Special thanks to Linus Lee for the support with this.

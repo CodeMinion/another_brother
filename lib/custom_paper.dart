@@ -394,6 +394,61 @@ class BinPaper_RJ3250WB implements ACustomPaper {
 
 }
 
+class BinPaper_RJ4030 implements ACustomPaper {
+  final String _name;
+  final String _assetPath;
+
+  static const String _rootDir = "packages/another_brother/custom_paper/CustomRJ4030Paper";
+  const BinPaper_RJ4030._internal(this._name, this._assetPath);
+
+  //static const RD_W80H115mm = const BinPaper_RJ4030._internal("RJ4030Ai-RD80_115mm", "$_rootDir/RJ4030Ai-RD80_115mm.bin");
+  //static const RD_W2in = const BinPaper_RJ4030._internal("RJ-4030Ai-RD2inch", "$_rootDir/RJ-4030Ai-RD2inch.bin");
+  //static const RD_W3in = const BinPaper_RJ4030._internal("RJ-4030Ai-RD3inch", "$_rootDir/RJ-4030Ai-RD3inch.bin");
+  static const RD_W4in = const BinPaper_RJ4030._internal("RJ-4030-RD4inch", "$_rootDir/RJ-4030-RD4inch.bin");
+  static const RD_W4H1in = const BinPaper_RJ4030._internal("RJ-4030-RD4x1", "$_rootDir/RJ-4030-RD4x1.bin");
+  static const RD_W4H2in = const BinPaper_RJ4030._internal("RJ-4030-RD4x2", "$_rootDir/RJ-4030-RD4x2.bin");
+  static const RD_W4H3in = const BinPaper_RJ4030._internal("RJ-4030-RD4x3", "$_rootDir/RJ-4030-RD4x3.bin");
+  static const RD_W4H4in = const BinPaper_RJ4030._internal("RJ-4030-RD4x4", "$_rootDir/RJ-4030-RD4x4.bin");
+  //static const RD_W4H6in = const BinPaper_RJ4030._internal("RJ-4030Ai-RD4x6", "$_rootDir/RJ-4030Ai-RD4x6.bin");
+  static const UNSUPPORTED = const BinPaper_RJ4030._internal("UNSUPPORTED", "");
+
+  static final _values = [
+    //RD_W80H115mm,
+    //RD_W2in,
+    //RD_W3in,
+    RD_W4in,
+    RD_W4H1in,
+    RD_W4H2in,
+    RD_W4H3in,
+    RD_W4H4in,
+    //RD_W4H6in,
+    UNSUPPORTED
+  ];
+
+  static List<BinPaper_RJ4030> getValues() => List.from(_values);
+  @override
+  String getName() {
+    return _name;
+  }
+
+  static BinPaper_RJ4030 valueFromName(String name) {
+    for (int i = 0; i < _values.length; i++) {
+      if (_values[i].getName() == name) {
+        return _values[i];
+      }
+    }
+    return UNSUPPORTED;
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    return {
+      "name": _name,
+      "assetPath": _assetPath
+    };
+  }
+
+}
 
 class BinPaper_RJ4030Ai implements ACustomPaper {
   final String _name;
