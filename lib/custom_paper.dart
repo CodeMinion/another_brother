@@ -327,7 +327,7 @@ class BinPaper_RJ3230B implements ACustomPaper {
     UNSUPPORTED
   ];
 
-  static List<BinPaper_RJ4030Ai> getValues() => List.from(_values);
+  static List<BinPaper_RJ3230B> getValues() => List.from(_values);
   @override
   String getName() {
     return _name;
@@ -369,7 +369,7 @@ class BinPaper_RJ3250WB implements ACustomPaper {
     UNSUPPORTED
   ];
 
-  static List<BinPaper_RJ4030Ai> getValues() => List.from(_values);
+  static List<BinPaper_RJ3250WB> getValues() => List.from(_values);
   @override
   String getName() {
     return _name;
