@@ -110,3 +110,6 @@
 
 ## 2.1.0
 - Adds bin papers for RJ-4030. Special thanks to Linus Lee for the support with this.
+
+## 2.1.1
+- Adds support for handling the case where the device name of a Bluetooth printer is null.

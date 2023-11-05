@@ -15,7 +15,12 @@ import kotlinx.coroutines.*
 /**
  * Command for getting the Brother that are paired to the device..
  */
-class GetBluetoothPrintersMethodCall(val flutterAssets: FlutterPlugin.FlutterAssets, val context: Context, val call: MethodCall, val result: MethodChannel.Result) {
+class GetBluetoothPrintersMethodCall(
+    val flutterAssets: FlutterPlugin.FlutterAssets,
+    val context: Context,
+    val call: MethodCall,
+    val result: MethodChannel.Result
+) {
     companion object {
         const val METHOD_NAME = "getBluetoothPrinters"
     }
@@ -24,12 +29,17 @@ class GetBluetoothPrintersMethodCall(val flutterAssets: FlutterPlugin.FlutterAss
 
         GlobalScope.launch(Dispatchers.IO) {
 
-            val dartPrintInfo: HashMap<String, Any> = call.argument<HashMap<String, Any>>("printInfo")!!
+            val dartPrintInfo: HashMap<String, Any> =
+                call.argument<HashMap<String, Any>>("printInfo")!!
             val printerId: String = call.argument<String>("printerId")!!
-            val models:List<String> = call.argument<List<String>>("models")!!
+            val models: List<String> = call.argument<List<String>>("models")!!
 
             // Decoded Printer Info
-            val printInfo = printerInfofromMap(context = context, flutterAssets = flutterAssets, map = dartPrintInfo)
+            val printInfo = printerInfofromMap(
+                context = context,
+                flutterAssets = flutterAssets,
+                map = dartPrintInfo
+            )
 
             /*
             // A print request is considered one-time if there was no printer tracked with this ID.
@@ -66,20 +76,27 @@ class GetBluetoothPrintersMethodCall(val flutterAssets: FlutterPlugin.FlutterAss
 
             // TODO Only select the devices containing the model in them.
             // Brother names their printers with the model followed by what seems to be 4 digits.
-            val matchingPrinters = BluetoothAdapter.getDefaultAdapter().bondedDevices.filter {
-                bluetoothDevice -> models.filter { modelName ->
-                bluetoothDevice.name.contains(modelName) || bluetoothDevice.name.replace("-", "_").contains(modelName)
-                }.isNotEmpty()
-            }
+            val matchingPrinters =
+                BluetoothAdapter.getDefaultAdapter().bondedDevices.filter { bluetoothDevice ->
+                    models.filter { modelName ->
+                        val btName: String? = bluetoothDevice.name
+                        
+                        btName != null && (btName.contains(modelName) || btName.replace(
+                            "-",
+                            "_"
+                        ).contains(modelName))
+
+                    }.isNotEmpty()
+                }
 
             //Log.e("Frank", "Found Printers ${BluetoothAdapter.getDefaultAdapter().bondedDevices}")
             //Log.e("Frank" , "Filtered Printers $matchingPrinters")
 
             val dartPrinters = matchingPrinters.map { it.toBluetoothPrinter() }
             withContext(Dispatchers.Main) {
-               // Set result Printer status.
-               result.success(dartPrinters)
-           }
+                // Set result Printer status.
+                result.success(dartPrinters)
+            }
         }
 
     }
