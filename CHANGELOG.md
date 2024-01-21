@@ -113,3 +113,6 @@
 
 ## 2.1.1
 - Adds support for handling the case where the device name of a Bluetooth printer is null.
+
+## 2.1.2
+- Removes JFrog as a provided of Android Brother native libraries. 
