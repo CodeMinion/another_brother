@@ -1359,11 +1359,14 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
              ) {
         return [BrotherUtils pjPrintSettingsFromMapWithValue:map];
     }
+    
     else if (printerModel == BRLMPrinterModelRJ_2050
              || printerModel == BRLMPrinterModelRJ_2140
              || printerModel == BRLMPrinterModelRJ_2150
              || printerModel == BRLMPrinterModelRJ_3050
+             || printerModel == BRLMPrinterModelRJ_3050Ai
              || printerModel == BRLMPrinterModelRJ_3150
+             || printerModel == BRLMPrinterModelRJ_4030Ai
              || printerModel == BRLMPrinterModelRJ_4040
              || printerModel == BRLMPrinterModelRJ_4230B
              || printerModel == BRLMPrinterModelRJ_4250WB

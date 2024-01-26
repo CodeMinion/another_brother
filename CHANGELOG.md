@@ -116,3 +116,6 @@
 
 ## 2.1.2
 - Removes JFrog as a provided of Android Brother native libraries. 
+
+## 2.1.3
+- Adds support for the RJ-4030Ai and RJ-3050Ai printers. Special thanks to Linus Lee for the report.
