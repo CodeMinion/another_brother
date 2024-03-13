@@ -19,7 +19,7 @@ class LabelInfo {
       this.isHalfCut = false,
       this.isSpecialTape = false,
       this.isCutMark = false,
-      this.chainPrint = false;
+      this.chainPrint = false,
       this.labelColor = LabelColor.UNSUPPORT,
       this.labelFontColor = LabelColor.UNSUPPORT,
       this.labelType = -1});
