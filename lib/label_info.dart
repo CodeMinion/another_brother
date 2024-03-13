@@ -5,6 +5,7 @@ class LabelInfo {
   bool isHalfCut = false;
   bool isSpecialTape = false;
   bool isCutMark = false;
+  bool chainPrint = false;
   LabelColor labelColor;
   LabelColor labelFontColor;
   int labelType = -1;
@@ -18,6 +19,7 @@ class LabelInfo {
       this.isHalfCut = false,
       this.isSpecialTape = false,
       this.isCutMark = false,
+      this.chainPrint = false,
       this.labelColor = LabelColor.UNSUPPORT,
       this.labelFontColor = LabelColor.UNSUPPORT,
       this.labelType = -1});
@@ -30,6 +32,7 @@ class LabelInfo {
       isHalfCut: map["isHalfCut"],
       isSpecialTape: map["isSpecialTape"],
       isCutMark: map["isCutMark"],
+      chainPrint: map["chainPrint"],
       labelColor: LabelColor.fromMap(map["labelColor"]),
       labelFontColor: LabelColor.fromMap(map["labelFontColor"]),
       labelType: map["labelType"],
@@ -45,6 +48,7 @@ class LabelInfo {
       "isHalfCut" : isHalfCut,
       "isSpecialTape" : isSpecialTape,
       "isCutMark" : isCutMark,
+      "chainPrint" : chainPrint,
       "labelColor" : labelColor.toMap(),
       "labelFontColor": labelFontColor.toMap(),
       "labelType": labelType
@@ -59,6 +63,7 @@ class LabelInfo {
         "isHalfCut $isHalfCut, "
         "isSpecialTape  $isSpecialTape, "
         "isCutMark $isCutMark, "
+        "chainPrint $chainPrint, "
         "labelColor $labelColor, "
         "labelFontColor $labelFontColor, "
         "labelType $labelType}";
