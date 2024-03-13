@@ -691,6 +691,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     printerSettings.labelSize = [BrotherUtils qlLabelSizeWithName:labelName];
     printerSettings.autoCut = [[map objectForKey:@"isAutoCut"] isEqual:@(YES)];
     printerSettings.cutAtEnd = [[map objectForKey:@"isEndCut"] isEqual:@(YES)];
+    printerSettings.chainPrint = [[map objectForKey:@"chainPrint"] isEqual:@(YES)];
     printerSettings.resolution = [BrotherUtils printResolutionFromMapWithValue:dartPrintQuality];
     
     // TODO Extract info from map.
@@ -1277,6 +1278,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     bool cutmarkPrint = [[map objectForKey:@"isCutMark"] isEqual:@(YES)];
     bool autoCut = [[map objectForKey:@"isAutoCut"] isEqual:@(YES)];
     bool halfCut = [[map objectForKey:@"isHalfCut"] isEqual:@(YES)];
+    bool chainPrint = [[map objectForKey:@"chainPrint"] isEqual:@(YES)];
     bool specialTapePrint = [[map objectForKey:@"isSpecialTape"] isEqual:@(YES)];
     
     NSDictionary<NSString *, NSObject *> * dartResolution = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"printQuality"];
@@ -1291,6 +1293,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     printerSettings.cutmarkPrint = cutmarkPrint;
     printerSettings.autoCut = autoCut;
     printerSettings.halfCut = halfCut;
+    printerSettings.chainPrint = chainPrint;
     printerSettings.specialTapePrint = specialTapePrint;
     printerSettings.resolution = [BrotherUtils printResolutionFromMapWithValue:dartResolution];
     printerSettings.forceVanishingMargin = forceVanishingMargin;
@@ -2242,6 +2245,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
         @"isHalfCut": @FALSE, // TODO
         @"isSpecialTape": @FALSE, // TODO
         @"isCutMark": @FALSE, // TODO
+        @"chainPrint": @FALSE, // TODO
         @"labelColor": [BrotherUtils colorTypeToMapWithValue:[status labelColor]],
         @"labelFontColor": [BrotherUtils colorTypeToMapWithValue:[status fontColor]],
         @"labelType": [BrotherUtils labelIdTypeToNumberWithValue: [status labelID ]]
