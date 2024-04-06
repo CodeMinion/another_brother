@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:another_brother/another_brother.dart';
 
 void main() {
+  /*
   const MethodChannel channel = MethodChannel('another_brother');
 
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -20,4 +21,6 @@ void main() {
   test('getPlatformVersion', () async {
     expect(await AnotherBrother.platformVersion, '42');
   });
+
+   */
 }

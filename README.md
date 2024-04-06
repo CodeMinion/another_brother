@@ -45,6 +45,7 @@ Add the following to your Info.plist
     	<key>UISupportedExternalAccessoryProtocols</key>
     	<array>
     		<string>com.brother.ptcbp</string>
+    		<!-- Only needed if working with TypeB printer. IMPORTANT: If planning to release to the Apple store don't use it as it will lead to a rejection -->
     		<string>com.issc.datapath</string>
     	</array>
     	<!-- End Another Brother Section -->

@@ -193,8 +193,11 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if([@"RJ_3050Ai" isEqualToString:name]) {
         return BRLMPrinterModelRJ_3050Ai;
     }
-    else if([@"RJ_3150Ai" isEqualToString:name]) {
-        return BRLMPrinterModelRJ_3150Ai;
+    else if([@"RJ_3230B" isEqualToString:name]) {
+        return BRLMPrinterModelRJ_3230B;
+    }
+    else if([@"RJ_3250WB" isEqualToString:name]) {
+        return BRLMPrinterModelRJ_3250WB;
     }
     else if([@"QL_800" isEqualToString:name]) {
         return BRLMPrinterModelUnknown;
@@ -1366,12 +1369,12 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
              || printerModel == BRLMPrinterModelRJ_3050
              || printerModel == BRLMPrinterModelRJ_3050Ai
              || printerModel == BRLMPrinterModelRJ_3150
+             || printerModel == BRLMPrinterModelRJ_3230B
+             || printerModel == BRLMPrinterModelRJ_3250WB
              || printerModel == BRLMPrinterModelRJ_4030Ai
              || printerModel == BRLMPrinterModelRJ_4040
              || printerModel == BRLMPrinterModelRJ_4230B
              || printerModel == BRLMPrinterModelRJ_4250WB
-             || printerModel == BRLMPrinterModelRJ_3230B
-             || printerModel == BRLMPrinterModelRJ_3250WB
              ) {
         return [BrotherUtils rjPrintSettingsFromMapWithValue:map];
     }
