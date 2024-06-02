@@ -80,15 +80,21 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if([@"PJ_663" isEqualToString:name]) {
         return BRLMPrinterModelUnknown;
     }
+    else if([@"PJ_673" isEqualToString:name]) {
+        return BRLMPrinterModelPJ_673;
+    }
     else if([@"RJ_4030" isEqualToString:name]) {
-        return BRLMPrinterModelUnknown;
-        //return BRLMPrinterModelRJ_4030Ai;
+        //return BRLMPrinterModelUnknown;
+        return BRLMPrinterModelRJ_4030Ai;
     }
     else if([@"RJ_4040" isEqualToString:name]) {
         return BRLMPrinterModelRJ_4040;
     }
     else if([@"RJ_3150" isEqualToString:name]) {
         return BRLMPrinterModelRJ_3150;
+    }
+    else if([@"RJ_3150Ai" isEqualToString:name]) {
+        return BRLMPrinterModelRJ_3150Ai;
     }
     else if([@"RJ_3050" isEqualToString:name]) {
         return BRLMPrinterModelRJ_3050;
@@ -144,6 +150,21 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if([@"PJ_723" isEqualToString:name]) {
         return BRLMPrinterModelUnknown;
     }
+    else if([@"PJ_822" isEqualToString:name]) {
+        return BRLMPrinterModelPJ_822;
+    }
+    else if([@"PJ_823" isEqualToString:name]) {
+        return BRLMPrinterModelPJ_823;
+    }
+    else if([@"PJ_862" isEqualToString:name]) {
+        return BRLMPrinterModelPJ_862;
+    }
+    else if([@"PJ_863" isEqualToString:name]) {
+        return BRLMPrinterModelPJ_863;
+    }
+    else if([@"PJ_883" isEqualToString:name]) {
+        return BRLMPrinterModelPJ_883;
+    }
     else if([@"PJ_763MFi" isEqualToString:name]) {
         return BRLMPrinterModelPJ_763MFi;
     }
@@ -159,12 +180,32 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if([@"PT_E850TKW" isEqualToString:name]) {
         return BRLMPrinterModelPT_E850TKW;
     }
+    else if([@"PT_D410" isEqualToString:name]) {
+        return BRLMPrinterModelPT_D410;
+    }
+    else if([@"PT_D460BT" isEqualToString:name]) {
+        return BRLMPrinterModelPT_D460BT;
+    }
     else if([@"PT_D610BT" isEqualToString:name]) {
-        // Returns some PT model to see if we can print since the sdk doesn't seem to have a constant for it.
         return BRLMPrinterModelPT_D610BT;
     }
     else if([@"PT_D800W" isEqualToString:name]) {
         return BRLMPrinterModelPT_D800W;
+    }
+    else if([@"PT_E800W" isEqualToString:name]) {
+        return BRLMPrinterModelPT_E800W;
+    }
+    else if([@"PT_P710BT" isEqualToString:name]) {
+        return BRLMPrinterModelPT_P710BT;
+    }
+    else if([@"PT_E500" isEqualToString:name]) {
+        return BRLMPrinterModelUnknown;
+    }
+    else if([@"PT_P715eBT" isEqualToString:name]) {
+        return BRLMPrinterModelPT_P715eBT;
+    }
+    else if([@"PT_P910BT" isEqualToString:name]) {
+        return BRLMPrinterModelPT_P910BT;
     }
     else if([@"PT_P900W" isEqualToString:name]) {
         return BRLMPrinterModelPT_P900W;
@@ -174,9 +215,6 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     }
     else if([@"RJ_4030Ai" isEqualToString:name]) {
         return BRLMPrinterModelRJ_4030Ai;
-    }
-    else if([@"PT_E800W" isEqualToString:name]) {
-        return BRLMPrinterModelPT_E800W;
     }
     else if([@"RJ_2030" isEqualToString:name]) {
         return BRLMPrinterModelUnknown;
@@ -220,17 +258,20 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if([@"QL_1115NWB" isEqualToString:name]) {
         return BRLMPrinterModelQL_1115NWB;
     }
-    else if([@"PT_P710BT" isEqualToString:name]) {
-        return BRLMPrinterModelPT_P710BT;
-    }
-    else if([@"PT_E500" isEqualToString:name]) {
-        return BRLMPrinterModelUnknown;
-    }
     else if([@"RJ_4230B" isEqualToString:name]) {
         return BRLMPrinterModelRJ_4230B;
     }
     else if([@"RJ_4250WB" isEqualToString:name]) {
         return BRLMPrinterModelRJ_4250WB;
+    }
+    else if([@"TD_2030A" isEqualToString:name]) {
+        return BRLMPrinterModelTD_2030A;
+    }
+    else if([@"TD_2135N" isEqualToString:name]) {
+        return BRLMPrinterModelTD_2135N;
+    }
+    else if([@"TD_2135NWB" isEqualToString:name]) {
+        return BRLMPrinterModelTD_2135NWB;
     }
     else if([@"TD_4410D" isEqualToString:name]) {
         return BRLMPrinterModelUnknown;
@@ -253,12 +294,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if([@"MW_270" isEqualToString:name]) {
         return BRLMPrinterModelMW_270;
     }
-    else if([@"PT_P715eBT" isEqualToString:name]) {
-        return BRLMPrinterModelPT_P715eBT;
-    }
-    else if([@"PT_P910BT" isEqualToString:name]) {
-        return BRLMPrinterModelPT_P910BT;
-    }
+    
     
     return BRLMPrinterModelUnknown;
     
@@ -1356,6 +1392,8 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if (printerModel == BRLMPrinterModelPJ_673
              || printerModel == BRLMPrinterModelPJ_773
              || printerModel == BRLMPrinterModelPJ_763MFi
+             || printerModel == BRLMPrinterModelPJ_822
+             || printerModel == BRLMPrinterModelPJ_823
              || printerModel == BRLMPrinterModelPJ_862
              || printerModel == BRLMPrinterModelPJ_863
              || printerModel == BRLMPrinterModelPJ_883
@@ -1369,6 +1407,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
              || printerModel == BRLMPrinterModelRJ_3050
              || printerModel == BRLMPrinterModelRJ_3050Ai
              || printerModel == BRLMPrinterModelRJ_3150
+             || printerModel == BRLMPrinterModelRJ_3150Ai
              || printerModel == BRLMPrinterModelRJ_3230B
              || printerModel == BRLMPrinterModelRJ_3250WB
              || printerModel == BRLMPrinterModelRJ_4030Ai
@@ -1384,6 +1423,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
              || printerModel == BRLMPrinterModelTD_4420DN
              || printerModel == BRLMPrinterModelTD_4520DN
              || printerModel == BRLMPrinterModelTD_4550DNWB
+             || printerModel == BRLMPrinterModelTD_2030A
              || printerModel == BRLMPrinterModelTD_2125N
              || printerModel == BRLMPrinterModelTD_2125NWB
              || printerModel == BRLMPrinterModelTD_2135N
@@ -1391,7 +1431,9 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
              ) {
         return [BrotherUtils tdPrintSettingsFromMapWithValue:map];
     }
-    else if (printerModel == BRLMPrinterModelPT_D800W
+    else if (printerModel == BRLMPrinterModelPT_D410
+             || printerModel == BRLMPrinterModelPT_D460BT
+             || printerModel == BRLMPrinterModelPT_D800W
              || printerModel == BRLMPrinterModelPT_E550W
              || printerModel == BRLMPrinterModelPT_E800W
              || printerModel == BRLMPrinterModelPT_P750W
