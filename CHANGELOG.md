@@ -125,3 +125,6 @@
 
 ## 2.1.5
 - Adds iOS support for PT-D410, PT-D460BT, PJ-822, PJ-823, PJ-862, PJ-863, PJ-883, TD-2030A, TD-2135N, TD-2135NWB printers. Special thanks to Linus Lee for the report.
+
+## 2.1.6
+- Links custom papers for RJ-4030. Special thanks to Linus Lee for the report.

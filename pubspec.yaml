@@ -1,6 +1,6 @@
 name: another_brother
 description: A flutter plugin for printing with the Brother label and TypeB printers.
-version: 2.1.5
+version: 2.1.6
 repository: https://github.com/CodeMinion/another_brother
 
 environment:
@@ -50,6 +50,7 @@ flutter:
     - custom_paper/CustomRJ3230BPaper/
     - custom_paper/CustomRJ3250WBPaper/
     - custom_paper/CustomRJ4030AiPaper/
+    - custom_paper/CustomRJ4030Paper/
     - custom_paper/CustomRJ4040Paper/
     - custom_paper/CustomRJ4230Paper/
     - custom_paper/CustomRJ4250Paper/
