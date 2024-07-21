@@ -128,3 +128,6 @@
 
 ## 2.1.6
 - Links custom papers for RJ-4030. Special thanks to Linus Lee for the report.
+
+## 2.1.7
+- Adds custom papers forTD-2135NWB and TD-2125N. Special thanks to Linus Lee and Primael Quemerais for the papers.

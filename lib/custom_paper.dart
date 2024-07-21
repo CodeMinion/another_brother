@@ -409,6 +409,7 @@ class BinPaper_RJ4030 implements ACustomPaper {
   static const RD_W4H2in = const BinPaper_RJ4030._internal("RJ-4030-RD4x2", "$_rootDir/RJ-4030-RD4x2.bin");
   static const RD_W4H3in = const BinPaper_RJ4030._internal("RJ-4030-RD4x3", "$_rootDir/RJ-4030-RD4x3.bin");
   static const RD_W4H4in = const BinPaper_RJ4030._internal("RJ-4030-RD4x4", "$_rootDir/RJ-4030-RD4x4.bin");
+  static const RD_W102H152mm = const BinPaper_RJ4030._internal("RD_W102H152", "$_rootDir/RJ-4030-RD102mmX152mm.bin");
   //static const RD_W4H6in = const BinPaper_RJ4030._internal("RJ-4030Ai-RD4x6", "$_rootDir/RJ-4030Ai-RD4x6.bin");
   static const UNSUPPORTED = const BinPaper_RJ4030._internal("UNSUPPORTED", "");
 
@@ -421,6 +422,7 @@ class BinPaper_RJ4030 implements ACustomPaper {
     RD_W4H2in,
     RD_W4H3in,
     RD_W4H4in,
+    RD_W102H152mm,
     //RD_W4H6in,
     UNSUPPORTED
   ];
@@ -768,11 +770,13 @@ class BinPaper_TD2125N implements ACustomPaper {
   const BinPaper_TD2125N._internal(this._name, this._assetPath);
 
   static const W40_H40mm = const BinPaper_TD2125N._internal("TD2125N-40mm40mm", "$_rootDir/TD2125N-40mm40mm.bin");
+  static const W51_H26mm = const BinPaper_TD2125N._internal("TD2125N-51x26mm", "$_rootDir/TD2125NWB-51x26mm.bin");
   static const W57mm = const BinPaper_TD2125N._internal("TD2125N-57mm", "$_rootDir/TD2125N-57mm.bin");
   static const UNSUPPORTED = const BinPaper_TD2125N._internal("UNSUPPORTED", "");
 
   static final _values = [
     W40_H40mm,
+    W51_H26mm,
     W57mm,
     UNSUPPORTED
   ];
@@ -899,6 +903,49 @@ class BinPaper_TD2130N implements ACustomPaper {
   }
 
   static BinPaper_TD2130N valueFromName(String name) {
+    for (int i = 0; i < _values.length; i++) {
+      if (_values[i].getName() == name) {
+        return _values[i];
+      }
+    }
+    return UNSUPPORTED;
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    return {
+      "name": _name,
+      "assetPath": _assetPath
+    };
+  }
+}
+
+class BinPaper_TD2135NWB implements ACustomPaper {
+  final String _name;
+  final String _assetPath;
+
+  static const String _rootDir = "packages/another_brother/custom_paper/CustomTD2135NWBPaper";
+  const BinPaper_TD2135NWB._internal(this._name, this._assetPath);
+
+  static const W40_H40mm = const BinPaper_TD2135NWB._internal("TD2135NWB-40mm40mm", "$_rootDir/TD2135NWB-40mm40mm.bin");
+  static const W57mm = const BinPaper_TD2135NWB._internal("TD2135NWB-57mm", "$_rootDir/TD2135NWB-57mm.bin");
+
+  static const UNSUPPORTED = const BinPaper_TD2135NWB._internal("UNSUPPORTED", "");
+
+  static final _values = [
+    W40_H40mm,
+    W57mm,
+    UNSUPPORTED
+  ];
+
+  static List<BinPaper_TD2135NWB> getValues() => List.from(_values);
+
+  @override
+  String getName() {
+    return _name;
+  }
+
+  static BinPaper_TD2135NWB valueFromName(String name) {
     for (int i = 0; i < _values.length; i++) {
       if (_values[i].getName() == name) {
         return _values[i];
