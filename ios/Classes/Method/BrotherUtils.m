@@ -1336,7 +1336,6 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     printerSettings.resolution = [BrotherUtils printResolutionFromMapWithValue:dartResolution];
     printerSettings.printQuality = [BrotherUtils printResolutionFromMapWithValue:dartResolution];
     printerSettings.forceVanishingMargin = forceVanishingMargin;
-    printerSettings.highResolutionPrint = true;
     printerSettings.printOrientation = [BrotherUtils orientationFromMapWithValue:dartOrientation];
     
     
