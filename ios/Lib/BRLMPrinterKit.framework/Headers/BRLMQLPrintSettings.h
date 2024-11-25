@@ -1,12 +1,12 @@
-//
+// ------------------------------------------------------
 //  BRLMQLPrintSettings.h
 //  BRLMPrinterKit
 //
 //  Copyright © 2018 Brother Industries, Ltd. All rights reserved.
-//
+// ------------------------------------------------------
 
-#import "BRLMPrintSettingsProtocol.h"
-#import "BRLMPrintImageSettings.h"
+#import <BRLMPrinterKit/BRLMPrintSettingsProtocol.h>
+#import <BRLMPrinterKit/BRLMPrintImageSettings.h>
 
     typedef NS_ENUM(NSInteger, BRLMQLPrintSettingsLabelSize) {
         BRLMQLPrintSettingsLabelSizeDieCutW17H54,
@@ -18,6 +18,8 @@
         BRLMQLPrintSettingsLabelSizeDieCutW39H48,
         BRLMQLPrintSettingsLabelSizeDieCutW52H29,
         BRLMQLPrintSettingsLabelSizeDieCutW62H29,
+        BRLMQLPrintSettingsLabelSizeDieCutW62H60,
+        BRLMQLPrintSettingsLabelSizeDieCutW62H75,
         BRLMQLPrintSettingsLabelSizeDieCutW62H100,
         BRLMQLPrintSettingsLabelSizeDieCutW60H86,
         BRLMQLPrintSettingsLabelSizeDieCutW54H29,
@@ -37,6 +39,9 @@
         BRLMQLPrintSettingsLabelSizeDTRollW102,
         BRLMQLPrintSettingsLabelSizeDTRollW102H51,
         BRLMQLPrintSettingsLabelSizeDTRollW102H152,
+        BRLMQLPrintSettingsLabelSizeRoundW12DIA,
+        BRLMQLPrintSettingsLabelSizeRoundW24DIA,
+        BRLMQLPrintSettingsLabelSizeRoundW58DIA,
     };
     
 NS_ASSUME_NONNULL_BEGIN
@@ -54,6 +59,18 @@ Default : 1
 @property (nonatomic) BOOL autoCut;
 @property (nonatomic) BOOL cutAtEnd;
 @property (nonatomic) BRLMPrintSettingsResolution resolution;
+/**
+Range(#) : -20 - 20
+ */
+@property (nonatomic) NSUInteger biColorRedEnhancement;
+/**
+Range(#) : -20 - 20
+ */
+@property (nonatomic) NSUInteger biColorGreenEnhancement;
+/**
+Range(#) : -20 - 20
+ */
+@property (nonatomic) NSUInteger biColorBlueEnhancement;
 
 // override
 - (nullable instancetype)initDefaultPrintSettingsWithPrinterModel:(BRLMPrinterModel)model;

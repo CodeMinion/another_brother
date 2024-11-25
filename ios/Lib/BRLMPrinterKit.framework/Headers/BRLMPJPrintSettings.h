@@ -1,19 +1,26 @@
-//
+// ------------------------------------------------------
 //  BRLMPJPrintSettings.h
 //  BRLMPrinterKit
 //
 //  Copyright © 2020 Brother Industries, Ltd. All rights reserved.
-//
+// ------------------------------------------------------
 
-#import "BRLMPrintSettingsProtocol.h"
-#import "BRLMPrintImageSettings.h"
+#import <BRLMPrinterKit/BRLMPrintSettingsProtocol.h>
+#import <BRLMPrinterKit/BRLMPrintImageSettings.h>
 
-#import "BRLMPJPrintSettingsPaperSize.h"
+#import <BRLMPrinterKit/BRLMPJPrintSettingsPaperSize.h>
 
 typedef float BRLMPrintSettingsLengthScale;
 
 
 typedef NS_ENUM(NSInteger, BRLMPJPrintSettingsPrintSpeed) {
+    BRLMPJPrintSettingsPrintSpeedHighSpeed,
+    BRLMPJPrintSettingsPrintSpeedMediumHighSpeed,
+    BRLMPJPrintSettingsPrintSpeedMediumLowSpeed,
+    BRLMPJPrintSettingsPrintSpeedLowSpeed,
+    BRLMPJPrintSettingsPrintSpeedFast_DraftQuality,
+    BRLMPJPrintSettingsPrintSpeedFast_LineConversion,
+    BRLMPJPrintSettingsPrintSpeedUsePrinterSetting,
     BRLMPJPrintSettingsPrintSpeed2_5inchPerSec,
     BRLMPJPrintSettingsPrintSpeed1_9inchPerSec,
     BRLMPJPrintSettingsPrintSpeed1_6inchPerSec,
@@ -35,12 +42,14 @@ typedef NS_ENUM(NSInteger, BRLMPJPrintSettingsDensity) {
     BRLMPJPrintSettingsDensityUsePrinterSetting,
 };
 
+
 typedef NS_ENUM(NSInteger, BRLMPJPrintSettingsFeedMode) {
     BRLMPJPrintSettingsFeedModeNoFeed,
     BRLMPJPrintSettingsFeedModeFixedPage,
     BRLMPJPrintSettingsFeedModeEndOfPage,
     BRLMPJPrintSettingsFeedModeEndOfPageRetract,
 };
+
 
 typedef NS_ENUM(NSInteger, BRLMPJPrintSettingsPaperInsertionPosition) {
     BRLMPJPrintSettingsPaperInsertionPositionLeft,
@@ -51,12 +60,15 @@ typedef NS_ENUM(NSInteger, BRLMPJPrintSettingsPaperInsertionPosition) {
 typedef NS_ENUM(NSInteger, BRLMPJPrintSettingsPaperType) {
     BRLMPJPrintSettingsPaperTypeRoll,
     BRLMPJPrintSettingsPaperTypeCutSheet,
+    BRLMPJPrintSettingsPaperTypePerforatedRoll,
 };
 
 typedef NS_ENUM(NSInteger, BRLMPJPrintSettingsRollCase) {
     BRLMPJPrintSettingsRollCaseNone,
     BRLMPJPrintSettingsRollCasePARC001_NoAntiCurl,
     BRLMPJPrintSettingsRollCasePARC001,
+    BRLMPJPrintSettingsRollCasePARC001_ShortFeed,
+    BRLMPJPrintSettingsRollCaseKeepPrinterSetting,
 };
 
 
@@ -69,11 +81,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BRLMPJPrintSettingsPaperType paperType;
 @property (nonatomic) BRLMPJPrintSettingsPaperInsertionPosition paperInsertionPosition;
 @property (nonatomic) BRLMPJPrintSettingsFeedMode feedMode;
+@property (nonatomic) NSUInteger extraFeedDots;
 @property (nonatomic) BRLMPJPrintSettingsDensity density;
 @property (nonatomic) BRLMPJPrintSettingsRollCase rollCase;
 @property (nonatomic) BRLMPJPrintSettingsPrintSpeed printSpeed;
 @property (nonatomic) BOOL usingCarbonCopyPaper;
 @property (nonatomic) BOOL printDashLine;
+@property (nonatomic) NSUInteger forceStretchPrintableArea;
 
 // override
 - (nullable instancetype)initDefaultPrintSettingsWithPrinterModel:(BRLMPrinterModel)model;

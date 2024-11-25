@@ -1,9 +1,9 @@
-//
+// ------------------------------------------------------
 //  BRLMPrinterDefine.h
 //  BRLMPrinterKit
 //
 //  Copyright © 2020 Brother Industries, Ltd. All rights reserved.
-//
+// ------------------------------------------------------
 
 
 
@@ -55,5 +55,39 @@ typedef NS_ENUM(NSInteger, BRLMPrinterModel) {
     BRLMPrinterModelPT_P710BT,
     BRLMPrinterModelPT_P715eBT,
     BRLMPrinterModelPT_P910BT,
+    BRLMPrinterModelRJ_3230B,
+    BRLMPrinterModelRJ_3250WB,
+    BRLMPrinterModelPT_D410,
+    BRLMPrinterModelPT_D460BT,
+    BRLMPrinterModelPT_D610BT,
+    BRLMPrinterModelPJ_822,
+    BRLMPrinterModelPJ_823,
+    BRLMPrinterModelPJ_862,
+    BRLMPrinterModelPJ_863,
+    BRLMPrinterModelPJ_883,
+    BRLMPrinterModelTD_2030A,
+    BRLMPrinterModelTD_2125N,
+    BRLMPrinterModelTD_2125NWB,
+    BRLMPrinterModelTD_2135N,
+    BRLMPrinterModelTD_2135NWB,
+    BRLMPrinterModelPT_E310BT,
+    BRLMPrinterModelPT_E510,
+    BRLMPrinterModelPT_E560BT,
+    BRLMPrinterModelTD_2310D_203,
+    BRLMPrinterModelTD_2310D_300,
+    BRLMPrinterModelTD_2320D_203,
+    BRLMPrinterModelTD_2320D_300,
+    BRLMPrinterModelTD_2320DF_203,
+    BRLMPrinterModelTD_2320DF_300,
+    BRLMPrinterModelTD_2320DSA_203,
+    BRLMPrinterModelTD_2320DSA_300,
+    BRLMPrinterModelTD_2350D_203,
+    BRLMPrinterModelTD_2350D_300,
+    BRLMPrinterModelTD_2350DF_203,
+    BRLMPrinterModelTD_2350DF_300,
+    BRLMPrinterModelTD_2350DSA_203,
+    BRLMPrinterModelTD_2350DSA_300,
+    BRLMPrinterModelTD_2350DFSA_203,
+    BRLMPrinterModelTD_2350DFSA_300,
     BRLMPrinterModelUnknown,
 };

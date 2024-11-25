@@ -1,12 +1,12 @@
-//
+// ------------------------------------------------------
 //  BRLMPTPrintSettings.h
 //  BRLMPrinterKit
 //
 //  Copyright © 2020 Brother Industries, Ltd. All rights reserved.
-//
+// ------------------------------------------------------
 
-#import "BRLMPrintSettingsProtocol.h"
-#import "BRLMPrintImageSettings.h"
+#import <BRLMPrinterKit/BRLMPrintSettingsProtocol.h>
+#import <BRLMPrinterKit/BRLMPrintImageSettings.h>
 
     typedef NS_ENUM(NSInteger, BRLMPTPrintSettingsLabelSize) {
         BRLMPTPrintSettingsLabelSizeWidth3_5mm,
@@ -22,6 +22,11 @@
         BRLMPTPrintSettingsLabelSizeWidthHS_17_7mm,
         BRLMPTPrintSettingsLabelSizeWidthHS_23_6mm,
         BRLMPTPrintSettingsLabelSizeWidthFL_21x45mm,
+        BRLMPTPrintSettingsLabelSizeWidthHS_5_2mm,
+        BRLMPTPrintSettingsLabelSizeWidthHS_9_0mm,
+        BRLMPTPrintSettingsLabelSizeWidthHS_11_2mm,
+        BRLMPTPrintSettingsLabelSizeWidthHS_21_0mm,
+        BRLMPTPrintSettingsLabelSizeWidthHS_31_0mm,
     };
     
 NS_ASSUME_NONNULL_BEGIN
@@ -30,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) BRLMPTPrintSettingsLabelSize labelSize;
 @property (nonatomic) BOOL cutmarkPrint;
+@property (nonatomic) BOOL cutPause;
 @property (nonatomic) BOOL autoCut;
 @property (nonatomic) BOOL halfCut;
 @property (nonatomic) BOOL chainPrint;

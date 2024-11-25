@@ -27,62 +27,75 @@ static NSString * METHOD_NAME = @"printFile";
 }
 - (void)execute {
     // Move the execution to a background thread to avoid blocking the main thread
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
-    dispatch_async(queue, ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @try {
+            // Validate input parameters
+            if (!_call.arguments[@"printInfo"] || !_call.arguments[@"filePath"]) {
+                [self handleError:BRLMPrintErrorCodePrinterStatusErrorInvalidParameter];
+                return;
+            }
 
-        // Get printInfo dart params from call
-        NSDictionary<NSString *, NSObject *> * dartPrintInfo = _call.arguments[@"printInfo"];
-        // Get file path from call
-        NSString * filePath = _call.arguments[@"filePath"];
+            NSDictionary<NSString *, NSObject *> * dartPrintInfo = _call.arguments[@"printInfo"];
+            NSString * filePath = _call.arguments[@"filePath"];
+            
+            // Validate file exists
+            if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+                [self handleError:BRLMPrintErrorCodePrinterStatusErrorFileNotFound];
+                return;
+            }
 
-        // Get channel from printInfo
-        BRLMChannel *channel = [BrotherUtils printChannelWithPrintSettingsMap:dartPrintInfo];
+            // Get channel from printInfo
+            BRLMChannel *channel = [BrotherUtils printChannelWithPrintSettingsMap:dartPrintInfo];
+            
+            // Generate printer driver
+            BRLMPrinterDriverGenerateResult * driverGenerateResult = [BRLMPrinterDriverGenerator openChannel:channel];
+            if (driverGenerateResult.error.code != BRLMOpenChannelErrorCodeNoError ||
+                driverGenerateResult.driver == nil) {
+                [self handleError:BRLMPrintErrorCodePrinterStatusErrorCommunicationError];
+                return;
+            }
 
-        // Generate printer driver
-        BRLMPrinterDriverGenerateResult * driverGenerateResult = [BRLMPrinterDriverGenerator openChannel:channel];
-        if (driverGenerateResult.error.code != BRLMOpenChannelErrorCodeNoError ||
-            driverGenerateResult.driver == nil) {
+            BRLMPrinterDriver *printerDriver = driverGenerateResult.driver;
+            @try {
+                // Get printer settings.
+                id<BRLMPrintSettingsProtocol> printerSettings = [BrotherUtils printSettingsFromMapWithValue:dartPrintInfo];
 
-            // On Error report error
-            NSDictionary<NSString *, NSObject *> * printStatus = [BrotherUtils printerStatusToMapWithError:BRLMPrintErrorCodePrinterStatusErrorCommunicationError status:nil];
+                NSURL *url = [NSURL fileURLWithPath:filePath];
+                NSString *extension = [url pathExtension];
+                BRLMPrintError *printError;
 
-            // Notify Flutter on the main thread
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                self->_result(printStatus);
-            });
-            return;
+                if ([extension.lowercaseString isEqualToString:@"prn"]) {
+                    printError = [printerDriver sendPRNFileWithURL:url];
+                } else {
+                    printError = [printerDriver printImageWithURL:url settings:printerSettings];
+                }
+
+                // Notify status to Flutter
+                NSDictionary<NSString *, NSObject *> *printStatus = [BrotherUtils printerStatusToMapWithError:printError.code status:nil];
+                [self notifyFlutterWithResult:printStatus];
+            }
+            @finally {
+                // Ensure printer channel is always closed
+                [printerDriver closeChannel];
+            }
         }
-
-        BRLMPrinterDriver *printerDriver = driverGenerateResult.driver;
-
-        // Get printer settings.
-        id<BRLMPrintSettingsProtocol> printerSettings = [BrotherUtils printSettingsFromMapWithValue:dartPrintInfo];
-
-        // If no error, create URL from file path
-        NSURL *url = [NSURL fileURLWithPath:filePath];
-        NSString *extension = [url pathExtension];
-        BRLMPrintError *printError;
-
-        if ([extension isEqualToString:@"prn"]) {
-            // Print PRN file
-            printError = [printerDriver sendPRNFileWithURL:url];
-        } else {
-            // Print normal file (image)
-            printError = [printerDriver printImageWithURL:url settings:printerSettings];
+        @catch (NSException *exception) {
+            [self handleError:BRLMPrintErrorCodePrinterStatusErrorUnknown];
         }
-
-        // Close printer channel
-        [printerDriver closeChannel];
-
-        // Notify status to Flutter
-        NSDictionary<NSString *, NSObject *> *printStatus = [BrotherUtils printerStatusToMapWithError:printError.code status:nil];
-
-        // Update Flutter UI on the main thread
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            self->_result(printStatus);
-        });
     });
 }
 
+// Helper method to handle errors
+- (void)handleError:(BRLMPrintErrorCode)errorCode {
+    NSDictionary<NSString *, NSObject *> *printStatus = [BrotherUtils printerStatusToMapWithError:errorCode status:nil];
+    [self notifyFlutterWithResult:printStatus];
+}
+
+// Helper method to notify Flutter on main thread
+- (void)notifyFlutterWithResult:(NSDictionary<NSString *, NSObject *> *)result {
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        self->_result(result);
+    });
+}
 
 @end

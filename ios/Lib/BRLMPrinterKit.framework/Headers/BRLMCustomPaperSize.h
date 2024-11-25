@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BRLMPrintImageSettings.h"
+#import <BRLMPrinterKit/BRLMPrintImageSettings.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -54,6 +54,26 @@ BRLMCustomPaperSizeMargins BRLMCustomPaperSizeMarginsMake(CGFloat top, CGFloat l
 
 - (instancetype) initWithFile:(NSURL*)filePath;
 
+- (instancetype) initRollWithTapeWidth:(CGFloat) tapeWidth
+                               margins:(BRLMCustomPaperSizeMargins)margins // disable bottomMargin
+                          unitOfLength:(BRLMCustomPaperSizeLengthUnit) unit
+                            energyRank:(unsigned int)energyRank;
+
+- (instancetype) initDieCutWithTapeWidth:(CGFloat) tapeWidth
+                              tapeLength:(CGFloat) tapeLength
+                                 margins:(BRLMCustomPaperSizeMargins)margins
+                               gapLength:(CGFloat) gapLength
+                            unitOfLength:(BRLMCustomPaperSizeLengthUnit) unit
+                              energyRank:(unsigned int)energyRank;
+
+- (instancetype) initMarkRollWithTapeWidth:(CGFloat) tapeWidth
+                                tapeLength:(CGFloat) tapeLength
+                                   margins:(BRLMCustomPaperSizeMargins)margins
+                              markPosition:(CGFloat) markVerticalOffset
+                                markHeight:(CGFloat) markLength
+                              unitOfLength:(BRLMCustomPaperSizeLengthUnit) unit
+                                energyRank:(unsigned int)energyRank;
+
 @property (nonatomic, readonly) BRLMCustomPaperSizePaperKind paperKind;
 @property (nonatomic, nullable, readonly) NSURL *paperBinFilePath;
 @property (nonatomic, readonly) CGFloat tapeWidth;
@@ -63,6 +83,7 @@ BRLMCustomPaperSizeMargins BRLMCustomPaperSizeMarginsMake(CGFloat top, CGFloat l
 @property (nonatomic, readonly) CGFloat markVerticalOffset;
 @property (nonatomic, readonly) CGFloat markLength;
 @property (nonatomic, readonly) BRLMCustomPaperSizeLengthUnit unit;
+@property (nonatomic, nullable, readonly) NSNumber* energyRank;
 
 @end
 

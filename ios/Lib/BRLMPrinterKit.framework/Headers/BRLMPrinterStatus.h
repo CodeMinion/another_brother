@@ -7,7 +7,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BRLMPrinterDefine.h"
+#import <BRLMPrinterKit/BRLMPrinterDefine.h>
+#import <BRLMPrinterKit/BRLMPTPrintSettings.h>
+#import <BRLMPrinterKit/BRLMQLPrintSettings.h>
 
 typedef struct {
     Byte    byHead;                // Head mark
@@ -40,16 +42,148 @@ typedef struct {
     Byte    byNoUse[2];            // Not Use
 } BRLMPrinterStatusRawDataStructure;
 
-NS_ASSUME_NONNULL_BEGIN
+typedef NS_ENUM(NSInteger, BRLMPrinterBatteryStatusTernary) {
+    BRLMPrinterBatteryStatusTernaryYes,
+    BRLMPrinterBatteryStatusTernaryNo,
+    BRLMPrinterBatteryStatusTernaryUnknown,
+};
 
-@interface BRLMPrinterStatus : NSObject
+typedef NS_ENUM(NSInteger, BRLMPrinterStatusErrorCode) {
+    BRLMPrinterStatusErrorCodeNoError,
+    BRLMPrinterStatusErrorCodeNoPaper,
+    BRLMPrinterStatusErrorCodeCoverOpen,
+    BRLMPrinterStatusErrorCodeBusy,
+    BRLMPrinterStatusErrorCodePaperJam,
+    BRLMPrinterStatusErrorCodeHighVoltageAdapter,
+    BRLMPrinterStatusErrorCodeBatteryEmpty,
+    BRLMPrinterStatusErrorCodeBatteryTrouble,
+    BRLMPrinterStatusErrorCodeTubeNotDetected,
+    BRLMPrinterStatusErrorCodeMotorSlow,
+    BRLMPrinterStatusErrorCodeUnsupportedCharger,
+    BRLMPrinterStatusErrorCodeIncompatibleOptionalEquipment,
+    BRLMPrinterStatusErrorCodeSystemError,
+    BRLMPrinterStatusErrorCodeAnotherError,
+};
 
-@property (nonatomic, readonly) BRLMPrinterStatusRawDataStructure ptStatus;
-@property (nonatomic, readonly) BRLMPrinterModel model;
+typedef NS_ENUM(NSInteger, BRLMMediaInfoMediaType) {
+    BRLMMediaInfoMediaTypePTLaminate,
+    BRLMMediaInfoMediaTypePTNonLaminate,
+    BRLMMediaInfoMediaTypePTFabric,
+    BRLMMediaInfoMediaTypeQLInfiniteLable,
+    BRLMMediaInfoMediaTypeQLDieCutLable,
+    BRLMMediaInfoMediaTypePTHeatShrink,
+    BRLMMediaInfoMediaTypePTFLe,
+    BRLMMediaInfoMediaTypePTFlexibleID,
+    BRLMMediaInfoMediaTypePTSatin,
+    BRLMMediaInfoMediaTypePTSelfLaminate,
+    BRLMMediaInfoMediaTypeIncompatible,
+    BRLMMediaInfoMediaTypeUnknown,
+};
 
-- (instancetype)init __unavailable;
-- (instancetype)copy __unavailable;
+typedef NS_ENUM(NSInteger, BRLMMediaInfoBackgroundColor) {
+    BRLMMediaInfoBackgroundColorStandard,
+    BRLMMediaInfoBackgroundColorWhite,
+    BRLMMediaInfoBackgroundColorOthers,
+    BRLMMediaInfoBackgroundColorClear,
+    BRLMMediaInfoBackgroundColorRed,
+    BRLMMediaInfoBackgroundColorBlue,
+    BRLMMediaInfoBackgroundColorYellow,
+    BRLMMediaInfoBackgroundColorGreen,
+    BRLMMediaInfoBackgroundColorBlack,
+    BRLMMediaInfoBackgroundColorClearWithWhiteInk,
+    BRLMMediaInfoBackgroundColorPremiumGold,
+    BRLMMediaInfoBackgroundColorPremiumSilver,
+    BRLMMediaInfoBackgroundColorPremiumOthers,
+    BRLMMediaInfoBackgroundColorMaskingOthers,
+    BRLMMediaInfoBackgroundColorMatteWhite,
+    BRLMMediaInfoBackgroundColorMatteClear,
+    BRLMMediaInfoBackgroundColorMatteSilver,
+    BRLMMediaInfoBackgroundColorSatinGold,
+    BRLMMediaInfoBackgroundColorSatinSilver,
+    BRLMMediaInfoBackgroundColorPastelPurple,
+    BRLMMediaInfoBackgroundColorBlueWithWhiteInk,
+    BRLMMediaInfoBackgroundColorRedWithWhiteInk,
+    BRLMMediaInfoBackgroundColorFluorescentOrange,
+    BRLMMediaInfoBackgroundColorFluorescentYellow,
+    BRLMMediaInfoBackgroundColorBerryPink,
+    BRLMMediaInfoBackgroundColorLightGray,
+    BRLMMediaInfoBackgroundColorLimeGreen,
+    BRLMMediaInfoBackgroundColorSatinNavyBlue,
+    BRLMMediaInfoBackgroundColorSatinWineRed,
+    BRLMMediaInfoBackgroundColorFabricYellow,
+    BRLMMediaInfoBackgroundColorFabricPink,
+    BRLMMediaInfoBackgroundColorFabricBlue,
+    BRLMMediaInfoBackgroundColorTubeWhite,
+    BRLMMediaInfoBackgroundColorSelfLaminatedWhite,
+    BRLMMediaInfoBackgroundColorFlexibleWhite,
+    BRLMMediaInfoBackgroundColorFlexibleYellow,
+    BRLMMediaInfoBackgroundColorCleaningWhite,
+    BRLMMediaInfoBackgroundColorStencilWhite,
+    BRLMMediaInfoBackgroundColorLightBlue_Satin,
+    BRLMMediaInfoBackgroundColorMint_Satin,
+    BRLMMediaInfoBackgroundColorSilver_Satin,
+    BRLMMediaInfoBackgroundColorIncompatible,
+    BRLMMediaInfoBackgroundColorUnknown,
+};
+
+typedef NS_ENUM(NSInteger, BRLMMediaInfoInkColor) {
+    BRLMMediaInfoInkColorStandard,
+    BRLMMediaInfoInkColorWhite,
+    BRLMMediaInfoInkColorOthers,
+    BRLMMediaInfoInkColorRed,
+    BRLMMediaInfoInkColorBlue,
+    BRLMMediaInfoInkColorBlack,
+    BRLMMediaInfoInkColorGold,
+    BRLMMediaInfoInkColorRedAndBlack,
+    BRLMMediaInfoInkColorFabricBlue,
+    BRLMMediaInfoInkColorCleaningBlack,
+    BRLMMediaInfoInkColorStencilBlack,
+    BRLMMediaInfoInkColorIncompatible,
+    BRLMMediaInfoInkColorUnknown,
+};
+
+typedef struct {
+    // min is 0
+    int max;
+    int current;
+} BRLMPrinterBatteryStatusFraction;
+
+@interface BRLMPrinterBatteryStatus : NSObject
+
+@property (nonatomic, readonly) BRLMPrinterBatteryStatusTernary batteryMounted;
+@property (nonatomic, readonly) BRLMPrinterBatteryStatusTernary charging;
+@property (nonatomic, readonly) BRLMPrinterBatteryStatusFraction chargeLevel;
+
+- (nonnull instancetype)init __unavailable;
+- (nonnull instancetype)copy __unavailable;
 
 @end
 
-NS_ASSUME_NONNULL_END
+@interface BRLMMediaInfo : NSObject
+
+@property (nonatomic, readonly) BRLMMediaInfoMediaType mediaType;
+@property (nonatomic, readonly) BRLMMediaInfoBackgroundColor backgroundColor;
+@property (nonatomic, readonly) BRLMMediaInfoInkColor inkColor;
+@property (nonatomic, readonly) int width_mm;
+@property (nonatomic, readonly) int height_mm;
+@property (nonatomic, readonly) bool isHeightInfinite;
+- (BRLMPTPrintSettingsLabelSize) getPTLabelSize:(bool * _Nonnull)succeeded;
+- (BRLMQLPrintSettingsLabelSize) getQLLabelSize:(bool * _Nonnull)succeeded;
+
+- (nonnull instancetype)init __unavailable;
+- (nonnull instancetype)copy __unavailable;
+
+@end
+
+@interface BRLMPrinterStatus : NSObject
+@property (nonatomic, readonly) BRLMPrinterStatusRawDataStructure ptStatus __deprecated;
+@property (nonatomic, readonly) BRLMPrinterStatusRawDataStructure rawData;
+@property (nonatomic, readonly) BRLMPrinterModel model;
+@property (nonatomic, readonly) BRLMPrinterStatusErrorCode errorCode;
+@property (nonatomic, readonly, nullable) BRLMPrinterBatteryStatus* batteryStatus;
+@property (nonatomic, readonly, nullable) BRLMMediaInfo* mediaInfo;
+
+- (nonnull instancetype)init __unavailable;
+- (nonnull instancetype)copy __unavailable;
+
+@end

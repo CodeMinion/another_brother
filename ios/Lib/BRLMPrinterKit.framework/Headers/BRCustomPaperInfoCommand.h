@@ -34,6 +34,8 @@ typedef enum  {
     MarkPosition = 8,
     MarkHeight = 9,
     DisplayName = 10,
+    NotSupportPrinter = 11,
+    PrinterName = 40,
 }ErrorParameterName;
 
 typedef enum  {
@@ -43,6 +45,7 @@ typedef enum  {
     BelowTheLowerLimit = 3,
     FailToCreateCommand = 4,
     FailToReadPTDFile = 5,
+    UnSupported = 11,
 }ErrorParameterDetail;
 
 
@@ -59,10 +62,10 @@ typedef enum  {
 @property(readonly) float markHeight_;
 @property(readonly) UnitOfLengthParameter unitOfLengthParameter_;
 @property(readonly) PaperKindParameter paperKindParameter_;
+@property(readonly) int energyRank_;
 
 // Advance Settings
 @property(nonatomic, strong) NSString *displayName;
-@property(readwrite) int energyRank;
 @property(readwrite) float dieStartRevPlus;
 @property(readwrite) float dieStartFwdPlus;
 @property(readwrite) float afterFeedPlus;
@@ -97,10 +100,41 @@ typedef enum  {
                            markHeight: (float) markHeight
                          unitOfLength: (UnitOfLengthParameter) unitOfLengthParameter;
 
+- (id) initWithPrinterNameForRoll: (NSString *) printerName
+                        tapeWidth: (float) tapeWidth
+                      rightMargin: (float) rightMargin
+                        leftMagin: (float) leftMagin
+                        topMargin: (float) topMargin
+                     unitOfLength: (UnitOfLengthParameter) unitOfLengthParameter
+                       energyRank: (unsigned int) energyRank;
+
+- (id) initWithPrinterNameForDieCut: (NSString *) printerName
+                          tapeWidth: (float) tapeWidth
+                         tapeLength: (float) tapeLength
+                        rightMargin: (float) rightMargin
+                          leftMagin: (float) leftMagin
+                          topMargin: (float) topMargin
+                       bottomMargin: (float) bottomMargin
+                         labelPitch: (float) labelPitch
+                       unitOfLength: (UnitOfLengthParameter) unitOfLengthParameter
+                         energyRank: (unsigned int) energyRank;
+
+- (id) initWithPrinterNameForMarkRoll: (NSString *) printerName
+                            tapeWidth: (float) tapeWidth
+                           tapeLength: (float) tapeLength
+                          rightMargin: (float) rightMargin
+                            leftMagin: (float) leftMagin
+                            topMargin: (float) topMargin
+                         bottomMargin: (float) bottomMargin
+                         markPosition: (float) markPosition
+                           markHeight: (float) markHeight
+                         unitOfLength: (UnitOfLengthParameter) unitOfLengthParameter
+                           energyRank: (unsigned int) energyRank;
+
 - (NSData *) getCustomPaperInfoCommandData: (NSMutableArray **)errorArr;
 
-- (NSString *) valueOfErrorParameter:(ErrorParameterName)errorParameterName;
-- (NSString *) valueOfErrorParameterDetail:(ErrorParameterDetail)errorParameterDetail;
++ (NSString *) valueOfErrorParameter:(ErrorParameterName)errorParameterName;
++ (NSString *) valueOfErrorParameterDetail:(ErrorParameterDetail)errorParameterDetail;
 
 @end
 

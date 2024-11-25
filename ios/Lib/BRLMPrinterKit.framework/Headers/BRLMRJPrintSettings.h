@@ -1,17 +1,14 @@
-//
+// ------------------------------------------------------
 //  BRLMRJPrintSettings.h
 //  BRLMPrinterKit
 //
 //  Copyright © 2018 Brother Industries, Ltd. All rights reserved.
-//
+// ------------------------------------------------------
 
-#import "BRLMPrintSettingsProtocol.h"
-#import "BRLMPrintImageSettings.h"
+#import <BRLMPrinterKit/BRLMPrintSettingsProtocol.h>
+#import <BRLMPrinterKit/BRLMPrintImageSettings.h>
 
-#import "BRLMCustomPaperSize.h"
-
-
-typedef float BRLMRJPrintLengthScale;
+#import <BRLMPrinterKit/BRLMCustomPaperSize.h>
 
 typedef NS_ENUM(NSInteger, BRLMRJPrintSettingsDensity) {
     BRLMRJPrintSettingsDensityWeakLevel5,

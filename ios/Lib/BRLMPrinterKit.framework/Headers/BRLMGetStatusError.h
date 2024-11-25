@@ -5,10 +5,10 @@
 //  Copyright © 2020 Brother Industries, Ltd. All rights reserved.
 //
 
-#import "BRLMError.h"
+#import <BRLMPrinterKit/BRLMError.h>
 
 typedef NS_ENUM(NSInteger, BRLMGetStatusErrorCode) {
-    BRLMGetStatusErrorCodeNoError,
+    BRLMGetStatusErrorCodeNoError = 20000,
     BRLMGetStatusErrorCodePrinterNotFound,
     BRLMGetStatusErrorCodeTimeout,
 };

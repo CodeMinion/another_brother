@@ -7,12 +7,19 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BRLMPrinterDefine.h"
-#import "BRLMPrintError.h"
-#import "BRLMPrintSettingsProtocol.h"
-#import "BRLMPrinterStatus.h"
-#import "BRLMGetStatusError.h"
+#import <BRLMPrinterKit/BRLMPrinterDefine.h>
+#import <BRLMPrinterKit/BRLMPrintError.h>
+#import <BRLMPrinterKit/BRLMPrintSettingsProtocol.h>
+#import <BRLMPrinterKit/BRLMPrinterStatus.h>
+#import <BRLMPrinterKit/BRLMGetStatusError.h>
 
+#import <BRLMPrinterKit/BRLMTemplatePrintSettingsProtocol.h>
+#import <BRLMPrinterKit/BRLMTemplateObjectReplacer.h>
+
+#import <BRLMPrinterKit/BRLMRequestPrinterInfoResult.h>
+#import <BRLMPrinterKit/BRLMPtouchDeviceDependedDataHeader.h>
+#import <BRLMPrinterKit/BRLMBatteryInfo.h>
+#import <BRLMPrinterKit/BRLMPtouchTemplateInfo.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -39,14 +46,29 @@ NS_ASSUME_NONNULL_BEGIN
 - (BRLMPrintError *)sendPRNFileWithURL:(NSURL *)url;
 - (BRLMPrintError *)sendPRNFileWithURLs:(NSArray<NSURL *> *)urls;
 
+- (BRLMPrintError *)printTemplateWithKey:(NSUInteger)key settings:(nonnull id<BRLMTemplatePrintSettingsProtocol>)settings replacers:(nullable NSArray<BRLMTemplateObjectReplacer *>*)replacers;
+
 - (void)cancelPrinting;
 
 - (BRLMPrintError *)sendRawData:(NSData *)data;
 
 - (BRLMGetPrinterStatusResult *)getPrinterStatus;
-
+- (BRLMRequestPrinterInfoResult<NSString *> *)requestSerialNumber;
+- (BRLMRequestPrinterInfoResult<NSString *> *)requestSystemReport;
+- (BRLMRequestPrinterInfoResult<NSString *> *)requestMainFirmVersion;
+- (BRLMRequestPrinterInfoResult<NSString *> *)requestMediaVersion;
+- (BRLMRequestPrinterInfoResult<BRLMBatteryInfo *> *)requestBatteryInfo;
+- (BRLMRequestPrinterInfoResult<NSMutableArray<BRLMPtouchTemplateInfo*> *> *) requestTemplateInfoList;
 
 - (void)closeChannel;
+
+///This api is for Brother applications. We do not recommend you to use it.
+- (BRLMRequestPrinterInfoResult<NSMutableArray<BRLMPtouchDeviceDependedDataHeader*> *> *) requestPtouchDeviceDependedDataHeaderList;
+///This api is for Brother applications. We do not recommend you to use it.
+- (BRLMRequestPrinterInfoResult<NSString *> *)requestBluetoothFirmVersion;
+///This api is for Brother applications. We do not recommend you to use it.
+- (BRLMRequestPrinterInfoResult<NSNumber *>*) requestPrinterInternalModelFlag;
+
 
 @end
 
