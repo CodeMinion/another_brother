@@ -134,3 +134,6 @@
 
 ## 2.1.8
 - Fixes issue with the TD-2125N bin paper. Special thanks to Primael Quemerais for the support.
+
+## 2.2.0
+- Updates min Java SDK for Android.
