@@ -137,3 +137,6 @@
 
 ## 2.2.0
 - Updates min Java SDK for Android.
+
+## 2.2.1
+- Updates AGP and path_provider version.
