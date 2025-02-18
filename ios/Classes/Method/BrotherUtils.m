@@ -729,7 +729,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     
     printerSettings.labelSize = [BrotherUtils qlLabelSizeWithName:labelName];
     printerSettings.autoCut = [[map objectForKey:@"isAutoCut"] isEqual:@(YES)];
-    printerSettings.cutAtEnd = [[map objectForKey:@"isEndCut"] isEqual:@(YES)];
+    printerSettings.cutAtEnd = [[map objectForKey:@"isCutAtEnd"] isEqual:@(YES)];
     printerSettings.resolution = [BrotherUtils printResolutionFromMapWithValue:dartPrintQuality];
     
     // TODO Extract info from map.
@@ -2283,7 +2283,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     NSDictionary<NSString*, NSObject *> * dartLabelInfoStatus = @{
         @"labelNameIndex": [BrotherUtils labelIdTypeToNumberWithValue: [status labelID ]],
         @"isAutoCut": @FALSE, // TODO
-        @"isEndCut": @FALSE, // TODO
+        @"isCutAtEnd": @FALSE, // TODO
         @"isHalfCut": @FALSE, // TODO
         @"isSpecialTape": @FALSE, // TODO
         @"isCutMark": @FALSE, // TODO
