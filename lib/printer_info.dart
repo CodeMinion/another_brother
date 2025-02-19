@@ -1470,6 +1470,7 @@ class PrinterInfo {
   bool rotate180;
   bool peelMode;
   bool isAutoCut;
+  int autoCutForEachPageCount;
   bool isCutAtEnd;
   bool isSpecialTape;
   bool isHalfCut;
@@ -1515,6 +1516,7 @@ class PrinterInfo {
       this.mirrorPrint = false,
       this.paperPosition = Align.CENTER,
       this.isAutoCut = true,
+      this.autoCutForEachPageCount = 1,
       this.isCutAtEnd = true,
       this.mode9 = true,
       this.skipStatusCheck = false,
@@ -1601,6 +1603,7 @@ class PrinterInfo {
         mirrorPrint: map["mirrorPrint"],
         paperPosition: Align.fromMap(map["paperPosition"]),
         isAutoCut: map["isAutoCut"],
+        autoCutForEachPageCount: map["autoCutForEachPageCount"],
         isCutAtEnd: map["isCutAtEnd"],
         mode9: map["mode9"],
         skipStatusCheck: map["skipStatusCheck"],
@@ -1664,6 +1667,7 @@ class PrinterInfo {
       "mirrorPrint": mirrorPrint,
       "paperPosition": paperPosition.toMap(),
       "isAutoCut": isAutoCut,
+      "autoCutForEachPageCount": autoCutForEachPageCount,
       "isCutAtEnd": isCutAtEnd,
       "mode9": mode9,
       "skipStatusCheck": skipStatusCheck,

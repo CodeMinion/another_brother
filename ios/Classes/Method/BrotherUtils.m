@@ -729,16 +729,9 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     
     printerSettings.labelSize = [BrotherUtils qlLabelSizeWithName:labelName];
     printerSettings.autoCut = [[map objectForKey:@"isAutoCut"] isEqual:@(YES)];
+    printerSettings.autoCutForEachPageCount = (UInt8)[(NSNumber *)[map objectForKey:@"autoCutForEachPageCount"] integerValue];
     printerSettings.cutAtEnd = [[map objectForKey:@"isEndCut"] isEqual:@(YES)];
     printerSettings.resolution = [BrotherUtils printResolutionFromMapWithValue:dartPrintQuality];
-    
-    // TODO Extract info from map.
-    //[x]labelSize
-    //autoCutForEachPageCount
-    //[x]autoCut
-    //[x]cutAtEnd
-    //[x]resolution
-    
     
     NSDictionary<NSString*, NSObject*> * dartPrintMode = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printMode"];
     
@@ -1315,6 +1308,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     
     bool cutmarkPrint = [[map objectForKey:@"isCutMark"] isEqual:@(YES)];
     bool autoCut = [[map objectForKey:@"isAutoCut"] isEqual:@(YES)];
+    UInt8 autoCutForEachPageCount = [(NSNumber *)[map objectForKey:@"autoCutForEachPageCount"] integerValue];
     bool halfCut = [[map objectForKey:@"isHalfCut"] isEqual:@(YES)];
     bool specialTapePrint = [[map objectForKey:@"isSpecialTape"] isEqual:@(YES)];
     
@@ -1329,6 +1323,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     printerSettings.labelSize = [BrotherUtils ptLabelSizeWithName:labelName];
     printerSettings.cutmarkPrint = cutmarkPrint;
     printerSettings.autoCut = autoCut;
+    printerSettings.autoCutForEachPageCount = autoCutForEachPageCount;
     printerSettings.halfCut = halfCut;
     printerSettings.specialTapePrint = specialTapePrint;
     printerSettings.resolution = [BrotherUtils printResolutionFromMapWithValue:dartResolution];
@@ -1338,7 +1333,6 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     
     // chainPrint @"???"
     // highResolutionPrint @"???"
-    // autoCutForEachPageCount @"???"
     //
     
     return printerSettings;
@@ -2283,6 +2277,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     NSDictionary<NSString*, NSObject *> * dartLabelInfoStatus = @{
         @"labelNameIndex": [BrotherUtils labelIdTypeToNumberWithValue: [status labelID ]],
         @"isAutoCut": @FALSE, // TODO
+        @"autoCutForEachPageCount": @1, // TODO
         @"isEndCut": @FALSE, // TODO
         @"isHalfCut": @FALSE, // TODO
         @"isSpecialTape": @FALSE, // TODO

@@ -49,6 +49,7 @@ fun printerInfofromMap(context:Context, flutterAssets: FlutterPlugin.FlutterAsse
         mirrorPrint = map["mirrorPrint"] as Boolean
         paperPosition = alignFromMap(map["paperPosition"] as Map<String, Any>)
         isAutoCut = map["isAutoCut"] as Boolean
+        numberOfAutoCutPages = map["autoCutForEachPageCount"] as Int
         isCutAtEnd = map["isCutAtEnd"] as Boolean
         mode9 = map["mode9"] as Boolean
         skipStatusCheck = map["skipStatusCheck"] as Boolean
