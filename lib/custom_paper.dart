@@ -1019,34 +1019,34 @@ class BinPaper_TD2135NWB implements ACustomPaper {
   }
 }
 
-class BinPaper_TD2350D203 implements ACustomPaper {
+class BinPaper_TD2350D implements ACustomPaper {
   final String _name;
   final String _assetPath;
 
   static const String _rootDir =
       "packages/another_brother/custom_paper/CustomTD2350D203Paper";
-  const BinPaper_TD2350D203._internal(this._name, this._assetPath);
+  const BinPaper_TD2350D._internal(this._name, this._assetPath);
 
-  static const W51_H26mm = const BinPaper_TD2350D203._internal(
-      "TD2350D203-51mm_26mm", "$_rootDir/TD2350D203-51mm_26mm.bin");
-  static const W58mm = const BinPaper_TD2350D203._internal(
-      "TD2350D203-58mm", "$_rootDir/TD2350D203-58mm.bin");
-  static const W57mm = const BinPaper_TD2350D203._internal(
-      "TD2350D203-57mm", "$_rootDir/TD2350D203-57mm.bin");
+  static const W51_H26mm = const BinPaper_TD2350D._internal(
+      "TD2350D-51mm_26mm", "$_rootDir/TD2350D-51mm_26mm.bin");
+  static const W58mm = const BinPaper_TD2350D._internal(
+      "TD2350D-58mm", "$_rootDir/TD2350D-58mm.bin");
+  static const W57mm = const BinPaper_TD2350D._internal(
+      "TD2350D-57mm", "$_rootDir/TD2350D-57mm.bin");
 
   static const UNSUPPORTED =
-      const BinPaper_TD2350D203._internal("UNSUPPORTED", "");
+      const BinPaper_TD2350D._internal("UNSUPPORTED", "");
 
   static final _values = [W51_H26mm, W58mm, W57mm, UNSUPPORTED];
 
-  static List<BinPaper_TD2350D203> getValues() => List.from(_values);
+  static List<BinPaper_TD2350D> getValues() => List.from(_values);
 
   @override
   String getName() {
     return _name;
   }
 
-  static BinPaper_TD2350D203 valueFromName(String name) {
+  static BinPaper_TD2350D valueFromName(String name) {
     for (int i = 0; i < _values.length; i++) {
       if (_values[i].getName() == name) {
         return _values[i];
