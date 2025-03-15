@@ -1516,6 +1516,8 @@ class PrinterInfo {
   bool banishMargin;
   bool useCopyCommandInTemplatePrint;
 
+  int? dpi;
+
   PrinterInfo(
       {Model? printerModel,
       this.port = Port.BLUETOOTH,
@@ -3038,7 +3040,7 @@ class Printer {
   }
 
   /// Set PrinterInfo object to specify the printer and print settings.
-  Future<bool> setPrinterInfo(PrinterInfo printerInfo) async {
+  Future<bool> setPrinterInfo(PrinterInfo printerInfo, {int? dpi}) async {
     mPrinterInfo = printerInfo;
     mPrinterInfo._labelName =
         mPrinterInfo.printerModel.getLabelName(mPrinterInfo.labelNameIndex);
