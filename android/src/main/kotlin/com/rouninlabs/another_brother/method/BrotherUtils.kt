@@ -137,10 +137,15 @@ fun paperKindFromMap(map:Map<String, Any>):PaperKind {
 fun modelFromMap(map: Map<String, Any>): PrinterInfo.Model {
     val id: Int = map["id"] as Int
     Log.d(TAG, "Model id : $id")
-    Log.e(TAG, "All models : ${PrinterInfo.Model.values().joinToString(",") { it.name }}")
-    val model = PrinterInfo.Model.valueFromID(id)
-    Log.d(TAG, "Model : $model")
-    return model
+    for (model in PrinterInfo.Model.values()) {
+        Log.d(TAG, "Model : $model")
+        Log.d(TAG, "Model id : ${model.id}")
+        if (model.id == id) {
+            Log.d(TAG, "Model found : $model")
+            return model
+        }
+    }
+    return PrinterInfo.Model.valueFromID(id)
 }
 
 fun TimeoutSettingFromMap(map: Map<String, Any>): TimeoutSetting {
