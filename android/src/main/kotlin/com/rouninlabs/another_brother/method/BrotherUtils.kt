@@ -142,10 +142,6 @@ fun modelFromMap(map: Map<String, Any>): PrinterInfo.Model {
         Log.d(TAG, "Model id : $i")
         val model = PrinterInfo.Model.valueFromID(i)
         Log.d(TAG, "Model : $model")
-        if (model.id == id) {
-            Log.d(TAG, "Model found : $model")
-            return model
-        }
     }
 
     return PrinterInfo.Model.valueFromID(id)
