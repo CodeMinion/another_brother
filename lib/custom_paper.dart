@@ -1024,7 +1024,7 @@ class BinPaper_TD2350D implements ACustomPaper {
   final String _assetPath;
 
   static const String _rootDir =
-      "packages/another_brother/custom_paper/CustomTD2350D203Paper";
+      "packages/another_brother/custom_paper/CustomTD2350DPaper";
   const BinPaper_TD2350D._internal(this._name, this._assetPath);
 
   static const W51_H26mm = const BinPaper_TD2350D._internal(
