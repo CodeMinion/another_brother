@@ -183,6 +183,7 @@ class Model implements AModel {
   static final TD_2135N = Model._internal2("TD_2135N", 83, RJ_4030);
   static final TD_2135NWB = Model._internal2("TD_2135NWB", 84, RJ_4030);
   static final TD_2350D = Model._internal2("TD_2350D", 85, RJ_4030);
+  static final TD_2350D_203 = Model._internal2("TD_2350D_203", 86, RJ_4030);
 
   static final UNSUPPORTED = Model._internal("UNSUPPORTED", 255,
       PaperSize.CUSTOM.getPaperId(), PrinterSeries.UNSUPPORTED);
@@ -272,6 +273,7 @@ class Model implements AModel {
     TD_2135N,
     TD_2135NWB,
     TD_2350D,
+    TD_2350D_203,
     UNSUPPORTED
   ];
 
