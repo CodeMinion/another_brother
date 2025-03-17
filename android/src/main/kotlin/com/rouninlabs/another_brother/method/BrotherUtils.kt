@@ -135,15 +135,6 @@ fun paperKindFromMap(map:Map<String, Any>):PaperKind {
     return PaperKind.valueOf(name)
 }
 fun modelFromMap(map: Map<String, Any>): PrinterInfo.Model {
-    val id: Int = map["id"] as Int
-    Log.d(TAG, "Model id : $id")
-
-    for (i in 0..255) {
-        Log.d(TAG, "Model id : $i")
-        val model = PrinterInfo.Model.valueFromID(i)
-        Log.d(TAG, "Model : $model")
-    }
-
     return PrinterInfo.Model.valueFromID(id)
 }
 
