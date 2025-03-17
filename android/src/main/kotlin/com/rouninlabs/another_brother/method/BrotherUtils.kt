@@ -138,7 +138,9 @@ fun modelFromMap(map: Map<String, Any>): PrinterInfo.Model {
     val id: Int = map["id"] as Int
     Log.d(TAG, "Model id : $id")
     Log.e(TAG, "All models : ${PrinterInfo.Model.values().joinToString(",") { it.name }}")
-    return PrinterInfo.Model.valueFromID(id)
+    val model = PrinterInfo.Model.valueFromID(id)
+    Log.d(TAG, "Model : $model")
+    return model
 }
 
 fun TimeoutSettingFromMap(map: Map<String, Any>): TimeoutSetting {
