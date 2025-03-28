@@ -1,13 +1,10 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'dart:io';
-import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:another_brother/printer_info.dart';
 import 'package:another_brother/type_b_commands.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:path_provider/path_provider.dart';
@@ -778,7 +775,7 @@ class TbPrinter {
       for (ScanResult r in results) {
         print("Scan Result: ${r.device}");
 
-        BLEPrinter foundSt = BLEPrinter(localName: r.device.name);
+        BLEPrinter foundSt = BLEPrinter(localName: r.device.localName);
         TbBlePrinter found = TbBlePrinter._(foundSt);
 
         // For now just filter by device name until we get service working.

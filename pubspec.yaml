@@ -59,6 +59,7 @@ flutter:
     - custom_paper/CustomTD2125NWBPaper/
     - custom_paper/CustomTD2130NPaper/
     - custom_paper/CustomTD2135NWBPaper/
+    - custom_paper/CustomTD2350DPaper/
     - custom_paper/CustomTD4550Paper/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

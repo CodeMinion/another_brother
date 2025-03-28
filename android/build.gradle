@@ -58,6 +58,6 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
-    implementation 'com.brother.sdk:printer:4.6.1@aar'
+    implementation 'com.brother.sdk:printer:4.12.0@aar'
     implementation 'com.brother.typeb:print:1.0.0'
 }
