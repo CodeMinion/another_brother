@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 import 'dart:ui';
 import 'dart:async';
 
@@ -184,6 +183,12 @@ class Model implements AModel {
   static final TD_2135NWB = Model._internal2("TD_2135NWB", 84, RJ_4030);
   static final TD_2350D_203 = Model._internal2("TD_2350D", 97, RJ_4030);
   static final TD_2350D_300 = Model._internal2("TD_2350D", 98, RJ_4030);
+  static final TD_2350DF_203 = Model._internal2("TD_2350D", 99, RJ_4030);
+  static final TD_2350DF_300 = Model._internal2("TD_2350D", 100, RJ_4030);
+  static final TD_2350DSA_203 = Model._internal2("TD_2350D", 101, RJ_4030);
+  static final TD_2350DSA_300 = Model._internal2("TD_2350D", 102, RJ_4030);
+  static final TD_2350DFSA_203 = Model._internal2("TD_2350D", 103, RJ_4030);
+  static final TD_2350DFSA_300 = Model._internal2("TD_2350D", 104, RJ_4030);
 
   static final UNSUPPORTED = Model._internal("UNSUPPORTED", 255,
       PaperSize.CUSTOM.getPaperId(), PrinterSeries.UNSUPPORTED);
@@ -274,6 +279,12 @@ class Model implements AModel {
     TD_2135NWB,
     TD_2350D_203,
     TD_2350D_300,
+    TD_2350DF_203,
+    TD_2350DF_300,
+    TD_2350DSA_203,
+    TD_2350DSA_300,
+    TD_2350DFSA_203,
+    TD_2350DFSA_300,
     UNSUPPORTED
   ];
 
@@ -3353,7 +3364,7 @@ class Printer {
       // Listen to scan results
       var subscription = FlutterBluePlus.scanResults.listen((results) {
         for (ScanResult r in results) {
-          BLEPrinter found = BLEPrinter(localName: r.device.name);
+          BLEPrinter found = BLEPrinter(localName: r.device.localName);
           if (!foundDevices.contains(found)) {
             foundDevices.add(found);
           }
