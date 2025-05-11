@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 import 'dart:ui';
 import 'dart:async';
 
@@ -57,7 +56,7 @@ class PaperSize implements ALabelName {
 
   static PaperSize fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    String name = map["name"];
+    //String name = map["name"];
     return PaperSize.valueFromID(id);
   }
 
@@ -371,7 +370,7 @@ class Model implements AModel {
 
   static Model fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    String name = map["name"];
+    //String name = map["name"];
     return Model.valueFromID(id);
   }
 
@@ -471,7 +470,7 @@ class Port {
 
   static Port fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    String name = map["name"];
+    //String name = map["name"];
     return Port.valueFromID(id);
   }
 
@@ -514,7 +513,7 @@ class Orientation {
 
   static Orientation fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    String name = map["name"];
+    //String name = map["name"];
     return Orientation.valueFromID(id);
   }
 
@@ -559,7 +558,7 @@ class PrintMode {
 
   static PrintMode fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    String name = map["name"];
+    //String name = map["name"];
     return PrintMode.valueFromID(id);
   }
 
@@ -603,7 +602,7 @@ class Halftone {
 
   static Halftone fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    String name = map["name"];
+    //String name = map["name"];
     return Halftone.valueFromID(id);
   }
 
@@ -647,7 +646,7 @@ class Align {
 
   static Align fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    String name = map["name"];
+    //String name = map["name"];
     return Align.valueFromID(id);
   }
 
@@ -691,7 +690,7 @@ class VAlign {
 
   static VAlign fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    String name = map["name"];
+    //String name = map["name"];
     return VAlign.valueFromID(id);
   }
 
@@ -739,7 +738,7 @@ class PjRollCase {
 
   static PjRollCase fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    String name = map["name"];
+    //String name = map["name"];
     return PjRollCase.valueFromID(id);
   }
 
@@ -789,7 +788,7 @@ class PjFeedMode {
 
   static PjFeedMode fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    String name = map["name"];
+    //String name = map["name"];
     return PjFeedMode.valueFromID(id);
   }
 
@@ -833,7 +832,7 @@ class CheckPrintEnd {
 
   static CheckPrintEnd fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    String name = map["name"];
+    //String name = map["name"];
     return CheckPrintEnd.valueFromID(id);
   }
 
@@ -1017,7 +1016,7 @@ class ErrorCode {
   }
 
   static ErrorCode fromMap(Map<dynamic, dynamic> map) {
-    int id = map["id"];
+    //int id = map["id"];
     String name = map["name"];
     return ErrorCode.valueFromName(name);
   }
@@ -1300,7 +1299,7 @@ class PrinterSettingItem {
   }
 
   static PrinterSettingItem fromMap(Map<dynamic, dynamic> map) {
-    int id = map["id"];
+    //int id = map["id"];
     String name = map["name"];
     return PrinterSettingItem.valueFromName(name);
   }
@@ -1356,7 +1355,7 @@ class PrintQuality {
 
   static PrintQuality fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    String name = map["name"];
+    //String name = map["name"];
     return PrintQuality.valueFromID(id);
   }
 
@@ -1399,7 +1398,7 @@ class PjPaperKind {
 
   static PjPaperKind fromMap(Map<dynamic, dynamic> map) {
     int id = map["id"];
-    String name = map["name"];
+    //String name = map["name"];
     return PjPaperKind.valueFromID(id);
   }
 
@@ -1767,7 +1766,7 @@ class BatteryTernary {
   }
 
   static BatteryTernary fromMap(Map<dynamic, dynamic> map) {
-    int id = map["id"];
+    //int id = map["id"];
     String name = map["name"];
     return BatteryTernary.valueFromName(name);
   }
@@ -1811,6 +1810,8 @@ class PrinterStatus {
   ErrorCode getLastError() {
     return this.errorCode;
   }
+
+  Uint8List getStatusBytes() => _statusBytes;
 
   static PrinterStatus fromMap(Map<dynamic, dynamic> map) {
     return PrinterStatus(
@@ -2233,7 +2234,7 @@ class HealthStatus {
   }
 
   static HealthStatus fromMap(Map<dynamic, dynamic> map) {
-    int id = map["id"];
+    //int id = map["id"];
     String name = map["name"];
     return HealthStatus.valueFromName(name);
   }
@@ -3299,16 +3300,16 @@ class Printer {
     // TODO Consider moving this to iOS side.
     if (Platform.isIOS) {
       //BLE Scanning
-      FlutterBluePlus? flutterBlue = FlutterBluePlus();
+      //FlutterBluePlus? flutterBlue = FlutterBluePlus();
 
       // Start scanning
       FlutterBluePlus.startScan(withServices: [Guid("A76EB9E0-F3AC-4990-84CF-3A94D2426B2B")], timeout: Duration(seconds: timeout~/1000));
 
       Set<BLEPrinter> foundDevices = {};
       // Listen to scan results
-      var subscription = FlutterBluePlus.scanResults.listen((results) {
+      FlutterBluePlus.scanResults.listen((results) {
         for (ScanResult r in results) {
-          BLEPrinter found = BLEPrinter(localName: r.device.name);
+          BLEPrinter found = BLEPrinter(localName: r.device.localName);
           if (!foundDevices.contains(found)) {
             foundDevices.add(found);
           }

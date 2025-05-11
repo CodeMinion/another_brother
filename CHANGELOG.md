@@ -142,4 +142,7 @@
 - Updates AGP and path_provider version.
 
 ## 2.2.2
-- Removes deprecated Registrar in Android.
+- Removes deprecated Registrar in Android. Special thanks to Mickey Cheong for the change.
+
+## 2.2.3
+- Addresses old analysis warning.

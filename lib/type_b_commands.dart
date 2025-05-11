@@ -124,7 +124,7 @@ class TbCommandSetWlanIp implements ITbCommand {
 
   String outCommand = "";
 
-  TbCommandSetWlanIp({@required String ipAddress = "", String maskAddress = "255.255.255.0", @required String gatewayAddress = ""}) {
+  TbCommandSetWlanIp({required String ipAddress, String maskAddress = "255.255.255.0", required String gatewayAddress}) {
       outCommand = "WLAN IP \"${ipAddress}\",\"${maskAddress}\",\"${gatewayAddress}\"\r\n";
   }
   @override

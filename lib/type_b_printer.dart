@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'dart:io';
-import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui';
 
@@ -129,8 +127,6 @@ class TbPrinter {
     _printerId = result;
 
     return _printerId.isEmpty;
-
-    return true;
   }
 
   /// Set up the label width, label height, print speed, print density, media sensor type, gap/black
@@ -386,7 +382,7 @@ class TbPrinter {
       int colorR = _clampColor(inputImageBytes[colorByte]);
       int colorG = _clampColor(inputImageBytes[colorByte + 1]);
       int colorB = _clampColor(inputImageBytes[colorByte + 2]);
-      int colorAa = _clampColor(inputImageBytes[colorByte + 3]);
+      //int colorAa = _clampColor(inputImageBytes[colorByte + 3]);
       //print ("R:${colorR} - G:${colorG} - B:${colorB} ");
       int total = (colorR + colorG + colorB) ~/ 3;
       if (total == 0) {
@@ -432,7 +428,7 @@ class TbPrinter {
       String tempBmpFilePath = await BrotherUtils.bytesToTempFile(
           bmpImageBytes, tempBmpFilename);
       // downloadBmp
-      bool downloadSuccess = await downloadBmp(tempBmpFilePath);
+      //bool downloadSuccess = await downloadBmp(tempBmpFilePath);
       // The position is set on the canvas instead of the put, so we
       // place at 0,0
       bool putSuccess = await sendTbCommand(
@@ -666,8 +662,9 @@ class TbPrinter {
     return success;
   }
   */
+  /*
   /// Sends a file to the printer.
-  Future<bool> _sendFile(String filePath) async {
+  Future<bool> sendFile(String filePath) async {
     var params = {
       "printerId": _printerId,
       "printInfo": _printerInfo.toMap(),
@@ -679,6 +676,7 @@ class TbPrinter {
 
     return success;
   }
+   */
 
   /// Returns the status of the printer.
   Future<TbPrinterStatus> printerStatus({int delayMillis = 1000}) async {
@@ -774,11 +772,11 @@ class TbPrinter {
 
     Set<BLEPrinter> foundDevices = {};
     // Listen to scan results
-    var subscription = FlutterBluePlus.scanResults.listen((results) {
+    FlutterBluePlus.scanResults.listen((results) {
       for (ScanResult r in results) {
-        print("Scan Result: ${r.device}");
+        debugPrint("Scan Result: ${r.device}");
 
-        BLEPrinter foundSt = BLEPrinter(localName: r.device.name);
+        BLEPrinter foundSt = BLEPrinter(localName: r.device.localName);
         TbBlePrinter found = TbBlePrinter._(foundSt);
 
         // For now just filter by device name until we get service working.
@@ -899,6 +897,8 @@ class TbRotation {
   int getValue() {
     return _value;
   }
+
+  List<TbRotation> getValues() => _values;
 }
 
 class TbFontSize {
