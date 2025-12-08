@@ -196,7 +196,7 @@ class LabelColor {
   }
 
   static LabelColor fromMap(Map<dynamic, dynamic> map) {
-    int id = map["id"];
+    //int id = map["id"];
     String name = map["name"];
     return LabelColor.valueFromName(name);
   }
