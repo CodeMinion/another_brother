@@ -7,7 +7,7 @@
 
 //
 
-#import "GenericMobileLabelModelPrintSettings.h"
+#import <BRLMPrinterKit/GenericMobileLabelModelPrintSettings.h>
 
 
 @interface TD4550DNWBPrintSettings : GenericMobileLabelModelPrintSettings <PrintSettingsDelegate>

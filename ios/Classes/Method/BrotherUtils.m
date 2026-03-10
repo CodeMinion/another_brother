@@ -851,7 +851,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     NSNumber * density = (NSNumber *)[map objectForKey:@"rjDensity"];
     
     printerSettings.density = [BrotherUtils rjPrintDensityWithValue:density];
-    printerSettings.rotate180degrees = [[map objectForKey:@"rotate180"] isEqual:@(YES)];
+    // rotate180degrees was dropped in SDK 4.12.0; use imageRotation on print settings if rotation is needed.
     printerSettings.peelLabel = [[map objectForKey:@"peelMode"]isEqual:@(YES)];
     printerSettings.customPaperSize = customPaperSize;
     
@@ -889,10 +889,6 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     }
     
     printerSettings.halftoneThreshold = [(NSNumber *)[map objectForKey:@"thresholdingValue"] intValue];
-    
-    
-    NSUInteger numberOfCopies =
-    printerSettings.numCopies = (NSUInteger)[(NSNumber *)[map objectForKey:@"numberOfCopies"] integerValue];
     
     printerSettings.numCopies = (NSUInteger)[(NSNumber *)[map objectForKey:@"numberOfCopies"] integerValue];
     
@@ -1320,7 +1316,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     
     NSDictionary<NSString *, NSObject *> * dartResolution = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"printQuality"];
     
-    bool forceVanishingMargin = [[map objectForKey:@"banishMargin"] isEqual:@(YES)];
+    // forceVanishingMargin / bBanishMargin was dropped in SDK 4.6.1.
     
     NSDictionary<NSString*, NSObject*> * dartOrientation = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"orientation"];
     
@@ -1332,7 +1328,6 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     printerSettings.halfCut = halfCut;
     printerSettings.specialTapePrint = specialTapePrint;
     printerSettings.resolution = [BrotherUtils printResolutionFromMapWithValue:dartResolution];
-    printerSettings.forceVanishingMargin = forceVanishingMargin;
     printerSettings.printOrientation = [BrotherUtils orientationFromMapWithValue:dartOrientation];
     
     

@@ -6,13 +6,16 @@
 //  Copyright (c) 2012-13 Brother Mobile Solutions. All rights reserved.
 //
 
-#import "PrintSettings.h"
+#import <BRLMPrinterKit/PrintSettings.h>
 
 
 
 @interface GenericMobileLabelModelPrintSettings : PrintSettings <PrintSettingsDelegate>
 {
     // provide subclasses with access to readonly properties via ivars.
+    // Each subclass should set these to their model-specific values, at least if the
+    // generic defaults are not accurate for each model.
+
     // Because they are readonly, there is no "Setter" method available in the superclass.
     // The subclasses should be the only place where these properties are set.
     // But, they will be used in this superclass.
@@ -28,12 +31,12 @@
     int _marginLengthDotsMin;
     int _marginLengthDotsMax;
     int _extraFeedMax;
-    
-    unsigned char _energyRank;
-    signed char _sensThrAdj;
-    signed char _sensDutyAdj;
-    int16_t _horzPosAdjDots;
-    int16_t _vertPosAdjDots;
+
+    unsigned char _energyRankMax; // min is always 0. Max depends on printer model.
+    // TD-4D and TD2a is +/-5, all others are +/-2 for sensor threshold adjust.
+    signed char _sensThrAdjMin;
+    signed char _sensThrAdjMax;
+    // NOTE: All models are +/-2 for sensor duty adjust, so not adding min/max for that one yet.
 }
 
 // the following are defined somewhat arbitrarily to limit these settings to a
@@ -97,16 +100,20 @@
 // These 2 are for Marked Paper only:
 @property (nonatomic, assign) int16_t markWidthDots; // width of mark
 @property (nonatomic, assign) int16_t markOffsetDots; // distance from leading edge to marks. Can be negative.
+
+//*** Advanced Paper Size Adjustments
 // The following properties are also added to Esc iUw (additionalMediaInfo) command.
 // In Windows Driver, these are on "Advanced Printing Adjustments..." when editing a PaperSize.
 //
 // Until now they have been hard-coded to match defaults in Windows driver.
 // In SDK version 2.3.4, we made these available for you to modify if necessary.
-// However, they may not be available in the PrintSettingsViewController. TBD.
-// If not and you wish to change them, you must set them independently, as you most likely do with all the other settings anyway.
+// In SDK version 2.5.1 => v4.3.2, we added (most of) these to the ViewControllers.
+// NOTE: Added new "min/max" read-only properties for these too, in order to allow sub-classes
+// to set their min/max values, based on the specific printer model.
 @property (nonatomic, assign) unsigned char energyRank;  // similar to density.
                                                 // Range is 0-10
                                                 // TD-4550 range is 0-30.
+                                                // RJ-3230B, RJ-3250WB range is 0-20
                                                 // Default depends on printer model and paper type.
                                                 // Set to '\xFF' (-1) to allow SDK to set default, same as SDK versions < v2.3.4.
 
@@ -114,6 +121,12 @@
 @property (nonatomic, assign) signed char sensThrAdj;  // range = 0xFE (-2) to 0x02 (2), default = 0
                                                        // TD-4550 range = 0xFB (-5) to 0x05 (5), default = 0
 @property (nonatomic, assign) signed char sensDutyAdj; // range = 0xFE (-2) to 0x02 (2), default = 0
+
+// TODO NOTE: These 2 horz/vert position adjustments do NOT work. So, IGNORE these for now.
+// It's not clear why these are properties are included in the "Esc iUw[]" data structure,
+// since setting them doesn't change the output. Based on Windows driver behavior, it appears
+// that the DRIVER is expected to modify the print data. If that's the case, then these really
+// do not belong inside the paper definition, in my opinion.
 #ifdef WHAT_THE_SPEC_SAYS
 // This range is small, especially at 300 dpi.
 // And, it doesn't match the size of the field in the struct or the Windows Driver.
@@ -181,6 +194,10 @@
 @property (readonly, nonatomic, assign) int marginLengthDotsMin;
 @property (readonly, nonatomic, assign) int marginLengthDotsMax;
 @property (readonly, nonatomic, assign) int extraFeedMax;
+@property (readonly, nonatomic, assign) unsigned char energyRankMax;
+@property (readonly, nonatomic, assign) signed char sensThrAdjMin;
+@property (readonly, nonatomic, assign) signed char sensThrAdjMax;
+
 
 
 // *** PrintSettingsDelegate protocol
@@ -207,5 +224,12 @@
 - (NSString *)stringFromExtraFeed:(int)extraFeed;
 - (NSString *)stringFromDensity: (DENSITY)density;
 
+
+//*** TD23xx function only. Adding here so we don't have to implement in each subclass,
+// and adding to this Generic interface avoids a warning.
+-(NSString *)stringFromResolution:(RESOLUTION)resolution;
+
+-(void)updatePaperInfoFromOldResolution:(RESOLUTION)old
+                        toNewResolution:(RESOLUTION)new;
 
 @end

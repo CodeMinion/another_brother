@@ -30,7 +30,11 @@ fun printerInfofromMap(context:Context, flutterAssets: FlutterPlugin.FlutterAsse
         localName = map["localName"] as String
         lastConnectedAddress = map["lastConnectedAddress"] as String
         paperSize = paperSizeFromMap(map["paperSize"] as Map<String, Any>)
-        orientation = orientationFromMap(map["orientation"] as Map<String, Any>)
+        // SDK 4.6.4+: orientation and rotate180 deprecated; use rotation instead.
+        rotation = rotationFromMap(
+            orientationMap = map["orientation"] as Map<String, Any>,
+            rotate180 = map["rotate180"] as Boolean
+        )
         numberOfCopies = map["numberOfCopies"] as Int
         halftone = halftoneFromMap(map["halftone"] as Map<String, Any>)
         printMode = printModeFromMap(map["printMode"] as Map<String, Any>)
@@ -44,7 +48,6 @@ fun printerInfofromMap(context:Context, flutterAssets: FlutterPlugin.FlutterAsse
         customPaperLength = map["customPaperLength"] as Int
         customFeed = map["customFeed"] as Int
         rjDensity = map["rjDensity"] as Int
-        rotate180 = map["rotate180"] as Boolean
         peelMode = map["peelMode"] as Boolean
         mirrorPrint = map["mirrorPrint"] as Boolean
         paperPosition = alignFromMap(map["paperPosition"] as Map<String, Any>)
@@ -77,7 +80,7 @@ fun printerInfofromMap(context:Context, flutterAssets: FlutterPlugin.FlutterAsse
         workPath = map["workPath"] as String
         pjPaperKind = pjPaperKindFromMap(map["pjPaperKind"] as Map<String, Any>)
         useLegacyHalftoneEngine = map["useLegacyHalftoneEngine"] as Boolean
-        banishMargin = map["banishMargin"] as Boolean
+        // banishMargin / forceVanishingMargin removed in SDK 4.6.1 (iOS); Android PrinterInfo no longer documents it for 4.13.
         useCopyCommandInTemplatePrint = map["useCopyCommandInTemplatePrint"] as Boolean
         this.timeout = timeout
         setCustomPaperInfo(customPaperInfo)
@@ -167,6 +170,19 @@ fun orientationFromMap(map: Map<String, Any>): PrinterInfo.Orientation {
     val id: Int = map["id"] as Int
     val name: String = map["name"] as String
     return PrinterInfo.Orientation.values().find { it.name == name }!!
+}
+
+/**
+ * Derives PrinterInfo.Rotation from orientation + rotate180 (SDK 4.6.4+ replacement for deprecated orientation/rotate180).
+ */
+fun rotationFromMap(orientationMap: Map<String, Any>, rotate180: Boolean): PrinterInfo.Rotation {
+    return when {
+        rotate180 -> PrinterInfo.Rotation.Rotate180
+        else -> when (orientationFromMap(orientationMap)) {
+            PrinterInfo.Orientation.LANDSCAPE -> PrinterInfo.Rotation.Rotate90
+            else -> PrinterInfo.Rotation.Rotate0
+        }
+    }
 }
 
 fun halftoneFromMap(map: Map<String, Any>): PrinterInfo.Halftone {

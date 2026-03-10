@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Brother Mobile Solutions. All rights reserved.
 //
 
-#import "GenericMobileLabelModelPrintSettings.h"
+#import <BRLMPrinterKit/GenericMobileLabelModelPrintSettings.h>
 
 
 @interface RJ3150PrintSettings : GenericMobileLabelModelPrintSettings <PrintSettingsDelegate>

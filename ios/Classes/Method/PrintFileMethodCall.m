@@ -59,26 +59,21 @@ static NSString * METHOD_NAME = @"printFile";
     NSURL * url = [NSURL fileURLWithPath:filePath];
     
     NSString * extension = [url pathExtension];
-    BRLMPrintError * printError;
+    NSDictionary<NSString *, NSObject *> * printStatus;
     
-    if ([extension isEqualToString:@"prn"] ) {
-        // TODO Print PRN
-        // Call print method
-        printError = [printerDriver sendPRNFileWithURL:url];
+    if ([extension isEqualToString:@"prn"]) {
+        // SDK 4.12.0+ replaced sendPRNFileWithURL: with transferBinaryFiles:progress:
+        BRLMTransferResult *transferResult = [printerDriver transferBinaryFiles:@[ url ] progress:^(NSURL *current, int progress) {}];
+        BRLMPrintErrorCode code = (transferResult.code == BRLMTransferSummaryErrorAllSuccess)
+            ? BRLMPrintErrorCodeNoError
+            : BRLMPrintErrorCodeUnknownError;
+        printStatus = [BrotherUtils printerStatusToMapWithError:code status:nil];
+    } else {
+        BRLMPrintError * printError = [printerDriver printImageWithURL:url settings:printerSettings];
+        printStatus = [BrotherUtils printerStatusToMapWithError:printError.code status:nil];
     }
-    else {
-        // Print normal file
-        // Call print method
-        printError = [printerDriver printImageWithURL:url settings:printerSettings];
-    }
-    
-    
     
     [printerDriver closeChannel];
-    
-    // Notify status to Flutter.
-    NSDictionary<NSString *, NSObject *> * printStatus = [BrotherUtils printerStatusToMapWithError:printError.code  status:nil];
-    
     _result(printStatus);
     
    

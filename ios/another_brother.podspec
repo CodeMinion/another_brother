@@ -32,7 +32,8 @@ A new flutter plugin project.
   #s.dependency 'BRLMPrinterKitBind'
   
   s.dependency 'Flutter'
-  s.platform = :ios, '9.0'
+  # Brother Print SDK 4.13.0 requires iOS 13+ (see 4.6.4 release notes).
+  s.platform = :ios, '13.0'
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }

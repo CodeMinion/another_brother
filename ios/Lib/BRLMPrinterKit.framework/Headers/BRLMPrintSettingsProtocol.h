@@ -1,5 +1,5 @@
 //
-//  BRLMPrintSettings.h
+//  BRLMPrintSettingsProtocol.h
 //  BRLMPrinterKit
 //
 //  Copyright © 2020 Brother Industries, Ltd. All rights reserved.
@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BRLMPrinterDefine.h"
+#import <BRLMPrinterKit/BRLMPrinterDefine.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @required
 - (nullable instancetype)initDefaultPrintSettingsWithPrinterModel:(BRLMPrinterModel)model;
-
+- (nullable instancetype)copyWithPrinterModel:(BRLMPrinterModel)model;
 @end
 
 NS_ASSUME_NONNULL_END

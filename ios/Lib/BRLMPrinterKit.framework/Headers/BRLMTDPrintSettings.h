@@ -1,17 +1,14 @@
-//
+// ------------------------------------------------------
 //  BRLMTDPrintSettings.h
 //  BRLMPrinterKit
 //
 //  Copyright © 2018 Brother Industries, Ltd. All rights reserved.
-//
+// ------------------------------------------------------
 
-#import "BRLMPrintSettingsProtocol.h"
-#import "BRLMPrintImageSettings.h"
+#import <BRLMPrinterKit/BRLMPrintSettingsProtocol.h>
+#import <BRLMPrinterKit/BRLMPrintImageSettings.h>
 
-#import "BRLMCustomPaperSize.h"
-
-
-typedef float BRLMTDPrintLengthScale;
+#import <BRLMPrinterKit/BRLMCustomPaperSize.h>
 
 typedef NS_ENUM(NSInteger, BRLMTDPrintSettingsDensity) {
     BRLMTDPrintSettingsDensityWeakLevel5,
@@ -34,9 +31,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BRLMTDPrintSettings : NSObject <NSCoding, BRLMPrintSettingsProtocol, BRLMPrintImageSettings>
 
 
-@property (nonatomic) BRLMCustomPaperSize* customPaperSize;
+@property (nonatomic, retain) BRLMCustomPaperSize* customPaperSize;
 @property (nonatomic) BRLMTDPrintSettingsDensity density;
 @property (nonatomic) BOOL peelLabel;
+@property (nonatomic) BOOL autoCut;
+@property (nonatomic) BOOL cutAtEnd;
+@property (nonatomic) UInt8 autoCutForEachPageCount;
+@property (nonatomic) NSUInteger feedDirectionMargins;
+@property (nonatomic, copy) NSString* customRecord;
 
 // override
 - (nullable instancetype)initDefaultPrintSettingsWithPrinterModel:(BRLMPrinterModel)model;

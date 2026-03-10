@@ -6,7 +6,7 @@
 //  Copyright (c) 2012-15 Brother Mobile Solutions. All rights reserved.
 //
 
-#import "PrintSettings.h"
+#import <BRLMPrinterKit/PrintSettings.h>
 
 typedef enum
 {

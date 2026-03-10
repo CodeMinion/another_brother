@@ -13,12 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) NSUInteger widthDots;
 @property (nonatomic, readonly) NSUInteger lengthDots;
-@property (nonatomic, readonly) NSUInteger feedDots;
 
 - (instancetype)init __unavailable;
 - (instancetype)copy __unavailable;
 
-- (instancetype)initWithWidthDots:(NSUInteger)width lengthDots:(NSUInteger)length feedDots:(NSUInteger)feed;
+- (instancetype)initWithWidthDots:(NSUInteger)width lengthDots:(NSUInteger)length;
 
 @end
 

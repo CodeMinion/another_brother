@@ -6,7 +6,7 @@
 //  Copyright (c) 2018 Brother Mobile Solutions. All rights reserved.
 //
 
-#import "GenericMobileLabelModelPrintSettings.h"
+#import <BRLMPrinterKit/GenericMobileLabelModelPrintSettings.h>
 
 
 @interface RJ4230BPrintSettings : GenericMobileLabelModelPrintSettings <PrintSettingsDelegate>
@@ -51,7 +51,7 @@
 
 // spec section 2.3.4 Maximum and Minimum Lengths
 #define RJ4230B_MIN_PAPERLENGTHDOTS 203 // NOTE: spec says 204 dots, but 203 seems OK.
-#define RJ4230B_MAX_PAPERLENGTHDOTS 24094 // NOTE: slightly over 3 meters. TODO:verify this value.
+#define RJ4230B_MAX_PAPERLENGTHDOTS 23977 // Spec 1.04 says this instead of 24094
 
 // spec section 2.3.3 Feed Amount
 #ifdef OLD

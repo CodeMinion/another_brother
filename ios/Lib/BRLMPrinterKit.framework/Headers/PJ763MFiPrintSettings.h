@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Brother Mobile Solutions. All rights reserved.
 //
 
-#import "GenericPocketJetPrintSettings.h"
+#import <BRLMPrinterKit/GenericPocketJetPrintSettings.h>
 
 @interface PJ763MFiPrintSettings : GenericPocketJetPrintSettings <PrintSettingsDelegate>
 

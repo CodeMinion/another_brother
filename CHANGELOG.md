@@ -149,3 +149,14 @@
 
 ## 2.2.4
 - Adds 16KB support for Android. Special thanks to swapnilparmar-git for the change.
+
+## 2.3.0
+- Upgrades iOS to Brother Print SDK 4.13.0.
+
+- **iOS breaking/legacy:** Requires iOS 13.0+ (podspec `platform :ios` updated from 9.0 to 13.0).
+- **iOS:** Replaces deprecated `sendPRNFileWithURL:` with `transferBinaryFiles:progress:` for .prn file printing (SDK 4.12.0+).
+- **iOS:** Removes use of dropped APIs: `rotate180degrees` on RJ print settings (SDK 4.12.0), `forceVanishingMargin` on PT print settings (SDK 4.6.1). Use image rotation / print settings alternatives where needed.
+- Host app must use a Brother iOS SDK 4.13.0–compatible pod (e.g. `BRLMPrinterKit_AB` or official Brother SDK at 4.13.0).
+
+- **Android (4.6 → 4.13.1):** Replaces deprecated `orientation` and `rotate180` on `PrinterInfo` with `rotation` (SDK 4.6.4 deprecations). Rotation is derived from the same Dart `orientation` + `rotate180` for backward compatibility.
+- **Android:** Stops setting `banishMargin` on `PrinterInfo` (no longer documented for SDK 4.13; PT forceVanishingMargin removed in iOS 4.6.1). Dart still sends `banishMargin`; it is ignored on Android.

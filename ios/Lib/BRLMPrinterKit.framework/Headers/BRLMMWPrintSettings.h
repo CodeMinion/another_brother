@@ -1,17 +1,14 @@
-//
+// ------------------------------------------------------
 //  BRLMMWPrintSettings.h
 //  BRLMPrinterKit
 //
 //  Copyright © 2020 Brother Industries, Ltd. All rights reserved.
-//
+// ------------------------------------------------------
 
-#import "BRLMPrintSettingsProtocol.h"
-#import "BRLMPrintImageSettings.h"
+#import <BRLMPrinterKit/BRLMPrintSettingsProtocol.h>
+#import <BRLMPrinterKit/BRLMPrintImageSettings.h>
 
-#import "BRLMCustomPaperSize.h"
-
-typedef float BRLMMWPrintLengthScale;
-
+#import <BRLMPrinterKit/BRLMCustomPaperSize.h>
 
 typedef NS_ENUM(NSInteger, BRLMMWPrintSettingsPaperSize) {
     BRLMMWPrintSettingsPaperSizeA6,
