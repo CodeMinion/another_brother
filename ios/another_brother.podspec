@@ -17,17 +17,17 @@ A new flutter plugin project.
   s.public_header_files = 'Classes/**/*.h'#, 'Classes/PtouchPrinterKit-Bridging-Header.h'
 
   
-  #s.preserve_paths = 'Lib/BRLMPrinterKit.framework'
+  s.preserve_paths = 'Lib/BRLMPrinterKit.framework'
   #s.xcconfig = { 'OTHER_LDFLAGS' => '-framework BRLMPrinterKit.framework' }
-  #s.ios.vendored_frameworks = 'Lib/BRLMPrinterKit.framework'
+  s.ios.vendored_frameworks = 'Lib/BRLMPrinterKit.framework'
   #s.vendored_frameworks = 'BRLMPrinterKit.framework'
     
   #s.ios.vendored_frameworks = 'Lib/BRPtouchPrinterKit.framework'
   #s.vendored_frameworks = 'BRPtouchPrinterKit.framework'
   
   #s.dependency 'BRLMPrinterKit'
-  s.dependency 'BRLMPrinterKit_AB'
-  s.dependency 'BROTHERSDK'
+  #s.dependency 'BRLMPrinterKit_AB'
+  #s.dependency 'BROTHERSDK'
   
   #s.dependency 'BRLMPrinterKitBind'
   
@@ -37,7 +37,7 @@ A new flutter plugin project.
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
-  s.swift_version = '5.0'
+  s.swift_version = '5.0' 
   
   #s.subspec 'BRLMPrinterKit' do |br|
   #  br.source_files = 'Lib/BRLMPrinterKit.framework/**/*'
