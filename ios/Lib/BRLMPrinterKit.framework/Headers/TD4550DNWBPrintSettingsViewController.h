@@ -6,9 +6,9 @@
 //  Copyright (c) 2019 Brother Mobile Solutions. All rights reserved.
 //
 
-#import "GenericMobileLabelModelPrintSettingsViewController.h"
-#import "TD4550DNWBPrintSettings.h"
-#import "PrintSettingTableViewController.h"
+#import <BRLMPrinterKit/GenericMobileLabelModelPrintSettingsViewController.h>
+#import <BRLMPrinterKit/TD4550DNWBPrintSettings.h>
+#import <BRLMPrinterKit/PrintSettingTableViewController.h>
 
 // This is the DEFAULT popup contentSize for TD4550DNWBPrintSettingsViewController.
 //

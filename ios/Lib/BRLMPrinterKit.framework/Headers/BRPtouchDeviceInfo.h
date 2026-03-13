@@ -17,6 +17,9 @@
 @property (copy,nonatomic)NSString* strNodeName;
 @property (copy,nonatomic)NSString* strMACAddress;
 @property (copy,nonatomic)NSString* strBLEAdvertiseLocalName;
+@property (retain,nonatomic)NSNumber* isSecureConnectionSupported;
+@property (retain,nonatomic)NSNumber* isCommandSecurityEnabled;
+
 
 - (NSString *)description;
 

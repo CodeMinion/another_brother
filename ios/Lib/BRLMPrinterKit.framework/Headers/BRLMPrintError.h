@@ -5,10 +5,10 @@
 //  Copyright © 2020 Brother Industries, Ltd. All rights reserved.
 //
 
-#import "BRLMError.h"
+#import <BRLMPrinterKit/BRLMLog.h>
 
 typedef NS_ENUM(NSInteger, BRLMPrintErrorCode) {
-    BRLMPrintErrorCodeNoError,
+    BRLMPrintErrorCodeNoError = 0,
     BRLMPrintErrorCodePrintSettingsError,
     BRLMPrintErrorCodeFilepathURLError,
     BRLMPrintErrorCodePDFPageError,
@@ -37,15 +37,22 @@ typedef NS_ENUM(NSInteger, BRLMPrintErrorCode) {
     BRLMPrintErrorCodePrinterStatusErrorMediaCannotBeFed,
     BRLMPrintErrorCodePrinterStatusErrorOverHeat,
     BRLMPrintErrorCodePrinterStatusErrorHighVoltageAdapter,
+    BRLMPrintErrorCodePrinterStatusErrorMotorSlow,
+    BRLMPrintErrorCodeUnsupportedCharger,
+    BRLMPrintErrorCodePrinterStatusErrorIncompatibleOptionalEquipment,
     BRLMPrintErrorCodePrinterStatusErrorUnknownError,
+    BRLMPrintErrorCodeTemplatePrintNotSupported,
+    BRLMPrintErrorCodeInvalidTemplateKey,
     BRLMPrintErrorCodeUnknownError,
 };
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BRLMPrintError : BRLMError
+@interface BRLMPrintError : NSObject
 
 @property(nonatomic, readonly) BRLMPrintErrorCode code;
+@property(nonatomic, readonly) NSString* errorDescription;
+@property(nonatomic, readonly) NSArray<BRLMLog*>* allLogs;
 
 @end
 

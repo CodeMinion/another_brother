@@ -1,5 +1,5 @@
 #import <Flutter/Flutter.h>
-#import <BROTHERSDK/BROTHERSDK.h>
+#import "BROTHERSDK.h"
 
 @interface AnotherBrotherPlugin : NSObject<FlutterPlugin>
 

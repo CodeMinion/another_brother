@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Brother Mobile Solutions. All rights reserved.
 //
 
-#import "GenericPocketJetPrintSettingsViewController.h"
-#import "PJ673PrintSettings.h"
+#import <BRLMPrinterKit/GenericPocketJetPrintSettingsViewController.h>
+#import <BRLMPrinterKit/PJ673PrintSettings.h>
 
 // This is the DEFAULT popup contentSize for PJ673PrintSettingsViewController.
 //

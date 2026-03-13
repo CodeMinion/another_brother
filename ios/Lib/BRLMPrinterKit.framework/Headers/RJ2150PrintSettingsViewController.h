@@ -6,8 +6,8 @@
 //  Copyright (c) 2016 Brother Mobile Solutions. All rights reserved.
 //
 
-#import "GenericMobileLabelModelPrintSettingsViewController.h"
-#import "RJ2150PrintSettings.h"
+#import <BRLMPrinterKit/GenericMobileLabelModelPrintSettingsViewController.h>
+#import <BRLMPrinterKit/RJ2150PrintSettings.h>
 
 // This is the DEFAULT popup contentSize for RJ2150PrintSettingsViewController.
 //

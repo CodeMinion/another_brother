@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-#include "BRPtouchDeviceInfo.h"
+#include <BRLMPrinterKit/BRPtouchDeviceInfo.h>
 
 //  Return value
 #define RET_FALSE       0

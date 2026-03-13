@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Brother Mobile Solutions. All rights reserved.
 //
 
-#import "GenericMobileLabelModelPrintSettings.h"
+#import <BRLMPrinterKit/GenericMobileLabelModelPrintSettings.h>
 
 
 @interface TD2130NPrintSettings : GenericMobileLabelModelPrintSettings <PrintSettingsDelegate>

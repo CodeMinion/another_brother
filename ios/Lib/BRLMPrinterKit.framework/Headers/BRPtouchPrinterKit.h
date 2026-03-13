@@ -6,12 +6,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BRPtouchPrinter.h"
-#import "BRPtouchNetworkManager.h"
-#import "BRPtouchBluetoothManager.h"
-#import "BRPtouchBLEManager.h"
-#import "BRPtouchDeviceInfo.h"
-#import "BRPtouchTemplateInfo.h"
+#import <BRLMPrinterKit/BRPtouchPrinter.h>
+#import <BRLMPrinterKit/BRPtouchNetworkManager.h>
+#import <BRLMPrinterKit/BRPtouchBluetoothManager.h>
+#import <BRLMPrinterKit/BRPtouchBLEManager.h>
+#import <BRLMPrinterKit/BRPtouchDeviceInfo.h>
+#import <BRLMPrinterKit/BRPtouchTemplateInfo.h>
 
 @interface BRPtouchPrinterKit : NSObject
 

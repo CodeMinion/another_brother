@@ -7,9 +7,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BRLMPrinterDriver.h"
-#import "BRLMChannel.h"
-#import "BRLMOpenChannelError.h"
+#import <BRLMPrinterKit/BRLMPrinterDriver.h>
+#import <BRLMPrinterKit/BRLMChannel.h>
+#import <BRLMPrinterKit/BRLMOpenChannelError.h>
+#import <BRLMPrinterKit/BRLMChannelCredential.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)copy __unavailable;
 
 + (BRLMPrinterDriverGenerateResult *)openChannel:(BRLMChannel *)channel;
++ (BRLMPrinterDriverGenerateResult *)openChannel:(BRLMChannel *)channel withCredential:(BRLMChannelCredential *)credential;
 
 @end
 

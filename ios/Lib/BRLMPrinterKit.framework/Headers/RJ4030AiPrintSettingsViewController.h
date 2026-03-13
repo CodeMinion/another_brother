@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Brother Mobile Solutions. All rights reserved.
 //
 
-#import "GenericMobileLabelModelPrintSettingsViewController.h"
-#import "RJ4030AiPrintSettings.h"
+#import <BRLMPrinterKit/GenericMobileLabelModelPrintSettingsViewController.h>
+#import <BRLMPrinterKit/RJ4030AiPrintSettings.h>
 
 // This is the DEFAULT popup contentSize for RJ4030AiPrintSettingsViewController.
 //

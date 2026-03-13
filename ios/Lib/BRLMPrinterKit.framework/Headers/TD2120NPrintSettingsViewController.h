@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Brother Mobile Solutions. All rights reserved.
 //
 
-#import "GenericMobileLabelModelPrintSettingsViewController.h"
-#import "TD2120NPrintSettings.h"
+#import <BRLMPrinterKit/GenericMobileLabelModelPrintSettingsViewController.h>
+#import <BRLMPrinterKit/TD2120NPrintSettings.h>
 
 // This is the DEFAULT popup contentSize for TD2120NPrintSettingsViewController.
 //

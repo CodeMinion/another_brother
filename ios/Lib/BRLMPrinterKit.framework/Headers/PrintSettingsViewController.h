@@ -12,7 +12,7 @@
 //  an object of the model-specific subclass, e.g. PJ673PrintSettingsViewController.
 
 #import <UIKit/UIKit.h>
-#import "PrintSettings.h"
+#import <BRLMPrinterKit/PrintSettings.h>
 
 // The following mask constants allow customizing the options available in the PrintSettingsViewController.
 // Combine these using the OR (|) operator to select only the options you want to be available.
@@ -48,8 +48,11 @@ typedef enum
     // NOTE: This is now in genericMLM class, but only RJ42 seems to need it.
     kShowSettingsOption_CoolingDelayEnabled = 0x00010000,
     
-    // TD-4550DNWB model-specific settings not handled by above options
+    // TD-4550DNWB and TD2a model-specific settings not handled by above options
     kShowSettingsOption_Cutter = 0x00020000,
+
+    // TD2a model-specific settings not handled by above options
+    kShowSettingsOption_Resolution = 0x00040000,
 
     // ViewController Settings
     // Normally, the TableView uses 3 sections. However, depending on the combination

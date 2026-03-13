@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Brother Mobile Solutions. All rights reserved.
 //
 
-#import "PrintSettingsViewController.h"
-#import "GenericPocketJetPrintSettings.h"
-#import "PrintSettingTableViewController.h" // for PrintSettingTableViewResponder protocol, internal use only
+#import <BRLMPrinterKit/PrintSettingsViewController.h>
+#import <BRLMPrinterKit/GenericPocketJetPrintSettings.h>
+#import <BRLMPrinterKit/PrintSettingTableViewController.h> // for PrintSettingTableViewResponder protocol, internal use only
 
 
 

@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BRLMPJPrintSettingsCustomPaperSize.h"
+#import <BRLMPrinterKit/BRLMPJPrintSettingsCustomPaperSize.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +16,7 @@ typedef NS_ENUM(NSUInteger, BRLMPJPrintSettingsPaperSizeStandard) {
     BRLMPJPrintSettingsPaperSizeStandardLegal,
     BRLMPJPrintSettingsPaperSizeStandardLetter,
     BRLMPJPrintSettingsPaperSizeStandardA5,
+    BRLMPJPrintSettingsPaperSizeStandardA5_Landscape,
     BRLMPJPrintSettingsPaperSizeStandardCustom, // read only
 };
 
