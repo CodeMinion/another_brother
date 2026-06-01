@@ -149,3 +149,6 @@
 
 ## 2.2.4
 - Adds 16KB support for Android. Special thanks to swapnilparmar-git for the change.
+
+## 2.2.5
+- Adds iOS support for `updatePrinterSettings`, mirroring the existing Android implementation.
