@@ -22,6 +22,7 @@
 #import "Method/StartCommunicationMethodCall.h"
 #import "Method/EndCommunicationMethodCall.h"
 #import "Method/GetPdfFilePagesMethodCall.h"
+#import "Method/UpdatePrinterSettingsMethodCall.h"
 #import "Method/TypeB/TbStartCommunicationMethodCall.h"
 #import "Method/TypeB/TbEndCommunicationMethodCall.h"
 #import "Method/TypeB/TbSendCommandMethodCall.h"
@@ -99,6 +100,9 @@
   }
   else if ([[GetPdfFilePagesMethodCall METHOD_NAME] isEqualToString:call.method]) {
         [[[GetPdfFilePagesMethodCall alloc] initWithCall:call result:result] execute];
+  }
+  else if ([[UpdatePrinterSettingsMethodCall METHOD_NAME] isEqualToString:call.method]) {
+        [[[UpdatePrinterSettingsMethodCall alloc] initWithCall:call result:result] execute];
   }
   // TYPE B
   else if ([[TbStartCommunicationMethodCall METHOD_NAME] isEqualToString:call.method]) {
