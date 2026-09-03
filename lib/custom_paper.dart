@@ -990,7 +990,7 @@ class BinPaper_TD2135NWB implements ACustomPaper {
   static const W40_H40mm = const BinPaper_TD2135NWB._internal(
       "TD2135NWB-40mm40mm", "$_rootDir/TD2135NWB-40mm40mm.bin");
   static const W51_H26mm = const BinPaper_TD2135NWB._internal(
-      "TD2135NWB-51mm_26mm", "$_rootDir/TD2135NWB-51mmx26mm.bin");
+      "TD2135NWB-51mm_26mm", "$_rootDir/TD2135NWB-51x26mm.bin");
   static const W57mm = const BinPaper_TD2135NWB._internal(
       "TD2135NWB-57mm", "$_rootDir/TD2135NWB-57mm.bin");
 
