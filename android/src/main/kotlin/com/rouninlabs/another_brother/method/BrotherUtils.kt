@@ -135,8 +135,8 @@ fun paperKindFromMap(map:Map<String, Any>):PaperKind {
     return PaperKind.valueOf(name)
 }
 fun modelFromMap(map: Map<String, Any>): PrinterInfo.Model {
-    val id: Int = map["id"] as Int;
-    return PrinterInfo.Model.valueFromID(id);
+    val id: Int = map["id"] as Int
+    return PrinterInfo.Model.valueFromID(id)
 }
 
 fun TimeoutSettingFromMap(map: Map<String, Any>): TimeoutSetting {

@@ -61,10 +61,7 @@ class PaperSize implements ALabelName {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": this._id,
-      "name": this._name
-    };
+    return {"id": this._id, "name": this._name};
   }
 }
 
@@ -167,10 +164,8 @@ class Model implements AModel {
   static final PT_P715eBT = Model._internal2("PT_P715eBT", 69, PT_E550W);
   static final PT_P910BT = Model._internal(
       "PT_P910BT", 68, PT.W36.getId(), PrinterSeries.PT_LABEL_PRINTER);
-  static final RJ_3230B = Model._internal2(
-      "RJ_3230B", 70, RJ_4030);
-  static final RJ_3250WB = Model._internal2(
-      "RJ_3250WB", 71, RJ_4030);
+  static final RJ_3230B = Model._internal2("RJ_3230B", 70, RJ_4030);
+  static final RJ_3250WB = Model._internal2("RJ_3250WB", 71, RJ_4030);
   static final PT_D410 = Model._internal(
       "PT_D410", 72, PT.W18.getId(), PrinterSeries.PT_LABEL_PRINTER);
   static final PT_D460BT = Model._internal2("PT_D460BT", 73, PT_D410);
@@ -186,7 +181,14 @@ class Model implements AModel {
   static final TD_2125NWB = Model._internal2("TD_2125NWB", 82, RJ_4030);
   static final TD_2135N = Model._internal2("TD_2135N", 83, RJ_4030);
   static final TD_2135NWB = Model._internal2("TD_2135NWB", 84, RJ_4030);
-
+  static final TD_2350D_203 = Model._internal2("TD_2350D", 97, RJ_4030);
+  static final TD_2350D_300 = Model._internal2("TD_2350D", 98, RJ_4030);
+  static final TD_2350DF_203 = Model._internal2("TD_2350D", 99, RJ_4030);
+  static final TD_2350DF_300 = Model._internal2("TD_2350D", 100, RJ_4030);
+  static final TD_2350DSA_203 = Model._internal2("TD_2350D", 101, RJ_4030);
+  static final TD_2350DSA_300 = Model._internal2("TD_2350D", 102, RJ_4030);
+  static final TD_2350DFSA_203 = Model._internal2("TD_2350D", 103, RJ_4030);
+  static final TD_2350DFSA_300 = Model._internal2("TD_2350D", 104, RJ_4030);
 
   static final UNSUPPORTED = Model._internal("UNSUPPORTED", 255,
       PaperSize.CUSTOM.getPaperId(), PrinterSeries.UNSUPPORTED);
@@ -275,6 +277,14 @@ class Model implements AModel {
     TD_2125NWB,
     TD_2135N,
     TD_2135NWB,
+    TD_2350D_203,
+    TD_2350D_300,
+    TD_2350DF_203,
+    TD_2350DF_300,
+    TD_2350DSA_203,
+    TD_2350DSA_300,
+    TD_2350DFSA_203,
+    TD_2350DFSA_300,
     UNSUPPORTED
   ];
 
@@ -375,10 +385,7 @@ class Model implements AModel {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": _id,
-    "name": _name
-    };
+    return {"id": _id, "name": _name};
   }
 
   static List<Model> getValues() => List.of(_values);
@@ -475,10 +482,7 @@ class Port {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": _id,
-      "name": _name
-    };
+    return {"id": _id, "name": _name};
   }
 }
 
@@ -518,10 +522,7 @@ class Orientation {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": _id,
-      "name": _name
-    };
+    return {"id": _id, "name": _name};
   }
 }
 
@@ -563,10 +564,7 @@ class PrintMode {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": _id,
-      "name": _name
-    };
+    return {"id": _id, "name": _name};
   }
 }
 
@@ -607,10 +605,7 @@ class Halftone {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": _id,
-      "name": _name
-    };
+    return {"id": _id, "name": _name};
   }
 }
 
@@ -618,11 +613,11 @@ class Align {
   final int _id;
   final String _name;
 
-  const Align._insternal(this._id, this._name);
+  const Align._internal(this._id, this._name);
 
-  static const LEFT = const Align._insternal(1, "LEFT");
-  static const CENTER = const Align._insternal(2, "CENTER");
-  static const RIGHT = const Align._insternal(3, "RIGHT");
+  static const LEFT = const Align._internal(1, "LEFT");
+  static const CENTER = const Align._internal(2, "CENTER");
+  static const RIGHT = const Align._internal(3, "RIGHT");
 
   static final _values = [LEFT, CENTER, RIGHT];
 
@@ -651,10 +646,7 @@ class Align {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": _id,
-      "name": _name
-    };
+    return {"id": _id, "name": _name};
   }
 }
 
@@ -695,10 +687,7 @@ class VAlign {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": _id,
-      "name": _name
-    };
+    return {"id": _id, "name": _name};
   }
 }
 
@@ -710,7 +699,8 @@ class PjRollCase {
 
   static const PJ_ROLLCASE_OFF = PjRollCase._internal(1, "PJ_ROLLCASE_OFF");
   static const PJ_ROLLCASE_ON = PjRollCase._internal(2, "PJ_ROLLCASE_ON");
-  static const PJ_ROLLCASE_WITH_ANTICURL = PjRollCase._internal(3, "PJ_ROLLCASE_WITH_ANTICURL");
+  static const PJ_ROLLCASE_WITH_ANTICURL =
+      PjRollCase._internal(3, "PJ_ROLLCASE_WITH_ANTICURL");
 
   static final _values = [
     PJ_ROLLCASE_OFF,
@@ -743,10 +733,7 @@ class PjRollCase {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": _id,
-      "name": _name
-    };
+    return {"id": _id, "name": _name};
   }
 }
 
@@ -756,10 +743,14 @@ class PjFeedMode {
 
   const PjFeedMode._internal(this._id, this._name);
 
-  static const PJ_FEED_MODE_FREE = const PjFeedMode._internal(1, "PJ_FEED_MODE_FREE");
-  static const PJ_FEED_MODE_FIXEDPAGE = const PjFeedMode._internal(2, "PJ_FEED_MODE_FIXEDPAGE");
-  static const PJ_FEED_MODE_ENDOFPAGE = const PjFeedMode._internal(3, "PJ_FEED_MODE_ENDOFPAGE");
-  static const PJ_FEED_MODE_ENDOFPAGERETRACT = const PjFeedMode._internal(4, "PJ_FEED_MODE_ENDOFPAGERETRACT");
+  static const PJ_FEED_MODE_FREE =
+      const PjFeedMode._internal(1, "PJ_FEED_MODE_FREE");
+  static const PJ_FEED_MODE_FIXEDPAGE =
+      const PjFeedMode._internal(2, "PJ_FEED_MODE_FIXEDPAGE");
+  static const PJ_FEED_MODE_ENDOFPAGE =
+      const PjFeedMode._internal(3, "PJ_FEED_MODE_ENDOFPAGE");
+  static const PJ_FEED_MODE_ENDOFPAGERETRACT =
+      const PjFeedMode._internal(4, "PJ_FEED_MODE_ENDOFPAGERETRACT");
 
   static final _values = [
     PJ_FEED_MODE_FREE,
@@ -793,10 +784,7 @@ class PjFeedMode {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": _id,
-      "name": _name
-    };
+    return {"id": _id, "name": _name};
   }
 }
 
@@ -807,7 +795,8 @@ class CheckPrintEnd {
   const CheckPrintEnd._internal(this._id, this._name);
 
   static const CPE_NO_CHECK = const CheckPrintEnd._internal(1, "CPE_NO_CHECK");
-  static const CPE_SKIP_LAST = const CheckPrintEnd._internal(2, "CPE_SKIP_LAST");
+  static const CPE_SKIP_LAST =
+      const CheckPrintEnd._internal(2, "CPE_SKIP_LAST");
   static const CPE_CHECK = const CheckPrintEnd._internal(3, "CPE_CHECK");
 
   static final _values = [CPE_NO_CHECK, CPE_SKIP_LAST, CPE_CHECK];
@@ -837,10 +826,7 @@ class CheckPrintEnd {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": _id,
-      "name": _name
-    };
+    return {"id": _id, "name": _name};
   }
 }
 
@@ -851,63 +837,106 @@ class ErrorCode {
   const ErrorCode._internal(this._id, this._name);
 
   static const ERROR_NONE = ErrorCode._internal(1, "ERROR_NONE");
-  static const ERROR_NOT_SAME_MODEL = ErrorCode._internal(2, "ERROR_NOT_SAME_MODEL");
-  static const ERROR_BROTHER_PRINTER_NOT_FOUND = ErrorCode._internal(3, "ERROR_BROTHER_PRINTER_NOT_FOUND");
+  static const ERROR_NOT_SAME_MODEL =
+      ErrorCode._internal(2, "ERROR_NOT_SAME_MODEL");
+  static const ERROR_BROTHER_PRINTER_NOT_FOUND =
+      ErrorCode._internal(3, "ERROR_BROTHER_PRINTER_NOT_FOUND");
   static const ERROR_PAPER_EMPTY = ErrorCode._internal(4, "ERROR_PAPER_EMPTY");
-  static const ERROR_BATTERY_EMPTY = ErrorCode._internal(5, "ERROR_BATTERY_EMPTY");
-  static const ERROR_COMMUNICATION_ERROR = ErrorCode._internal(6, "ERROR_COMMUNICATION_ERROR");
+  static const ERROR_BATTERY_EMPTY =
+      ErrorCode._internal(5, "ERROR_BATTERY_EMPTY");
+  static const ERROR_COMMUNICATION_ERROR =
+      ErrorCode._internal(6, "ERROR_COMMUNICATION_ERROR");
   static const ERROR_OVERHEAT = ErrorCode._internal(7, "ERROR_OVERHEAT");
   static const ERROR_PAPER_JAM = ErrorCode._internal(8, "ERROR_PAPER_JAM");
-  static const ERROR_HIGH_VOLTAGE_ADAPTER = ErrorCode._internal(9, "ERROR_HIGH_VOLTAGE_ADAPTER");
-  static const ERROR_CHANGE_CASSETTE = ErrorCode._internal(10, "ERROR_CHANGE_CASSETTE");
-  static const ERROR_FEED_OR_CASSETTE_EMPTY = ErrorCode._internal(11, "ERROR_FEED_OR_CASSETTE_EMPTY");
-  static const ERROR_SYSTEM_ERROR = ErrorCode._internal(12, "ERROR_SYSTEM_ERROR");
+  static const ERROR_HIGH_VOLTAGE_ADAPTER =
+      ErrorCode._internal(9, "ERROR_HIGH_VOLTAGE_ADAPTER");
+  static const ERROR_CHANGE_CASSETTE =
+      ErrorCode._internal(10, "ERROR_CHANGE_CASSETTE");
+  static const ERROR_FEED_OR_CASSETTE_EMPTY =
+      ErrorCode._internal(11, "ERROR_FEED_OR_CASSETTE_EMPTY");
+  static const ERROR_SYSTEM_ERROR =
+      ErrorCode._internal(12, "ERROR_SYSTEM_ERROR");
   static const ERROR_NO_CASSETTE = ErrorCode._internal(13, "ERROR_NO_CASSETTE");
-  static const ERROR_WRONG_CASSETTE_DIRECT = ErrorCode._internal(14, "ERROR_WRONG_CASSETTE_DIRECT");
-  static const ERROR_CREATE_SOCKET_FAILED = ErrorCode._internal(15, "ERROR_CREATE_SOCKET_FAILED");
-  static const ERROR_CONNECT_SOCKET_FAILED = ErrorCode._internal(16, "ERROR_CONNECT_SOCKET_FAILED");
-  static const ERROR_GET_OUTPUT_STREAM_FAILED = ErrorCode._internal(17, "ERROR_GET_OUTPUT_STREAM_FAILED");
-  static const ERROR_GET_INPUT_STREAM_FAILED = ErrorCode._internal(18, "ERROR_GET_INPUT_STREAM_FAILED");
-  static const ERROR_CLOSE_SOCKET_FAILED = ErrorCode._internal(19, "ERROR_CLOSE_SOCKET_FAILED");
-  static const ERROR_OUT_OF_MEMORY = ErrorCode._internal(20, "ERROR_OUT_OF_MEMORY");
-  static const ERROR_SET_OVER_MARGIN = ErrorCode._internal(21, "ERROR_SET_OVER_MARGIN");
+  static const ERROR_WRONG_CASSETTE_DIRECT =
+      ErrorCode._internal(14, "ERROR_WRONG_CASSETTE_DIRECT");
+  static const ERROR_CREATE_SOCKET_FAILED =
+      ErrorCode._internal(15, "ERROR_CREATE_SOCKET_FAILED");
+  static const ERROR_CONNECT_SOCKET_FAILED =
+      ErrorCode._internal(16, "ERROR_CONNECT_SOCKET_FAILED");
+  static const ERROR_GET_OUTPUT_STREAM_FAILED =
+      ErrorCode._internal(17, "ERROR_GET_OUTPUT_STREAM_FAILED");
+  static const ERROR_GET_INPUT_STREAM_FAILED =
+      ErrorCode._internal(18, "ERROR_GET_INPUT_STREAM_FAILED");
+  static const ERROR_CLOSE_SOCKET_FAILED =
+      ErrorCode._internal(19, "ERROR_CLOSE_SOCKET_FAILED");
+  static const ERROR_OUT_OF_MEMORY =
+      ErrorCode._internal(20, "ERROR_OUT_OF_MEMORY");
+  static const ERROR_SET_OVER_MARGIN =
+      ErrorCode._internal(21, "ERROR_SET_OVER_MARGIN");
   static const ERROR_NO_SD_CARD = ErrorCode._internal(22, "ERROR_NO_SD_CARD");
-  static const ERROR_FILE_NOT_SUPPORTED = ErrorCode._internal(23, "ERROR_FILE_NOT_SUPPORTED");
-  static const ERROR_EVALUATION_TIMEUP = ErrorCode._internal(24, "ERROR_EVALUATION_TIMEUP");
-  static const ERROR_WRONG_CUSTOM_INFO = ErrorCode._internal(25, "ERROR_WRONG_CUSTOM_INFO");
+  static const ERROR_FILE_NOT_SUPPORTED =
+      ErrorCode._internal(23, "ERROR_FILE_NOT_SUPPORTED");
+  static const ERROR_EVALUATION_TIMEUP =
+      ErrorCode._internal(24, "ERROR_EVALUATION_TIMEUP");
+  static const ERROR_WRONG_CUSTOM_INFO =
+      ErrorCode._internal(25, "ERROR_WRONG_CUSTOM_INFO");
   static const ERROR_NO_ADDRESS = ErrorCode._internal(26, "ERROR_NO_ADDRESS");
-  static const ERROR_NOT_MATCH_ADDRESS = ErrorCode._internal(27, "ERROR_NOT_MATCH_ADDRESS");
-  static const ERROR_FILE_NOT_FOUND = ErrorCode._internal(28, "ERROR_FILE_NOT_FOUND");
-  static const ERROR_TEMPLATE_FILE_NOT_MATCH_MODEL = ErrorCode._internal(29, "ERROR_TEMPLATE_FILE_NOT_MATCH_MODEL");
-  static const ERROR_TEMPLATE_NOT_TRANS_MODEL = ErrorCode._internal(30, "ERROR_TEMPLATE_NOT_TRANS_MODEL");
+  static const ERROR_NOT_MATCH_ADDRESS =
+      ErrorCode._internal(27, "ERROR_NOT_MATCH_ADDRESS");
+  static const ERROR_FILE_NOT_FOUND =
+      ErrorCode._internal(28, "ERROR_FILE_NOT_FOUND");
+  static const ERROR_TEMPLATE_FILE_NOT_MATCH_MODEL =
+      ErrorCode._internal(29, "ERROR_TEMPLATE_FILE_NOT_MATCH_MODEL");
+  static const ERROR_TEMPLATE_NOT_TRANS_MODEL =
+      ErrorCode._internal(30, "ERROR_TEMPLATE_NOT_TRANS_MODEL");
   static const ERROR_COVER_OPEN = ErrorCode._internal(31, "ERROR_COVER_OPEN");
   static const ERROR_WRONG_LABEL = ErrorCode._internal(32, "ERROR_WRONG_LABEL");
-  static const ERROR_PORT_NOT_SUPPORTED = ErrorCode._internal(33, "ERROR_PORT_NOT_SUPPORTED");
-  static const ERROR_WRONG_TEMPLATE_KEY = ErrorCode._internal(34, "ERROR_WRONG_TEMPLATE_KEY");
+  static const ERROR_PORT_NOT_SUPPORTED =
+      ErrorCode._internal(33, "ERROR_PORT_NOT_SUPPORTED");
+  static const ERROR_WRONG_TEMPLATE_KEY =
+      ErrorCode._internal(34, "ERROR_WRONG_TEMPLATE_KEY");
   static const ERROR_BUSY = ErrorCode._internal(35, "ERROR_BUSY");
-  static const ERROR_TEMPLATE_NOT_PRINT_MODEL = ErrorCode._internal(36, "ERROR_TEMPLATE_NOT_PRINT_MODEL");
+  static const ERROR_TEMPLATE_NOT_PRINT_MODEL =
+      ErrorCode._internal(36, "ERROR_TEMPLATE_NOT_PRINT_MODEL");
   static const ERROR_CANCEL = ErrorCode._internal(37, "ERROR_CANCEL");
-  static const ERROR_PRINTER_SETTING_NOT_SUPPORTED = ErrorCode._internal(38, "ERROR_PRINTER_SETTING_NOT_SUPPORTED");
-  static const ERROR_INVALID_PARAMETER = ErrorCode._internal(39, "ERROR_INVALID_PARAMETER");
-  static const ERROR_INTERNAL_ERROR = ErrorCode._internal(40, "ERROR_INTERNAL_ERROR");
-  static const ERROR_TEMPLATE_NOT_CONTROL_MODEL = ErrorCode._internal(41, "ERROR_TEMPLATE_NOT_CONTROL_MODEL");
-  static const ERROR_TEMPLATE_NOT_EXIST = ErrorCode._internal(42, "ERROR_TEMPLATE_NOT_EXIST");
+  static const ERROR_PRINTER_SETTING_NOT_SUPPORTED =
+      ErrorCode._internal(38, "ERROR_PRINTER_SETTING_NOT_SUPPORTED");
+  static const ERROR_INVALID_PARAMETER =
+      ErrorCode._internal(39, "ERROR_INVALID_PARAMETER");
+  static const ERROR_INTERNAL_ERROR =
+      ErrorCode._internal(40, "ERROR_INTERNAL_ERROR");
+  static const ERROR_TEMPLATE_NOT_CONTROL_MODEL =
+      ErrorCode._internal(41, "ERROR_TEMPLATE_NOT_CONTROL_MODEL");
+  static const ERROR_TEMPLATE_NOT_EXIST =
+      ErrorCode._internal(42, "ERROR_TEMPLATE_NOT_EXIST");
   static const ERROR_BUFFER_FULL = ErrorCode._internal(44, "ERROR_BUFFER_FULL");
   static const ERROR_TUBE_EMPTY = ErrorCode._internal(45, "ERROR_TUBE_EMPTY");
-  static const ERROR_TUBE_RIBBON_EMPTY = ErrorCode._internal(46, "ERROR_TUBE_RIBBON_EMPTY");
-  static const ERROR_UPDATE_FRIM_NOT_SUPPORTED = ErrorCode._internal(47, "ERROR_UPDATE_FRIM_NOT_SUPPORTED");
-  static const ERROR_OS_VERSION_NOT_SUPPORTED = ErrorCode._internal(48, "ERROR_OS_VERSION_NOT_SUPPORTED");
-  static const ERROR_RESOLUTION_MODE = ErrorCode._internal(49, "ERROR_RESOLUTION_MODE");
-  static const ERROR_POWER_CABLE_UNPLUGGING = ErrorCode._internal(50, "ERROR_POWER_CABLE_UNPLUGGING");
-  static const ERROR_BATTERY_TROUBLE = ErrorCode._internal(51, "ERROR_BATTERY_TROUBLE");
-  static const ERROR_UNSUPPORTED_MEDIA = ErrorCode._internal(52, "ERROR_UNSUPPORTED_MEDIA");
+  static const ERROR_TUBE_RIBBON_EMPTY =
+      ErrorCode._internal(46, "ERROR_TUBE_RIBBON_EMPTY");
+  static const ERROR_UPDATE_FRIM_NOT_SUPPORTED =
+      ErrorCode._internal(47, "ERROR_UPDATE_FRIM_NOT_SUPPORTED");
+  static const ERROR_OS_VERSION_NOT_SUPPORTED =
+      ErrorCode._internal(48, "ERROR_OS_VERSION_NOT_SUPPORTED");
+  static const ERROR_RESOLUTION_MODE =
+      ErrorCode._internal(49, "ERROR_RESOLUTION_MODE");
+  static const ERROR_POWER_CABLE_UNPLUGGING =
+      ErrorCode._internal(50, "ERROR_POWER_CABLE_UNPLUGGING");
+  static const ERROR_BATTERY_TROUBLE =
+      ErrorCode._internal(51, "ERROR_BATTERY_TROUBLE");
+  static const ERROR_UNSUPPORTED_MEDIA =
+      ErrorCode._internal(52, "ERROR_UNSUPPORTED_MEDIA");
   static const ERROR_TUBE_CUTTER = ErrorCode._internal(53, "ERROR_TUBE_CUTTER");
-  static const ERROR_UNSUPPORTED_TWO_COLOR = ErrorCode._internal(54, "ERROR_UNSUPPORTED_TWO_COLOR");
-  static const ERROR_UNSUPPORTED_MONO_COLOR = ErrorCode._internal(55, "ERROR_UNSUPPORTED_MONO_COLOR");
-  static const ERROR_MINIMUM_LENGTH_LIMIT = ErrorCode._internal(56, "ERROR_MINIMUM_LENGTH_LIMIT");
-  static const ERROR_WORKPATH_NOT_SET = ErrorCode._internal(57, "ERROR_WORKPATH_NOT_SET");
+  static const ERROR_UNSUPPORTED_TWO_COLOR =
+      ErrorCode._internal(54, "ERROR_UNSUPPORTED_TWO_COLOR");
+  static const ERROR_UNSUPPORTED_MONO_COLOR =
+      ErrorCode._internal(55, "ERROR_UNSUPPORTED_MONO_COLOR");
+  static const ERROR_MINIMUM_LENGTH_LIMIT =
+      ErrorCode._internal(56, "ERROR_MINIMUM_LENGTH_LIMIT");
+  static const ERROR_WORKPATH_NOT_SET =
+      ErrorCode._internal(57, "ERROR_WORKPATH_NOT_SET");
   // Another_Brother specific error. Sent when the Android device does not have storage permissions granted.
-  static const ERROR_STORAGE_PERMISSION_NOT_GRANTED = ErrorCode._internal(9999, "ERROR_STORAGE_PERMISSION_NOT_GRANTED");
+  static const ERROR_STORAGE_PERMISSION_NOT_GRANTED =
+      ErrorCode._internal(9999, "ERROR_STORAGE_PERMISSION_NOT_GRANTED");
 
   static final _values = [
     ERROR_NONE,
@@ -1022,10 +1051,7 @@ class ErrorCode {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": _id,
-      "name": _name
-    };
+    return {"id": _id, "name": _name};
   }
 
   static List<ErrorCode> getValues() => List.from(_values);
@@ -1167,44 +1193,70 @@ class PrinterSettingItem {
 
   static const NET_BOOTMODE = PrinterSettingItem._internal(1, "NET_BOOTMODE");
   static const NET_INTERFACE = PrinterSettingItem._internal(2, "NET_INTERFACE");
-  static const NET_IPV4_BOOTMETHOD = PrinterSettingItem._internal(5, "NET_IPV4_BOOTMETHOD");
-  static const NET_STATIC_IPV4ADDRESS = PrinterSettingItem._internal(6, "NET_STATIC_IPV4ADDRESS");
-  static const NET_SUBNETMASK = PrinterSettingItem._internal(7, "NET_SUBNETMASK");
+  static const NET_IPV4_BOOTMETHOD =
+      PrinterSettingItem._internal(5, "NET_IPV4_BOOTMETHOD");
+  static const NET_STATIC_IPV4ADDRESS =
+      PrinterSettingItem._internal(6, "NET_STATIC_IPV4ADDRESS");
+  static const NET_SUBNETMASK =
+      PrinterSettingItem._internal(7, "NET_SUBNETMASK");
   static const NET_GATEWAY = PrinterSettingItem._internal(8, "NET_GATEWAY");
-  static const NET_DNS_IPV4_BOOTMETHOD = PrinterSettingItem._internal(9, "NET_DNS_IPV4_BOOTMETHOD");
-  static const NET_PRIMARY_DNS_IPV4ADDRESS = PrinterSettingItem._internal(10, "NET_PRIMARY_DNS_IPV4ADDRESS");
-  static const NET_SECOND_DNS_IPV4ADDRESS = PrinterSettingItem._internal(11, "NET_SECOND_DNS_IPV4ADDRESS");
+  static const NET_DNS_IPV4_BOOTMETHOD =
+      PrinterSettingItem._internal(9, "NET_DNS_IPV4_BOOTMETHOD");
+  static const NET_PRIMARY_DNS_IPV4ADDRESS =
+      PrinterSettingItem._internal(10, "NET_PRIMARY_DNS_IPV4ADDRESS");
+  static const NET_SECOND_DNS_IPV4ADDRESS =
+      PrinterSettingItem._internal(11, "NET_SECOND_DNS_IPV4ADDRESS");
   static const NET_USED_IPV6 = PrinterSettingItem._internal(3, "NET_USED_IPV6");
-  static const NET_PRIORITY_IPV6 = PrinterSettingItem._internal(4, "NET_PRIORITY_IPV6");
-  static const NET_IPV6_BOOTMETHOD = PrinterSettingItem._internal(12, "NET_IPV6_BOOTMETHOD");
-  static const NET_STATIC_IPV6ADDRESS = PrinterSettingItem._internal(13, "NET_STATIC_IPV6ADDRESS");
-  static const NET_PRIMARY_DNS_IPV6ADDRESS = PrinterSettingItem._internal(14, "NET_PRIMARY_DNS_IPV6ADDRESS");
-  static const NET_SECOND_DNS_IPV6ADDRESS = PrinterSettingItem._internal(15, "NET_SECOND_DNS_IPV6ADDRESS");
-  static const NET_IPV6ADDRESS_LIST = PrinterSettingItem._internal(16, "NET_IPV6ADDRESS_LIST");
-  static const NET_COMMUNICATION_MODE = PrinterSettingItem._internal(17, "NET_COMMUNICATION_MODE");
+  static const NET_PRIORITY_IPV6 =
+      PrinterSettingItem._internal(4, "NET_PRIORITY_IPV6");
+  static const NET_IPV6_BOOTMETHOD =
+      PrinterSettingItem._internal(12, "NET_IPV6_BOOTMETHOD");
+  static const NET_STATIC_IPV6ADDRESS =
+      PrinterSettingItem._internal(13, "NET_STATIC_IPV6ADDRESS");
+  static const NET_PRIMARY_DNS_IPV6ADDRESS =
+      PrinterSettingItem._internal(14, "NET_PRIMARY_DNS_IPV6ADDRESS");
+  static const NET_SECOND_DNS_IPV6ADDRESS =
+      PrinterSettingItem._internal(15, "NET_SECOND_DNS_IPV6ADDRESS");
+  static const NET_IPV6ADDRESS_LIST =
+      PrinterSettingItem._internal(16, "NET_IPV6ADDRESS_LIST");
+  static const NET_COMMUNICATION_MODE =
+      PrinterSettingItem._internal(17, "NET_COMMUNICATION_MODE");
   static const NET_SSID = PrinterSettingItem._internal(18, "NET_SSID");
   static const NET_CHANNEL = PrinterSettingItem._internal(19, "NET_CHANNEL");
-  static const NET_AUTHENTICATION_METHOD = PrinterSettingItem._internal(20, "NET_AUTHENTICATION_METHOD");
-  static const NET_ENCRYPTIONMODE = PrinterSettingItem._internal(21, "NET_ENCRYPTIONMODE");
+  static const NET_AUTHENTICATION_METHOD =
+      PrinterSettingItem._internal(20, "NET_AUTHENTICATION_METHOD");
+  static const NET_ENCRYPTIONMODE =
+      PrinterSettingItem._internal(21, "NET_ENCRYPTIONMODE");
   static const NET_WEPKEY = PrinterSettingItem._internal(22, "NET_WEPKEY");
-  static const NET_PASSPHRASE = PrinterSettingItem._internal(23, "NET_PASSPHRASE");
+  static const NET_PASSPHRASE =
+      PrinterSettingItem._internal(23, "NET_PASSPHRASE");
   static const NET_USER_ID = PrinterSettingItem._internal(24, "NET_USER_ID");
   static const NET_PASSWORD = PrinterSettingItem._internal(25, "NET_PASSWORD");
   static const NET_NODENAME = PrinterSettingItem._internal(26, "NET_NODENAME");
   static const WIRELESSDIRECT_KEY_CREATE_MODE =
       PrinterSettingItem._internal(27, "WIRELESSDIRECT_KEY_CREATE_MODE");
-  static const WIRELESSDIRECT_SSID = PrinterSettingItem._internal(28, "WIRELESSDIRECT_SSID");
-  static const WIRELESSDIRECT_NETWORK_KEY = PrinterSettingItem._internal(29, "WIRELESSDIRECT_NETWORK_KEY");
-  static const BT_ISDISCOVERABLE = PrinterSettingItem._internal(30, "BT_ISDISCOVERABLE");
-  static const BT_DEVICENAME = PrinterSettingItem._internal(31, "BT_DEVICENAME");
+  static const WIRELESSDIRECT_SSID =
+      PrinterSettingItem._internal(28, "WIRELESSDIRECT_SSID");
+  static const WIRELESSDIRECT_NETWORK_KEY =
+      PrinterSettingItem._internal(29, "WIRELESSDIRECT_NETWORK_KEY");
+  static const BT_ISDISCOVERABLE =
+      PrinterSettingItem._internal(30, "BT_ISDISCOVERABLE");
+  static const BT_DEVICENAME =
+      PrinterSettingItem._internal(31, "BT_DEVICENAME");
   static const BT_BOOTMODE = PrinterSettingItem._internal(34, "BT_BOOTMODE");
-  static const PRINT_JPEG_HALFTONE = PrinterSettingItem._internal(37, "PRINT_JPEG_HALFTONE");
-  static const PRINT_JPEG_SCALE = PrinterSettingItem._internal(38, "PRINT_JPEG_SCALE");
-  static const PRINT_DENSITY = PrinterSettingItem._internal(39, "PRINT_DENSITY");
+  static const PRINT_JPEG_HALFTONE =
+      PrinterSettingItem._internal(37, "PRINT_JPEG_HALFTONE");
+  static const PRINT_JPEG_SCALE =
+      PrinterSettingItem._internal(38, "PRINT_JPEG_SCALE");
+  static const PRINT_DENSITY =
+      PrinterSettingItem._internal(39, "PRINT_DENSITY");
   static const PRINT_SPEED = PrinterSettingItem._internal(40, "PRINT_SPEED");
-  static const PRINTER_POWEROFFTIME = PrinterSettingItem._internal(35, "PRINTER_POWEROFFTIME");
-  static const PRINTER_POWEROFFTIME_BATTERY = PrinterSettingItem._internal(36, "PRINTER_POWEROFFTIME_BATTERY");
-  static const BT_AUTO_CONNECTION = PrinterSettingItem._internal(44, "BT_AUTO_CONNECTION");
+  static const PRINTER_POWEROFFTIME =
+      PrinterSettingItem._internal(35, "PRINTER_POWEROFFTIME");
+  static const PRINTER_POWEROFFTIME_BATTERY =
+      PrinterSettingItem._internal(36, "PRINTER_POWEROFFTIME_BATTERY");
+  static const BT_AUTO_CONNECTION =
+      PrinterSettingItem._internal(44, "BT_AUTO_CONNECTION");
   static const RESET = PrinterSettingItem._internal(254, "RESET");
   static const UNSUPPORTED = PrinterSettingItem._internal(255, "UNSUPPORTED");
 
@@ -1305,10 +1357,7 @@ class PrinterSettingItem {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": _id,
-      "name": _name
-    };
+    return {"id": _id, "name": _name};
   }
 
   @override
@@ -1360,10 +1409,7 @@ class PrintQuality {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": _id,
-      "name": _name
-    };
+    return {"id": _id, "name": _name};
   }
 }
 
@@ -1403,10 +1449,7 @@ class PjPaperKind {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": _id,
-      "name": _name
-    };
+    return {"id": _id, "name": _name};
   }
 }
 
@@ -1486,9 +1529,10 @@ class PrinterInfo {
   bool banishMargin;
   bool useCopyCommandInTemplatePrint;
 
+  int? dpi;
+
   PrinterInfo(
-      {
-        Model? printerModel,
+      {Model? printerModel,
       this.port = Port.BLUETOOTH,
       this.ipAddress = "",
       this.macAddress = "",
@@ -1544,9 +1588,10 @@ class PrinterInfo {
       this.pjPaperKind = PjPaperKind.PJ_CUT_PAPER,
       this.useLegacyHalftoneEngine = false,
       this.banishMargin = false,
-      this.useCopyCommandInTemplatePrint = false}):
-        this.printerModel = printerModel == null ?  Model.PJ_663 : printerModel,
-  this._lastConnectedAddress = "", this._localName = "",
+      this.useCopyCommandInTemplatePrint = false})
+      : this.printerModel = printerModel == null ? Model.PJ_663 : printerModel,
+        this._lastConnectedAddress = "",
+        this._localName = "",
         _labelName = QL700.W62;
 
   String getLastConnectedAddress() {
@@ -1702,8 +1747,6 @@ class PrinterInfo {
   CustomPaperInfo? getCustomPaperInfo() {
     return this.customPaperInfo;
   }*/
-
-
 }
 
 class BatteryTernary {
@@ -1754,7 +1797,6 @@ class BatteryTernary {
     return Unknown;
   }
 
-
   static int ordinalFromID(int id) {
     for (int i = 0; i < _values.length; ++i) {
       BatteryTernary num = _values[i];
@@ -1772,10 +1814,7 @@ class BatteryTernary {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": this._id,
-      "name": this._name
-    };
+    return {"id": this._id, "name": this._name};
   }
 }
 
@@ -1815,23 +1854,23 @@ class PrinterStatus {
 
   static PrinterStatus fromMap(Map<dynamic, dynamic> map) {
     return PrinterStatus(
-      statusBytes: map["statusBytes"],
+        statusBytes: map["statusBytes"],
         errorCode: ErrorCode.fromMap(map["errorCode"]),
         labelId: map["labelId"],
         labelType: map["labelType"],
         isACConnected: BatteryTernary.fromMap(map["isACConnected"]),
-      isBatteryMounted: BatteryTernary.fromMap(map["isBatteryMounted"]),
+        isBatteryMounted: BatteryTernary.fromMap(map["isBatteryMounted"]),
         batteryLevel: map["batteryLevel"],
         batteryResidualQuantityLevel: map["batteryResidualQuantityLevel"],
-        maxOfBatteryResidualQuantityLevel: map["maxOfBatteryResidualQuantityLevel"]
-    );
+        maxOfBatteryResidualQuantityLevel:
+            map["maxOfBatteryResidualQuantityLevel"]);
   }
 
   Map<String, dynamic> toMap() {
     return {
       "errorCode": errorCode.toMap(),
       "labelId": labelId,
-      "labelType": labelType ,
+      "labelType": labelType,
       "isACConnected": isACConnected.toMap(),
       "isBatteryMounted": isBatteryMounted.toMap(),
       "batteryLevel": batteryLevel,
@@ -1844,7 +1883,6 @@ class PrinterStatus {
   String toString() {
     return toMap().toString();
   }
-
 }
 
 class TimeoutSetting {
@@ -1897,8 +1935,16 @@ class PrinterSpec {
   final bool printerCase;
   final String modelName;
 
-  const PrinterSpec({this.modelId = 0, this.seriesId = 0, this.usdId = 0, this.headpin = 0, this.xDpi = 0,
-      this.yDpi = 0, this.printerCase = false, this.tubeHeadpin = 0, this.modelName = ""});
+  const PrinterSpec(
+      {this.modelId = 0,
+      this.seriesId = 0,
+      this.usdId = 0,
+      this.headpin = 0,
+      this.xDpi = 0,
+      this.yDpi = 0,
+      this.printerCase = false,
+      this.tubeHeadpin = 0,
+      this.modelName = ""});
 
   static PrinterSpec fromMap(Map<dynamic, dynamic> map) {
     return PrinterSpec(
@@ -1910,8 +1956,7 @@ class PrinterSpec {
         yDpi: map["yDpi"],
         printerCase: map["printerCase"],
         tubeHeadpin: map["tubeHeadpin"],
-        modelName:map["modelName"]
-    );
+        modelName: map["modelName"]);
   }
 
   Map<String, dynamic> toMap() {
@@ -1927,7 +1972,6 @@ class PrinterSpec {
       "modelName": modelName
     };
   }
-
 }
 
 class TemplateInfo {
@@ -1938,14 +1982,16 @@ class TemplateInfo {
   final String fileName;
   final int modifiedDateRaw;
 
-  TemplateInfo({
-      this.key = 0,
+  TemplateInfo(
+      {this.key = 0,
       this.fileSize = 0,
       this.checksum = 0,
       Uint8List? modifiedDate,
       this.fileName = "",
       this.modifiedDateRaw = 0})
-      : this.modifiedDate = modifiedDate != null ? Printer.getDate(modifiedDate): new DateTime(0);
+      : this.modifiedDate = modifiedDate != null
+            ? Printer.getDate(modifiedDate)
+            : new DateTime(0);
 
   static TemplateInfo fromMap(Map<dynamic, dynamic> map) {
     return TemplateInfo(
@@ -1954,8 +2000,7 @@ class TemplateInfo {
         checksum: map["checksum"],
         modifiedDate: map["modifiedDate"],
         fileName: map["fileName"],
-        modifiedDateRaw: map["modifiedDateRaw"]
-    );
+        modifiedDateRaw: map["modifiedDateRaw"]);
   }
 
   Map<String, dynamic> toMap() {
@@ -2047,8 +2092,7 @@ class Paper {
         pinOffsetRight: map["pinOffsetRight"],
         labelType: map["labelType"],
         paperName: map["paperName"],
-        paperNameInch: map["paperNameInch:"]
-    );
+        paperNameInch: map["paperNameInch:"]);
   }
 
   Map<String, dynamic> toMap() {
@@ -2072,6 +2116,7 @@ class Paper {
     };
   }
 }
+
 class LabelParam {
   int headPinNum = 0;
   int labelWidth;
@@ -2102,7 +2147,7 @@ class LabelParam {
       double paperLength = 0,
       int imageAreaWidth = 0,
       int imageAreaLength = 0,
-      int pinOffsetLeft = 0 ,
+      int pinOffsetLeft = 0,
       int pinOffsetRight = 0,
       int physicalOffsetX = 0,
       int physicalOffsetY = 0,
@@ -2138,8 +2183,7 @@ class LabelParam {
         physicalOffsetX: map["physicalOffsetX"],
         physicalOffsetY: map["physicalOffsetY"],
         labelType: map["labelType"],
-        paperID : map["paperID"]
-    );
+        paperID: map["paperID"]);
   }
 
   Map<String, dynamic> toMap() {
@@ -2182,7 +2226,6 @@ class LabelParam {
         "paperName $paperName, "
         "paperNameInch $paperNameInch, "
         "paperID $paperID}";
-
   }
 }
 
@@ -2193,7 +2236,7 @@ class HealthStatus {
 
   static const Excellent = HealthStatus._internal(0, "Excellent");
   static const Good = HealthStatus._internal(1, "Good");
-  static const ReplaceSoon  = HealthStatus._internal(2, "ReplaceSoon");
+  static const ReplaceSoon = HealthStatus._internal(2, "ReplaceSoon");
   static const ReplaceBattery = HealthStatus._internal(3, "ReplaceBattery");
   static const NotInstalled = HealthStatus._internal(4, "NotInstalled");
 
@@ -2240,17 +2283,13 @@ class HealthStatus {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": this._id,
-      "name": this._name
-    };
+    return {"id": this._id, "name": this._name};
   }
 
   @override
   String toString() {
     return _name;
   }
-
 }
 
 class BatteryInfo {
@@ -2266,13 +2305,11 @@ class BatteryInfo {
         this.batteryHealthLevel = healthLevel,
         this.batteryHealthStatus = healthStatus;
 
-
   static BatteryInfo fromMap(Map<dynamic, dynamic> map) {
     return BatteryInfo(
-      chargeLevel:  map["chargeLevel"],
+        chargeLevel: map["chargeLevel"],
         healthLevel: map["healthLevel"],
-        healthStatus: HealthStatus.fromMap(map["healthStatus"])
-    );
+        healthStatus: HealthStatus.fromMap(map["healthStatus"]));
   }
 
   Map<String, dynamic> toMap() {
@@ -2333,7 +2370,6 @@ class NetPrinter implements ABrotherPrinter {
 
   @override
   String getName() => modelName;
-
 }
 
 class PaperKind {
@@ -2345,11 +2381,7 @@ class PaperKind {
   static const DIE_CUT = PaperKind._internal("DIE_CUT");
   static const MARKED_ROLL = PaperKind._internal("MARKED_ROLL");
 
-  static final _values = [
-    ROLL,
-    DIE_CUT,
-    MARKED_ROLL
-  ];
+  static final _values = [ROLL, DIE_CUT, MARKED_ROLL];
 
   static PaperKind fromName(String name) {
     int var2 = _values.length;
@@ -2377,7 +2409,6 @@ class PaperKind {
   String toString() {
     return toMap().toString();
   }
-
 }
 
 class Unit {
@@ -2387,10 +2418,7 @@ class Unit {
   static const Inch = Unit._internal("Inch");
   static const Mm = Unit._internal("Mm");
 
-  static final _values = [
-    Inch,
-    Mm
-  ];
+  static final _values = [Inch, Mm];
 
   static Unit fromName(String name) {
     int var2 = _values.length;
@@ -2448,16 +2476,66 @@ class CustomPaperInfo {
       this.markPosition,
       this.markHeight);
 
-  static CustomPaperInfo newCustomRollPaper(Model printerModel, Unit unit, double tapeWidth, double rightMargin, double leftMargin, double topMargin) {
-    return new CustomPaperInfo._internal(printerModel, PaperKind.ROLL, unit, tapeWidth, 0.0, rightMargin, leftMargin, topMargin, 0.0, 0.0, 0.0, 0.0);
+  static CustomPaperInfo newCustomRollPaper(
+      Model printerModel,
+      Unit unit,
+      double tapeWidth,
+      double rightMargin,
+      double leftMargin,
+      double topMargin) {
+    return new CustomPaperInfo._internal(printerModel, PaperKind.ROLL, unit,
+        tapeWidth, 0.0, rightMargin, leftMargin, topMargin, 0.0, 0.0, 0.0, 0.0);
   }
 
-  static CustomPaperInfo newCustomDiaCutPaper(Model printerModel, Unit unit, double tapeWidth, double tapeLength, double rightMargin, double leftMargin, double topMargin, double bottomMargin, double labelPitch) {
-    return new CustomPaperInfo._internal(printerModel, PaperKind.DIE_CUT, unit, tapeWidth, tapeLength, rightMargin, leftMargin, topMargin, bottomMargin, labelPitch, 0.0, 0.0);
+  static CustomPaperInfo newCustomDiaCutPaper(
+      Model printerModel,
+      Unit unit,
+      double tapeWidth,
+      double tapeLength,
+      double rightMargin,
+      double leftMargin,
+      double topMargin,
+      double bottomMargin,
+      double labelPitch) {
+    return new CustomPaperInfo._internal(
+        printerModel,
+        PaperKind.DIE_CUT,
+        unit,
+        tapeWidth,
+        tapeLength,
+        rightMargin,
+        leftMargin,
+        topMargin,
+        bottomMargin,
+        labelPitch,
+        0.0,
+        0.0);
   }
 
-  static CustomPaperInfo newCustomMarkRollPaper(Model printerModel, Unit unit, double tapeWidth, double tapeLength, double rightMargin, double leftMargin, double topMargin, double bottomMargin, double markPosition, double markHeight) {
-    return new CustomPaperInfo._internal(printerModel, PaperKind.MARKED_ROLL, unit, tapeWidth, tapeLength, rightMargin, leftMargin, topMargin, bottomMargin, 0.0, markPosition, markHeight);
+  static CustomPaperInfo newCustomMarkRollPaper(
+      Model printerModel,
+      Unit unit,
+      double tapeWidth,
+      double tapeLength,
+      double rightMargin,
+      double leftMargin,
+      double topMargin,
+      double bottomMargin,
+      double markPosition,
+      double markHeight) {
+    return new CustomPaperInfo._internal(
+        printerModel,
+        PaperKind.MARKED_ROLL,
+        unit,
+        tapeWidth,
+        tapeLength,
+        rightMargin,
+        leftMargin,
+        topMargin,
+        bottomMargin,
+        0.0,
+        markPosition,
+        markHeight);
   }
 
   static CustomPaperInfo? fromMap(Map<dynamic, dynamic>? map) {
@@ -2482,7 +2560,7 @@ class CustomPaperInfo {
 
   Map<String, dynamic> toMap() {
     return {
-      "printerModel" : this.printerModel.toMap(),
+      "printerModel": this.printerModel.toMap(),
       "paperKind": this.paperKind.toMap(),
       "unit": this.unit.toMap(),
       "tapeWidth": this.tapeWidth,
@@ -2513,14 +2591,11 @@ class BLEPrinter implements ABrotherPrinter {
   BLEPrinter({this.localName = ""});
 
   static BLEPrinter fromMap(Map<dynamic, dynamic> map) {
-    return BLEPrinter(
-        localName: map["localName"]);
+    return BLEPrinter(localName: map["localName"]);
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "localName": localName
-    };
+    return {"localName": localName};
   }
 
   @override
@@ -2532,11 +2607,11 @@ class BLEPrinter implements ABrotherPrinter {
   int get hashCode => localName.hashCode;
 
   @override
-  bool operator ==(Object other) => other is BLEPrinter && localName == other.localName;
+  bool operator ==(Object other) =>
+      other is BLEPrinter && localName == other.localName;
 
   @override
   String getName() => localName;
-
 }
 
 // TODO Integrate with new API getBluetoothPrinters(List<String> modelNames)
@@ -2548,16 +2623,11 @@ class BluetoothPrinter implements ABrotherPrinter {
 
   static BluetoothPrinter fromMap(Map<dynamic, dynamic> map) {
     return BluetoothPrinter(
-        modelName: map["modelName"],
-      macAddress: map["macAddress"]
-    );
+        modelName: map["modelName"], macAddress: map["macAddress"]);
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "modelName": modelName,
-      "macAddress": macAddress
-    };
+    return {"modelName": modelName, "macAddress": macAddress};
   }
 
   @override
@@ -2569,15 +2639,14 @@ class BluetoothPrinter implements ABrotherPrinter {
   int get hashCode => macAddress.hashCode;
 
   @override
-  bool operator ==(Object other) => other is BluetoothPrinter && macAddress == other.macAddress;
+  bool operator ==(Object other) =>
+      other is BluetoothPrinter && macAddress == other.macAddress;
 
   @override
   String getName() => modelName;
-
 }
 
 class Printer {
-
   static const MethodChannel _channel = const MethodChannel('another_brother');
 
   static final int QUALITY = 100;
@@ -2600,8 +2669,8 @@ class Printer {
 
   static void setUserPrinterInfo(PrinterInfo mPrinterInfo) {
     Printer.mPrinterInfo = mPrinterInfo;
-    mPrinterInfo._labelName = Printer.mPrinterInfo.printerModel.getLabelName(mPrinterInfo.labelNameIndex);
-
+    mPrinterInfo._labelName = Printer.mPrinterInfo.printerModel
+        .getLabelName(mPrinterInfo.labelNameIndex);
   }
 
   static DateTime getDate(Uint8List bytes) {
@@ -2637,31 +2706,31 @@ class Printer {
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "filePath" : filepath
+      "filePath": filepath
     };
 
     final Map resultMap = await _channel.invokeMethod("printFile", params);
-    print ("Received Result: $resultMap");
+    print("Received Result: $resultMap");
 
     PrinterStatus status = PrinterStatus.fromMap(resultMap);
 
     return status;
   }
 
-
   static Future<String> get platformVersion async {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
 
-
   // Print the text using print settings.
-  Future<PrinterStatus> printText(Paragraph paragraph, {Offset offset = Offset.zero, Color background = const Color(0xFFFFFFFF)}) async {
+  Future<PrinterStatus> printText(Paragraph paragraph,
+      {Offset offset = Offset.zero,
+      Color background = const Color(0xFFFFFFFF)}) async {
     PictureRecorder recorder = PictureRecorder();
     Canvas c = Canvas(recorder);
     Paint paint = new Paint()..color = background;
 
-    double height =  offset.dy + paragraph.height;
+    double height = offset.dy + paragraph.height;
 
     // TODO Move to constant
     if (height < 100) {
@@ -2670,73 +2739,68 @@ class Printer {
 
     c.drawRect(Rect.fromLTWH(0, 0, offset.dx + paragraph.width, height), paint);
     c.drawParagraph(paragraph, offset);
-    var picture = await recorder.endRecording().toImage(offset.dx.toInt() + paragraph.width.toInt(), height.toInt());
+    var picture = await recorder
+        .endRecording()
+        .toImage(offset.dx.toInt() + paragraph.width.toInt(), height.toInt());
 
     return printImage(picture);
   }
 
   /// Print the image using print settings set by setPrinterInfo.
   Future<PrinterStatus> printImage(Image image) async {
+    var imageBytes = await image.toByteData(format: ImageByteFormat.png);
+    if (imageBytes == null) {
+      return PrinterStatus(errorCode: ErrorCode.ERROR_UNSUPPORTED_MEDIA);
+    }
 
-      var imageBytes = await image.toByteData(format: ImageByteFormat.png);
-      if (imageBytes == null) {
-        return PrinterStatus(errorCode: ErrorCode.ERROR_UNSUPPORTED_MEDIA);
-      }
+    var outByteArray = Uint8List(imageBytes.lengthInBytes);
+    for (int i = 0; i < imageBytes.lengthInBytes; i++) {
+      outByteArray[i] = imageBytes.getUint8(i);
+    }
 
-      var outByteArray = Uint8List(imageBytes.lengthInBytes);
-      for (int i = 0; i < imageBytes.lengthInBytes; i ++) {
-        outByteArray[i] = imageBytes.getUint8(i);
-      }
+    var params = {
+      "printerId": mPrinterId,
+      "printInfo": mPrinterInfo.toMap(),
+      "imageBytes": outByteArray
+    };
 
-      var params = {
-        "printerId": mPrinterId,
-        "printInfo": mPrinterInfo.toMap(),
-        "imageBytes": outByteArray
-      };
+    final Map resultMap = await _channel.invokeMethod("printImage", params);
 
-      final Map resultMap = await _channel.invokeMethod("printImage", params);
+    print("Print Result: ${resultMap} ");
 
-      print("Print Result: ${resultMap} ");
+    PrinterStatus status = PrinterStatus.fromMap(resultMap);
 
-      PrinterStatus status = PrinterStatus.fromMap(resultMap);
-
-      return status;
+    return status;
   }
-
 
   /// Print the image files using print settings set by setPrinterInfo.
   Future<PrinterStatus> printFileList(List<String> fileList) async {
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "filePathList" : fileList
+      "filePathList": fileList
     };
 
     final Map resultMap = await _channel.invokeMethod("printFileList", params);
     PrinterStatus status = PrinterStatus.fromMap(resultMap);
 
     return status;
-
   }
-
 
   /// Print the pdf file using print settings set by setPrinterInfo. Available on Android 5.0 or later.
   Future<PrinterStatus> printPdfFile(String filepath, int pagenum) async {
-
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "filePath" : filepath,
-      "pagenum" : pagenum
+      "filePath": filepath,
+      "pagenum": pagenum
     };
 
     final Map resultMap = await _channel.invokeMethod("printPdfFile", params);
     PrinterStatus status = PrinterStatus.fromMap(resultMap);
 
     return status;
-
   }
-
 
   /*
   /// Same functionality as printPdfFile. Available on less than Android 6.0.
@@ -2774,11 +2838,10 @@ class Printer {
 
   /// Get the page count of the specified pdf file. Available on Android 5.0 or later.
   Future<int> getPdfFilePages(String filepath) async {
-
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "filePath" : filepath
+      "filePath": filepath
     };
 
     final int pages = await _channel.invokeMethod("getPDFFilePages", params);
@@ -2791,11 +2854,10 @@ class Printer {
   /// a Windows application. For Bluetooth and USB transfers, use pdz files.
   /// For all interface, use blf files.
   Future<PrinterStatus> transfer(String filepath) async {
-
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "filePath" : filepath,
+      "filePath": filepath,
     };
 
     final Map resultMap = await _channel.invokeMethod("transfer", params);
@@ -2804,22 +2866,18 @@ class Printer {
     return status;
   }
 
-
   Future<PrinterStatus> updateFirm(String filepath) async {
-
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "filePath" : filepath,
+      "filePath": filepath,
     };
 
     final Map resultMap = await _channel.invokeMethod("updateFirm", params);
     PrinterStatus status = PrinterStatus.fromMap(resultMap);
 
     return status;
-
   }
-
 
   /// Send the database data described in .csv format. In addition,
   /// Updates the database for printers that have templates and databases
@@ -2834,18 +2892,16 @@ class Printer {
   //
   //PT-E550W
   Future<PrinterStatus> sendDatabase(String filepath) async {
-
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "filePath" : filepath,
+      "filePath": filepath,
     };
 
     final Map resultMap = await _channel.invokeMethod("sendDatabase", params);
     PrinterStatus status = PrinterStatus.fromMap(resultMap);
 
     return status;
-
   }
 
   /// Send the binary file containing the command. Since the status check is
@@ -2855,25 +2911,23 @@ class Printer {
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "filePath" : filepath,
+      "filePath": filepath,
     };
 
     final Map resultMap = await _channel.invokeMethod("sendBinaryFile", params);
     PrinterStatus status = PrinterStatus.fromMap(resultMap);
 
     return status;
-
   }
 
   /// Send the binary data containing the command. Since the status check
   /// is not performed, it is sent even if the printer specified by
   /// printerModel is different from the actually connected printer.
   Future<PrinterStatus> sendBinary(Uint8List data) async {
-
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "data" : data,
+      "data": data,
     };
 
     final Map resultMap = await _channel.invokeMethod("sendBinary", params);
@@ -2888,11 +2942,11 @@ class Printer {
       "printInfo": mPrinterInfo.toMap(),
     };
 
-    final String firmVersion = await _channel.invokeMethod("getFirmVersion", params);
+    final String firmVersion =
+        await _channel.invokeMethod("getFirmVersion", params);
 
     return firmVersion;
   }
-
 
   Future<String> getMediaVersion() async {
     var params = {
@@ -2900,7 +2954,8 @@ class Printer {
       "printInfo": mPrinterInfo.toMap(),
     };
 
-    final String mediaVersion = await _channel.invokeMethod("getMediaVersion", params);
+    final String mediaVersion =
+        await _channel.invokeMethod("getMediaVersion", params);
 
     return mediaVersion;
   }
@@ -2911,11 +2966,11 @@ class Printer {
       "printInfo": mPrinterInfo.toMap(),
     };
 
-    final String serialNumber = await _channel.invokeMethod("getSerialNumber", params);
+    final String serialNumber =
+        await _channel.invokeMethod("getSerialNumber", params);
 
     return serialNumber;
   }
-
 
   Future<int> getBatteryWeak() async {
     var params = {
@@ -2923,11 +2978,11 @@ class Printer {
       "printInfo": mPrinterInfo.toMap(),
     };
 
-    final int batteryWeak = await _channel.invokeMethod("getBatteryWeak", params);
+    final int batteryWeak =
+        await _channel.invokeMethod("getBatteryWeak", params);
 
     return batteryWeak;
   }
-
 
   Future<int> getBootMode() async {
     var params = {
@@ -2940,15 +2995,15 @@ class Printer {
     return bootMode;
   }
 
-
   Future<String> getFirmFileVer(String filePath) async {
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "filePath" : filePath,
+      "filePath": filePath,
     };
 
-    final String firmFileVersion = await _channel.invokeMethod("getFirmFileVer", params);
+    final String firmFileVersion =
+        await _channel.invokeMethod("getFirmFileVer", params);
 
     return firmFileVersion;
   }
@@ -2957,21 +3012,21 @@ class Printer {
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "filePath" : filePath,
+      "filePath": filePath,
     };
 
-    final String mediaFileVersion = await _channel.invokeMethod("getMediaFileVer", params);
+    final String mediaFileVersion =
+        await _channel.invokeMethod("getMediaFileVer", params);
 
     return mediaFileVersion;
   }
 
   /// Removes templates from the printer.
   Future<PrinterStatus> removeTemplate(List<int> keyList) async {
-
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "keyList" : keyList,
+      "keyList": keyList,
     };
 
     final Map resultMap = await _channel.invokeMethod("removeTemplate", params);
@@ -2980,16 +3035,15 @@ class Printer {
     return status;
   }
 
-
   /// Gets a list of the templates that have been downloaded to the printer.
   Future<PrinterStatus> getTemplateList(List<TemplateInfo> outTmplList) async {
-
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
     };
 
-    final Map resultMap = await _channel.invokeMethod("getTemplateList", params);
+    final Map resultMap =
+        await _channel.invokeMethod("getTemplateList", params);
     PrinterStatus status = PrinterStatus.fromMap(resultMap["printerStatus"]);
 
     final List<dynamic> templates = resultMap["templateList"];
@@ -3001,12 +3055,12 @@ class Printer {
   }
 
   /// Set PrinterInfo object to specify the printer and print settings.
-  Future<bool> setPrinterInfo(PrinterInfo printerInfo) async {
+  Future<bool> setPrinterInfo(PrinterInfo printerInfo, {int? dpi}) async {
     mPrinterInfo = printerInfo;
-    mPrinterInfo._labelName = mPrinterInfo.printerModel.getLabelName(mPrinterInfo.labelNameIndex);
+    mPrinterInfo._labelName =
+        mPrinterInfo.printerModel.getLabelName(mPrinterInfo.labelNameIndex);
     return true;
   }
-
 
   /// Get the printer information which is currently set.
   Future<PrinterInfo> getPrinterInfo() async {
@@ -3015,13 +3069,13 @@ class Printer {
 
   /// Retrieves the printer status.
   Future<PrinterStatus> getPrinterStatus() async {
-
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
     };
 
-    final Map resultMap = await _channel.invokeMethod("getPrinterStatus", params);
+    final Map resultMap =
+        await _channel.invokeMethod("getPrinterStatus", params);
     PrinterStatus status = PrinterStatus.fromMap(resultMap);
 
     return status;
@@ -3033,31 +3087,33 @@ class Printer {
   /// getPrinterSettings after the restart.
   Future<PrinterStatus> updatePrinterSettings(
       Map<PrinterSettingItem, String> settings) async {
-
-    final Map<Map<String, dynamic>, String> dartSettings = settings.map((key, value) => new MapEntry(key.toMap(), value));
+    final Map<Map<String, dynamic>, String> dartSettings =
+        settings.map((key, value) => new MapEntry(key.toMap(), value));
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
       "settings": dartSettings
     };
 
-    final Map resultMap = await _channel.invokeMethod("updatePrinterSettings", params);
+    final Map resultMap =
+        await _channel.invokeMethod("updatePrinterSettings", params);
     PrinterStatus status = PrinterStatus.fromMap(resultMap);
 
     return status;
   }
 
   /// Get printer settings. See Printer Configurations for available values.
-  Future<PrinterStatus> getPrinterSettings(
-      List<PrinterSettingItem> keys, Map<PrinterSettingItem, String> outValues) async {
-
+  Future<PrinterStatus> getPrinterSettings(List<PrinterSettingItem> keys,
+      Map<PrinterSettingItem, String> outValues) async {
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "keys": keys.map((printerSettingItem) => printerSettingItem.toMap()).toList()
+      "keys":
+          keys.map((printerSettingItem) => printerSettingItem.toMap()).toList()
     };
 
-    final Map resultMap = await _channel.invokeMethod("getPrinterSettings", params);
+    final Map resultMap =
+        await _channel.invokeMethod("getPrinterSettings", params);
     PrinterStatus status = PrinterStatus.fromMap(resultMap["printerStatus"]);
     Map<dynamic, dynamic> values = resultMap["values"];
 
@@ -3076,7 +3132,8 @@ class Printer {
       "printInfo": mPrinterInfo.toMap(),
     };
 
-    final String systemReport = await _channel.invokeMethod("getSystemReport", params);
+    final String systemReport =
+        await _channel.invokeMethod("getSystemReport", params);
 
     return systemReport;
   }
@@ -3092,21 +3149,23 @@ class Printer {
 
     BatteryInfo info = BatteryInfo.fromMap(resultMap);
     return info;
-
   }
 
   /// Gets Bluetooth settings from the MW series. Refer to BluetoothPreference.
-  Future<PrinterStatus> getBluetoothPreference(BluetoothPreference btPre) async {
+  Future<PrinterStatus> getBluetoothPreference(
+      BluetoothPreference btPre) async {
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
     };
 
-    final Map resultMap = await _channel.invokeMethod("getBluetoothPreference", params);
+    final Map resultMap =
+        await _channel.invokeMethod("getBluetoothPreference", params);
 
     PrinterStatus status = PrinterStatus.fromMap(resultMap["printerStatus"]);
 
-    BluetoothPreference resultPrefs = BluetoothPreference.fromMap(resultMap["btPre"]);
+    BluetoothPreference resultPrefs =
+        BluetoothPreference.fromMap(resultMap["btPre"]);
     btPre.authMode = resultPrefs.authMode;
     btPre.enableSsp = resultPrefs.enableSsp;
     btPre.powerMode = resultPrefs.powerMode;
@@ -3117,19 +3176,20 @@ class Printer {
   /// Updates Bluetooth settings of the MW series. Refer to BluetoothPreference.
   /// This method does not check if the request has been reflected on the
   /// device. Please check using getBluetoothPreference if needed.
-  Future<PrinterStatus> updateBluetoothPreference(BluetoothPreference btPre) async {
+  Future<PrinterStatus> updateBluetoothPreference(
+      BluetoothPreference btPre) async {
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
       "btPre": btPre.toMap()
     };
 
-    final Map resultMap = await _channel.invokeMethod("updateBluetoothPreference", params);
+    final Map resultMap =
+        await _channel.invokeMethod("updateBluetoothPreference", params);
 
     PrinterStatus status = PrinterStatus.fromMap(resultMap);
     return status;
   }
-
 
   /// Start creating the command and print data string for a P-touch Template.
   /// Specify a template and the character encoding.
@@ -3162,13 +3222,11 @@ class Printer {
     final bool success = await _channel.invokeMethod("replaceText", params);
 
     return success;
-
   }
 
   /// Replaces the text in an object of a P-touch Template, specified by
   /// its object number.
   Future<bool> replaceTextIndex(String data, int index) async {
-
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
@@ -3176,16 +3234,15 @@ class Printer {
       "index": index
     };
 
-    final bool success = await _channel.invokeMethod("replaceTextIndex", params);
+    final bool success =
+        await _channel.invokeMethod("replaceTextIndex", params);
 
     return success;
   }
 
-
   /// Replaces the text in an object of a P-touch Template,
   /// specified by the object's name.
   Future<bool> replaceTextName(String data, String objectName) async {
-
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
@@ -3214,46 +3271,49 @@ class Printer {
   /// Discover printers of the given model that are connected to the
   /// same network.
   Future<List<NetPrinter>> getNetPrinters(List<String> modelName) async {
-
     // TODO If on iOS don't call the platform, do it at the flutter layer.
 
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "models" : modelName,
+      "models": modelName,
     };
 
-    final List<dynamic> resultList = await _channel.invokeMethod("getNetPrinters", params);
+    final List<dynamic> resultList =
+        await _channel.invokeMethod("getNetPrinters", params);
 
-    final List<NetPrinter> outList = resultList.map( (netPrinter) => NetPrinter.fromMap(netPrinter)).toList();
+    final List<NetPrinter> outList =
+        resultList.map((netPrinter) => NetPrinter.fromMap(netPrinter)).toList();
     return outList;
   }
 
-
   /// Returns the paried printers matching the model name specified.
-  Future<List<BluetoothPrinter>> getBluetoothPrinters(List<String> modelName) async {
-
+  Future<List<BluetoothPrinter>> getBluetoothPrinters(
+      List<String> modelName) async {
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "models" : modelName,
+      "models": modelName,
     };
 
-    final List<dynamic> resultList = await _channel.invokeMethod("getBluetoothPrinters", params);
+    final List<dynamic> resultList =
+        await _channel.invokeMethod("getBluetoothPrinters", params);
 
-    final List<BluetoothPrinter> outList = resultList.map( (bluetoothPrinter) => BluetoothPrinter.fromMap(bluetoothPrinter)).toList();
+    final List<BluetoothPrinter> outList = resultList
+        .map((bluetoothPrinter) => BluetoothPrinter.fromMap(bluetoothPrinter))
+        .toList();
     return outList;
   }
-
 
   Future<NetPrinter> getNetPrinterInfo(String ipAddress) async {
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "ipAddress" : ipAddress,
+      "ipAddress": ipAddress,
     };
 
-    final Map resultMap = await _channel.invokeMethod("getNetPrinterInfo", params);
+    final Map resultMap =
+        await _channel.invokeMethod("getNetPrinterInfo", params);
 
     final NetPrinter outPrinter = NetPrinter.fromMap(resultMap);
     return outPrinter;
@@ -3262,7 +3322,6 @@ class Printer {
   /// Get the detail information of the media (for QL, PT, TD and RJ series)
   /// specified by setPrinterInfo.
   Future<LabelParam> getLabelParam() async {
-
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
@@ -3274,11 +3333,9 @@ class Printer {
     return outLabel;
   }
 
-
   /// Retrieves the label information from the printer.
   /// Available for QL and PT series only.
   Future<LabelInfo> getLabelInfo() async {
-
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
@@ -3286,24 +3343,24 @@ class Printer {
 
     final Map resultMap = await _channel.invokeMethod("getLabelInfo", params);
 
-    print ("Label Info: $resultMap");
+    print("Label Info: $resultMap");
 
     final LabelInfo outLabel = LabelInfo.fromMap(resultMap);
     return outLabel;
   }
 
-
   /// Discover printers which are connectable via BLE. Available
   /// on Android 5.0 or later.
   Future<List<BLEPrinter>> getBLEPrinters(int timeout) async {
-
     // TODO Consider moving this to iOS side.
     if (Platform.isIOS) {
       //BLE Scanning
       //FlutterBluePlus? flutterBlue = FlutterBluePlus();
 
       // Start scanning
-      FlutterBluePlus.startScan(withServices: [Guid("A76EB9E0-F3AC-4990-84CF-3A94D2426B2B")], timeout: Duration(seconds: timeout~/1000));
+      FlutterBluePlus.startScan(
+          withServices: [Guid("A76EB9E0-F3AC-4990-84CF-3A94D2426B2B")],
+          timeout: Duration(seconds: timeout ~/ 1000));
 
       Set<BLEPrinter> foundDevices = {};
       // Listen to scan results
@@ -3316,33 +3373,35 @@ class Printer {
         }
       });
 
-      return await Future.delayed(Duration(seconds: timeout~/1000), () => foundDevices.toList());
+      return await Future.delayed(
+          Duration(seconds: timeout ~/ 1000), () => foundDevices.toList());
     }
 
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
-      "timeout" : timeout,
+      "timeout": timeout,
     };
 
-    final List<dynamic> resultList = await _channel.invokeMethod("getBLEPrinters", params);
+    final List<dynamic> resultList =
+        await _channel.invokeMethod("getBLEPrinters", params);
 
-    final List<BLEPrinter> outList = resultList.map( (blePrinter) => BLEPrinter.fromMap(blePrinter)).toList();
+    final List<BLEPrinter> outList =
+        resultList.map((blePrinter) => BLEPrinter.fromMap(blePrinter)).toList();
     return outList;
   }
-
 
   /// Starts a communication with the printer.
   /// Note: This does not seem to impact whether a print will succeed or not
   /// on the Android side. Printing without calling this will still print.
   Future<bool> startCommunication() async {
-
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
     };
 
-    final bool result = await _channel.invokeMethod("startCommunication", params);
+    final bool result =
+        await _channel.invokeMethod("startCommunication", params);
 
     print("Print Result: ${result} ");
     return result;
@@ -3351,7 +3410,6 @@ class Printer {
   /// Ends a communication with the printer.
   /// Note: This does not seem to impact printing.
   Future<bool> endCommunication() async {
-
     var params = {
       "printerId": mPrinterId,
       "printInfo": mPrinterInfo.toMap(),
@@ -3363,7 +3421,6 @@ class Printer {
     return result;
   }
 
-
   /// Cancel printing. Invalid while sending data.
   Future<bool> cancel() async {
     var params = {
@@ -3374,6 +3431,4 @@ class Printer {
     final bool result = await _channel.invokeMethod("cancel", params);
     return result;
   }
-
 }
-

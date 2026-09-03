@@ -11,7 +11,7 @@ class LabelInfo {
 
   LabelInfo(
       {
-      // TODO Consider using labal ID instead
+      // TODO Consider using label ID instead
       this.labelNameIndex = -1,
       this.isAutoCut = true,
       this.isEndCut = true,

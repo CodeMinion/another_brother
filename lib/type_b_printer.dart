@@ -30,7 +30,7 @@ class TbPrinterInfo {
       String btAddress = "",
       String localName = "",
       TbModel printerModel = TbModel.RJ_2055WB,
-        ATbLabelName? labelName,
+      ATbLabelName? labelName,
       this.port = Port.NET})
       : this.ipAddress = ipAddress,
         this.portNumber = portNumber,
@@ -53,13 +53,12 @@ class TbPrinterInfo {
 
   factory TbPrinterInfo.fromMap(Map<String, dynamic> map) {
     return TbPrinterInfo(
-      ipAddress: map["ipAddress"],
-      portNumber: map["portNumber"],
-      btAddress: map["btAddress"],
-        localName:map["localName"],
-      port: Port.fromMap(map["port"]),
-      labelName: TbLabelName.fromMap(map["labelName"])
-    );
+        ipAddress: map["ipAddress"],
+        portNumber: map["portNumber"],
+        btAddress: map["btAddress"],
+        localName: map["localName"],
+        port: Port.fromMap(map["port"]),
+        labelName: TbLabelName.fromMap(map["labelName"]));
   }
 }
 
@@ -83,7 +82,6 @@ class TbPrinter {
   static dotsToMillimeters(double resolution, double dots) {
     return resolution / dots * _MM_IN_INCHE;
   }
-
 
   TbPrinter({TbPrinterInfo? printerInfo}) {
     if (printerInfo != null) {
@@ -323,7 +321,7 @@ class TbPrinter {
   //Future<Image> downloadImage(Image image,
   Future<bool> downloadImage(Image image,
       {int x = 0, int y = 0, double scale = 1, int printerDpi = 203}) async {
-    double ratio = image.height / image.width ;
+    double ratio = image.height / image.width;
     double desiredImageWidth =
         image.width * scale; //image.height * printerDpi / 72 * scale;
     double desiredImageHeight =
@@ -424,21 +422,21 @@ class TbPrinter {
 
       //Image bmpImage = await BrotherUtils.bytesToImage(bmpImageBytes);
       // Save image to temp storage location.
-      String tempBmpFilename = "temp.bmp"; //"temp_${DateTime.now().microsecondsSinceEpoch}.bmp";
-      String tempBmpFilePath = await BrotherUtils.bytesToTempFile(
-          bmpImageBytes, tempBmpFilename);
+      String tempBmpFilename =
+          "temp.bmp"; //"temp_${DateTime.now().microsecondsSinceEpoch}.bmp";
+      String tempBmpFilePath =
+          await BrotherUtils.bytesToTempFile(bmpImageBytes, tempBmpFilename);
       // downloadBmp
       //bool downloadSuccess = await downloadBmp(tempBmpFilePath);
       // The position is set on the canvas instead of the put, so we
       // place at 0,0
-      bool putSuccess = await sendTbCommand(
-          TbCommandPutBmp(0, 0, tempBmpFilePath));
+      bool putSuccess =
+          await sendTbCommand(TbCommandPutBmp(0, 0, tempBmpFilePath));
       // Delete bmp file
       await File(tempBmpFilePath).delete();
       // Return success value.
       return putSuccess;
-    }
-    else {
+    } else {
       TbCommandSendBitmap sendBitmapCmd = TbCommandSendBitmap(
           x,
           y,
@@ -451,11 +449,9 @@ class TbPrinter {
               outImageBytes); //sendCommand(String.fromCharCodes(outImageBytes));
       result = result && await sendCommand("\"\r\n");
 
-
       return result;
       //return bmpImage;
       //return grayPicture;
-
     }
   }
 
@@ -464,31 +460,48 @@ class TbPrinter {
   /// returns the completed BMP bytes.
   /// Type B uses Windows BMP format (BM)
   /// Reference: https://en.wikipedia.org/wiki/BMP_file_format
-  Uint8List _wrapInWindowBmp({required int width, required int height, required Uint8List imageBytes, required int printerDpi}) {
-
+  Uint8List _wrapInWindowBmp(
+      {required int width,
+      required int height,
+      required Uint8List imageBytes,
+      required int printerDpi}) {
     // BMP Header
-    int headerByteSize =  2 // header field
-        + 4 // size of bmp file in bytes
-        + 2 // Reserved
-        + 2 // Reserved
-        + 4 // The offset, starting address of the byte where the image data can be found
+    int headerByteSize = 2 // header field
+            +
+            4 // size of bmp file in bytes
+            +
+            2 // Reserved
+            +
+            2 // Reserved
+            +
+            4 // The offset, starting address of the byte where the image data can be found
         ;
 
     // DIB Header
-    int bitmapInfoHeaderByteSize =  4 // Size of this header in bytes (40)
-        + 4 //bitmap width in pixels
-        + 4 // bitmap height in pixels
-        + 2 // number of color planes,
-        + 2 // number of bit per pixel, 1, 4 ,8 24 or 32
-        + 4 // compression method being used.
-        + 4 // the size of the raw image bitmap data
-        + 4 // horizontal resolution of the image
-        + 4 // vertical resolution of the image
-        + 4 // the number of colors in teh color palette, or 0 to default to 2^n
-        + 4 // the number of important colors used, or 0 when every color is important, generally ignored
-        + 8 // Color Table. because bpp < 8
-    ;
-
+    int bitmapInfoHeaderByteSize = 4 // Size of this header in bytes (40)
+            +
+            4 //bitmap width in pixels
+            +
+            4 // bitmap height in pixels
+            +
+            2 // number of color planes,
+            +
+            2 // number of bit per pixel, 1, 4 ,8 24 or 32
+            +
+            4 // compression method being used.
+            +
+            4 // the size of the raw image bitmap data
+            +
+            4 // horizontal resolution of the image
+            +
+            4 // vertical resolution of the image
+            +
+            4 // the number of colors in teh color palette, or 0 to default to 2^n
+            +
+            4 // the number of important colors used, or 0 when every color is important, generally ignored
+            +
+            8 // Color Table. because bpp < 8
+        ;
 
     final BytesBuilder bytesBuilder = BytesBuilder();
     // BMP Header
@@ -496,7 +509,8 @@ class TbPrinter {
     bytesBuilder.addByte(0x42); // B - 0X42
     bytesBuilder.addByte(0x4D); // M - 0x4D
     // Size of BMP in bytes - 4 bytes
-    int sizeOfBmpFile = headerByteSize +  bitmapInfoHeaderByteSize + imageBytes.length;
+    int sizeOfBmpFile =
+        headerByteSize + bitmapInfoHeaderByteSize + imageBytes.length;
     ByteData sizeData = ByteData(4);
     sizeData.setInt32(0, sizeOfBmpFile, Endian.little);
     bytesBuilder.add(sizeData.buffer.asUint8List());
@@ -507,7 +521,7 @@ class TbPrinter {
     bytesBuilder.addByte(0);
     bytesBuilder.addByte(0);
     // Offset, - 4 bytes i.e. starting address of the byte where the image data can be found
-    int imageDataOffset = headerByteSize +  bitmapInfoHeaderByteSize;
+    int imageDataOffset = headerByteSize + bitmapInfoHeaderByteSize;
     ByteData imageDataOffsetData = ByteData(4);
     imageDataOffsetData.setInt32(0, imageDataOffset, Endian.little);
     bytesBuilder.add(imageDataOffsetData.buffer.asUint8List());
@@ -560,7 +574,8 @@ class TbPrinter {
     bytesBuilder.add(colorsInPaletteData.buffer.asUint8List());
     // Number of important colors - 4 bytes
     ByteData importantColorData = ByteData(4);
-    importantColorData.setInt32(0, 0, Endian.little); // 0 - every color is important.
+    importantColorData.setInt32(
+        0, 0, Endian.little); // 0 - every color is important.
     bytesBuilder.add(importantColorData.buffer.asUint8List());
     // Color table, 2 colors (black and white) required if bpp <= 8
     bytesBuilder.add([0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x00]);
@@ -571,23 +586,21 @@ class TbPrinter {
     if (requiredRowWidth == width) {
       // Just add since no padding is needed.
       // TODO: Revisit if image prints updside down Note the image is also built bottom up starting from the last row.
-      for (int i = height -1; i >= 0; i--) {
-        int start = i * width~/8;
-        int end = start + width~/8;
+      for (int i = height - 1; i >= 0; i--) {
+        int start = i * width ~/ 8;
+        int end = start + width ~/ 8;
         //print ("Start: $start - End: $end - Size: ${imageBytes.length}");
         bytesBuilder.add(imageBytes.getRange(start, end).toList());
       }
-
-    }
-    else {
+    } else {
       // Add row and pad with extra bits.
       int paddingBitCount = requiredRowWidth - width;
       // Important: This only works because the image width is a multiple of 8 as is
-      ByteData paddingByteData = ByteData(paddingBitCount~/8);
+      ByteData paddingByteData = ByteData(paddingBitCount ~/ 8);
       //for (int i = 0; i < height; i++) {
-      for (int i = height -1; i >= 0; i--) {
-        int start = i * width~/8;
-        int end = start + width~/8;
+      for (int i = height - 1; i >= 0; i--) {
+        int start = i * width ~/ 8;
+        int end = start + width ~/ 8;
         //print ("Start: $start - End: $end - Size: ${imageBytes.length}");
         bytesBuilder.add(imageBytes.getRange(start, end).toList());
         // TODO Revisit this because right now it's relying on the format from the data above.
@@ -751,7 +764,8 @@ class TbPrinter {
         await _channel.invokeMethod("typeB-getBluetoothPrinters", params);
 
     final List<BluetoothPrinter> outList = resultList
-        .map((bluetoothPrinter) => TbBluetoothPrinter._(BluetoothPrinter.fromMap(bluetoothPrinter)))
+        .map((bluetoothPrinter) =>
+            TbBluetoothPrinter._(BluetoothPrinter.fromMap(bluetoothPrinter)))
         .toList();
     return outList;
   }
@@ -764,10 +778,10 @@ class TbPrinter {
 
     // Start scanning
     FlutterBluePlus.startScan(
-      // Note: For some reason it does not find the printer even though this is the service
-      //withServices: [Guid("49535343-FE7D-4AE5-8FA9-9FAFD205E455"),
-      // Guid("F0DD799C-C883-4976-96A5-8BB4907F41D6")
-      //],
+        // Note: For some reason it does not find the printer even though this is the service
+        //withServices: [Guid("49535343-FE7D-4AE5-8FA9-9FAFD205E455"),
+        // Guid("F0DD799C-C883-4976-96A5-8BB4907F41D6")
+        //],
         timeout: Duration(seconds: timeout ~/ 1000));
 
     Set<BLEPrinter> foundDevices = {};
@@ -780,7 +794,8 @@ class TbPrinter {
         TbBlePrinter found = TbBlePrinter._(foundSt);
 
         // For now just filter by device name until we get service working.
-        if (found.localName.startsWith(_printerInfo.printerModel.getName()) && !foundDevices.contains(found)) {
+        if (found.localName.startsWith(_printerInfo.printerModel.getName()) &&
+            !foundDevices.contains(found)) {
           foundDevices.add(found);
         }
       }
@@ -952,7 +967,7 @@ class TbSensor {
   int getValue() => _value;
 
   static valueFromName(String name) {
-    for (int i = 0; i < _values.length; i ++ ) {
+    for (int i = 0; i < _values.length; i++) {
       if (_values[i].getName() == name) {
         return _values[i];
       }
@@ -962,9 +977,7 @@ class TbSensor {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "name": _name
-    };
+    return {"name": _name};
   }
 
   static TbSensor fromMap(Map<String, dynamic> map) {
@@ -1031,9 +1044,7 @@ class TbPrinterStatus {
   }
 }
 
-abstract class ATbModel implements AModel {
-
-}
+abstract class ATbModel implements AModel {}
 
 class TbModel implements ATbModel {
   final String _displayName;
@@ -1041,7 +1052,7 @@ class TbModel implements ATbModel {
 
   const TbModel._internal(this._displayName, this._name);
 
-  factory TbModel({required String displayName, String discoveryName = "PS-"}){
+  factory TbModel({required String displayName, String discoveryName = "PS-"}) {
     return TbModel._internal(displayName, discoveryName);
   }
 
@@ -1082,7 +1093,7 @@ class TbModel implements ATbModel {
   String getDisplayName() => _displayName;
 
   static TbModel valueFromName(String name) {
-    for (int i =0; i < _values.length; i ++) {
+    for (int i = 0; i < _values.length; i++) {
       if (_values[i]._displayName == name) {
         return _values[i];
       }
@@ -1094,17 +1105,13 @@ class TbModel implements ATbModel {
   String getName() {
     if (Platform.isIOS) {
       return _displayName;
-    }
-    else {
+    } else {
       return _name;
     }
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "name":_name,
-      "displayName": _displayName
-    };
+    return {"name": _name, "displayName": _displayName};
   }
 
   factory TbModel.fromMap(Map<String, dynamic> map) {
@@ -1114,7 +1121,6 @@ class TbModel implements ATbModel {
 }
 
 class BrotherUtils {
-
   /// Utility function for turning a byte array into a UI Image.
   /// @param imageBytes Byte array of the image.
   static Future<Image> bytesToImage(Uint8List imageBytes) async {
@@ -1138,9 +1144,7 @@ class BrotherUtils {
   }
 
   static Future<String> assetFileToPath(String assetKey) async {
-    String fileName = assetKey
-        .split("/")
-        .last;
+    String fileName = assetKey.split("/").last;
     // Load byte date from file.
     ByteData fileData = await PlatformAssetBundle().load(assetKey);
     // Save to a file.
@@ -1152,7 +1156,8 @@ class BrotherUtils {
   }
 
   /// Helper funtion to write a set of bytes to a temp file.
-  static Future<String> bytesToTempFile(Uint8List bytesToWrite, String fileName) async {
+  static Future<String> bytesToTempFile(
+      Uint8List bytesToWrite, String fileName) async {
     Directory directory = await getTemporaryDirectory();
     String dirPath = directory.path;
     File destFile = File('$dirPath/$fileName');
@@ -1181,8 +1186,7 @@ class BrotherUtils {
         binLine = "";
       }
 
-      binLine =
-          binLine + " " + (bytes[i].toRadixString(16).padLeft(2, '0'));
+      binLine = binLine + " " + (bytes[i].toRadixString(16).padLeft(2, '0'));
     }
   }
 }
@@ -1203,7 +1207,6 @@ class TbBlePrinter implements BLEPrinter, ABrotherTbPrinter {
 
   @override
   Map<String, dynamic> toMap() => _printer.toMap();
-
 }
 
 class TbBluetoothPrinter implements BluetoothPrinter, ABrotherTbPrinter {
@@ -1224,7 +1227,6 @@ class TbBluetoothPrinter implements BluetoothPrinter, ABrotherTbPrinter {
 }
 
 abstract class ATbLabelName extends ALabelName {
-
   int getWidth() => 50;
   int getHeight() => 50;
   int getSpeed() => 1;
@@ -1235,7 +1237,6 @@ abstract class ATbLabelName extends ALabelName {
 }
 
 class TbLabelName implements ATbLabelName {
-
   static const int _kDefWidth = 50;
   static const int _kDefHeight = 50;
   static const int _kDefSpeed = 1;
@@ -1253,10 +1254,15 @@ class TbLabelName implements ATbLabelName {
   final int _sensorDistance;
   final int _sensorOffset;
 
-  const TbLabelName._internal(this._name,
-      this._width, this._height,
-      this._speed, this._density,
-      this._sensor, this._sensorDistance, this._sensorOffset);
+  const TbLabelName._internal(
+      this._name,
+      this._width,
+      this._height,
+      this._speed,
+      this._density,
+      this._sensor,
+      this._sensorDistance,
+      this._sensorOffset);
 
   /// Set up the label width, label height, print speed, print density, media sensor type, gap/black
   /// mark vertical distance, gap/black mark shift distance.
@@ -1277,26 +1283,28 @@ class TbLabelName implements ATbLabelName {
   /// @sensor Media Sensor Type
   /// @sensorDistance Sensor Distance - Vertical gap height of the gap/black mark in mm
   /// @sensorOffset Sensor Offset - Shift distance of the gap/black mark in mm.
-  factory TbLabelName({required String name, int width = _kDefWidth, int height = _kDefHeight,
-    int speed = _kDefSpeed,  int density = _kDefDensity, TbSensor sensor = _kDefSensor,
-    int sensorDistance = _kDefDistance,
-    int sensorOffset = _kDefOffset
-  }) {
-    return TbLabelName._internal(name, width, height, speed,
-        density, sensor, sensorDistance,
-        sensorOffset);
+  factory TbLabelName(
+      {required String name,
+      int width = _kDefWidth,
+      int height = _kDefHeight,
+      int speed = _kDefSpeed,
+      int density = _kDefDensity,
+      TbSensor sensor = _kDefSensor,
+      int sensorDistance = _kDefDistance,
+      int sensorOffset = _kDefOffset}) {
+    return TbLabelName._internal(name, width, height, speed, density, sensor,
+        sensorDistance, sensorOffset);
   }
 
-  static const Unsupported = const TbLabelName._internal("UNSUPPORTED", 50, 50, 1, 15, TbSensor.GAP, 0, 0);
+  static const Unsupported = const TbLabelName._internal(
+      "UNSUPPORTED", 50, 50, 1, 15, TbSensor.GAP, 0, 0);
 
-  static final _values = [
-    Unsupported
-  ];
+  static final _values = [Unsupported];
 
   static getValues() => List.of(_values);
 
   @override
-  String getName() =>_name;
+  String getName() => _name;
 
   @override
   Map<String, dynamic> toMap() {
@@ -1314,15 +1322,14 @@ class TbLabelName implements ATbLabelName {
 
   static TbLabelName fromMap(Map<String, dynamic> map) {
     return TbLabelName(
-    name: map["name"],
-    width: map["width"],
-      height: map["height"],
-      speed: map["speed"],
-      density: map["density"],
-      sensor: TbSensor.fromMap(map["sensor"]),
-      sensorDistance: map["sensorDistance"],
-      sensorOffset: map["sensorOffset"]
-    );
+        name: map["name"],
+        width: map["width"],
+        height: map["height"],
+        speed: map["speed"],
+        density: map["density"],
+        sensor: TbSensor.fromMap(map["sensor"]),
+        sensorDistance: map["sensorDistance"],
+        sensorOffset: map["sensorOffset"]);
   }
 
   @override
@@ -1345,7 +1352,6 @@ class TbLabelName implements ATbLabelName {
 
   @override
   int getSpeed() => _speed;
-
 }
 
 /*
